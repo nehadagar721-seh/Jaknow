@@ -25,6 +25,13 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   - `jaknow_logo.dart`: the "जाKnow" logo
   - `boojho.dart`: Boojho, drawn with CustomPainter and animated from one
     repeating AnimationController that the screen owns and passes in
+  - `coming_soon.dart`: "coming soon" message for buttons with no screen yet
+- App-wide helpers live in `lib/services/`:
+  - `boojho_voice.dart`: Boojho's voice (`flutter_tts` text-to-speech).
+    `BoojhoVoice.instance.say(text)`; screens listen to `isSpeaking` so his
+    mouth only moves while he talks. Stop the voice when leaving a screen.
+- Screens so far: Welcome (`design/1-welcome.png`) → Features
+  (`design/2-features.png`).
 - The design files are 390 px wide phone screens (screenshots at 2x).
 
 ## Design

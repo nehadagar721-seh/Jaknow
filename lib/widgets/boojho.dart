@@ -29,16 +29,56 @@ class Boojho extends StatelessWidget {
   }
 }
 
+/// A round "profile picture" of Boojho: head and shoulders in an amber
+/// circle. He still blinks, and talks while [isSpeaking] is true.
+class BoojhoAvatar extends StatelessWidget {
+  const BoojhoAvatar({
+    super.key,
+    required this.animation,
+    this.isSpeaking = false,
+    this.size = 40,
+  });
+
+  final Animation<double> animation;
+  final bool isSpeaking;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.square(
+      dimension: size,
+      child: CustomPaint(
+        painter: BoojhoPainter(
+          animation: animation,
+          isSpeaking: isSpeaking,
+          portrait: true,
+        ),
+      ),
+    );
+  }
+}
+
 /// Draws Boojho. All numbers below are positions measured on the
 /// design screenshot, so the drawing matches the design. The whole drawing
 /// is then scaled to fit whatever space the widget is given.
 class BoojhoPainter extends CustomPainter {
-  BoojhoPainter({required this.animation, required this.isSpeaking})
-      // "repaint" redraws Boojho every time the clock ticks.
-      : super(repaint: animation);
+  BoojhoPainter({
+    required this.animation,
+    required this.isSpeaking,
+    this.portrait = false,
+  })
+    // "repaint" redraws Boojho every time the clock ticks.
+    : super(repaint: animation);
 
   final Animation<double> animation;
   final bool isSpeaking;
+
+  /// true = only head and shoulders in a circle (see [BoojhoAvatar]).
+  final bool portrait;
+
+  // The part of the drawing shown in portrait mode: a circle around his head.
+  static const Offset _portraitCentre = Offset(393, 742);
+  static const double _portraitRadius = 125;
 
   // The area of the design Boojho occupies.
   static const double designLeft = 150;
@@ -65,9 +105,15 @@ class BoojhoPainter extends CustomPainter {
     final wave = math.sin(t * _fullTurn * 4); // waving, four times per loop
     final eyesClosed = t > 0.70 && t < 0.74; // a quick blink once per loop
     final talk = isSpeaking
-        ? (math.sin(t * _fullTurn * 13) * 0.6 + math.sin(t * _fullTurn * 7) * 0.4)
-            .abs()
+        ? (math.sin(t * _fullTurn * 13) * 0.6 +
+                  math.sin(t * _fullTurn * 7) * 0.4)
+              .abs()
         : 0.0;
+
+    if (portrait) {
+      _paintPortrait(canvas, size, eyesClosed: eyesClosed, mouthOpen: talk);
+      return;
+    }
 
     // Scale the design-sized drawing to the real widget size.
     canvas.save();
@@ -86,6 +132,30 @@ class BoojhoPainter extends CustomPainter {
     _drawHead(canvas, eyesClosed: eyesClosed, mouthOpen: talk);
     canvas.restore();
 
+    canvas.restore();
+  }
+
+  /// Head and shoulders only, inside an amber circle.
+  void _paintPortrait(
+    Canvas canvas,
+    Size size, {
+    required bool eyesClosed,
+    required double mouthOpen,
+  }) {
+    final radius = size.shortestSide / 2;
+    final centre = size.center(Offset.zero);
+
+    canvas.save();
+    canvas.drawCircle(centre, radius, _fill(AppColors.amber));
+    // Anything drawn outside the circle gets cut off.
+    canvas.clipPath(
+      Path()..addOval(Rect.fromCircle(center: centre, radius: radius)),
+    );
+    canvas.translate(centre.dx, centre.dy);
+    canvas.scale(radius / _portraitRadius);
+    canvas.translate(-_portraitCentre.dx, -_portraitCentre.dy);
+    _drawBody(canvas);
+    _drawHead(canvas, eyesClosed: eyesClosed, mouthOpen: mouthOpen);
     canvas.restore();
   }
 
@@ -252,7 +322,11 @@ class BoojhoPainter extends CustomPainter {
       Rect.fromCenter(center: globe, width: 30, height: 74),
       globeLines,
     );
-    canvas.drawLine(const Offset(224, 1013), const Offset(296, 1013), globeLines);
+    canvas.drawLine(
+      const Offset(224, 1013),
+      const Offset(296, 1013),
+      globeLines,
+    );
 
     // Hand in front of the globe.
     canvas.drawCircle(const Offset(283, 1033), 22, _fill(AppColors.boojhoSkin));
@@ -389,5 +463,6 @@ class BoojhoPainter extends CustomPainter {
   @override
   bool shouldRepaint(BoojhoPainter oldDelegate) =>
       oldDelegate.animation != animation ||
-      oldDelegate.isSpeaking != isSpeaking;
+      oldDelegate.isSpeaking != isSpeaking ||
+      oldDelegate.portrait != portrait;
 }

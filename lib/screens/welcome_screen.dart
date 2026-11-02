@@ -50,11 +50,19 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     super.dispose();
   }
 
-  /// Speaker button: turn Boojho's voice off, or back on (he repeats himself).
+  /// Speaker button:
+  ///   - voice off       → turn it on and speak
+  ///   - talking         → turn the voice off
+  ///   - quiet (not off) → speak again
   void _toggleSound() {
-    final turnOn = _voice.isMuted.value;
-    _voice.setMuted(!turnOn);
-    if (turnOn) _voice.say(_message);
+    if (_voice.isMuted.value) {
+      _voice.setMuted(false);
+      _voice.say(_message);
+    } else if (_voice.isSpeaking.value) {
+      _voice.setMuted(true);
+    } else {
+      _voice.say(_message);
+    }
   }
 
   /// "Let's begin": stop talking and open the next screen.

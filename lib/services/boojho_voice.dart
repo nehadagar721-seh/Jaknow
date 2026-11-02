@@ -53,7 +53,14 @@ class BoojhoVoice {
     final tts = await _voice();
     if (tts == null) return;
     try {
-      await tts.stop();
+      if (isSpeaking.value) {
+        await tts.stop();
+        // Web browsers need a moment to finish stopping; if we speak too
+        // soon, the new sentence is silently ignored.
+        if (kIsWeb) {
+          await Future<void>.delayed(const Duration(milliseconds: 300));
+        }
+      }
       await tts.speak(text);
     } catch (error) {
       isSpeaking.value = false;

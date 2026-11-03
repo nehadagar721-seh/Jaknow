@@ -26,6 +26,8 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   - `boojho.dart`: Boojho, drawn with CustomPainter and animated from one
     repeating AnimationController that the screen owns and passes in
   - `coming_soon.dart`: "coming soon" message for buttons with no screen yet
+  - `back_circle_button.dart`: round outlined back button
+  - `boojho_says.dart`: Boojho's round face with a speech bubble
 - App-wide helpers live in `lib/services/`:
   - `boojho_voice.dart`: Boojho's voice (`flutter_tts` text-to-speech).
     `BoojhoVoice.instance.say(text)`; screens listen to `isSpeaking` so his
@@ -35,8 +37,10 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
     time with short pauses (`sentences`), to sound more natural.
 - Screens so far: Welcome (`design/1-welcome.png`) → Features
   (`design/2-features.png`) → Sign up (`design/3-sign-up.png`) → Home
-  (`design/4-home.png`). "Skip" buttons and a valid sign-up open Home via
-  `openHome(context, name: ...)`, which clears the intro screens behind it.
+  (`design/4-home.png`). A valid sign-up opens Level, step 1 of 2
+  (`design/5-level.png`); its Continue opens Home until step 2 exists.
+  "Skip" buttons and Level's Continue open Home via
+  `openHome(context, name: ..., dailyGoal: ...)`, which clears the intro screens behind it.
 - Home uses a lighter background (`AppColors.creamLight`, #FFFBF2) and soft
   card borders (`AppColors.cardBorder`), as in its design. Streak/level
   numbers there are placeholders until progress is saved.

@@ -4,9 +4,11 @@ import 'package:flutter/services.dart';
 import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
-import '../widgets/boojho.dart';
+import '../widgets/back_circle_button.dart';
+import '../widgets/boojho_says.dart';
 import '../widgets/coming_soon.dart';
 import 'home_screen.dart';
+import 'level_screen.dart';
 
 /// Third screen: create an account with name, mobile number and a
 /// 6-digit password.
@@ -82,9 +84,12 @@ class _SignUpScreenState extends State<SignUpScreen>
     if (!formOk || !_agreed) return;
 
     // TODO: really create the account once the app has a server.
-    // For now we only remember the first name, for Boojho to use.
+    // For now we only remember the first name, for Boojho to use,
+    // and go on to "Pick your starting level".
     final firstName = _nameController.text.trim().split(RegExp(r'\s+')).first;
-    openHome(context, name: firstName);
+    BoojhoVoice.instance.stop();
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => LevelScreen(name: firstName)));
   }
 
   @override
@@ -104,7 +109,9 @@ class _SignUpScreenState extends State<SignUpScreen>
                 children: [
                   Row(
                     children: [
-                      _BackButton(onPressed: () => Navigator.of(context).pop()),
+                      BackCircleButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                      ),
                       const Spacer(),
                       // Go straight to Home without signing up.
                       TextButton(
@@ -119,7 +126,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                   const SizedBox(height: 18),
                   ValueListenableBuilder<bool>(
                     valueListenable: _voice.isSpeaking,
-                    builder: (context, speaking, _) => _BoojhoSays(
+                    builder: (context, speaking, _) => BoojhoSays(
                       message: _message,
                       animation: _clock,
                       isSpeaking: speaking,
@@ -281,98 +288,6 @@ class _SignUpScreenState extends State<SignUpScreen>
 }
 
 // ---------- Small pieces of this screen ----------
-
-/// Round outlined back button (chevron).
-class _BackButton extends StatelessWidget {
-  const _BackButton({required this.onPressed});
-
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 44,
-      height: 44,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: AppColors.white,
-        border: Border.all(color: AppColors.line, width: 1.2),
-      ),
-      child: IconButton(
-        padding: EdgeInsets.zero,
-        iconSize: 22,
-        color: AppColors.ink,
-        tooltip: 'Back',
-        icon: const Icon(Icons.chevron_left_rounded),
-        onPressed: onPressed,
-      ),
-    );
-  }
-}
-
-/// Boojho's face with a white speech bubble pointing at him.
-/// Tap the bubble to hear him again.
-class _BoojhoSays extends StatelessWidget {
-  const _BoojhoSays({
-    required this.message,
-    required this.animation,
-    required this.isSpeaking,
-    required this.onTap,
-  });
-
-  final String message;
-  final Animation<double> animation;
-  final bool isSpeaking;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        BoojhoAvatar(animation: animation, isSpeaking: isSpeaking, size: 56),
-        const SizedBox(width: 5),
-        // Little triangle pointing left, at Boojho.
-        CustomPaint(size: const Size(8, 14), painter: _LeftTailPainter()),
-        Expanded(
-          child: GestureDetector(
-            onTap: onTap,
-            child: Container(
-              constraints: const BoxConstraints(minHeight: 56),
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Text(
-                message,
-                style: AppTextStyles.speech.copyWith(
-                  fontSize: 15,
-                  height: 1.25,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _LeftTailPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final path = Path()
-      ..moveTo(size.width, 0)
-      ..lineTo(0, size.height / 2)
-      ..lineTo(size.width, size.height)
-      ..close();
-    canvas.drawPath(path, Paint()..color = AppColors.white);
-  }
-
-  @override
-  bool shouldRepaint(_LeftTailPainter oldDelegate) => false;
-}
 
 /// The fixed "+91" box in front of the mobile number.
 class _CountryCode extends StatelessWidget {

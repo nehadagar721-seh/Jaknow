@@ -97,10 +97,9 @@ void main() {
 
       expect(find.textContaining('Please'), findsNothing);
       expect(find.textContaining('must be'), findsNothing);
-      // A correct form opens Home, where Boojho greets you by name.
+      // A correct form opens "Pick your starting level".
       await tester.pump(const Duration(seconds: 1));
-      expect(find.text('Ready to sharpen your mind?'), findsOneWidget);
-      expect(find.textContaining('Namaste, Neha!'), findsOneWidget);
+      expect(find.text('Pick your starting level'), findsOneWidget);
     });
 
     testWidgets('"Skip" goes straight to Home', (tester) async {

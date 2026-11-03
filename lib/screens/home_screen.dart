@@ -11,10 +11,12 @@ import '../widgets/jaknow_logo.dart';
 
 /// Opens Home and removes the intro/sign-up screens behind it, so the
 /// back button doesn't lead back into them.
-void openHome(BuildContext context, {String? name}) {
+void openHome(BuildContext context, {String? name, int dailyGoal = 5}) {
   BoojhoVoice.instance.stop();
   Navigator.of(context).pushAndRemoveUntil(
-    MaterialPageRoute(builder: (_) => HomeScreen(name: name)),
+    MaterialPageRoute(
+      builder: (_) => HomeScreen(name: name, dailyGoal: dailyGoal),
+    ),
     (route) => false,
   );
 }
@@ -24,10 +26,13 @@ void openHome(BuildContext context, {String? name}) {
 /// Boojho is interactive here: tap him, your streak or a topic, or type a
 /// question, and he answers out loud (his bubble shows what he's saying).
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, this.name});
+  const HomeScreen({super.key, this.name, this.dailyGoal = 5});
 
   /// The user's first name, if we know it (from sign-up).
   final String? name;
+
+  /// How many questions a day the user chose (5, 10 or 15).
+  final int dailyGoal;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -70,7 +75,8 @@ class _HomeScreenState extends State<HomeScreen>
   String _welcomeLine() {
     final name = widget.name;
     final hello = name == null ? 'Namaste!' : 'Namaste, $name!';
-    return '$hello 5 Foundation questions are ready. Warm up first?';
+    return '$hello ${widget.dailyGoal} Foundation questions are ready. '
+        'Warm up first?';
   }
 
   @override
@@ -81,7 +87,8 @@ class _HomeScreenState extends State<HomeScreen>
       final name = widget.name == null ? '' : ', ${widget.name}';
       _voice.say(
         '$_greeting$name! You’re on a $_streakDays day streak. '
-        '5 Foundation questions are ready. Shall we warm up first?',
+        '${widget.dailyGoal} Foundation questions are ready. '
+        'Shall we warm up first?',
       );
     });
   }
@@ -108,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   void _onStreakTapped() {
     _boojhoSays(
-      '$_streakDays days in a row! Finish today’s 5 questions '
+      '$_streakDays days in a row! Finish today’s ${widget.dailyGoal} questions '
       'to make it ${_streakDays + 1}.',
     );
   }
@@ -167,7 +174,11 @@ class _HomeScreenState extends State<HomeScreen>
                   style: AppTextStyles.display.copyWith(fontSize: 24.5),
                 ),
                 const SizedBox(height: 14),
-                _StreakCard(days: _streakDays, onTap: _onStreakTapped),
+                _StreakCard(
+                  days: _streakDays,
+                  goal: widget.dailyGoal,
+                  onTap: _onStreakTapped,
+                ),
                 const SizedBox(height: 13),
                 ValueListenableBuilder<bool>(
                   valueListenable: _voice.isSpeaking,
@@ -183,6 +194,7 @@ class _HomeScreenState extends State<HomeScreen>
                 const SizedBox(height: 13),
                 _QuizCard(
                   level: _level,
+                  goal: widget.dailyGoal,
                   onTap: () {
                     _boojhoSays('Let’s go! The quiz is almost ready.');
                     showComingSoon(context, 'Today’s quiz');
@@ -289,9 +301,14 @@ class _StreakPill extends StatelessWidget {
 // ---------- Streak card with the week's circles ----------
 
 class _StreakCard extends StatelessWidget {
-  const _StreakCard({required this.days, required this.onTap});
+  const _StreakCard({
+    required this.days,
+    required this.goal,
+    required this.onTap,
+  });
 
   final int days;
+  final int goal;
   final VoidCallback onTap;
 
   // Monday = 1 … Sunday = 7, like DateTime.weekday.
@@ -327,7 +344,7 @@ class _StreakCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'Finish 5 questions today to keep it alive',
+                        'Finish $goal questions today to keep it alive',
                         style: AppTextStyles.subtitle.copyWith(fontSize: 13),
                       ),
                     ],
@@ -545,9 +562,14 @@ class _AskField extends StatelessWidget {
 // ---------- "Take today's quiz" ----------
 
 class _QuizCard extends StatelessWidget {
-  const _QuizCard({required this.level, required this.onTap});
+  const _QuizCard({
+    required this.level,
+    required this.goal,
+    required this.onTap,
+  });
 
   final int level;
+  final int goal;
   final VoidCallback onTap;
 
   @override
@@ -572,7 +594,7 @@ class _QuizCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      'Level $level · Foundation · 5 questions',
+                      'Level $level · Foundation · $goal questions',
                       style: AppTextStyles.cardBody.copyWith(
                         color: AppColors.ink,
                         fontSize: 13,

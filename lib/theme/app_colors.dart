@@ -12,6 +12,7 @@ class AppColors {
   static const Color white = Color(0xFFFFFFFF); // cards
   static const Color muted = Color(0xFF5B5F78); // secondary text
   static const Color line = Color(0xFFCDBF9F); // thin borders on cream
+  static const Color error = Color(0xFFD23B3B); // mistakes in forms
 
   // Boojho, the cartoon guide (only used when drawing him)
   static const Color boojhoSkin = Color(0xFFC8895A);

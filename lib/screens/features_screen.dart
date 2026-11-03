@@ -8,6 +8,7 @@ import '../theme/app_text_styles.dart';
 import '../widgets/boojho.dart';
 import '../widgets/coming_soon.dart';
 import '../widgets/jaknow_logo.dart';
+import 'sign_up_screen.dart';
 
 /// Second screen: Boojho explains the five reasons to use JaKnow.
 class FeaturesScreen extends StatefulWidget {
@@ -45,6 +46,13 @@ class _FeaturesScreenState extends State<FeaturesScreen>
   }
 
   /// The amber button: stop Boojho if he's talking, otherwise play again.
+  /// "Get started": stop talking and open the sign-up screen.
+  void _getStarted() {
+    _voice.stop();
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => const SignUpScreen()));
+  }
+
   void _togglePlay() {
     if (_voice.isSpeaking.value) {
       _voice.stop();
@@ -123,7 +131,7 @@ class _FeaturesScreenState extends State<FeaturesScreen>
                     shape: const StadiumBorder(),
                     textStyle: AppTextStyles.button.copyWith(fontSize: 17),
                   ),
-                  onPressed: () => showComingSoon(context, 'Home'),
+                  onPressed: _getStarted,
                   child: const Text('Get started'),
                 ),
               ),

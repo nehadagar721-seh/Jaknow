@@ -52,6 +52,33 @@ class AppTextStyles {
     color: AppColors.muted,
   );
 
+  // Grey line under a page title
+  static TextStyle get subtitle => GoogleFonts.plusJakartaSans(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    height: 1.3,
+    color: AppColors.muted,
+  );
+
+  // Forms: label above a box, text typed into it, and the grey hint
+  static TextStyle get fieldLabel => GoogleFonts.plusJakartaSans(
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: AppColors.ink,
+  );
+
+  static TextStyle get fieldText => GoogleFonts.plusJakartaSans(
+    fontSize: 15,
+    fontWeight: FontWeight.w600,
+    color: AppColors.ink,
+  );
+
+  static TextStyle get fieldHint => GoogleFonts.plusJakartaSans(
+    fontSize: 15,
+    fontWeight: FontWeight.w400,
+    color: AppColors.muted,
+  );
+
   // Body text (Plus Jakarta Sans)
   static TextStyle get body => GoogleFonts.plusJakartaSans(
     fontSize: 16,

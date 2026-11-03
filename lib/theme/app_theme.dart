@@ -52,6 +52,34 @@ class AppTheme {
           ),
         ),
       ),
+      // Text boxes: white pills with a thin border, indigo while typing,
+      // red when something is wrong.
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: AppColors.white,
+        hintStyle: AppTextStyles.fieldHint,
+        errorStyle: AppTextStyles.bodyMuted.copyWith(
+          color: AppColors.error,
+          fontSize: 13,
+        ),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 18,
+          vertical: 16,
+        ),
+        enabledBorder: _pill(AppColors.line),
+        focusedBorder: _pill(AppColors.indigo, width: 1.6),
+        errorBorder: _pill(AppColors.error),
+        focusedErrorBorder: _pill(AppColors.error, width: 1.6),
+      ),
+      textSelectionTheme: const TextSelectionThemeData(
+        cursorColor: AppColors.indigo,
+      ),
     );
   }
+
+  static OutlineInputBorder _pill(Color color, {double width = 1.2}) =>
+      OutlineInputBorder(
+        borderRadius: BorderRadius.circular(26),
+        borderSide: BorderSide(color: color, width: width),
+      );
 }

@@ -30,8 +30,12 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   - `boojho_voice.dart`: Boojho's voice (`flutter_tts` text-to-speech).
     `BoojhoVoice.instance.say(text)`; screens listen to `isSpeaking` so his
     mouth only moves while he talks. Stop the voice when leaving a screen.
+    It picks the clearest English voice on the device (`voiceScore`) and
+    says "JaKnow" as "Jaa Know" (`forSpeech`).
 - Screens so far: Welcome (`design/1-welcome.png`) → Features
-  (`design/2-features.png`).
+  (`design/2-features.png`) → Sign up (`design/3-sign-up.png`).
+- Sign-up password is exactly 6 digits (the user's choice, not the design's
+  "at least 8 characters"). No server yet: Sign up only checks the form.
 - The design files are 390 px wide phone screens (screenshots at 2x).
 
 ## Design

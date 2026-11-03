@@ -33,4 +33,18 @@ void main() {
     expect(find.text('BOOJHO IS EXPLAINING'), findsOneWidget);
     expect(find.text('Get started'), findsOneWidget);
   });
+
+  testWidgets('"Get started" opens the sign-up screen', (tester) async {
+    await tester.pumpWidget(const JaKnowApp());
+    await tester.pump();
+    await tester.tap(find.text('Let’s begin'));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+
+    await tester.tap(find.text('Get started'));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+
+    expect(find.text('Create your account'), findsOneWidget);
+  });
 }

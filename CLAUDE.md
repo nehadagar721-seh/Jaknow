@@ -43,7 +43,11 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   (`design/4-home.png`). A valid sign-up opens Level, step 1 of 2
   (`design/5-level.png`); its Continue opens Home until step 2 exists.
   Home's "Take today's quiz" and Quiz tab open Quiz (`design/6-quiz.png`),
-  which returns the score with `Navigator.pop(score)`; Boojho announces it.
+  which returns the score with `Navigator.pop(score)`. After the last
+  question the quiz shows its results (`quiz_results_screen.dart`,
+  `design/7-results.png`) inside the same screen; Continue returns to Home,
+  which adds today to the streak. XP: 10 per right answer, 100 per level
+  (starting XP and streak are placeholders until progress is saved).
   "Skip" buttons and Level's Continue open Home via
   `openHome(context, name: ..., dailyGoal: ...)`, which clears the intro screens behind it.
 - Home uses a lighter background (`AppColors.creamLight`, #FFFBF2) and soft

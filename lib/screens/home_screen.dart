@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import '../data/quiz_questions.dart';
 import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
@@ -53,7 +52,8 @@ class _HomeScreenState extends State<HomeScreen>
 
   // Pretend numbers until the app saves real progress.
   // TODO: load these from the user's saved progress.
-  static const int _streakDays = 7;
+  int _streakDays = 7;
+  bool _doneToday = false; // has today's quiz been finished?
   static const int _level = 2;
 
   /// What Boojho is saying right now (shown in his card).
@@ -117,6 +117,12 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   void _onStreakTapped() {
+    if (_doneToday) {
+      _boojhoSays(
+        '$_streakDays days in a row! Today is done. See you tomorrow!',
+      );
+      return;
+    }
     _boojhoSays(
       '$_streakDays days in a row! Finish today’s ${widget.dailyGoal} questions '
       'to make it ${_streakDays + 1}.',
@@ -143,7 +149,12 @@ class _HomeScreenState extends State<HomeScreen>
     _voice.stop();
     final score = await Navigator.of(context).push<int>(
       MaterialPageRoute(
-        builder: (_) => QuizScreen(level: _level, streakDays: _streakDays),
+        // The quiz adds today to the streak itself, so if today is already
+        // done, give it yesterday's number.
+        builder: (_) => QuizScreen(
+          level: _level,
+          streakDays: _doneToday ? _streakDays - 1 : _streakDays,
+        ),
       ),
     );
     if (!mounted) return;
@@ -151,14 +162,19 @@ class _HomeScreenState extends State<HomeScreen>
       _boojhoSays('No problem. The quiz will be here when you’re ready.');
       return;
     }
-    final total = todaysQuiz.length;
-    final cheer = switch (score) {
-      _ when score == total => 'A perfect score! Brilliant!',
-      _ when score >= total - 1 => 'So close to perfect. Well done!',
-      _ when score >= total / 2 => 'Good effort! Practice makes perfect.',
-      _ => 'Every mistake is a lesson. Let’s try again tomorrow!',
-    };
-    _boojhoSays('You got $score out of $total! $cheer');
+    // The results screen already told them the score.
+    if (_doneToday) {
+      _boojhoSays('Nice practice! Your streak is still $_streakDays days.');
+      return;
+    }
+    setState(() {
+      _streakDays++;
+      _doneToday = true;
+    });
+    _boojhoSays(
+      'Your streak is now $_streakDays days! '
+      'I’ll have new questions for you tomorrow.',
+    );
   }
 
   void _onTopicTapped(_Topic topic) {
@@ -204,6 +220,7 @@ class _HomeScreenState extends State<HomeScreen>
                 _StreakCard(
                   days: _streakDays,
                   goal: widget.dailyGoal,
+                  doneToday: _doneToday,
                   onTap: _onStreakTapped,
                 ),
                 const SizedBox(height: 13),
@@ -280,11 +297,13 @@ class _StreakCard extends StatelessWidget {
   const _StreakCard({
     required this.days,
     required this.goal,
+    required this.doneToday,
     required this.onTap,
   });
 
   final int days;
   final int goal;
+  final bool doneToday;
   final VoidCallback onTap;
 
   // Monday = 1 … Sunday = 7, like DateTime.weekday.
@@ -320,7 +339,9 @@ class _StreakCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'Finish $goal questions today to keep it alive',
+                        doneToday
+                            ? 'Done for today. See you tomorrow!'
+                            : 'Finish $goal questions today to keep it alive',
                         style: AppTextStyles.subtitle.copyWith(fontSize: 13),
                       ),
                     ],
@@ -348,7 +369,7 @@ class _StreakCard extends StatelessWidget {
               children: [
                 for (final letter in pastDays)
                   _DayDot(label: letter, done: true),
-                const _DayDot(label: 'Today', done: false),
+                _DayDot(label: 'Today', done: doneToday),
               ],
             ),
           ],
@@ -383,9 +404,10 @@ class _DayDot extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           label,
-          style: done
-              ? AppTextStyles.subtitle.copyWith(fontSize: 12.5)
-              : AppTextStyles.link.copyWith(fontSize: 13),
+          // "Today" is always indigo, the other days grey.
+          style: label == 'Today'
+              ? AppTextStyles.link.copyWith(fontSize: 13)
+              : AppTextStyles.subtitle.copyWith(fontSize: 12.5),
         ),
       ],
     );

@@ -71,7 +71,9 @@ void main() {
     expect(find.text('Question 1 of 5'), findsOneWidget);
   });
 
-  testWidgets('finishing the quiz tells you the score on Home', (tester) async {
+  testWidgets('finishing shows results, then Home with a longer streak', (
+    tester,
+  ) async {
     tallScreen(tester);
     await tester.pumpWidget(
       MaterialApp(theme: AppTheme.light, home: const HomeScreen()),
@@ -94,7 +96,31 @@ void main() {
       await tester.pump(const Duration(seconds: 1));
     }
 
+    // The results appear first…
+    expect(find.text('8-day streak!'), findsOneWidget);
+    expect(find.text('You answered 4 of 5 correctly'), findsOneWidget);
+    expect(find.text('+40'), findsOneWidget);
+    expect(find.text('80%'), findsOneWidget);
+    expect(find.text('60%'), findsOneWidget); // 20 XP before + 40 = 60 of 100
+    expect(find.textContaining('Well done!'), findsOneWidget);
+
+    // …"Review my answers" lists every question…
+    await tester.tap(find.text('Review my answers'));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text('Your answers'), findsOneWidget);
+    expect(find.textContaining('Right answer:'), findsOneWidget); // 1 wrong
+    await tester.tapAt(const Offset(195, 20)); // tap above the panel to close
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+
+    // …and Continue goes back to Home with the streak now at 8.
+    await tester.tap(find.text('Continue'));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
     expect(find.text('Ready to sharpen your mind?'), findsOneWidget);
-    expect(find.textContaining('You got 4 out of 5!'), findsOneWidget);
+    expect(find.text('8-day streak'), findsOneWidget);
+    expect(find.text('Done for today. See you tomorrow!'), findsOneWidget);
+    expect(find.textContaining('Your streak is now 8 days!'), findsOneWidget);
   });
 }

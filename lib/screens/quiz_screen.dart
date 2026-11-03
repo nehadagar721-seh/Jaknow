@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../data/quiz_questions.dart';
+import 'quiz_results_screen.dart';
 import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
@@ -19,11 +20,17 @@ class QuizScreen extends StatefulWidget {
     this.questions = todaysQuiz,
     this.level = 2,
     this.streakDays = 7,
+    this.levelName = 'Intermediate',
+    this.xpBefore = 20,
   });
 
   final List<QuizQuestion> questions;
   final int level;
   final int streakDays;
+  final String levelName;
+
+  /// XP already earned towards the next level (pretend number for now).
+  final int xpBefore;
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();
@@ -41,6 +48,8 @@ class _QuizScreenState extends State<QuizScreen>
   int _index = 0; // which question we're on (0 = the first)
   int? _picked; // which answer was tapped; null = not answered yet
   int _score = 0;
+  final List<int> _picks = []; // every answer picked, for the review
+  bool _finished = false; // true = show the results
 
   QuizQuestion get _question => widget.questions[_index];
   bool get _answered => _picked != null;
@@ -74,6 +83,7 @@ class _QuizScreenState extends State<QuizScreen>
     if (_answered) return; // only the first tap counts
     setState(() {
       _picked = option;
+      _picks.add(option);
       if (option == _question.correctIndex) _score++;
     });
     _voice.say(_spokenLine);
@@ -81,7 +91,8 @@ class _QuizScreenState extends State<QuizScreen>
 
   void _next() {
     if (_isLast) {
-      Navigator.of(context).pop(_score); // finished: give back the score
+      // Finished: show the results (in this same screen).
+      setState(() => _finished = true);
       return;
     }
     setState(() {
@@ -125,6 +136,28 @@ class _QuizScreenState extends State<QuizScreen>
 
   @override
   Widget build(BuildContext context) {
+    if (_finished) {
+      // The phone's back button also counts as "Continue", so the score
+      // still reaches Home.
+      return PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, _) {
+          if (!didPop) Navigator.of(context).pop(_score);
+        },
+        child: Scaffold(
+          body: QuizResultsView(
+            questions: widget.questions,
+            picks: _picks,
+            streakDays: widget.streakDays + 1, // today counts now
+            level: widget.level,
+            levelName: widget.levelName,
+            xpBefore: widget.xpBefore,
+            onContinue: () => Navigator.of(context).pop(_score),
+          ),
+        ),
+      );
+    }
+
     final q = _question;
     return Scaffold(
       body: SafeArea(

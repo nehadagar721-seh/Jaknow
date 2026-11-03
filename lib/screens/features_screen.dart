@@ -6,8 +6,8 @@ import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../widgets/boojho.dart';
-import '../widgets/coming_soon.dart';
 import '../widgets/jaknow_logo.dart';
+import 'home_screen.dart';
 import 'sign_up_screen.dart';
 
 /// Second screen: Boojho explains the five reasons to use JaKnow.
@@ -82,7 +82,7 @@ class _FeaturesScreenState extends State<FeaturesScreen>
                       const JaKnowLogo(size: 23),
                       const Spacer(),
                       TextButton(
-                        onPressed: () => showComingSoon(context, 'Home'),
+                        onPressed: () => openHome(context),
                         child: Text(
                           'Skip',
                           style: AppTextStyles.link.copyWith(fontSize: 16),

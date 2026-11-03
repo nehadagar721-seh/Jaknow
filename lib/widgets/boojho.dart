@@ -12,10 +12,19 @@ import '../theme/app_colors.dart';
 ///
 /// Set [isSpeaking] to false to keep his mouth still.
 class Boojho extends StatelessWidget {
-  const Boojho({super.key, required this.animation, this.isSpeaking = true});
+  const Boojho({
+    super.key,
+    required this.animation,
+    this.isSpeaking = true,
+    this.background = true,
+  });
 
   final Animation<double> animation;
   final bool isSpeaking;
+
+  /// false = no big amber circle behind him (just Boojho, a sparkle and
+  /// his shadow), for showing him inside a card.
+  final bool background;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +32,11 @@ class Boojho extends StatelessWidget {
     return AspectRatio(
       aspectRatio: BoojhoPainter.designWidth / BoojhoPainter.designHeight,
       child: CustomPaint(
-        painter: BoojhoPainter(animation: animation, isSpeaking: isSpeaking),
+        painter: BoojhoPainter(
+          animation: animation,
+          isSpeaking: isSpeaking,
+          background: background,
+        ),
       ),
     );
   }
@@ -66,6 +79,7 @@ class BoojhoPainter extends CustomPainter {
     required this.animation,
     required this.isSpeaking,
     this.portrait = false,
+    this.background = true,
   })
     // "repaint" redraws Boojho every time the clock ticks.
     : super(repaint: animation);
@@ -75,6 +89,9 @@ class BoojhoPainter extends CustomPainter {
 
   /// true = only head and shoulders in a circle (see [BoojhoAvatar]).
   final bool portrait;
+
+  /// false = skip the amber circle and the extra sparkles behind him.
+  final bool background;
 
   // The part of the drawing shown in portrait mode: a circle around his head.
   static const Offset _portraitCentre = Offset(393, 742);
@@ -162,6 +179,19 @@ class BoojhoPainter extends CustomPainter {
   // ---------- Background: circle, sparkles, shadow ----------
 
   void _drawBackground(Canvas canvas, double t, double bob) {
+    final twinkle = 1 + math.sin(t * _fullTurn * 2) * 0.15;
+    if (!background) {
+      // Just one sparkle, next to his waving hand.
+      _drawSparkle(
+        canvas,
+        const Offset(628, 640),
+        26 * twinkle,
+        AppColors.amber,
+      );
+      _drawShadow(canvas, bob);
+      return;
+    }
+
     canvas.drawCircle(
       const Offset(390, 912),
       240,
@@ -169,7 +199,6 @@ class BoojhoPainter extends CustomPainter {
     );
 
     // Sparkles gently grow and shrink ("twinkle").
-    final twinkle = 1 + math.sin(t * _fullTurn * 2) * 0.15;
     _drawSparkle(canvas, const Offset(215, 712), 28 * twinkle, AppColors.amber);
     _drawSparkle(
       canvas,
@@ -183,7 +212,11 @@ class BoojhoPainter extends CustomPainter {
       _fill(AppColors.muted.withValues(alpha: 0.45)),
     );
 
-    // The shadow shrinks a little when Boojho bobs up.
+    _drawShadow(canvas, bob);
+  }
+
+  /// The shadow shrinks a little when Boojho bobs up.
+  void _drawShadow(Canvas canvas, double bob) {
     final shadowWidth = 232 * (1 + bob / 60);
     canvas.drawOval(
       Rect.fromCenter(
@@ -464,5 +497,6 @@ class BoojhoPainter extends CustomPainter {
   bool shouldRepaint(BoojhoPainter oldDelegate) =>
       oldDelegate.animation != animation ||
       oldDelegate.isSpeaking != isSpeaking ||
-      oldDelegate.portrait != portrait;
+      oldDelegate.portrait != portrait ||
+      oldDelegate.background != background;
 }

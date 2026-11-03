@@ -16,6 +16,14 @@ void main() {
       );
     });
 
+    test('splits text into sentences for natural pauses', () {
+      expect(BoojhoVoice.sentences('Hi! How are you? I am fine.'), [
+        'Hi!',
+        'How are you?',
+        'I am fine.',
+      ]);
+    });
+
     test('prefers a clear Indian English voice', () {
       int score(String name, String locale, [String quality = '']) =>
           BoojhoVoice.voiceScore({
@@ -89,10 +97,10 @@ void main() {
 
       expect(find.textContaining('Please'), findsNothing);
       expect(find.textContaining('must be'), findsNothing);
-      expect(
-        find.text('Creating your account is coming soon!'),
-        findsOneWidget,
-      );
+      // A correct form opens Home, where Boojho greets you by name.
+      await tester.pump(const Duration(seconds: 1));
+      expect(find.text('Ready to sharpen your mind?'), findsOneWidget);
+      expect(find.textContaining('Namaste, Neha!'), findsOneWidget);
     });
   });
 }

@@ -6,6 +6,7 @@ import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../widgets/boojho.dart';
 import '../widgets/coming_soon.dart';
+import 'home_screen.dart';
 
 /// Third screen: create an account with name, mobile number and a
 /// 6-digit password.
@@ -79,8 +80,10 @@ class _SignUpScreenState extends State<SignUpScreen>
     setState(() => _showAgreeError = !_agreed);
     if (!formOk || !_agreed) return;
 
-    // TODO: create the account once the app has a server.
-    showComingSoon(context, 'Creating your account');
+    // TODO: really create the account once the app has a server.
+    // For now we only remember the first name, for Boojho to use.
+    final firstName = _nameController.text.trim().split(RegExp(r'\s+')).first;
+    openHome(context, name: firstName);
   }
 
   @override

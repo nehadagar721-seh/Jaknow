@@ -22,6 +22,10 @@ class BoojhoVoice {
 
   FlutterTts? _tts;
 
+  /// Goes up by one every time Boojho starts something new or is stopped,
+  /// so an older, half-finished speech knows it should stop.
+  int _turn = 0;
+
   /// Sets up the voice the first time it's needed.
   Future<FlutterTts?> _voice() async {
     if (_tts != null) return _tts;
@@ -40,6 +44,8 @@ class BoojhoVoice {
       // (Phones treat 0.5 as normal speed; web browsers treat 1.0 as normal.)
       await _try('speed', () => tts.setSpeechRate(kIsWeb ? 0.9 : 0.45));
       await _try('pitch', () => tts.setPitch(1.0));
+      // Let say() wait for each sentence to finish before the next one.
+      await _try('pauses', () => tts.awaitSpeakCompletion(true));
       _tts = tts;
     } catch (error) {
       // No text-to-speech available (for example in tests). Boojho just
@@ -132,12 +138,24 @@ class BoojhoVoice {
   static String forSpeech(String text) =>
       text.replaceAll(RegExp('jaknow', caseSensitive: false), 'Jaa Know');
 
+  /// Splits text into sentences: "Hi! How are you?" → ["Hi!", "How are you?"]
+  @visibleForTesting
+  static List<String> sentences(String text) => text
+      .split(RegExp(r'(?<=[.!?])\s+'))
+      .map((s) => s.trim())
+      .where((s) => s.isNotEmpty)
+      .toList();
+
   /// Boojho reads [text] out loud, unless the voice is muted.
   /// Anything he was already saying is stopped first.
+  ///
+  /// To sound more natural he says one sentence at a time, with a short
+  /// pause in between, the way people talk.
   Future<void> say(String text) async {
     if (isMuted.value) return;
     final tts = await _voice();
     if (tts == null) return;
+    final myTurn = ++_turn;
     try {
       if (isSpeaking.value) {
         await tts.stop();
@@ -147,7 +165,17 @@ class BoojhoVoice {
           await Future<void>.delayed(const Duration(milliseconds: 300));
         }
       }
-      await tts.speak(forSpeech(text));
+      for (final sentence in sentences(forSpeech(text))) {
+        // Stop if something newer started, or the voice was muted.
+        if (myTurn != _turn || isMuted.value) return;
+        // Waits until the sentence is finished (never longer than 20 s,
+        // in case the device forgets to tell us it's done).
+        await tts
+            .speak(sentence)
+            .timeout(const Duration(seconds: 20), onTimeout: () => null);
+        if (myTurn != _turn) return;
+        await Future<void>.delayed(const Duration(milliseconds: 250));
+      }
     } catch (error) {
       isSpeaking.value = false;
       debugPrint('Boojho could not speak: $error');
@@ -156,6 +184,7 @@ class BoojhoVoice {
 
   /// Stops talking right away.
   Future<void> stop() async {
+    _turn++; // tells any speech in progress to stop
     isSpeaking.value = false;
     try {
       await _tts?.stop();

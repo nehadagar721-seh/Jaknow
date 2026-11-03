@@ -6,9 +6,9 @@ import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../widgets/boojho.dart';
-import '../widgets/coming_soon.dart';
 import '../widgets/jaknow_logo.dart';
 import 'features_screen.dart';
+import 'home_screen.dart';
 
 /// The first screen: Boojho says hello and explains the app.
 ///
@@ -144,7 +144,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               ),
               const SizedBox(height: 8),
               TextButton(
-                onPressed: () => showComingSoon(context, 'Home'),
+                onPressed: () => openHome(context),
                 child: Text('Skip intro', style: AppTextStyles.link),
               ),
             ],

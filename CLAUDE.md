@@ -31,9 +31,15 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
     `BoojhoVoice.instance.say(text)`; screens listen to `isSpeaking` so his
     mouth only moves while he talks. Stop the voice when leaving a screen.
     It picks the clearest English voice on the device (`voiceScore`) and
-    says "JaKnow" as "Jaa Know" (`forSpeech`).
+    says "JaKnow" as "Jaa Know" (`forSpeech`). It speaks one sentence at a
+    time with short pauses (`sentences`), to sound more natural.
 - Screens so far: Welcome (`design/1-welcome.png`) → Features
-  (`design/2-features.png`) → Sign up (`design/3-sign-up.png`).
+  (`design/2-features.png`) → Sign up (`design/3-sign-up.png`) → Home
+  (`design/4-home.png`). "Skip" buttons and a valid sign-up open Home via
+  `openHome(context, name: ...)`, which clears the intro screens behind it.
+- Home uses a lighter background (`AppColors.creamLight`, #FFFBF2) and soft
+  card borders (`AppColors.cardBorder`), as in its design. Streak/level
+  numbers there are placeholders until progress is saved.
 - Sign-up password is exactly 6 digits (the user's choice, not the design's
   "at least 8 characters"). No server yet: Sign up only checks the form.
 - The design files are 390 px wide phone screens (screenshots at 2x).

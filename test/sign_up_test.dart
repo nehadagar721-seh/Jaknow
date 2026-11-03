@@ -102,5 +102,27 @@ void main() {
       expect(find.text('Ready to sharpen your mind?'), findsOneWidget);
       expect(find.textContaining('Namaste, Neha!'), findsOneWidget);
     });
+
+    testWidgets('"Skip" goes straight to Home', (tester) async {
+      await openSignUp(tester);
+      await tester.tap(find.text('Skip'));
+      await tester.pump();
+      await tester.pump(const Duration(seconds: 1));
+      expect(find.text('Ready to sharpen your mind?'), findsOneWidget);
+    });
+
+    testWidgets('the eye button shows the password', (tester) async {
+      await openSignUp(tester);
+      EditableText passwordBox() => tester.widget<EditableText>(
+        find.descendant(
+          of: find.byType(TextFormField).last,
+          matching: find.byType(EditableText),
+        ),
+      );
+      expect(passwordBox().obscureText, isTrue);
+      await tester.tap(find.byTooltip('Show password'));
+      await tester.pump();
+      expect(passwordBox().obscureText, isFalse);
+    });
   });
 }

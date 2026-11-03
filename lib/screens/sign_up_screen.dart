@@ -34,6 +34,7 @@ class _SignUpScreenState extends State<SignUpScreen>
   final _mobileController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _agreed = false;
+  bool _showPassword = false; // the eye button switches this
   bool _showAgreeError = false;
 
   static const String _message = 'Namaste! Let’s start your first streak.';
@@ -101,7 +102,20 @@ class _SignUpScreenState extends State<SignUpScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _BackButton(onPressed: () => Navigator.of(context).pop()),
+                  Row(
+                    children: [
+                      _BackButton(onPressed: () => Navigator.of(context).pop()),
+                      const Spacer(),
+                      // Go straight to Home without signing up.
+                      TextButton(
+                        onPressed: () => openHome(context),
+                        child: Text(
+                          'Skip',
+                          style: AppTextStyles.link.copyWith(fontSize: 16),
+                        ),
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 18),
                   ValueListenableBuilder<bool>(
                     valueListenable: _voice.isSpeaking,
@@ -173,7 +187,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                   TextFormField(
                     controller: _passwordController,
                     style: AppTextStyles.fieldText,
-                    obscureText: true,
+                    obscureText: !_showPassword,
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.done,
                     autofillHints: const [AutofillHints.newPassword],
@@ -181,8 +195,22 @@ class _SignUpScreenState extends State<SignUpScreen>
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(6),
                     ],
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       hintText: '6-digit password',
+                      // Eye button: show or hide the digits.
+                      suffixIcon: IconButton(
+                        tooltip: _showPassword
+                            ? 'Hide password'
+                            : 'Show password',
+                        color: AppColors.muted,
+                        icon: Icon(
+                          _showPassword
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
+                        ),
+                        onPressed: () =>
+                            setState(() => _showPassword = !_showPassword),
+                      ),
                     ),
                     validator: _checkPassword,
                     onFieldSubmitted: (_) => _signUp(),

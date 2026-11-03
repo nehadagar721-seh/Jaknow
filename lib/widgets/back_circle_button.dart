@@ -4,9 +4,18 @@ import '../theme/app_colors.dart';
 
 /// Round outlined back button (chevron).
 class BackCircleButton extends StatelessWidget {
-  const BackCircleButton({super.key, required this.onPressed});
+  const BackCircleButton({
+    super.key,
+    required this.onPressed,
+    this.icon = Icons.chevron_left_rounded,
+    this.tooltip = 'Back',
+  });
 
   final VoidCallback onPressed;
+
+  /// The arrow by default; e.g. Icons.close_rounded for an ✕.
+  final IconData icon;
+  final String tooltip;
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +31,8 @@ class BackCircleButton extends StatelessWidget {
         padding: EdgeInsets.zero,
         iconSize: 22,
         color: AppColors.ink,
-        tooltip: 'Back',
-        icon: const Icon(Icons.chevron_left_rounded),
+        tooltip: tooltip,
+        icon: Icon(icon),
         onPressed: onPressed,
       ),
     );

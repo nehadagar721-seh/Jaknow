@@ -16,6 +16,12 @@ class AppColors {
   static const Color cardBorder = Color(0xFFEFE7D7); // soft card outlines
   static const Color error = Color(0xFFD23B3B); // mistakes in forms
 
+  // Quiz answers
+  static const Color success = Color(0xFF0B6B45); // right answer
+  static const Color successLight = Color(0xFFDDF3E8);
+  static const Color errorLight = Color(0xFFFBE4E2); // wrong answer
+  static const Color track = Color(0xFFE8E0CC); // empty part of a progress bar
+
   // Boojho, the cartoon guide (only used when drawing him)
   static const Color boojhoSkin = Color(0xFFC8895A);
   static const Color boojhoHair = Color(0xFF1E1612);

@@ -2,12 +2,15 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../data/quiz_questions.dart';
 import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../widgets/boojho.dart';
 import '../widgets/coming_soon.dart';
 import '../widgets/jaknow_logo.dart';
+import '../widgets/streak_pill.dart';
+import 'quiz_screen.dart';
 
 /// Opens Home and removes the intro/sign-up screens behind it, so the
 /// back button doesn't lead back into them.
@@ -135,6 +138,29 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
+  /// Opens today's quiz, then Boojho reacts to the score.
+  Future<void> _openQuiz() async {
+    _voice.stop();
+    final score = await Navigator.of(context).push<int>(
+      MaterialPageRoute(
+        builder: (_) => QuizScreen(level: _level, streakDays: _streakDays),
+      ),
+    );
+    if (!mounted) return;
+    if (score == null) {
+      _boojhoSays('No problem. The quiz will be here when you’re ready.');
+      return;
+    }
+    final total = todaysQuiz.length;
+    final cheer = switch (score) {
+      _ when score == total => 'A perfect score! Brilliant!',
+      _ when score >= total - 1 => 'So close to perfect. Well done!',
+      _ when score >= total / 2 => 'Good effort! Practice makes perfect.',
+      _ => 'Every mistake is a lesson. Let’s try again tomorrow!',
+    };
+    _boojhoSays('You got $score out of $total! $cheer');
+  }
+
   void _onTopicTapped(_Topic topic) {
     _boojhoSays('${topic.name}! ${topic.boojhoLine} Lessons are coming soon.');
   }
@@ -144,7 +170,8 @@ class _HomeScreenState extends State<HomeScreen>
     return Scaffold(
       backgroundColor: AppColors.creamLight,
       bottomNavigationBar: _BottomBar(
-        onTap: (label) => showComingSoon(context, label),
+        onTap: (label) =>
+            label == 'Quiz' ? _openQuiz() : showComingSoon(context, label),
       ),
       body: SafeArea(
         bottom: false,
@@ -160,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen>
                   children: [
                     const JaKnowLogo(size: 21),
                     const Spacer(),
-                    _StreakPill(days: _streakDays, onTap: _onStreakTapped),
+                    StreakPill(days: _streakDays, onTap: _onStreakTapped),
                   ],
                 ),
                 const SizedBox(height: 12),
@@ -195,10 +222,7 @@ class _HomeScreenState extends State<HomeScreen>
                 _QuizCard(
                   level: _level,
                   goal: widget.dailyGoal,
-                  onTap: () {
-                    _boojhoSays('Let’s go! The quiz is almost ready.');
-                    showComingSoon(context, 'Today’s quiz');
-                  },
+                  onTap: _openQuiz,
                 ),
                 const SizedBox(height: 12),
                 Row(
@@ -249,54 +273,6 @@ BoxDecoration _cardDecoration({double radius = 24}) => BoxDecoration(
   borderRadius: BorderRadius.circular(radius),
   border: Border.all(color: AppColors.cardBorder, width: 1.2),
 );
-
-// ---------- Top: streak pill ----------
-
-class _StreakPill extends StatelessWidget {
-  const _StreakPill({required this.days, required this.onTap});
-
-  final int days;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Tooltip(
-      message: '$days-day streak',
-      child: InkWell(
-        onTap: onTap,
-        customBorder: const StadiumBorder(),
-        child: Ink(
-          height: 41,
-          padding: const EdgeInsets.symmetric(horizontal: 14),
-          decoration: ShapeDecoration(
-            color: AppColors.white,
-            shape: const StadiumBorder(
-              side: BorderSide(color: AppColors.cardBorder, width: 1.2),
-            ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(
-                Icons.local_fire_department_rounded,
-                color: AppColors.amber,
-                size: 19,
-              ),
-              const SizedBox(width: 10),
-              Text(
-                '$days',
-                style: AppTextStyles.cardTitle.copyWith(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 // ---------- Streak card with the week's circles ----------
 

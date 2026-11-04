@@ -32,6 +32,9 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   - `app_bottom_bar.dart`: the Home / Quiz / News / Learn / Boojho bar
 - Quiz questions live in `lib/data/quiz_questions.dart` (`QuizQuestion`,
   `todaysQuiz`: 5 sample questions until there is a question bank).
+- Lessons live in `lib/data/lessons.dart` (`Lesson`, `ancientIndiaLessons`:
+  History → Ancient India, 6 lessons). Each lesson needs at least 5 key
+  points, a "Remember" fact and a 3-question quiz.
 - News stories live in `lib/data/news_stories.dart` (`NewsStory`,
   `sampleStories`). These are REAL past events (2023–24) used as samples,
   not today's news. Never invent news: real daily stories need a server.
@@ -54,6 +57,9 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   (starting XP and streak are placeholders until progress is saved).
   Home's "Current affairs" card and News tab open News (`design/8-news.png`);
   it pops with 'Quiz' if its Quiz tab is tapped, and Home opens the quiz.
+  Home's "Learn topics" card, Learn tab and History topic open Lesson
+  (`design/9-lesson.png`). Its quiz uses QuizScreen with `forLesson: true`
+  (results say "Lesson complete!", no streak); then "Next lesson".
   "Skip" buttons and Level's Continue open Home via
   `openHome(context, name: ..., dailyGoal: ...)`, which clears the intro screens behind it.
 - Home uses a lighter background (`AppColors.creamLight`, #FFFBF2) and soft

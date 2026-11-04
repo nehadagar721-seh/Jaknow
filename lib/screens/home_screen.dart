@@ -10,6 +10,7 @@ import '../widgets/app_bottom_bar.dart';
 import '../widgets/coming_soon.dart';
 import '../widgets/jaknow_logo.dart';
 import '../widgets/streak_pill.dart';
+import 'lesson_screen.dart';
 import 'news_screen.dart';
 import 'quiz_screen.dart';
 
@@ -190,7 +191,19 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   void _onTopicTapped(_Topic topic) {
+    // Only History has lessons so far.
+    if (topic.name == 'History') {
+      _openLessons();
+      return;
+    }
     _boojhoSays('${topic.name}! ${topic.boojhoLine} Lessons are coming soon.');
+  }
+
+  /// Opens the first History lesson (the only course so far).
+  Future<void> _openLessons() async {
+    _voice.stop();
+    await Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => const LessonScreen()));
   }
 
   @override
@@ -202,6 +215,7 @@ class _HomeScreenState extends State<HomeScreen>
         onTap: (label) => switch (label) {
           'Quiz' => _openQuiz(),
           'News' => _openNews(),
+          'Learn' => _openLessons(),
           _ => showComingSoon(context, label),
         },
       ),
@@ -274,7 +288,7 @@ class _HomeScreenState extends State<HomeScreen>
                         icon: Icons.school_outlined,
                         title: 'Learn topics',
                         subtitle: 'Guided by Boojho',
-                        onTap: () => showComingSoon(context, 'Learn topics'),
+                        onTap: _openLessons,
                       ),
                     ),
                   ],

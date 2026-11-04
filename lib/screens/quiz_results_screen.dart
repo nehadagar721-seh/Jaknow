@@ -28,6 +28,7 @@ class QuizResultsView extends StatefulWidget {
     required this.levelName,
     required this.xpBefore,
     required this.onContinue,
+    this.forLesson = false,
   });
 
   final List<QuizQuestion> questions;
@@ -43,6 +44,10 @@ class QuizResultsView extends StatefulWidget {
   /// XP already earned towards the next level, before this quiz.
   final int xpBefore;
   final VoidCallback onContinue;
+
+  /// true = this was a lesson's quiz: say "Lesson complete!" and leave out
+  /// the streak (only the daily quiz counts for the streak).
+  final bool forLesson;
 
   @override
   State<QuizResultsView> createState() => _QuizResultsViewState();
@@ -74,9 +79,15 @@ class _QuizResultsViewState extends State<QuizResultsView>
   double get _levelProgress =>
       ((widget.xpBefore + _xpEarned) / xpPerLevel).clamp(0.0, 1.0);
 
+  String get _title => widget.forLesson
+      ? 'Lesson complete!'
+      : '${widget.streakDays}-day streak!';
+
   /// Boojho's message, depending on how it went.
   String get _boojhoLine {
-    const tomorrow = 'Come back tomorrow to keep the flame burning.';
+    final tomorrow = widget.forLesson
+        ? 'Ready for the next lesson?'
+        : 'Come back tomorrow to keep the flame burning.';
     if (_score == _total) return 'Perfect score! $tomorrow';
     if (_score >= _total - 1) return 'Well done! $tomorrow';
     if (_score * 2 >= _total) return 'Good effort! $tomorrow';
@@ -88,8 +99,7 @@ class _QuizResultsViewState extends State<QuizResultsView>
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _voice.say(
-        '${widget.streakDays} day streak! You answered $_score of $_total '
-        'correctly. $_boojhoLine',
+        '$_title You answered $_score of $_total correctly. $_boojhoLine',
       );
     });
   }
@@ -132,7 +142,7 @@ class _QuizResultsViewState extends State<QuizResultsView>
                     ),
                     const SizedBox(height: 14),
                     Text(
-                      '${widget.streakDays}-day streak!',
+                      _title,
                       textAlign: TextAlign.center,
                       style: AppTextStyles.display.copyWith(fontSize: 36),
                     ),
@@ -172,8 +182,10 @@ class _QuizResultsViewState extends State<QuizResultsView>
                       nextLevel: widget.level + 1,
                       progress: _levelProgress,
                     ),
-                    const SizedBox(height: 16),
-                    _WeekChecks(streakDays: widget.streakDays),
+                    if (!widget.forLesson) ...[
+                      const SizedBox(height: 16),
+                      _WeekChecks(streakDays: widget.streakDays),
+                    ],
                     const SizedBox(height: 22),
                     ValueListenableBuilder<bool>(
                       valueListenable: _voice.isSpeaking,

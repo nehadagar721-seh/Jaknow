@@ -37,9 +37,9 @@ void main() {
 
   testWidgets('Boojho answers when you tap a topic', (tester) async {
     await openHome(tester);
-    await tester.tap(find.text('History'));
+    await tester.tap(find.text('Geography'));
     await tester.pump(const Duration(milliseconds: 300));
-    expect(find.textContaining('Let’s travel back in time.'), findsOneWidget);
+    expect(find.textContaining('Let’s explore the world.'), findsOneWidget);
   });
 
   testWidgets('Boojho replies to a question', (tester) async {

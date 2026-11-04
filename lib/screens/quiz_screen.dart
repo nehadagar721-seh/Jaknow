@@ -22,6 +22,7 @@ class QuizScreen extends StatefulWidget {
     this.streakDays = 7,
     this.levelName = 'Intermediate',
     this.xpBefore = 20,
+    this.forLesson = false,
   });
 
   final List<QuizQuestion> questions;
@@ -31,6 +32,9 @@ class QuizScreen extends StatefulWidget {
 
   /// XP already earned towards the next level (pretend number for now).
   final int xpBefore;
+
+  /// true = a lesson's quiz (results don't mention the streak).
+  final bool forLesson;
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();
@@ -153,6 +157,7 @@ class _QuizScreenState extends State<QuizScreen>
             levelName: widget.levelName,
             xpBefore: widget.xpBefore,
             onContinue: () => Navigator.of(context).pop(_score),
+            forLesson: widget.forLesson,
           ),
         ),
       );

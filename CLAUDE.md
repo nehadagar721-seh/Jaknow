@@ -29,8 +29,12 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   - `back_circle_button.dart`: round outlined back button
   - `boojho_says.dart`: Boojho's round face with a speech bubble
   - `streak_pill.dart`: the white "🔥 7" streak pill
+  - `app_bottom_bar.dart`: the Home / Quiz / News / Learn / Boojho bar
 - Quiz questions live in `lib/data/quiz_questions.dart` (`QuizQuestion`,
   `todaysQuiz`: 5 sample questions until there is a question bank).
+- News stories live in `lib/data/news_stories.dart` (`NewsStory`,
+  `sampleStories`). These are REAL past events (2023–24) used as samples,
+  not today's news. Never invent news: real daily stories need a server.
 - App-wide helpers live in `lib/services/`:
   - `boojho_voice.dart`: Boojho's voice (`flutter_tts` text-to-speech).
     `BoojhoVoice.instance.say(text)`; screens listen to `isSpeaking` so his
@@ -48,6 +52,8 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   `design/7-results.png`) inside the same screen; Continue returns to Home,
   which adds today to the streak. XP: 10 per right answer, 100 per level
   (starting XP and streak are placeholders until progress is saved).
+  Home's "Current affairs" card and News tab open News (`design/8-news.png`);
+  it pops with 'Quiz' if its Quiz tab is tapped, and Home opens the quiz.
   "Skip" buttons and Level's Continue open Home via
   `openHome(context, name: ..., dailyGoal: ...)`, which clears the intro screens behind it.
 - Home uses a lighter background (`AppColors.creamLight`, #FFFBF2) and soft

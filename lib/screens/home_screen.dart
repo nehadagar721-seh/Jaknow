@@ -6,9 +6,11 @@ import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../widgets/boojho.dart';
+import '../widgets/app_bottom_bar.dart';
 import '../widgets/coming_soon.dart';
 import '../widgets/jaknow_logo.dart';
 import '../widgets/streak_pill.dart';
+import 'news_screen.dart';
 import 'quiz_screen.dart';
 
 /// Opens Home and removes the intro/sign-up screens behind it, so the
@@ -177,6 +179,16 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
+  /// Opens Current affairs. If the user taps the Quiz tab there,
+  /// it closes with 'Quiz' and we open the quiz from here.
+  Future<void> _openNews() async {
+    _voice.stop();
+    final tab = await Navigator.of(context)
+        .push<String>(MaterialPageRoute(builder: (_) => const NewsScreen()));
+    if (!mounted) return;
+    if (tab == 'Quiz') _openQuiz();
+  }
+
   void _onTopicTapped(_Topic topic) {
     _boojhoSays('${topic.name}! ${topic.boojhoLine} Lessons are coming soon.');
   }
@@ -185,9 +197,13 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.creamLight,
-      bottomNavigationBar: _BottomBar(
-        onTap: (label) =>
-            label == 'Quiz' ? _openQuiz() : showComingSoon(context, label),
+      bottomNavigationBar: AppBottomBar(
+        selected: 'Home',
+        onTap: (label) => switch (label) {
+          'Quiz' => _openQuiz(),
+          'News' => _openNews(),
+          _ => showComingSoon(context, label),
+        },
       ),
       body: SafeArea(
         bottom: false,
@@ -249,7 +265,7 @@ class _HomeScreenState extends State<HomeScreen>
                         icon: Icons.feed_outlined,
                         title: 'Current affairs',
                         subtitle: '5 updates today',
-                        onTap: () => showComingSoon(context, 'Current affairs'),
+                        onTap: _openNews,
                       ),
                     ),
                     const SizedBox(width: 13),
@@ -730,91 +746,6 @@ class _TopicChips extends StatelessWidget {
             ),
           );
         },
-      ),
-    );
-  }
-}
-
-// ---------- Bottom navigation bar ----------
-
-class _BottomBar extends StatelessWidget {
-  const _BottomBar({required this.onTap});
-
-  /// Called with the tab's name when a tab other than Home is tapped.
-  final ValueChanged<String> onTap;
-
-  static const _tabs = [
-    (Icons.home_outlined, 'Home'),
-    (Icons.help_outline_rounded, 'Quiz'),
-    (Icons.feed_outlined, 'News'),
-    (Icons.school_outlined, 'Learn'),
-    (Icons.person_outline_rounded, 'Boojho'),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: const BoxDecoration(
-        color: AppColors.white,
-        border: Border(top: BorderSide(color: AppColors.cardBorder)),
-      ),
-      child: SafeArea(
-        top: false,
-        child: SizedBox(
-          height: 66,
-          child: Row(
-            children: [
-              for (final (icon, label) in _tabs)
-                Expanded(
-                  child: _BarItem(
-                    icon: icon,
-                    label: label,
-                    selected: label == 'Home',
-                    onTap: label == 'Home' ? null : () => onTap(label),
-                  ),
-                ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _BarItem extends StatelessWidget {
-  const _BarItem({
-    required this.icon,
-    required this.label,
-    required this.selected,
-    required this.onTap,
-  });
-
-  final IconData icon;
-  final String label;
-  final bool selected;
-  final VoidCallback? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final color = selected ? AppColors.indigo : AppColors.muted;
-    return InkWell(
-      onTap: onTap,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: color, size: 25),
-          const SizedBox(height: 3),
-          Text(
-            label,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.cardBody.copyWith(
-              color: color,
-              fontSize: 12,
-              fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
-            ),
-          ),
-        ],
       ),
     );
   }

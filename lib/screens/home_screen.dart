@@ -10,6 +10,7 @@ import '../widgets/app_bottom_bar.dart';
 import '../widgets/coming_soon.dart';
 import '../widgets/jaknow_logo.dart';
 import '../widgets/streak_pill.dart';
+import 'boojho_chat_screen.dart';
 import 'lesson_screen.dart';
 import 'news_screen.dart';
 import 'quiz_screen.dart';
@@ -140,10 +141,16 @@ class _HomeScreenState extends State<HomeScreen>
       return;
     }
     _askController.clear();
-    // TODO: send the question to an AI service once the app has a server.
-    _boojhoSays(
-      'Good question! Soon I’ll be able to answer things like that. '
-      'For now, let’s practise with today’s quiz.',
+    _openChat(question);
+  }
+
+  /// Opens the chat with Boojho, optionally asking [question] straight away.
+  Future<void> _openChat([String? question]) async {
+    _voice.stop();
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => BoojhoChatScreen(firstQuestion: question),
+      ),
     );
   }
 
@@ -216,6 +223,7 @@ class _HomeScreenState extends State<HomeScreen>
           'Quiz' => _openQuiz(),
           'News' => _openNews(),
           'Learn' => _openLessons(),
+          'Boojho' => _openChat(),
           _ => showComingSoon(context, label),
         },
       ),

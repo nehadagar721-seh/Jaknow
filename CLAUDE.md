@@ -45,6 +45,10 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
     It picks the clearest English voice on the device (`voiceScore`) and
     says "JaKnow" as "Jaa Know" (`forSpeech`). It speaks one sentence at a
     time with short pauses (`sentences`), to sound more natural.
+  - `boojho_brain.dart`: how Boojho answers chat questions. For now it only
+    uses the app's own content (lessons, quiz, news) plus hand-written GK
+    facts, and says "I don't know" otherwise. Later: swap in a real AI
+    service via the app's server (never put an API key in the app).
 - Screens so far: Welcome (`design/1-welcome.png`) → Features
   (`design/2-features.png`) → Sign up (`design/3-sign-up.png`) → Home
   (`design/4-home.png`). A valid sign-up opens Level, step 1 of 2
@@ -60,6 +64,8 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   Home's "Learn topics" card, Learn tab and History topic open Lesson
   (`design/9-lesson.png`). Its quiz uses QuizScreen with `forLesson: true`
   (results say "Lesson complete!", no streak); then "Next lesson".
+  Home's Boojho tab and "Ask Boojho anything" open the chat
+  (`boojho_chat_screen.dart`, `design/10-boojho-chat.png`).
   "Skip" buttons and Level's Continue open Home via
   `openHome(context, name: ..., dailyGoal: ...)`, which clears the intro screens behind it.
 - Home uses a lighter background (`AppColors.creamLight`, #FFFBF2) and soft

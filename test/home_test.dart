@@ -42,11 +42,14 @@ void main() {
     expect(find.textContaining('Let’s explore the world.'), findsOneWidget);
   });
 
-  testWidgets('Boojho replies to a question', (tester) async {
+  testWidgets('asking on Home opens the chat', (tester) async {
     await openHome(tester);
     await tester.enterText(find.byType(TextField), 'Who built the Taj Mahal?');
     await tester.testTextInput.receiveAction(TextInputAction.send);
     await tester.pump(const Duration(milliseconds: 300));
-    expect(find.textContaining('Good question!'), findsOneWidget);
+    // The question opens the chat, where Boojho answers it.
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text('Who built the Taj Mahal?'), findsOneWidget);
+    expect(find.text('Your AI guide'), findsOneWidget);
   });
 }

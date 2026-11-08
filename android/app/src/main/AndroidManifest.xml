@@ -1,4 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Needed to download fonts and talk to the backend (Supabase). -->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="jaknow"
         android:name="${applicationName}"

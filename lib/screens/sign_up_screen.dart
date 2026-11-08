@@ -7,8 +7,10 @@ import '../theme/app_text_styles.dart';
 import '../widgets/back_circle_button.dart';
 import '../widgets/boojho_says.dart';
 import '../widgets/coming_soon.dart';
+import '../services/backend.dart';
 import 'home_screen.dart';
 import 'level_screen.dart';
+import 'log_in_screen.dart';
 
 /// Third screen: create an account with name, mobile number and a
 /// 6-digit password.
@@ -37,6 +39,8 @@ class _SignUpScreenState extends State<SignUpScreen>
   final _passwordController = TextEditingController();
   bool _agreed = false;
   bool _showPassword = false; // the eye button switches this
+  bool _busy = false; // true while waiting for the server
+  String? _serverError; // e.g. "This mobile number already has an account"
   bool _showAgreeError = false;
 
   static const String _message = 'Namaste! Let’s start your first streak.';
@@ -77,19 +81,34 @@ class _SignUpScreenState extends State<SignUpScreen>
     return null;
   }
 
-  void _signUp() {
+  Future<void> _signUp() async {
+    if (_busy) return;
     FocusScope.of(context).unfocus(); // hide the keyboard
     final formOk = _formKey.currentState!.validate();
-    setState(() => _showAgreeError = !_agreed);
+    setState(() {
+      _showAgreeError = !_agreed;
+      _serverError = null;
+    });
     if (!formOk || !_agreed) return;
 
-    // TODO: really create the account once the app has a server.
-    // For now we only remember the first name, for Boojho to use,
-    // and go on to "Pick your starting level".
-    final firstName = _nameController.text.trim().split(RegExp(r'\s+')).first;
-    BoojhoVoice.instance.stop();
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (_) => LevelScreen(name: firstName)));
+    // Create the account on the backend (Supabase, or test mode).
+    setState(() => _busy = true);
+    try {
+      final profile = await Backend.instance.signUp(
+        name: _nameController.text.trim(),
+        mobile: _mobileController.text,
+        password: _passwordController.text,
+      );
+      if (!mounted) return;
+      BoojhoVoice.instance.stop();
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => LevelScreen(name: profile.firstName)),
+      );
+    } on BackendException catch (e) {
+      setState(() => _serverError = e.message);
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
   }
 
   @override
@@ -244,7 +263,24 @@ class _SignUpScreenState extends State<SignUpScreen>
                     ),
                   const SizedBox(height: 20),
 
-                  _PillButton(label: 'Sign up', dark: true, onPressed: _signUp),
+                  if (_serverError != null)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: Text(
+                        _serverError!,
+                        style: AppTextStyles.bodyMuted.copyWith(
+                          color: AppColors.error,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  _PillButton(
+                    label: 'Sign up',
+                    dark: true,
+                    busy: _busy,
+                    onPressed: _signUp,
+                  ),
                   const SizedBox(height: 14),
                   const _OrDivider(),
                   const SizedBox(height: 14),
@@ -268,7 +304,11 @@ class _SignUpScreenState extends State<SignUpScreen>
                           style: AppTextStyles.subtitle,
                         ),
                         TextButton(
-                          onPressed: () => showComingSoon(context, 'Log in'),
+                          onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => const LogInScreen(),
+                            ),
+                          ),
                           child: Text(
                             'Log in',
                             style: AppTextStyles.link.copyWith(fontSize: 16),
@@ -398,11 +438,15 @@ class _PillButton extends StatelessWidget {
     required this.label,
     required this.dark,
     required this.onPressed,
+    this.busy = false,
   });
 
   final String label;
   final bool dark;
   final VoidCallback onPressed;
+
+  /// true = show a small spinner instead of the label.
+  final bool busy;
 
   @override
   Widget build(BuildContext context) {
@@ -422,7 +466,15 @@ class _PillButton extends StatelessWidget {
           textStyle: AppTextStyles.button.copyWith(fontSize: 17),
         ),
         onPressed: onPressed,
-        child: Text(label),
+        child: busy
+            ? const SizedBox.square(
+                dimension: 22,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2.5,
+                  color: AppColors.white,
+                ),
+              )
+            : Text(label),
       ),
     );
   }

@@ -39,6 +39,16 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   `sampleStories`). These are REAL past events (2023–24) used as samples,
   not today's news. Never invent news: real daily stories need a server.
 - App-wide helpers live in `lib/services/`:
+  - `backend.dart`: accounts and saved profiles. Screens only use
+    `Backend.instance` (never Supabase directly). `SupabaseBackend` is used
+    when the app runs with `--dart-define-from-file=env.json`
+    (SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY); otherwise `MemoryBackend`
+    ("test mode", also used by tests). Login is mobile + 6-digit password,
+    stored in Supabase Auth as `<mobile>@phone.jaknow.app` (no SMS costs);
+    "Confirm email" must be OFF. Database: `supabase/schema.sql` (profiles
+    table, row-level security, auto-created on sign-up); setup steps in
+    `supabase/SETUP.md`. `env.json` is git-ignored; never commit keys, and
+    never put the Supabase secret/service_role key in the app.
   - `boojho_voice.dart`: Boojho's voice (`flutter_tts` text-to-speech).
     `BoojhoVoice.instance.say(text)`; screens listen to `isSpeaking` so his
     mouth only moves while he talks. Stop the voice when leaving a screen.
@@ -72,7 +82,11 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   card borders (`AppColors.cardBorder`), as in its design. Streak/level
   numbers there are placeholders until progress is saved.
 - Sign-up password is exactly 6 digits (the user's choice, not the design's
-  "at least 8 characters"). No server yet: Sign up only checks the form.
+  "at least 8 characters"). Sign up creates a real account, then opens
+  Level, whose Continue saves level + daily goal. "Log in" opens
+  `log_in_screen.dart` (no design; follows Sign-up's style). On Home, tapping
+  the logo opens the account panel with Log out. A logged-in user starts on
+  Home. Streak/XP are not saved yet (next backend step).
 - The design files are 390 px wide phone screens (screenshots at 2x).
 
 ## Design

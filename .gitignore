@@ -46,3 +46,6 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Your Supabase project address and key (see supabase/SETUP.md)
+env.json

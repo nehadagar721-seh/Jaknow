@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../services/backend.dart';
 import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
@@ -69,8 +70,27 @@ class _LevelScreenState extends State<LevelScreen>
     });
   }
 
-  void _continue() {
-    // TODO: open step 2 once it's designed, and save these choices.
+  Future<void> _continue() async {
+    // Save the choices to the user's profile (if they're logged in).
+    final profile = Backend.instance.currentProfile;
+    if (profile != null) {
+      try {
+        await Backend.instance.saveChoices(
+          profile.copyWith(level: _level.title, dailyGoal: _goal),
+        );
+      } on BackendException catch (e) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.message),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        return;
+      }
+    }
+    if (!mounted) return;
+    // TODO: open step 2 once it's designed.
     openHome(context, name: widget.name, dailyGoal: _goal);
   }
 

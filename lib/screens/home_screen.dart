@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../services/backend.dart';
 import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
@@ -14,6 +15,7 @@ import 'boojho_chat_screen.dart';
 import 'lesson_screen.dart';
 import 'news_screen.dart';
 import 'quiz_screen.dart';
+import 'welcome_screen.dart';
 
 /// Opens Home and removes the intro/sign-up screens behind it, so the
 /// back button doesn't lead back into them.
@@ -187,6 +189,74 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
+  /// A small panel with the user's account and a Log out button.
+  void _showAccount() {
+    final backend = Backend.instance;
+    final profile = backend.currentProfile;
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: AppColors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      builder: (sheetContext) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 22, 24, 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                profile == null ? 'Not logged in' : profile.name,
+                style: AppTextStyles.display.copyWith(fontSize: 24),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                profile == null
+                    ? 'You skipped sign-up, so nothing is saved.'
+                    : '+91 ${profile.mobile}',
+                style: AppTextStyles.subtitle,
+              ),
+              if (!backend.isConnected) ...[
+                const SizedBox(height: 12),
+                Text(
+                  'Test mode: not connected to Supabase, so accounts are '
+                  'forgotten when the app closes.',
+                  style: AppTextStyles.subtitle.copyWith(fontSize: 13),
+                ),
+              ],
+              const SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                height: 52,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: AppColors.ink,
+                    side: const BorderSide(color: AppColors.line, width: 1.2),
+                    shape: const StadiumBorder(),
+                    textStyle: AppTextStyles.button.copyWith(fontSize: 16),
+                  ),
+                  onPressed: () async {
+                    Navigator.of(sheetContext).pop();
+                    if (profile != null) await backend.logOut();
+                    if (!mounted) return;
+                    _voice.stop();
+                    // Back to the start, with nothing behind it.
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (_) => const WelcomeScreen()),
+                      (route) => false,
+                    );
+                  },
+                  child: Text(profile == null ? 'Back to start' : 'Log out'),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   /// Opens Current affairs. If the user taps the Quiz tab there,
   /// it closes with 'Quiz' and we open the quiz from here.
   Future<void> _openNews() async {
@@ -239,7 +309,14 @@ class _HomeScreenState extends State<HomeScreen>
               children: [
                 Row(
                   children: [
-                    const JaKnowLogo(size: 21),
+                    // Tap the logo for your account (and Log out).
+                    Tooltip(
+                      message: 'Your account',
+                      child: GestureDetector(
+                        onTap: _showAccount,
+                        child: const JaKnowLogo(size: 21),
+                      ),
+                    ),
                     const Spacer(),
                     StreakPill(days: _streakDays, onTap: _onStreakTapped),
                   ],

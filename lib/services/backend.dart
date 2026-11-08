@@ -7,44 +7,91 @@ class Profile {
     required this.id,
     required this.name,
     required this.mobile,
+    this.studentClass = '',
     this.level = 'Intermediate',
     this.dailyGoal = 5,
     this.streakDays = 0,
     this.lastQuizDate,
     this.xp = 0,
+    this.joined,
   });
 
   final String id;
   final String name;
   final String mobile;
 
+  /// E.g. 'Class 7', 'College', 'Preparing for exams' ('' = not chosen).
+  final String studentClass;
+
   /// 'Beginner', 'Intermediate' or 'Exam ready'.
   final String level;
 
   /// Questions per day: 5, 10 or 15.
   final int dailyGoal;
+
+  /// Days in a row with the daily quiz done, up to [lastQuizDate].
   final int streakDays;
   final DateTime? lastQuizDate;
+
+  /// Total XP ever earned.
   final int xp;
+
+  /// When the account was made.
+  final DateTime? joined;
 
   /// The first word of the name, for greetings ("Namaste, Neha!").
   String get firstName => name.trim().split(RegExp(r'\s+')).first;
 
-  Profile copyWith({String? level, int? dailyGoal}) => Profile(
-    id: id,
-    name: name,
-    mobile: mobile,
-    level: level ?? this.level,
-    dailyGoal: dailyGoal ?? this.dailyGoal,
-    streakDays: streakDays,
-    lastQuizDate: lastQuizDate,
-    xp: xp,
-  );
+  /// Has the daily quiz been done on [today]?
+  bool doneOn(DateTime today) =>
+      lastQuizDate != null && _sameDay(lastQuizDate!, today);
+
+  /// The streak as it stands on [today]: it's lost if a whole day was missed.
+  int currentStreak(DateTime today) {
+    final last = lastQuizDate;
+    if (last == null) return 0;
+    final yesterday = _dateOnly(today).subtract(const Duration(days: 1));
+    return _sameDay(last, today) || _sameDay(last, yesterday) ? streakDays : 0;
+  }
+
+  /// The profile after finishing the daily quiz on [today]:
+  /// played yesterday → streak + 1; already played today → no change;
+  /// otherwise the streak starts again at 1. XP is always added.
+  Profile afterQuiz({required int xpEarned, required DateTime today}) {
+    final newStreak = doneOn(today) ? streakDays : currentStreak(today) + 1;
+    return Profile(
+      id: id,
+      name: name,
+      mobile: mobile,
+      studentClass: studentClass,
+      level: level,
+      dailyGoal: dailyGoal,
+      streakDays: newStreak,
+      lastQuizDate: _dateOnly(today),
+      xp: xp + xpEarned,
+      joined: joined,
+    );
+  }
+
+  Profile copyWith({String? studentClass, String? level, int? dailyGoal}) =>
+      Profile(
+        id: id,
+        name: name,
+        mobile: mobile,
+        studentClass: studentClass ?? this.studentClass,
+        level: level ?? this.level,
+        dailyGoal: dailyGoal ?? this.dailyGoal,
+        streakDays: streakDays,
+        lastQuizDate: lastQuizDate,
+        xp: xp,
+        joined: joined,
+      );
 
   factory Profile.fromRow(Map<String, dynamic> row) => Profile(
     id: row['id'] as String,
     name: (row['name'] as String?) ?? '',
     mobile: (row['mobile'] as String?) ?? '',
+    studentClass: (row['student_class'] as String?) ?? '',
     level: (row['level'] as String?) ?? 'Intermediate',
     dailyGoal: (row['daily_goal'] as int?) ?? 5,
     streakDays: (row['streak_days'] as int?) ?? 0,
@@ -52,8 +99,22 @@ class Profile {
         ? null
         : DateTime.parse(row['last_quiz_date'] as String),
     xp: (row['xp'] as int?) ?? 0,
+    joined: row['created_at'] == null
+        ? null
+        : DateTime.parse(row['created_at'] as String).toLocal(),
   );
+
+  /// A date as "2026-11-08", the way the database stores it.
+  static String dateText(DateTime d) =>
+      '${d.year.toString().padLeft(4, '0')}-'
+      '${d.month.toString().padLeft(2, '0')}-'
+      '${d.day.toString().padLeft(2, '0')}';
 }
+
+DateTime _dateOnly(DateTime d) => DateTime(d.year, d.month, d.day);
+
+bool _sameDay(DateTime a, DateTime b) =>
+    a.year == b.year && a.month == b.month && a.day == b.day;
 
 /// Something went wrong, with a message that can be shown to the user.
 class BackendException implements Exception {
@@ -113,8 +174,11 @@ abstract class Backend {
 
   Future<void> logOut();
 
-  /// Saves the level and daily goal from [profile].
+  /// Saves the class, level and daily goal from [profile].
   Future<Profile> saveChoices(Profile profile);
+
+  /// Saves the result of the daily quiz: XP, streak and today's date.
+  Future<Profile> recordQuiz({required int xpEarned});
 
   /// The hidden login address made from a mobile number. Supabase's own
   /// mobile login needs paid SMS, so we use this instead; nothing is ever
@@ -201,8 +265,34 @@ class SupabaseBackend implements Backend {
     final row = await _guard(
       () => _client
           .from('profiles')
-          .update({'level': profile.level, 'daily_goal': profile.dailyGoal})
+          .update({
+            'student_class': profile.studentClass,
+            'level': profile.level,
+            'daily_goal': profile.dailyGoal,
+          })
           .eq('id', profile.id)
+          .select()
+          .single(),
+    );
+    return _profile = Profile.fromRow(row);
+  }
+
+  @override
+  Future<Profile> recordQuiz({required int xpEarned}) async {
+    final current = _profile;
+    if (current == null) {
+      throw const BackendException('Please log in to save your progress.');
+    }
+    final next = current.afterQuiz(xpEarned: xpEarned, today: DateTime.now());
+    final row = await _guard(
+      () => _client
+          .from('profiles')
+          .update({
+            'streak_days': next.streakDays,
+            'last_quiz_date': Profile.dateText(next.lastQuizDate!),
+            'xp': next.xp,
+          })
+          .eq('id', current.id)
           .select()
           .single(),
     );
@@ -282,7 +372,12 @@ class MemoryBackend implements Backend {
         'This mobile number already has an account. Please log in.',
       );
     }
-    final profile = Profile(id: 'test-$mobile', name: name, mobile: mobile);
+    final profile = Profile(
+      id: 'test-$mobile',
+      name: name,
+      mobile: mobile,
+      joined: DateTime.now(),
+    );
     _accounts[mobile] = (password, profile);
     return _profile = profile;
   }
@@ -303,7 +398,18 @@ class MemoryBackend implements Backend {
   Future<void> logOut() async => _profile = null;
 
   @override
-  Future<Profile> saveChoices(Profile profile) async {
+  Future<Profile> saveChoices(Profile profile) async => _store(profile);
+
+  @override
+  Future<Profile> recordQuiz({required int xpEarned}) async {
+    final current = _profile;
+    if (current == null) {
+      throw const BackendException('Please log in to save your progress.');
+    }
+    return _store(current.afterQuiz(xpEarned: xpEarned, today: DateTime.now()));
+  }
+
+  Profile _store(Profile profile) {
     final account = _accounts[profile.mobile];
     if (account != null) _accounts[profile.mobile] = (account.$1, profile);
     return _profile = profile;

@@ -145,10 +145,12 @@ void main() {
       expect(find.text('Ready to sharpen your mind?'), findsOneWidget);
       expect(find.textContaining('Namaste, Neha!'), findsOneWidget);
 
-      // Log out from the account panel (tap the logo).
-      await tester.tap(find.byTooltip('Your account'));
+      // Log out from the profile (the round button next to the streak).
+      await tester.tap(find.byTooltip('My profile'));
       await settle(tester);
       expect(find.text('Neha Dagar'), findsOneWidget);
+      await tester.ensureVisible(find.text('Log out'));
+      await tester.pump();
       await tester.tap(find.text('Log out'));
       await settle(tester);
       expect(Backend.instance.currentProfile, isNull);

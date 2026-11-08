@@ -97,9 +97,9 @@ void main() {
 
       expect(find.textContaining('Please'), findsNothing);
       expect(find.textContaining('must be'), findsNothing);
-      // A correct form opens "Pick your starting level".
+      // A correct form opens "Which class are you in?" (step 1 of 2).
       await tester.pump(const Duration(seconds: 1));
-      expect(find.text('Pick your starting level'), findsOneWidget);
+      expect(find.text('Which class are you in?'), findsOneWidget);
     });
 
     testWidgets('"Skip" goes straight to Home', (tester) async {

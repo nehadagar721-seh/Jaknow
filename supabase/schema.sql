@@ -5,6 +5,7 @@ create table if not exists public.profiles (
   id uuid primary key references auth.users (id) on delete cascade,
   name text not null default '',
   mobile text not null default '',
+  student_class text not null default '',
   level text not null default 'Intermediate'
     check (level in ('Beginner', 'Intermediate', 'Exam ready')),
   daily_goal int not null default 5 check (daily_goal in (5, 10, 15)),
@@ -14,6 +15,10 @@ create table if not exists public.profiles (
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+-- Added later: safe to run again on a database made with an older version.
+alter table public.profiles
+  add column if not exists student_class text not null default '';
 
 -- Security: people can only see and change their OWN profile.
 alter table public.profiles enable row level security;

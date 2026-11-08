@@ -29,7 +29,7 @@ void main() {
 
   testWidgets('Home shows the streak, quiz and topics', (tester) async {
     await openHome(tester);
-    expect(find.text('7-day streak'), findsOneWidget);
+    expect(find.text('Start your streak'), findsOneWidget); // new player
     expect(find.text('Today'), findsOneWidget);
     expect(find.text('Take today’s quiz'), findsOneWidget);
     expect(find.text('History'), findsOneWidget);

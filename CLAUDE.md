@@ -30,8 +30,13 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   - `boojho_says.dart`: Boojho's round face with a speech bubble
   - `streak_pill.dart`: the white "🔥 7" streak pill
   - `app_bottom_bar.dart`: the Home / Quiz / News / Learn / Boojho bar
-- Quiz questions live in `lib/data/quiz_questions.dart` (`QuizQuestion`,
-  `todaysQuiz`: 5 sample questions until there is a question bank).
+  - `step_indicator.dart`: "Step 1 of 2" with little bars
+- Quiz questions live in `lib/data/quiz_questions.dart` (`QuizQuestion`;
+  `quizForLevel(level)` gives `beginnerQuiz`, `todaysQuiz` (Intermediate) or
+  `examReadyQuiz`: 5 sample questions each until there is a question bank).
+- Classes and levels live in `lib/data/study_levels.dart`: `studentClasses`,
+  `suggestedLevel(class)` (Class 6–8 → Beginner, exams → Exam ready, else
+  Intermediate), `levelNumber`, `quizLabel` (Basics/Foundation/Exam prep).
 - Lessons live in `lib/data/lessons.dart` (`Lesson`, `ancientIndiaLessons`:
   History → Ancient India, 6 lessons). Each lesson needs at least 5 key
   points, a "Remember" fact and a 3-question quiz.
@@ -68,7 +73,7 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   question the quiz shows its results (`quiz_results_screen.dart`,
   `design/7-results.png`) inside the same screen; Continue returns to Home,
   which adds today to the streak. XP: 10 per right answer, 100 per level
-  (starting XP and streak are placeholders until progress is saved).
+  (new users start at 0 streak and 0 XP).
   Home's "Current affairs" card and News tab open News (`design/8-news.png`);
   it pops with 'Quiz' if its Quiz tab is tapped, and Home opens the quiz.
   Home's "Learn topics" card, Learn tab and History topic open Lesson
@@ -79,14 +84,21 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   "Skip" buttons and Level's Continue open Home via
   `openHome(context, name: ..., dailyGoal: ...)`, which clears the intro screens behind it.
 - Home uses a lighter background (`AppColors.creamLight`, #FFFBF2) and soft
-  card borders (`AppColors.cardBorder`), as in its design. Streak/level
-  numbers there are placeholders until progress is saved.
+  card borders (`AppColors.cardBorder`), as in its design.
 - Sign-up password is exactly 6 digits (the user's choice, not the design's
   "at least 8 characters"). Sign up creates a real account, then opens
-  Level, whose Continue saves level + daily goal. "Log in" opens
-  `log_in_screen.dart` (no design; follows Sign-up's style). On Home, tapping
-  the logo opens the account panel with Log out. A logged-in user starts on
-  Home. Streak/XP are not saved yet (next backend step).
+  Class (`class_screen.dart`, step 1 of 2, no design), then Level (step 2,
+  suggested level pre-selected with a "For you" tag), whose Continue saves
+  class + level + daily goal. "Log in" opens `log_in_screen.dart` (no
+  design). A logged-in user starts on Home.
+- Profile (`profile_screen.dart`, no design) opens from the round initial
+  button next to Home's streak pill: details, streak/XP/level, study
+  settings (class, level, goal — editable, saved), saved lessons, Log out.
+- Streak and XP are real: after the daily quiz Home calls
+  `Backend.recordQuiz` (`Profile.afterQuiz`: played yesterday → +1, missed a
+  day → 1, same day → unchanged; XP always added). Skipped sign-up = a
+  streak that lasts only while the app is open. Home's quiz uses the
+  profile's level.
 - The design files are 390 px wide phone screens (screenshots at 2x).
 
 ## Design

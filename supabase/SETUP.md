@@ -12,6 +12,8 @@ You do this once, in your web browser. It takes about 5 minutes.
 1. In the left menu, open **SQL Editor** → **New query**.
 2. Open `supabase/schema.sql` from this project, copy everything, paste it in.
 3. Click **Run**. You should see "Success. No rows returned".
+   (When `schema.sql` changes in a later update, just run it again: it is
+   safe to run more than once and keeps everyone's data.)
 
 ## 3. Turn off email confirmation
 JaKnow logs people in with their mobile number and a 6-digit password.

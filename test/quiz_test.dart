@@ -97,11 +97,11 @@ void main() {
     }
 
     // The results appear first…
-    expect(find.text('8-day streak!'), findsOneWidget);
+    expect(find.text('1-day streak!'), findsOneWidget); // first quiz ever
     expect(find.text('You answered 4 of 5 correctly'), findsOneWidget);
     expect(find.text('+40'), findsOneWidget);
     expect(find.text('80%'), findsOneWidget);
-    expect(find.text('60%'), findsOneWidget); // 20 XP before + 40 = 60 of 100
+    expect(find.text('40%'), findsOneWidget); // 0 XP before + 40 = 40 of 100
     expect(find.textContaining('Well done!'), findsOneWidget);
 
     // …"Review my answers" lists every question…
@@ -114,13 +114,13 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(seconds: 1));
 
-    // …and Continue goes back to Home with the streak now at 8.
+    // …and Continue goes back to Home with the streak now at 1.
     await tester.tap(find.text('Continue'));
     await tester.pump();
     await tester.pump(const Duration(seconds: 1));
     expect(find.text('Ready to sharpen your mind?'), findsOneWidget);
-    expect(find.text('8-day streak'), findsOneWidget);
+    expect(find.text('1-day streak'), findsOneWidget);
     expect(find.text('Done for today. See you tomorrow!'), findsOneWidget);
-    expect(find.textContaining('Your streak is now 8 days!'), findsOneWidget);
+    expect(find.textContaining('Your streak is now 1 day!'), findsOneWidget);
   });
 }

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../data/study_levels.dart';
 import '../services/backend.dart';
 import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../widgets/back_circle_button.dart';
 import '../widgets/boojho_says.dart';
+import '../widgets/step_indicator.dart';
 import 'home_screen.dart';
 
 /// Onboarding step 1 of 2: pick a starting level and a daily goal.
@@ -13,10 +15,13 @@ import 'home_screen.dart';
 /// Boojho comments on each choice. Step 2 isn't designed yet, so
 /// "Continue" opens Home for now.
 class LevelScreen extends StatefulWidget {
-  const LevelScreen({super.key, this.name});
+  const LevelScreen({super.key, this.name, this.studentClass = ''});
 
   /// The user's first name from sign-up (passed on to Home).
   final String? name;
+
+  /// The class picked on step 1 ('' if unknown).
+  final String studentClass;
 
   @override
   State<LevelScreen> createState() => _LevelScreenState();
@@ -34,14 +39,26 @@ class _LevelScreenState extends State<LevelScreen>
   static const String _firstLine =
       'Where shall we start? I’ll raise the level as you improve.';
 
-  String _boojhoLine = _firstLine;
-  _Level _level = _levels[1]; // Intermediate, as in the design
+  /// First words: with a suggestion when we know the class.
+  late final String _openingLine = widget.studentClass.isEmpty
+      ? _firstLine
+      : 'For ${widget.studentClass}, I suggest ${_suggested.title}. '
+            'I’ll raise the level as you improve.';
+  late String _boojhoLine = _openingLine;
+
+  /// The level that suits the student's class (Intermediate if unknown).
+  late final _Level _suggested = _levels.firstWhere(
+    (l) => l.title == suggestedLevel(widget.studentClass),
+  );
+  late _Level _level = _suggested;
   int _goal = 5;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _voice.say(_firstLine));
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _voice.say(_openingLine),
+    );
   }
 
   @override
@@ -76,7 +93,11 @@ class _LevelScreenState extends State<LevelScreen>
     if (profile != null) {
       try {
         await Backend.instance.saveChoices(
-          profile.copyWith(level: _level.title, dailyGoal: _goal),
+          profile.copyWith(
+            studentClass: widget.studentClass,
+            level: _level.title,
+            dailyGoal: _goal,
+          ),
         );
       } on BackendException catch (e) {
         if (!mounted) return;
@@ -115,7 +136,7 @@ class _LevelScreenState extends State<LevelScreen>
                             onPressed: () => Navigator.of(context).pop(),
                           ),
                           const Spacer(),
-                          const _StepIndicator(step: 1, of: 2),
+                          const StepIndicator(step: 2, of: 2),
                         ],
                       ),
                       const SizedBox(height: 18),
@@ -138,6 +159,10 @@ class _LevelScreenState extends State<LevelScreen>
                         _LevelCard(
                           level: level,
                           selected: level == _level,
+                          // Only show "For you" when we know the class.
+                          suggested:
+                              widget.studentClass.isNotEmpty &&
+                              level == _suggested,
                           onTap: () => _pickLevel(level),
                         ),
                         const SizedBox(height: 10),
@@ -198,42 +223,6 @@ class _LevelScreenState extends State<LevelScreen>
   }
 }
 
-// ---------- "Step 1 of 2" with two little bars ----------
-
-class _StepIndicator extends StatelessWidget {
-  const _StepIndicator({required this.step, required this.of});
-
-  final int step;
-  final int of;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          'Step $step of $of',
-          style: AppTextStyles.subtitle.copyWith(
-            fontSize: 13.5,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        for (var i = 1; i <= of; i++) ...[
-          const SizedBox(width: 8),
-          // The current step is a long indigo bar; the others short and grey.
-          Container(
-            width: i == step ? 28 : 12,
-            height: 6,
-            decoration: BoxDecoration(
-              color: i == step ? AppColors.indigo : AppColors.line,
-              borderRadius: BorderRadius.circular(3),
-            ),
-          ),
-        ],
-      ],
-    );
-  }
-}
-
 // ---------- The three levels ----------
 
 class _Level {
@@ -274,11 +263,15 @@ class _LevelCard extends StatelessWidget {
     required this.level,
     required this.selected,
     required this.onTap,
+    this.suggested = false,
   });
 
   final _Level level;
   final bool selected;
   final VoidCallback onTap;
+
+  /// true = show a small "For you" tag (the level that suits their class).
+  final bool suggested;
 
   @override
   Widget build(BuildContext context) {
@@ -315,12 +308,35 @@ class _LevelCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      level.title,
-                      style: AppTextStyles.cardTitle.copyWith(
-                        fontSize: 17.5,
-                        fontWeight: FontWeight.w800,
-                      ),
+                    Wrap(
+                      spacing: 8,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        Text(
+                          level.title,
+                          style: AppTextStyles.cardTitle.copyWith(
+                            fontSize: 17.5,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        if (suggested)
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 2,
+                            ),
+                            decoration: const ShapeDecoration(
+                              color: AppColors.amberLight,
+                              shape: StadiumBorder(),
+                            ),
+                            child: Text(
+                              'For you',
+                              style: AppTextStyles.cardTitle.copyWith(
+                                fontSize: 11.5,
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
                     const SizedBox(height: 3),
                     Text(

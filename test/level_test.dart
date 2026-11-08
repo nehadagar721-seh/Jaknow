@@ -22,7 +22,7 @@ void main() {
 
   testWidgets('starts with Intermediate and 5 questions', (tester) async {
     await openLevel(tester);
-    expect(find.text('Step 1 of 2'), findsOneWidget);
+    expect(find.text('Step 2 of 2'), findsOneWidget);
     expect(find.text('5 questions'), findsOneWidget);
     expect(find.byIcon(Icons.check_rounded), findsOneWidget);
   });

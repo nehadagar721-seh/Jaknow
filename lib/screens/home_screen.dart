@@ -2,6 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../data/quiz_questions.dart';
+import '../data/study_levels.dart';
 import '../services/backend.dart';
 import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
@@ -14,8 +16,9 @@ import '../widgets/streak_pill.dart';
 import 'boojho_chat_screen.dart';
 import 'lesson_screen.dart';
 import 'news_screen.dart';
+import 'profile_screen.dart';
+import 'quiz_results_screen.dart' show xpPerCorrectAnswer, xpPerLevel;
 import 'quiz_screen.dart';
-import 'welcome_screen.dart';
 
 /// Opens Home and removes the intro/sign-up screens behind it, so the
 /// back button doesn't lead back into them.
@@ -56,11 +59,28 @@ class _HomeScreenState extends State<HomeScreen>
   final BoojhoVoice _voice = BoojhoVoice.instance;
   final _askController = TextEditingController();
 
-  // Pretend numbers until the app saves real progress.
-  // TODO: load these from the user's saved progress.
-  int _streakDays = 7;
-  bool _doneToday = false; // has today's quiz been finished?
-  static const int _level = 2;
+  // Progress comes from the saved profile. Someone who skipped sign-up
+  // gets a streak that only lasts while the app is open.
+  int _guestStreak = 0;
+  bool _guestDoneToday = false;
+
+  Profile? get _profile => Backend.instance.currentProfile;
+  int get _streakDays =>
+      _profile?.currentStreak(DateTime.now()) ?? _guestStreak;
+  bool get _doneToday => _profile?.doneOn(DateTime.now()) ?? _guestDoneToday;
+  String get _levelName => _profile?.level ?? 'Intermediate';
+  int get _level => levelNumber(_levelName);
+  int get _dailyGoal => _profile?.dailyGoal ?? widget.dailyGoal;
+
+  /// "1 day" or "7 days".
+  String get _daysText => _streakDays == 1 ? '1 day' : '$_streakDays days';
+
+  /// "5 Foundation questions", "5 easy questions", "5 exam-style questions".
+  String get _questionsText => switch (_levelName) {
+    'Beginner' => '$_dailyGoal easy questions',
+    'Exam ready' => '$_dailyGoal exam-style questions',
+    _ => '$_dailyGoal Foundation questions',
+  };
 
   /// What Boojho is saying right now (shown in his card).
   late String _boojhoLine = _welcomeLine();
@@ -84,8 +104,7 @@ class _HomeScreenState extends State<HomeScreen>
   String _welcomeLine() {
     final name = widget.name;
     final hello = name == null ? 'Namaste!' : 'Namaste, $name!';
-    return '$hello ${widget.dailyGoal} Foundation questions are ready. '
-        'Warm up first?';
+    return '$hello $_questionsText are ready. Warm up first?';
   }
 
   @override
@@ -95,9 +114,9 @@ class _HomeScreenState extends State<HomeScreen>
       // Spoken greeting is a little longer than the written one.
       final name = widget.name == null ? '' : ', ${widget.name}';
       _voice.say(
-        '$_greeting$name! You’re on a $_streakDays day streak. '
-        '${widget.dailyGoal} Foundation questions are ready. '
-        'Shall we warm up first?',
+        '$_greeting$name! '
+        '${_streakDays > 0 ? 'You’re on a $_streakDays day streak. ' : 'Let’s start your streak today! '}'
+        '$_questionsText are ready. Shall we warm up first?',
       );
     });
   }
@@ -123,14 +142,16 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   void _onStreakTapped() {
+    if (_streakDays == 0) {
+      _boojhoSays('Finish today’s $_dailyGoal questions to start your streak!');
+      return;
+    }
     if (_doneToday) {
-      _boojhoSays(
-        '$_streakDays days in a row! Today is done. See you tomorrow!',
-      );
+      _boojhoSays('$_daysText in a row! Today is done. See you tomorrow!');
       return;
     }
     _boojhoSays(
-      '$_streakDays days in a row! Finish today’s ${widget.dailyGoal} questions '
+      '$_daysText in a row! Finish today’s $_dailyGoal questions '
       'to make it ${_streakDays + 1}.',
     );
   }
@@ -164,8 +185,11 @@ class _HomeScreenState extends State<HomeScreen>
         // The quiz adds today to the streak itself, so if today is already
         // done, give it yesterday's number.
         builder: (_) => QuizScreen(
+          questions: quizForLevel(_levelName),
           level: _level,
+          levelName: _levelName,
           streakDays: _doneToday ? _streakDays - 1 : _streakDays,
+          xpBefore: (_profile?.xp ?? 0) % xpPerLevel,
         ),
       ),
     );
@@ -174,87 +198,45 @@ class _HomeScreenState extends State<HomeScreen>
       _boojhoSays('No problem. The quiz will be here when you’re ready.');
       return;
     }
+    // Save the result: XP, streak and today's date.
+    final wasDoneToday = _doneToday;
+    if (_profile != null) {
+      try {
+        await Backend.instance.recordQuiz(xpEarned: score * xpPerCorrectAnswer);
+      } on BackendException catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(e.message),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        }
+      }
+    } else if (!wasDoneToday) {
+      _guestStreak++;
+      _guestDoneToday = true;
+    }
+    if (!mounted) return;
+    setState(() {}); // redraw with the new streak
+
     // The results screen already told them the score.
-    if (_doneToday) {
-      _boojhoSays('Nice practice! Your streak is still $_streakDays days.');
+    if (wasDoneToday) {
+      _boojhoSays('Nice practice! Your streak is still $_daysText.');
       return;
     }
-    setState(() {
-      _streakDays++;
-      _doneToday = true;
-    });
     _boojhoSays(
-      'Your streak is now $_streakDays days! '
+      'Your streak is now $_daysText! '
       'I’ll have new questions for you tomorrow.',
     );
   }
 
-  /// A small panel with the user's account and a Log out button.
-  void _showAccount() {
-    final backend = Backend.instance;
-    final profile = backend.currentProfile;
-    showModalBottomSheet<void>(
-      context: context,
-      backgroundColor: AppColors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      builder: (sheetContext) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 22, 24, 20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                profile == null ? 'Not logged in' : profile.name,
-                style: AppTextStyles.display.copyWith(fontSize: 24),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                profile == null
-                    ? 'You skipped sign-up, so nothing is saved.'
-                    : '+91 ${profile.mobile}',
-                style: AppTextStyles.subtitle,
-              ),
-              if (!backend.isConnected) ...[
-                const SizedBox(height: 12),
-                Text(
-                  'Test mode: not connected to Supabase, so accounts are '
-                  'forgotten when the app closes.',
-                  style: AppTextStyles.subtitle.copyWith(fontSize: 13),
-                ),
-              ],
-              const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                height: 52,
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: AppColors.ink,
-                    side: const BorderSide(color: AppColors.line, width: 1.2),
-                    shape: const StadiumBorder(),
-                    textStyle: AppTextStyles.button.copyWith(fontSize: 16),
-                  ),
-                  onPressed: () async {
-                    Navigator.of(sheetContext).pop();
-                    if (profile != null) await backend.logOut();
-                    if (!mounted) return;
-                    _voice.stop();
-                    // Back to the start, with nothing behind it.
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (_) => const WelcomeScreen()),
-                      (route) => false,
-                    );
-                  },
-                  child: Text(profile == null ? 'Back to start' : 'Log out'),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+  /// Opens the profile; redraw afterwards in case anything changed there.
+  Future<void> _openProfile() async {
+    _voice.stop();
+    await Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => const ProfileScreen()));
+    if (mounted) setState(() {});
   }
 
   /// Opens Current affairs. If the user taps the Quiz tab there,
@@ -309,15 +291,13 @@ class _HomeScreenState extends State<HomeScreen>
               children: [
                 Row(
                   children: [
-                    // Tap the logo for your account (and Log out).
-                    Tooltip(
-                      message: 'Your account',
-                      child: GestureDetector(
-                        onTap: _showAccount,
-                        child: const JaKnowLogo(size: 21),
-                      ),
-                    ),
+                    const JaKnowLogo(size: 21),
                     const Spacer(),
+                    _ProfileButton(
+                      initial: _profile?.firstName.characters.firstOrNull,
+                      onTap: _openProfile,
+                    ),
+                    const SizedBox(width: 9),
                     StreakPill(days: _streakDays, onTap: _onStreakTapped),
                   ],
                 ),
@@ -334,7 +314,7 @@ class _HomeScreenState extends State<HomeScreen>
                 const SizedBox(height: 14),
                 _StreakCard(
                   days: _streakDays,
-                  goal: widget.dailyGoal,
+                  goal: _dailyGoal,
                   doneToday: _doneToday,
                   onTap: _onStreakTapped,
                 ),
@@ -353,7 +333,8 @@ class _HomeScreenState extends State<HomeScreen>
                 const SizedBox(height: 13),
                 _QuizCard(
                   level: _level,
-                  goal: widget.dailyGoal,
+                  label: quizLabel(_levelName),
+                  goal: _dailyGoal,
                   onTap: _openQuiz,
                 ),
                 const SizedBox(height: 12),
@@ -428,9 +409,14 @@ class _StreakCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // The six days before today, then today.
     final today = DateTime.now();
+    // How many of the past six days belong to the streak.
+    final pastStreakDays = doneToday ? days - 1 : days;
     final pastDays = [
       for (var i = 6; i >= 1; i--)
-        _letters[today.subtract(Duration(days: i)).weekday - 1],
+        (
+          _letters[today.subtract(Duration(days: i)).weekday - 1],
+          i <= pastStreakDays,
+        ),
     ];
 
     return GestureDetector(
@@ -449,7 +435,7 @@ class _StreakCard extends StatelessWidget {
                     children: [
                       const SizedBox(height: 4),
                       Text(
-                        '$days-day streak',
+                        days == 0 ? 'Start your streak' : '$days-day streak',
                         style: AppTextStyles.display.copyWith(fontSize: 22),
                       ),
                       const SizedBox(height: 6),
@@ -482,8 +468,8 @@ class _StreakCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                for (final letter in pastDays)
-                  _DayDot(label: letter, done: true),
+                for (final (letter, done) in pastDays)
+                  _DayDot(label: letter, done: done),
                 _DayDot(label: 'Today', done: doneToday),
               ],
             ),
@@ -507,6 +493,8 @@ class _DayDot extends StatelessWidget {
       children: [
         SizedBox.square(
           dimension: 30,
+          // Done: amber. Today, not done yet: dashed indigo ring.
+          // A missed past day: a plain grey circle.
           child: done
               ? const DecoratedBox(
                   decoration: BoxDecoration(
@@ -514,7 +502,14 @@ class _DayDot extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                 )
-              : CustomPaint(painter: _DashedCirclePainter()),
+              : label == 'Today'
+              ? CustomPaint(painter: _DashedCirclePainter())
+              : const DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: AppColors.track,
+                    shape: BoxShape.circle,
+                  ),
+                ),
         ),
         const SizedBox(height: 8),
         Text(
@@ -677,11 +672,15 @@ class _AskField extends StatelessWidget {
 class _QuizCard extends StatelessWidget {
   const _QuizCard({
     required this.level,
+    required this.label,
     required this.goal,
     required this.onTap,
   });
 
   final int level;
+
+  /// 'Basics', 'Foundation' or 'Exam prep'.
+  final String label;
   final int goal;
   final VoidCallback onTap;
 
@@ -707,7 +706,7 @@ class _QuizCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      'Level $level · Foundation · $goal questions',
+                      'Level $level · $label · $goal questions',
                       style: AppTextStyles.cardBody.copyWith(
                         color: AppColors.ink,
                         fontSize: 13,
@@ -845,6 +844,50 @@ class _TopicChips extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+/// Round button with the user's first initial (or a person icon).
+class _ProfileButton extends StatelessWidget {
+  const _ProfileButton({required this.initial, required this.onTap});
+
+  final String? initial;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: 'My profile',
+      child: InkWell(
+        onTap: onTap,
+        customBorder: const CircleBorder(),
+        child: Ink(
+          width: 41,
+          height: 41,
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            shape: BoxShape.circle,
+            border: Border.all(color: AppColors.cardBorder, width: 1.2),
+          ),
+          child: Center(
+            child: initial == null
+                ? const Icon(
+                    Icons.person_outline_rounded,
+                    color: AppColors.indigo,
+                    size: 22,
+                  )
+                : Text(
+                    initial!.toUpperCase(),
+                    style: AppTextStyles.cardTitle.copyWith(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.indigo,
+                    ),
+                  ),
+          ),
+        ),
       ),
     );
   }

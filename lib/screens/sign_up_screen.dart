@@ -9,7 +9,7 @@ import '../widgets/boojho_says.dart';
 import '../widgets/coming_soon.dart';
 import '../services/backend.dart';
 import 'home_screen.dart';
-import 'level_screen.dart';
+import 'class_screen.dart';
 import 'log_in_screen.dart';
 
 /// Third screen: create an account with name, mobile number and a
@@ -102,7 +102,7 @@ class _SignUpScreenState extends State<SignUpScreen>
       if (!mounted) return;
       BoojhoVoice.instance.stop();
       Navigator.of(context).push(
-        MaterialPageRoute(builder: (_) => LevelScreen(name: profile.firstName)),
+        MaterialPageRoute(builder: (_) => ClassScreen(name: profile.firstName)),
       );
     } on BackendException catch (e) {
       setState(() => _serverError = e.message);

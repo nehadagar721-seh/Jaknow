@@ -23,7 +23,14 @@ class QuizQuestion {
   String get correctAnswer => options[correctIndex];
 }
 
-/// Today's quiz: Level 2, Foundation.
+/// Today's quiz for a level ('Beginner', 'Intermediate' or 'Exam ready').
+List<QuizQuestion> quizForLevel(String level) => switch (level) {
+  'Beginner' => beginnerQuiz,
+  'Exam ready' => examReadyQuiz,
+  _ => todaysQuiz,
+};
+
+/// Today's quiz: Level 2, Foundation (Intermediate).
 ///
 /// These are sample questions written into the app. Later they will come
 /// from a question bank, with new ones every day and harder ones as the
@@ -78,5 +85,103 @@ const List<QuizQuestion> todaysQuiz = [
     explanation:
         'The Reserve Bank of India, set up in 1935, looks after the country’s '
         'money and banking system.',
+  ),
+];
+
+/// Level 1, Basics (Beginner: Class 6 to 8).
+const List<QuizQuestion> beginnerQuiz = [
+  QuizQuestion(
+    topic: 'Science',
+    question: 'Which planet is known as the Red Planet?',
+    options: ['Venus', 'Mars', 'Jupiter', 'Saturn'],
+    correctIndex: 1,
+    explanation:
+        'Mars looks red because its soil and dust contain a lot of iron '
+        'oxide, which is rust.',
+  ),
+  QuizQuestion(
+    topic: 'Geography',
+    question: 'What is the capital of India?',
+    options: ['Mumbai', 'Kolkata', 'New Delhi', 'Chennai'],
+    correctIndex: 2,
+    explanation: 'New Delhi is the capital of India.',
+  ),
+  QuizQuestion(
+    topic: 'Geography',
+    question: 'Which is the largest ocean on Earth?',
+    options: ['Atlantic', 'Indian', 'Arctic', 'Pacific'],
+    correctIndex: 3,
+    explanation: 'The Pacific Ocean is the largest and deepest ocean.',
+  ),
+  QuizQuestion(
+    topic: 'History',
+    question: 'Who is called the “Father of the Nation” in India?',
+    options: [
+      'Jawaharlal Nehru',
+      'Mahatma Gandhi',
+      'Subhas Chandra Bose',
+      'Bhagat Singh',
+    ],
+    correctIndex: 1,
+    explanation: 'Mahatma Gandhi is called the Father of the Nation.',
+  ),
+  QuizQuestion(
+    topic: 'Geography',
+    question: 'What is India’s national animal?',
+    options: ['Lion', 'Elephant', 'Bengal tiger', 'Peacock'],
+    correctIndex: 2,
+    explanation: 'The Bengal tiger is India’s national animal.',
+  ),
+];
+
+/// Level 3, Exam prep (competitive-exam style).
+const List<QuizQuestion> examReadyQuiz = [
+  QuizQuestion(
+    topic: 'Politics',
+    question: 'Which Article of the Constitution abolishes untouchability?',
+    options: ['Article 14', 'Article 17', 'Article 21', 'Article 32'],
+    correctIndex: 1,
+    explanation:
+        'Article 17 abolishes untouchability and forbids its practice in '
+        'any form.',
+  ),
+  QuizQuestion(
+    topic: 'History',
+    question: 'In which year was the Battle of Plassey fought?',
+    options: ['1757', '1761', '1764', '1857'],
+    correctIndex: 0,
+    explanation:
+        'The Battle of Plassey was fought in 1757; the British East India '
+        'Company defeated Siraj-ud-Daulah.',
+  ),
+  QuizQuestion(
+    topic: 'Geography',
+    question: 'Which river is called the “Dakshin Ganga”?',
+    options: ['Krishna', 'Kaveri', 'Godavari', 'Narmada'],
+    correctIndex: 2,
+    explanation:
+        'The Godavari, the longest river of peninsular India, is called the '
+        'Dakshin Ganga.',
+  ),
+  QuizQuestion(
+    topic: 'Economy',
+    question: 'Who chairs the GST Council?',
+    options: [
+      'The Prime Minister',
+      'The Union Finance Minister',
+      'The RBI Governor',
+      'The President',
+    ],
+    correctIndex: 1,
+    explanation:
+        'Under Article 279A, the Union Finance Minister chairs the GST '
+        'Council.',
+  ),
+  QuizQuestion(
+    topic: 'Science',
+    question: 'Which vitamin does the skin make in sunlight?',
+    options: ['Vitamin A', 'Vitamin B12', 'Vitamin C', 'Vitamin D'],
+    correctIndex: 3,
+    explanation: 'The skin makes vitamin D when it is exposed to sunlight.',
   ),
 ];

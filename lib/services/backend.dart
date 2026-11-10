@@ -334,7 +334,9 @@ class SupabaseBackend implements Backend {
     if (code == 'invalid_credentials' || text.contains('invalid login')) {
       return 'Wrong mobile number or password.';
     }
-    if (code == 'email_not_confirmed') {
+    // Supabase refuses to email our made-up login address. That only
+    // happens while "Confirm email" is still on.
+    if (code == 'email_address_invalid' || code == 'email_not_confirmed') {
       return 'In Supabase, turn off “Confirm email” (see supabase/SETUP.md).';
     }
     if (code == 'over_request_rate_limit' || text.contains('rate limit')) {

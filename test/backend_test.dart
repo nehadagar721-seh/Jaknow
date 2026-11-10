@@ -77,6 +77,13 @@ void main() {
       'Wrong mobile number or password.',
     );
     expect(Backend.loginEmail('9876543210'), '9876543210@phone.jaknow.app');
+    expect(
+      SupabaseBackend.friendlyAuthMessage(
+        'email_address_invalid',
+        'Email address "x@phone.jaknow.app" is invalid',
+      ),
+      contains('Confirm email'),
+    );
   });
 
   group('Screens', () {

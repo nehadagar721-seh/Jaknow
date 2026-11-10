@@ -49,10 +49,28 @@ class _SignUpScreenState extends State<SignUpScreen>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => _voice.say(_message));
+    Backend.instance.profileChanges.addListener(_backFromGoogle);
+  }
+
+  /// "Continue with Google": opens Google's sign-in page.
+  Future<void> _google() async {
+    setState(() => _serverError = null);
+    try {
+      await Backend.instance.startGoogleSignIn();
+    } on BackendException catch (e) {
+      setState(() => _serverError = e.message);
+    }
+  }
+
+  /// On phones: the user is back from Google and logged in.
+  void _backFromGoogle() {
+    final profile = Backend.instance.profileChanges.value;
+    if (profile != null && mounted) openAfterLogin(context, profile);
   }
 
   @override
   void dispose() {
+    Backend.instance.profileChanges.removeListener(_backFromGoogle);
     _voice.stop();
     _clock.dispose();
     _nameController.dispose();
@@ -287,7 +305,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                   _PillButton(
                     label: 'Continue with Google',
                     dark: false,
-                    onPressed: () => showComingSoon(context, 'Google sign-in'),
+                    onPressed: _google,
                   ),
                   const SizedBox(height: 46),
 

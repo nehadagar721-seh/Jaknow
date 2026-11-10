@@ -7,6 +7,7 @@ class Profile {
     required this.id,
     required this.name,
     required this.mobile,
+    this.email = '',
     this.studentClass = '',
     this.level = 'Intermediate',
     this.dailyGoal = 5,
@@ -19,6 +20,9 @@ class Profile {
   final String id;
   final String name;
   final String mobile;
+
+  /// The Google email for people who signed up with Google ('' otherwise).
+  final String email;
 
   /// E.g. 'Class 7', 'College', 'Preparing for exams' ('' = not chosen).
   final String studentClass;
@@ -63,6 +67,7 @@ class Profile {
       id: id,
       name: name,
       mobile: mobile,
+      email: email,
       studentClass: studentClass,
       level: level,
       dailyGoal: dailyGoal,
@@ -78,6 +83,7 @@ class Profile {
         id: id,
         name: name,
         mobile: mobile,
+        email: email,
         studentClass: studentClass ?? this.studentClass,
         level: level ?? this.level,
         dailyGoal: dailyGoal ?? this.dailyGoal,
@@ -87,22 +93,24 @@ class Profile {
         joined: joined,
       );
 
-  factory Profile.fromRow(Map<String, dynamic> row) => Profile(
-    id: row['id'] as String,
-    name: (row['name'] as String?) ?? '',
-    mobile: (row['mobile'] as String?) ?? '',
-    studentClass: (row['student_class'] as String?) ?? '',
-    level: (row['level'] as String?) ?? 'Intermediate',
-    dailyGoal: (row['daily_goal'] as int?) ?? 5,
-    streakDays: (row['streak_days'] as int?) ?? 0,
-    lastQuizDate: row['last_quiz_date'] == null
-        ? null
-        : DateTime.parse(row['last_quiz_date'] as String),
-    xp: (row['xp'] as int?) ?? 0,
-    joined: row['created_at'] == null
-        ? null
-        : DateTime.parse(row['created_at'] as String).toLocal(),
-  );
+  factory Profile.fromRow(Map<String, dynamic> row, {String email = ''}) =>
+      Profile(
+        id: row['id'] as String,
+        name: (row['name'] as String?) ?? '',
+        mobile: (row['mobile'] as String?) ?? '',
+        email: email,
+        studentClass: (row['student_class'] as String?) ?? '',
+        level: (row['level'] as String?) ?? 'Intermediate',
+        dailyGoal: (row['daily_goal'] as int?) ?? 5,
+        streakDays: (row['streak_days'] as int?) ?? 0,
+        lastQuizDate: row['last_quiz_date'] == null
+            ? null
+            : DateTime.parse(row['last_quiz_date'] as String),
+        xp: (row['xp'] as int?) ?? 0,
+        joined: row['created_at'] == null
+            ? null
+            : DateTime.parse(row['created_at'] as String).toLocal(),
+      );
 
   /// A date as "2026-11-08", the way the database stores it.
   static String dateText(DateTime d) =>
@@ -174,6 +182,14 @@ abstract class Backend {
 
   Future<void> logOut();
 
+  /// Starts "Continue with Google": opens Google's sign-in page.
+  /// On the web the page reloads afterwards (main.dart picks up the login);
+  /// on phones, [profileChanges] gets the new profile when the user is back.
+  Future<void> startGoogleSignIn();
+
+  /// Tells screens when someone has just logged in (e.g. back from Google).
+  ValueNotifier<Profile?> get profileChanges;
+
   /// Saves the class, level and daily goal from [profile].
   Future<Profile> saveChoices(Profile profile);
 
@@ -189,10 +205,42 @@ abstract class Backend {
 // ---------- The real backend: Supabase ----------
 
 class SupabaseBackend implements Backend {
-  SupabaseBackend(this._client);
+  SupabaseBackend(this._client) {
+    // Coming back from Google on a phone: load the profile and tell screens.
+    _client.auth.onAuthStateChange.listen((state) async {
+      final user = state.session?.user;
+      if (state.event == AuthChangeEvent.signedIn &&
+          user != null &&
+          _profile?.id != user.id) {
+        try {
+          _profile = await _loadProfile(user.id);
+          profileChanges.value = _profile;
+        } catch (error) {
+          debugPrint('JaKnow: could not load the profile ($error).');
+        }
+      }
+    });
+  }
 
   final SupabaseClient _client;
   Profile? _profile;
+
+  @override
+  final ValueNotifier<Profile?> profileChanges = ValueNotifier(null);
+
+  /// Where Google sends people back to: the same web page, or the app
+  /// itself on phones (see AndroidManifest.xml and Info.plist).
+  static const String appRedirect = 'com.example.jaknow://login-callback';
+
+  @override
+  Future<void> startGoogleSignIn() async {
+    await _guard(
+      () => _client.auth.signInWithOAuth(
+        OAuthProvider.google,
+        redirectTo: kIsWeb ? Uri.base.origin : appRedirect,
+      ),
+    );
+  }
 
   @override
   bool get isConnected => true;
@@ -274,7 +322,7 @@ class SupabaseBackend implements Backend {
           .select()
           .single(),
     );
-    return _profile = Profile.fromRow(row);
+    return _profile = Profile.fromRow(row, email: _profile?.email ?? '');
   }
 
   @override
@@ -296,12 +344,17 @@ class SupabaseBackend implements Backend {
           .select()
           .single(),
     );
-    return _profile = Profile.fromRow(row);
+    return _profile = Profile.fromRow(row, email: _profile?.email ?? '');
   }
 
   Future<Profile> _loadProfile(String id) async {
     final row = await _client.from('profiles').select().eq('id', id).single();
-    return Profile.fromRow(row);
+    // Show the email only for Google accounts, not our hidden phone address.
+    final email = _client.auth.currentUser?.email ?? '';
+    return Profile.fromRow(
+      row,
+      email: email.endsWith('@phone.jaknow.app') ? '' : email,
+    );
   }
 
   /// Runs a Supabase call and turns its errors into friendly messages.
@@ -353,6 +406,17 @@ class SupabaseBackend implements Backend {
 class MemoryBackend implements Backend {
   final Map<String, (String password, Profile profile)> _accounts = {};
   Profile? _profile;
+
+  @override
+  final ValueNotifier<Profile?> profileChanges = ValueNotifier(null);
+
+  @override
+  Future<void> startGoogleSignIn() async {
+    throw const BackendException(
+      'Google sign-in needs Supabase. Run the app with '
+      '--dart-define-from-file=env.json.',
+    );
+  }
 
   @override
   bool get isConnected => false;

@@ -14,6 +14,7 @@ import '../widgets/coming_soon.dart';
 import '../widgets/jaknow_logo.dart';
 import '../widgets/streak_pill.dart';
 import 'boojho_chat_screen.dart';
+import 'class_screen.dart';
 import 'lesson_screen.dart';
 import 'news_screen.dart';
 import 'profile_screen.dart';
@@ -30,6 +31,20 @@ void openHome(BuildContext context, {String? name, int dailyGoal = 5}) {
     ),
     (route) => false,
   );
+}
+
+/// After logging in (phone or Google): pick a class first if that was
+/// never done (e.g. a brand-new Google account), otherwise go Home.
+void openAfterLogin(BuildContext context, Profile profile) {
+  if (profile.studentClass.isEmpty) {
+    BoojhoVoice.instance.stop();
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (_) => ClassScreen(name: profile.firstName)),
+      (route) => false,
+    );
+  } else {
+    openHome(context, name: profile.firstName, dailyGoal: profile.dailyGoal);
+  }
 }
 
 /// The main screen: streak, Boojho, today's quiz and the topics.

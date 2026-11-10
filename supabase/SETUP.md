@@ -49,3 +49,6 @@ everything works, but accounts are forgotten when the app closes.
 ## 6. Check it worked
 Sign up in the app, then in Supabase open **Table Editor** → **profiles**:
 your name and mobile number should be there.
+
+## 7. Optional: "Continue with Google"
+See `supabase/GOOGLE_SIGNIN.md`.

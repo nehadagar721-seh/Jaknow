@@ -77,6 +77,18 @@ void main() {
       'Wrong mobile number or password.',
     );
     expect(Backend.loginEmail('9876543210'), '9876543210@phone.jaknow.app');
+    // A Google profile keeps its email through changes.
+    const google = Profile(
+      id: 'g',
+      name: 'Neha',
+      mobile: '',
+      email: 'n@gmail.com',
+    );
+    expect(google.copyWith(level: 'Beginner').email, 'n@gmail.com');
+    expect(
+      google.afterQuiz(xpEarned: 10, today: DateTime(2026, 11, 10)).email,
+      'n@gmail.com',
+    );
     expect(
       SupabaseBackend.friendlyAuthMessage(
         'email_address_invalid',
@@ -126,11 +138,12 @@ void main() {
       tester,
     ) async {
       tallScreen(tester);
-      await Backend.instance.signUp(
+      final p = await Backend.instance.signUp(
         name: 'Neha Dagar',
         mobile: '9876543210',
         password: '123456',
       );
+      await Backend.instance.saveChoices(p.copyWith(studentClass: 'Class 10'));
       await Backend.instance.logOut();
       await tester.pumpWidget(
         MaterialApp(theme: AppTheme.light, home: const LogInScreen()),
@@ -166,6 +179,21 @@ void main() {
 
     testWidgets('a logged-in user starts on Home', (tester) async {
       tallScreen(tester);
+      final p = await Backend.instance.signUp(
+        name: 'Neha',
+        mobile: '9876543210',
+        password: '123456',
+      );
+      await Backend.instance.saveChoices(p.copyWith(studentClass: 'Class 10'));
+      await tester.pumpWidget(const JaKnowApp());
+      await tester.pump();
+      expect(find.text('Ready to sharpen your mind?'), findsOneWidget);
+    });
+
+    testWidgets('logged in without a class: starts on the class step', (
+      tester,
+    ) async {
+      tallScreen(tester);
       await Backend.instance.signUp(
         name: 'Neha',
         mobile: '9876543210',
@@ -173,7 +201,23 @@ void main() {
       );
       await tester.pumpWidget(const JaKnowApp());
       await tester.pump();
-      expect(find.text('Ready to sharpen your mind?'), findsOneWidget);
+      expect(find.text('Which class are you in?'), findsOneWidget);
+    });
+
+    testWidgets('Google in test mode explains it needs Supabase', (
+      tester,
+    ) async {
+      tallScreen(tester);
+      await tester.pumpWidget(
+        MaterialApp(theme: AppTheme.light, home: const SignUpScreen()),
+      );
+      await tester.pump();
+      await tester.tap(find.text('Continue with Google'));
+      await settle(tester);
+      expect(
+        find.textContaining('Google sign-in needs Supabase'),
+        findsOneWidget,
+      );
     });
   });
 }

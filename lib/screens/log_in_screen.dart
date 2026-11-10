@@ -40,10 +40,27 @@ class _LogInScreenState extends State<LogInScreen>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => _voice.say(_message));
+    Backend.instance.profileChanges.addListener(_backFromGoogle);
+  }
+
+  Future<void> _google() async {
+    setState(() => _serverError = null);
+    try {
+      await Backend.instance.startGoogleSignIn();
+    } on BackendException catch (e) {
+      setState(() => _serverError = e.message);
+    }
+  }
+
+  /// On phones: the user is back from Google and logged in.
+  void _backFromGoogle() {
+    final profile = Backend.instance.profileChanges.value;
+    if (profile != null && mounted) openAfterLogin(context, profile);
   }
 
   @override
   void dispose() {
+    Backend.instance.profileChanges.removeListener(_backFromGoogle);
     _voice.stop();
     _clock.dispose();
     _mobileController.dispose();
@@ -64,7 +81,7 @@ class _LogInScreenState extends State<LogInScreen>
         password: _passwordController.text,
       );
       if (!mounted) return;
-      openHome(context, name: profile.firstName, dailyGoal: profile.dailyGoal);
+      openAfterLogin(context, profile);
     } on BackendException catch (e) {
       setState(() => _serverError = e.message);
     } finally {
@@ -221,6 +238,25 @@ class _LogInScreenState extends State<LogInScreen>
                               ),
                             )
                           : const Text('Log in'),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 52,
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: AppColors.white,
+                        foregroundColor: AppColors.ink,
+                        side: const BorderSide(
+                          color: AppColors.line,
+                          width: 1.2,
+                        ),
+                        shape: const StadiumBorder(),
+                        textStyle: AppTextStyles.button.copyWith(fontSize: 17),
+                      ),
+                      onPressed: _google,
+                      child: const Text('Continue with Google'),
                     ),
                   ),
                   const SizedBox(height: 24),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'screens/class_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/welcome_screen.dart';
 import 'services/backend.dart';
@@ -24,8 +25,12 @@ class JaKnowApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       // Already logged in? Straight to Home. Otherwise start at Welcome.
+      // Logged in but never picked a class (e.g. new Google account)?
+      // Ask for the class first.
       home: profile == null
           ? const WelcomeScreen()
+          : profile.studentClass.isEmpty
+          ? ClassScreen(name: profile.firstName)
           : HomeScreen(name: profile.firstName, dailyGoal: profile.dailyGoal),
     );
   }

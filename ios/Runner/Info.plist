@@ -66,5 +66,16 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<!-- After "Continue with Google", Safari opens
+	     com.example.jaknow://login-callback to come back here. -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.example.jaknow</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

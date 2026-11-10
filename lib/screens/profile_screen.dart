@@ -253,7 +253,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    '+91 ${p.mobile}',
+                    p.mobile.isEmpty ? p.email : '+91 ${p.mobile}',
                     style: AppTextStyles.subtitle.copyWith(fontSize: 14),
                   ),
                   if (joined != null)

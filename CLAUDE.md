@@ -50,7 +50,15 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
     (SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY); otherwise `MemoryBackend`
     ("test mode", also used by tests). Login is mobile + 6-digit password,
     stored in Supabase Auth as `<mobile>@phone.jaknow.app` (no SMS costs);
-    "Confirm email" must be OFF. Database: `supabase/schema.sql` (profiles
+    "Confirm email" must be OFF (otherwise Supabase rejects the hidden
+    address as invalid). "Continue with Google" (Sign up + Log in) uses
+    `signInWithOAuth`; the app comes back via
+    `com.example.jaknow://login-callback` (AndroidManifest, Info.plist) or
+    the same web page (run Chrome with `--web-port 3000`); setup steps in
+    `supabase/GOOGLE_SIGNIN.md`. After any login, `openAfterLogin` sends
+    users without a class to the class step, others to Home.
+    Supabase project: `khyrwtbjwkwnshrlebht` (Mumbai); the Supabase
+    connector can run SQL/migrations but not change Auth settings. Database: `supabase/schema.sql` (profiles
     table, row-level security, auto-created on sign-up); setup steps in
     `supabase/SETUP.md`. `env.json` is git-ignored; never commit keys, and
     never put the Supabase secret/service_role key in the app.

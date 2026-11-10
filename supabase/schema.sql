@@ -55,6 +55,10 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
 
+-- Only the sign-up trigger may run this; nobody can call it directly
+-- through the web API (Supabase's security advisor checks for this).
+revoke execute on function public.handle_new_user() from public, anon, authenticated;
+
 -- Keep updated_at current on every change.
 create or replace function public.touch_updated_at()
 returns trigger

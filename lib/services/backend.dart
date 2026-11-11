@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../data/library.dart';
+import '../data/lessons.dart';
+import '../data/quiz_questions.dart';
 import '../data/study_levels.dart';
 
 /// A user's saved details and progress (one row in Supabase's `profiles`).
@@ -277,6 +280,10 @@ abstract class Backend {
   /// Top 50 (and your own row): XP this week, or all time.
   Future<List<LeaderboardEntry>> leaderboard({required bool thisWeek});
 
+  /// All courses and lessons from the server, or null if there's no server
+  /// (test mode) or it can't be reached: then the app uses its built-in copy.
+  Future<List<Course>?> fetchLibrary();
+
   /// The hidden login address made from a mobile number. Supabase's own
   /// mobile login needs paid SMS, so we use this instead; nothing is ever
   /// sent to it.
@@ -489,6 +496,64 @@ class SupabaseBackend implements Backend {
     ];
   }
 
+  @override
+  Future<List<Course>?> fetchLibrary() async {
+    try {
+      final courseRows = await _client.from('courses').select().order('sort');
+      final lessonRows = await _client
+          .from('lessons')
+          .select()
+          .not('course_id', 'is', null)
+          .order('sort');
+      final courses = [
+        for (final c in courseRows)
+          Course(
+            id: c['id'] as String,
+            title: c['title'] as String,
+            subject: c['subject'] as String,
+            section: c['section'] == 'class'
+                ? CourseSection.forClass
+                : CourseSection.explore,
+            studentClass: c['student_class'] as String? ?? '',
+            collection: c['collection'] as String? ?? '',
+            description: c['description'] as String? ?? '',
+            lessons: [
+              for (final l in lessonRows)
+                if (l['course_id'] == c['id']) _lessonFromRow(l),
+            ],
+          ),
+      ];
+      return courses.where((c) => c.lessons.isNotEmpty).toList();
+    } catch (error) {
+      debugPrint('JaKnow: could not load the library ($error).');
+      return null;
+    }
+  }
+
+  static Lesson _lessonFromRow(Map<String, dynamic> row) => Lesson(
+    id: row['id'] as String,
+    topic: row['subject'] as String? ?? '',
+    unit: row['unit'] as String? ?? '',
+    title: row['title'] as String? ?? '',
+    boojhoIntro: row['boojho_intro'] as String? ?? '',
+    keyPoints: List<String>.from(row['key_points'] as List? ?? const []),
+    remember: row['remember'] as String? ?? '',
+    sections: [
+      for (final s in row['sections'] as List? ?? const [])
+        LessonSection(s['heading'] as String, s['text'] as String),
+    ],
+    quiz: [
+      for (final q in row['quiz'] as List? ?? const [])
+        QuizQuestion(
+          topic: q['topic'] as String? ?? '',
+          question: q['question'] as String,
+          options: List<String>.from(q['options'] as List),
+          correctIndex: q['correct_index'] as int,
+          explanation: q['explanation'] as String? ?? '',
+        ),
+    ],
+  );
+
   Profile _requireProfile() {
     final current = _profile;
     if (current == null) {
@@ -559,6 +624,9 @@ class MemoryBackend implements Backend {
 
   @override
   final ValueNotifier<Profile?> profileChanges = ValueNotifier(null);
+
+  @override
+  Future<List<Course>?> fetchLibrary() async => null; // use the built-in copy
 
   @override
   Future<void> startGoogleSignIn() async {

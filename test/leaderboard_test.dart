@@ -143,7 +143,9 @@ void main() {
       expect(find.text('Neha D. (you)'), findsOneWidget);
     });
 
-    testWidgets('Learn opens at the next unfinished lesson', (tester) async {
+    testWidgets('a course continues at the next unfinished lesson', (
+      tester,
+    ) async {
       tallScreen(tester);
       await signUp('Neha', '9876543210');
       await Backend.instance.recordLessonQuiz(
@@ -155,7 +157,15 @@ void main() {
         MaterialApp(theme: AppTheme.light, home: const HomeScreen()),
       );
       await settle(tester);
+      // Learn → Library → the course → "Continue" at lesson 2.
       await tester.tap(find.text('Learn topics'));
+      await settle(tester);
+      // This test user is in Class 10, so the Class 6 course is in Explore.
+      await tester.tap(find.text('Explore more'));
+      await settle(tester);
+      await tester.tap(find.text('Ancient India'));
+      await settle(tester);
+      await tester.tap(find.text('Continue: The Indus Valley Civilisation'));
       await settle(tester);
       expect(find.byType(LessonScreen), findsOneWidget);
       expect(find.text('Lesson 2 of 6'), findsOneWidget);

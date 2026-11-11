@@ -39,9 +39,25 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
 - Classes and levels live in `lib/data/study_levels.dart`: `studentClasses`,
   `suggestedLevel(class)` (Class 6–8 → Beginner, exams → Exam ready, else
   Intermediate), `levelNumber`, `quizLabel` (Basics/Foundation/Exam prep).
-- Lessons live in `lib/data/lessons.dart` (`Lesson`, `ancientIndiaLessons`:
-  History → Ancient India, 6 lessons). Each lesson needs at least 5 key
-  points, a "Remember" fact and a 3-question quiz.
+- LIBRARY. Lessons (`lib/data/lessons.dart`: `Lesson`, `LessonSection`)
+  belong to courses (`lib/data/library.dart`: `Course`, `builtInCourses`).
+  A course is either `CourseSection.forClass` (+ `studentClass`, Class 5–12)
+  or `CourseSection.explore` (+ `collection`: `generalKnowledge` /
+  `bharatKoJano`). Each lesson: unique `id`, 5+ key points ("Crisp"),
+  optional `sections` ("Full read"), a "Remember" fact, a quiz (4 options).
+  The SAME content is in Supabase (`courses` + `lessons` tables,
+  `supabase/library.sql`); after changing content run
+  `dart run tool/content_to_sql.dart` → `supabase/content.sql`, then apply
+  it (lesson ids + question counts must match for scoring).
+  `LibraryService` loads from Supabase, falling back to `builtInCourses`.
+  Content is written in our own words: never copy textbook text (NCERT,
+  Lucent, Bharat Ko Jano are copyrighted); cover their topics instead.
+- Library screens: `library_screen.dart` ("For Class N" / "Explore more" /
+  search; Home's Learn tab, Learn topics card and topic chips open it),
+  `course_screen.dart` (lessons with ticks, "Continue" at the next
+  unfinished one). Lessons have a Crisp / Full read switch
+  (`preferFullRead`). `Ink` must sit on a `Material`, not inside a coloured
+  `Container`, or it's painted underneath and invisible.
 - News stories live in `lib/data/news_stories.dart` (`NewsStory`,
   `sampleStories`). These are REAL past events (2023–24) used as samples,
   not today's news. Never invent news: real daily stories need a server.
@@ -86,8 +102,7 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   (new users start at 0 streak and 0 XP).
   Home's "Current affairs" card and News tab open News (`design/8-news.png`);
   it pops with 'Quiz' if its Quiz tab is tapped, and Home opens the quiz.
-  Home's "Learn topics" card, Learn tab and History topic open Lesson
-  (`design/9-lesson.png`). Its quiz uses QuizScreen with `forLesson: true`
+  The Library opens lessons (`design/9-lesson.png`). Its quiz uses QuizScreen with `forLesson: true`
   (results say "Lesson complete!", no streak); then "Next lesson".
   Home's Boojho tab and "Ask Boojho anything" open the chat
   (`boojho_chat_screen.dart`, `design/10-boojho-chat.png`).

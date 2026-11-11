@@ -10,6 +10,10 @@ import '../widgets/back_circle_button.dart';
 import '../widgets/boojho.dart';
 import 'quiz_screen.dart';
 
+/// The reading mode last chosen ("Full read" or not). Kept while the app is
+/// open, so the next lesson opens the same way.
+bool preferFullRead = false;
+
 /// One lesson: key points, a "Remember" box, Boojho reading it aloud, and a
 /// 3-question quiz. After the quiz, the button moves on to the next lesson.
 class LessonScreen extends StatefulWidget {
@@ -47,6 +51,14 @@ class _LessonScreenState extends State<LessonScreen>
   bool get _hasNext => widget.index < widget.lessons.length - 1;
   bool get _saved => _progress.bookmarked;
   bool get _loggedIn => _backend.currentProfile != null;
+
+  /// Showing the "Full read" version? Only if this lesson has one.
+  bool get _fullRead => preferFullRead && _lesson.sections.isNotEmpty;
+
+  void _setFullRead(bool full) {
+    _voice.stop();
+    setState(() => preferFullRead = full);
+  }
 
   @override
   void initState() {
@@ -95,6 +107,12 @@ class _LessonScreenState extends State<LessonScreen>
     }
     _voice.setMuted(false);
     final l = _lesson;
+    // Read whichever version is on screen.
+    if (_fullRead) {
+      final parts = [for (final s in l.sections) '${s.heading}. ${s.text}'];
+      _voice.say('${l.title}. ${parts.join(' ')} Remember: ${l.remember}');
+      return;
+    }
     final points = [
       for (var i = 0; i < l.keyPoints.length; i++)
         'Point ${i + 1}. ${l.keyPoints[i]}',
@@ -246,6 +264,13 @@ class _LessonScreenState extends State<LessonScreen>
                           height: 1.1,
                         ),
                       ),
+                      if (l.sections.isNotEmpty) ...[
+                        const SizedBox(height: 12),
+                        _ModeSwitch(
+                          fullRead: _fullRead,
+                          onChanged: _setFullRead,
+                        ),
+                      ],
                       const SizedBox(height: 16),
                       ValueListenableBuilder<bool>(
                         valueListenable: _voice.isSpeaking,
@@ -257,7 +282,11 @@ class _LessonScreenState extends State<LessonScreen>
                         ),
                       ),
                       const SizedBox(height: 12),
-                      _KeyPoints(points: l.keyPoints),
+                      // Crisp: numbered key points. Full read: the sections.
+                      if (_fullRead)
+                        _FullRead(sections: l.sections)
+                      else
+                        _KeyPoints(points: l.keyPoints),
                       const SizedBox(height: 13),
                       _RememberBox(text: l.remember),
                       const SizedBox(height: 16),
@@ -558,6 +587,115 @@ class _RememberBox extends StatelessWidget {
               ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+// ---------- Crisp / Full read ----------
+
+class _ModeSwitch extends StatelessWidget {
+  const _ModeSwitch({required this.fullRead, required this.onChanged});
+
+  final bool fullRead;
+  final ValueChanged<bool> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    Widget pill(String label, IconData icon, bool full) {
+      final on = fullRead == full;
+      return Expanded(
+        child: InkWell(
+          onTap: () => onChanged(full),
+          customBorder: const StadiumBorder(),
+          child: Ink(
+            height: 40,
+            decoration: ShapeDecoration(
+              color: on ? AppColors.ink : AppColors.white,
+              shape: const StadiumBorder(),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  icon,
+                  size: 18,
+                  color: on ? AppColors.white : AppColors.muted,
+                ),
+                const SizedBox(width: 6),
+                Text(
+                  label,
+                  style: AppTextStyles.cardTitle.copyWith(
+                    fontSize: 14.5,
+                    color: on ? AppColors.white : AppColors.ink,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
+    return Semantics(
+      label: fullRead ? 'Showing the full read' : 'Showing the crisp version',
+      // A Material (not a Container): the pills' Ink is painted on it, so
+      // the dark "selected" pill shows on top of the white background.
+      child: Material(
+        color: AppColors.white,
+        shape: const StadiumBorder(
+          side: BorderSide(color: AppColors.cardBorder, width: 1.2),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(4),
+          child: Row(
+            children: [
+              pill('Crisp', Icons.bolt_rounded, false),
+              const SizedBox(width: 4),
+              pill('Full read', Icons.menu_book_rounded, true),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The "Full read" version: headed sections of explanation.
+class _FullRead extends StatelessWidget {
+  const _FullRead({required this.sections});
+
+  final List<LessonSection> sections;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(18, 18, 18, 6),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(28),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (final section in sections) ...[
+            Text(
+              section.heading,
+              style: AppTextStyles.display.copyWith(fontSize: 19),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              section.text,
+              style: AppTextStyles.body.copyWith(
+                fontSize: 15.5,
+                fontWeight: FontWeight.w500,
+                height: 1.5,
+              ),
+            ),
+            const SizedBox(height: 16),
+          ],
         ],
       ),
     );

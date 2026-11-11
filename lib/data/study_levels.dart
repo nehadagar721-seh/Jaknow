@@ -8,6 +8,7 @@ const int xpPerLevel = 100;
 
 /// Everything someone can choose on "Which class are you in?".
 const List<String> studentClasses = [
+  'Class 5',
   'Class 6',
   'Class 7',
   'Class 8',
@@ -24,7 +25,7 @@ const List<String> studentClasses = [
 const List<String> levelNames = ['Beginner', 'Intermediate', 'Exam ready'];
 
 /// The level that suits a class:
-/// Class 6–8 → Beginner, exam preparation → Exam ready,
+/// Class 5–8 → Beginner, exam preparation → Exam ready,
 /// everyone else (Class 9–12, college, not a student) → Intermediate.
 String suggestedLevel(String studentClass) {
   final number = int.tryParse(studentClass.replaceAll('Class ', ''));

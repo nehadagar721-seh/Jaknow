@@ -15,9 +15,8 @@ import '../widgets/jaknow_logo.dart';
 import '../widgets/streak_pill.dart';
 import 'boojho_chat_screen.dart';
 import 'class_screen.dart';
-import '../data/lessons.dart';
 import 'leaderboard_screen.dart';
-import 'lesson_screen.dart';
+import 'library_screen.dart';
 import 'news_screen.dart';
 import 'profile_screen.dart';
 import 'quiz_screen.dart';
@@ -276,32 +275,19 @@ class _HomeScreenState extends State<HomeScreen>
     if (tab == 'Quiz') _openQuiz();
   }
 
+  /// A topic chip: Boojho says a line, and the Library opens on that topic.
   void _onTopicTapped(_Topic topic) {
-    // Only History has lessons so far.
-    if (topic.name == 'History') {
-      _openLessons();
-      return;
-    }
-    _boojhoSays('${topic.name}! ${topic.boojhoLine} Lessons are coming soon.');
+    _boojhoSays('${topic.name}! ${topic.boojhoLine}');
+    _openLessons(topic.name);
   }
 
   /// Opens the first History lesson (the only course so far).
-  Future<void> _openLessons() async {
+  /// Opens the Library (optionally already searching for [query]).
+  Future<void> _openLessons([String query = '']) async {
     _voice.stop();
-    // Carry on from the first lesson not finished yet.
-    var start = 0;
-    try {
-      final progress = await Backend.instance.lessonProgress();
-      final next = ancientIndiaLessons.indexWhere(
-        (l) => !(progress[l.id]?.completed ?? false),
-      );
-      start = next < 0 ? 0 : next; // all done: start again from lesson 1
-    } on BackendException {
-      // Couldn't load: just start at lesson 1.
-    }
-    if (!mounted) return;
-    await Navigator.of(context)
-        .push(MaterialPageRoute(builder: (_) => LessonScreen(index: start)));
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => LibraryScreen(initialQuery: query)),
+    );
     _refreshRank(); // lesson XP may have changed the leaderboard
   }
 

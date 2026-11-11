@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../data/study_levels.dart';
+
 /// A user's saved details and progress (one row in Supabase's `profiles`).
 class Profile {
   const Profile({
@@ -58,11 +60,14 @@ class Profile {
     return _sameDay(last, today) || _sameDay(last, yesterday) ? streakDays : 0;
   }
 
-  /// The profile after finishing the daily quiz on [today]:
-  /// played yesterday → streak + 1; already played today → no change;
-  /// otherwise the streak starts again at 1. XP is always added.
-  Profile afterQuiz({required int xpEarned, required DateTime today}) {
-    final newStreak = doneOn(today) ? streakDays : currentStreak(today) + 1;
+  /// The profile after finishing the daily quiz on [today] with [correct]
+  /// right answers: played yesterday → streak + 1; otherwise the streak
+  /// starts again at 1. Already played today → nothing changes (later rounds
+  /// are practice, so XP can't be farmed). Same rules as the server's
+  /// record_daily_quiz (supabase/progress_and_leaderboard.sql).
+  Profile afterQuiz({required int correct, required DateTime today}) {
+    if (doneOn(today)) return this;
+    final newStreak = currentStreak(today) + 1;
     return Profile(
       id: id,
       name: name,
@@ -73,10 +78,25 @@ class Profile {
       dailyGoal: dailyGoal,
       streakDays: newStreak,
       lastQuizDate: _dateOnly(today),
-      xp: xp + xpEarned,
+      xp: xp + correct * xpPerCorrectAnswer,
       joined: joined,
     );
   }
+
+  /// The same profile with a new XP total (used by test mode).
+  Profile withXp(int newXp) => Profile(
+    id: id,
+    name: name,
+    mobile: mobile,
+    email: email,
+    studentClass: studentClass,
+    level: level,
+    dailyGoal: dailyGoal,
+    streakDays: streakDays,
+    lastQuizDate: lastQuizDate,
+    xp: newXp,
+    joined: joined,
+  );
 
   Profile copyWith({String? studentClass, String? level, int? dailyGoal}) =>
       Profile(
@@ -123,6 +143,51 @@ DateTime _dateOnly(DateTime d) => DateTime(d.year, d.month, d.day);
 
 bool _sameDay(DateTime a, DateTime b) =>
     a.year == b.year && a.month == b.month && a.day == b.day;
+
+/// How far someone has got with one lesson.
+class LessonProgress {
+  const LessonProgress({
+    this.bestScore = 0,
+    this.completed = false,
+    this.bookmarked = false,
+  });
+
+  final int bestScore;
+  final bool completed;
+  final bool bookmarked;
+}
+
+/// One row of the leaderboard.
+class LeaderboardEntry {
+  const LeaderboardEntry({
+    required this.rank,
+    required this.name,
+    required this.studentClass,
+    required this.xp,
+    required this.streak,
+    required this.isMe,
+  });
+
+  final int rank;
+
+  /// First name + last initial only, e.g. "Neha D." (privacy).
+  final String name;
+  final String studentClass;
+  final int xp;
+  final int streak;
+  final bool isMe;
+
+  /// "NEHA DAGAR" → "Neha D.", like the server's get_leaderboard.
+  static String displayName(String fullName) {
+    final words = fullName.trim().split(RegExp(r'\s+'));
+    String cap(String w) =>
+        w.isEmpty ? w : w[0].toUpperCase() + w.substring(1).toLowerCase();
+    final first = cap(words.first);
+    return words.length > 1 && words[1].isNotEmpty
+        ? '$first ${words[1][0].toUpperCase()}.'
+        : first;
+  }
+}
 
 /// Something went wrong, with a message that can be shown to the user.
 class BackendException implements Exception {
@@ -193,8 +258,24 @@ abstract class Backend {
   /// Saves the class, level and daily goal from [profile].
   Future<Profile> saveChoices(Profile profile);
 
-  /// Saves the result of the daily quiz: XP, streak and today's date.
-  Future<Profile> recordQuiz({required int xpEarned});
+  /// Saves the daily quiz result. The server works out streak and XP.
+  Future<Profile> recordQuiz({required int correct, required int total});
+
+  /// Saves a lesson quiz result. Returns the XP earned, which is only for
+  /// beating your best score in that lesson.
+  Future<int> recordLessonQuiz({
+    required String lessonId,
+    required int correct,
+    required int total,
+  });
+
+  /// Progress in every lesson started, by lesson ID.
+  Future<Map<String, LessonProgress>> lessonProgress();
+
+  Future<void> setLessonBookmark(String lessonId, bool on);
+
+  /// Top 50 (and your own row): XP this week, or all time.
+  Future<List<LeaderboardEntry>> leaderboard({required bool thisWeek});
 
   /// The hidden login address made from a mobile number. Supabase's own
   /// mobile login needs paid SMS, so we use this instead; nothing is ever
@@ -326,25 +407,94 @@ class SupabaseBackend implements Backend {
   }
 
   @override
-  Future<Profile> recordQuiz({required int xpEarned}) async {
+  Future<Profile> recordQuiz({required int correct, required int total}) async {
+    final current = _requireProfile();
+    final row = await _guard(
+      () => _client.rpc(
+        'record_daily_quiz',
+        params: {'p_correct': correct, 'p_total': total},
+      ),
+    );
+    return _profile = Profile.fromRow(
+      Map<String, dynamic>.from(row as Map),
+      email: current.email,
+    );
+  }
+
+  @override
+  Future<int> recordLessonQuiz({
+    required String lessonId,
+    required int correct,
+    required int total,
+  }) async {
+    final current = _requireProfile();
+    final earned = await _guard(
+      () => _client.rpc(
+        'record_lesson_quiz',
+        params: {
+          'p_lesson_id': lessonId,
+          'p_correct': correct,
+          'p_total': total,
+        },
+      ),
+    );
+    _profile = await _guard(() => _loadProfile(current.id)); // new XP total
+    return (earned as num).toInt();
+  }
+
+  @override
+  Future<Map<String, LessonProgress>> lessonProgress() async {
+    if (_profile == null) return {};
+    final rows = await _guard(() => _client.from('lesson_progress').select());
+    return {
+      for (final row in rows)
+        row['lesson_id'] as String: LessonProgress(
+          bestScore: (row['best_score'] as int?) ?? 0,
+          completed: row['completed_at'] != null,
+          bookmarked: (row['bookmarked'] as bool?) ?? false,
+        ),
+    };
+  }
+
+  @override
+  Future<void> setLessonBookmark(String lessonId, bool on) async {
+    _requireProfile();
+    await _guard(
+      () => _client.rpc(
+        'set_lesson_bookmark',
+        params: {'p_lesson_id': lessonId, 'p_on': on},
+      ),
+    );
+  }
+
+  @override
+  Future<List<LeaderboardEntry>> leaderboard({required bool thisWeek}) async {
+    _requireProfile();
+    final rows = await _guard(
+      () => _client.rpc(
+        'get_leaderboard',
+        params: {'p_period': thisWeek ? 'week' : 'all'},
+      ),
+    );
+    return [
+      for (final row in rows as List)
+        LeaderboardEntry(
+          rank: (row['rank'] as num).toInt(),
+          name: row['display_name'] as String? ?? '',
+          studentClass: row['student_class'] as String? ?? '',
+          xp: (row['xp'] as num?)?.toInt() ?? 0,
+          streak: (row['streak'] as num?)?.toInt() ?? 0,
+          isMe: row['is_me'] as bool? ?? false,
+        ),
+    ];
+  }
+
+  Profile _requireProfile() {
     final current = _profile;
     if (current == null) {
       throw const BackendException('Please log in to save your progress.');
     }
-    final next = current.afterQuiz(xpEarned: xpEarned, today: DateTime.now());
-    final row = await _guard(
-      () => _client
-          .from('profiles')
-          .update({
-            'streak_days': next.streakDays,
-            'last_quiz_date': Profile.dateText(next.lastQuizDate!),
-            'xp': next.xp,
-          })
-          .eq('id', current.id)
-          .select()
-          .single(),
-    );
-    return _profile = Profile.fromRow(row, email: _profile?.email ?? '');
+    return current;
   }
 
   Future<Profile> _loadProfile(String id) async {
@@ -466,13 +616,104 @@ class MemoryBackend implements Backend {
   @override
   Future<Profile> saveChoices(Profile profile) async => _store(profile);
 
-  @override
-  Future<Profile> recordQuiz({required int xpEarned}) async {
+  /// Lesson progress and XP history, per mobile number.
+  final Map<String, Map<String, LessonProgress>> _lessons = {};
+  final List<(String mobile, int xp, DateTime when)> _xpLog = [];
+
+  Profile _requireProfile() {
     final current = _profile;
     if (current == null) {
       throw const BackendException('Please log in to save your progress.');
     }
-    return _store(current.afterQuiz(xpEarned: xpEarned, today: DateTime.now()));
+    return current;
+  }
+
+  @override
+  Future<Profile> recordQuiz({required int correct, required int total}) async {
+    final current = _requireProfile();
+    final next = current.afterQuiz(correct: correct, today: DateTime.now());
+    if (next.xp > current.xp) {
+      _xpLog.add((current.mobile, next.xp - current.xp, DateTime.now()));
+    }
+    return _store(next);
+  }
+
+  @override
+  Future<int> recordLessonQuiz({
+    required String lessonId,
+    required int correct,
+    required int total,
+  }) async {
+    final current = _requireProfile();
+    final mine = _lessons.putIfAbsent(current.mobile, () => {});
+    final before = mine[lessonId] ?? const LessonProgress();
+    final earned =
+        (correct - before.bestScore).clamp(0, total) * xpPerCorrectAnswer;
+    mine[lessonId] = LessonProgress(
+      bestScore: correct > before.bestScore ? correct : before.bestScore,
+      completed: true,
+      bookmarked: before.bookmarked,
+    );
+    if (earned > 0) {
+      _xpLog.add((current.mobile, earned, DateTime.now()));
+      _store(current.withXp(current.xp + earned));
+    }
+    return earned;
+  }
+
+  @override
+  Future<Map<String, LessonProgress>> lessonProgress() async {
+    final current = _profile;
+    return current == null ? {} : {...?_lessons[current.mobile]};
+  }
+
+  @override
+  Future<void> setLessonBookmark(String lessonId, bool on) async {
+    final current = _requireProfile();
+    final mine = _lessons.putIfAbsent(current.mobile, () => {});
+    final before = mine[lessonId] ?? const LessonProgress();
+    mine[lessonId] = LessonProgress(
+      bestScore: before.bestScore,
+      completed: before.completed,
+      bookmarked: on,
+    );
+  }
+
+  @override
+  Future<List<LeaderboardEntry>> leaderboard({required bool thisWeek}) async {
+    final me = _requireProfile();
+    final now = DateTime.now();
+    final monday = DateTime(
+      now.year,
+      now.month,
+      now.day,
+    ).subtract(Duration(days: now.weekday - 1));
+    final scores = [
+      for (final (_, profile) in _accounts.values)
+        (
+          profile,
+          thisWeek
+              ? _xpLog
+                    .where(
+                      (e) => e.$1 == profile.mobile && !e.$3.isBefore(monday),
+                    )
+                    .fold<int>(0, (sum, e) => sum + e.$2)
+              : profile.xp,
+        ),
+    ]..removeWhere((e) => e.$2 == 0 && e.$1.mobile != me.mobile);
+    scores.sort((a, b) => b.$2.compareTo(a.$2));
+    return [
+      for (var i = 0; i < scores.length; i++)
+        LeaderboardEntry(
+          // Equal scores share a rank, like the server.
+          rank: scores.indexWhere((e) => e.$2 == scores[i].$2) + 1,
+          name: LeaderboardEntry.displayName(scores[i].$1.name),
+          studentClass: scores[i].$1.studentClass,
+          xp: scores[i].$2,
+          streak: scores[i].$1.currentStreak(now),
+          isMe: scores[i].$1.mobile == me.mobile,
+        ),
+    ];
   }
 
   Profile _store(Profile profile) {

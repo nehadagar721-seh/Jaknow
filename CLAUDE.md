@@ -31,6 +31,8 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   - `streak_pill.dart`: the white "🔥 7" streak pill
   - `app_bottom_bar.dart`: the Home / Quiz / News / Learn / Boojho bar
   - `step_indicator.dart`: "Step 1 of 2" with little bars
+- `setState(() { x = future; })`: always use braces when assigning a
+  Future inside setState (an arrow `=>` returns the Future and crashes).
 - Quiz questions live in `lib/data/quiz_questions.dart` (`QuizQuestion`;
   `quizForLevel(level)` gives `beginnerQuiz`, `todaysQuiz` (Intermediate) or
   `examReadyQuiz`: 5 sample questions each until there is a question bank).
@@ -102,11 +104,20 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
 - Profile (`profile_screen.dart`, no design) opens from the round initial
   button next to Home's streak pill: details, streak/XP/level, study
   settings (class, level, goal — editable, saved), saved lessons, Log out.
-- Streak and XP are real: after the daily quiz Home calls
-  `Backend.recordQuiz` (`Profile.afterQuiz`: played yesterday → +1, missed a
-  day → 1, same day → unchanged; XP always added). Skipped sign-up = a
-  streak that lasts only while the app is open. Home's quiz uses the
-  profile's level.
+- Scoring is done by the SERVER (`supabase/progress_and_leaderboard.sql`):
+  the app can't write xp/streak columns. Daily quiz → `recordQuiz(correct,
+  total)` → `record_daily_quiz` (yesterday → streak +1, missed a day → 1;
+  XP only for the first daily quiz each day, India date). Lesson quiz →
+  `recordLessonQuiz` → `record_lesson_quiz` (best score saved; XP only for
+  beating it; lesson IDs must exist in the `lessons` table, e.g.
+  'ancient-india-2' = `Lesson.id`). Bookmarks → `setLessonBookmark`.
+  `Profile.afterQuiz` mirrors the daily rules for test mode. Results show
+  the real XP via `xpForScore`. Skipped sign-up = nothing saved.
+- Leaderboard (`leaderboard_screen.dart`, no design): `get_leaderboard`
+  ('week' = XP since Monday from `xp_events`, or 'all'); top 50 + your own
+  row; only first name + last initial, class, streak, XP. Opened from the
+  🏆 card on Home and the Profile screen. Learn opens at the next
+  unfinished lesson; Profile lists lessons done and saved.
 - The design files are 390 px wide phone screens (screenshots at 2x).
 
 ## Design

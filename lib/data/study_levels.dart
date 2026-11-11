@@ -1,5 +1,11 @@
 // Classes a student can pick, and the difficulty levels of JaKnow.
 
+/// Points earned for each right answer.
+const int xpPerCorrectAnswer = 10;
+
+/// XP needed to go up one level.
+const int xpPerLevel = 100;
+
 /// Everything someone can choose on "Which class are you in?".
 const List<String> studentClasses = [
   'Class 6',

@@ -30,7 +30,7 @@ void main() {
       final p = played(
         DateTime(2026, 11, 7),
         7,
-      ).afterQuiz(xpEarned: 40, today: today);
+      ).afterQuiz(correct: 4, today: today);
       expect(p.streakDays, 8);
       expect(p.xp, 140);
       expect(p.doneOn(today), isTrue);
@@ -39,20 +39,17 @@ void main() {
     test('missed a day: the streak starts again at 1', () {
       final before = played(DateTime(2026, 11, 5), 7);
       expect(before.currentStreak(today), 0); // shown as lost
-      expect(before.afterQuiz(xpEarned: 10, today: today).streakDays, 1);
+      expect(before.afterQuiz(correct: 1, today: today).streakDays, 1);
     });
 
-    test('second quiz on the same day: no extra day, but XP still counts', () {
-      final p = played(today, 3).afterQuiz(xpEarned: 20, today: today);
+    test('second quiz on the same day: practice, no extra day or XP', () {
+      final p = played(today, 3).afterQuiz(correct: 2, today: today);
       expect(p.streakDays, 3);
-      expect(p.xp, 120);
+      expect(p.xp, 100);
     });
 
     test('very first quiz: 1 day', () {
-      expect(
-        played(null, 0).afterQuiz(xpEarned: 0, today: today).streakDays,
-        1,
-      );
+      expect(played(null, 0).afterQuiz(correct: 0, today: today).streakDays, 1);
     });
   });
 

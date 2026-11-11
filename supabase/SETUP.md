@@ -15,6 +15,10 @@ You do this once, in your web browser. It takes about 5 minutes.
    (When `schema.sql` changes in a later update, just run it again: it is
    safe to run more than once and keeps everyone's data.)
 
+Then do the same with `supabase/progress_and_leaderboard.sql` (saved lesson
+progress, fair server-side scoring and the leaderboard). Run `schema.sql`
+first. Both files are safe to run again.
+
 ## 3. Turn off email confirmation
 JaKnow logs people in with their mobile number and a 6-digit password.
 Behind the scenes it uses a made-up address like `9876543210@phone.jaknow.app`,

@@ -86,7 +86,7 @@ void main() {
     );
     expect(google.copyWith(level: 'Beginner').email, 'n@gmail.com');
     expect(
-      google.afterQuiz(xpEarned: 10, today: DateTime(2026, 11, 10)).email,
+      google.afterQuiz(correct: 1, today: DateTime(2026, 11, 10)).email,
       'n@gmail.com',
     );
     expect(

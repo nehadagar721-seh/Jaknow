@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../data/study_levels.dart';
-import '../screens/quiz_results_screen.dart' show xpPerLevel;
 import '../services/backend.dart';
 import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../widgets/back_circle_button.dart';
-import 'lesson_screen.dart' show savedLessons;
+import '../data/lessons.dart';
+import 'leaderboard_screen.dart';
 import 'log_in_screen.dart';
 import 'sign_up_screen.dart';
 import 'welcome_screen.dart';
@@ -24,6 +24,11 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final Backend _backend = Backend.instance;
   bool _saving = false;
+
+  /// Lesson progress from the account (done / saved lessons).
+  late final Future<Map<String, LessonProgress>> _lessons = _backend
+      .lessonProgress()
+      .catchError((_) => <String, LessonProgress>{});
 
   static const _months = [
     'Jan',
@@ -371,24 +376,52 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
       const SizedBox(height: 20),
-      _SectionLabel('SAVED'),
+      _SectionLabel('LESSONS'),
       const SizedBox(height: 10),
-      _Card(
-        child: Row(
-          children: [
-            const Icon(Icons.bookmark_rounded, color: AppColors.indigo),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                savedLessons.isEmpty
-                    ? 'No saved lessons yet. Tap 🔖 on a lesson to save it.'
-                    : '${savedLessons.length} saved lesson'
-                          '${savedLessons.length == 1 ? '' : 's'}: '
-                          '${savedLessons.join(', ')}',
-                style: AppTextStyles.body.copyWith(fontSize: 14.5),
-              ),
+      // Loaded from the account: lessons done and lessons saved.
+      FutureBuilder<Map<String, LessonProgress>>(
+        future: _lessons,
+        builder: (context, snapshot) {
+          final progress = snapshot.data ?? const {};
+          final done = ancientIndiaLessons
+              .where((l) => progress[l.id]?.completed ?? false)
+              .length;
+          final saved = [
+            for (final l in ancientIndiaLessons)
+              if (progress[l.id]?.bookmarked ?? false) l.title,
+          ];
+          return _Card(
+            padding: EdgeInsets.zero,
+            child: Column(
+              children: [
+                _InfoRow(
+                  icon: Icons.task_alt_rounded,
+                  text:
+                      'Ancient India: $done of ${ancientIndiaLessons.length} '
+                      'lessons done',
+                ),
+                const Divider(height: 1, color: AppColors.track),
+                _InfoRow(
+                  icon: Icons.bookmark_rounded,
+                  text: saved.isEmpty
+                      ? 'No saved lessons yet. Tap 🔖 on a lesson to save it.'
+                      : 'Saved: ${saved.join(', ')}',
+                ),
+              ],
             ),
-          ],
+          );
+        },
+      ),
+      const SizedBox(height: 12),
+      _Card(
+        padding: EdgeInsets.zero,
+        child: _SettingRow(
+          icon: Icons.emoji_events_rounded,
+          title: 'Leaderboard',
+          value: 'See your rank',
+          onTap: () => Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (_) => const LeaderboardScreen())),
         ),
       ),
       if (!_backend.isConnected) ...[
@@ -581,6 +614,33 @@ class _NotSignedIn extends StatelessWidget {
                 'I already have an account',
                 style: AppTextStyles.link.copyWith(fontSize: 15),
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// An icon and a line of text, inside a card.
+class _InfoRow extends StatelessWidget {
+  const _InfoRow({required this.icon, required this.text});
+
+  final IconData icon;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      child: Row(
+        children: [
+          Icon(icon, color: AppColors.indigo, size: 22),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              text,
+              style: AppTextStyles.body.copyWith(fontSize: 14.5),
             ),
           ),
         ],

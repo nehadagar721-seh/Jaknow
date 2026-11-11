@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../data/lessons.dart';
+import '../data/study_levels.dart';
+import '../services/backend.dart';
 import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../widgets/back_circle_button.dart';
 import '../widgets/boojho.dart';
 import 'quiz_screen.dart';
-
-/// Lessons the user has bookmarked, by title. Kept only while the app is
-/// open, until progress is saved on the phone.
-final Set<String> savedLessons = {};
 
 /// One lesson: key points, a "Remember" box, Boojho reading it aloud, and a
 /// 3-question quiz. After the quiz, the button moves on to the next lesson.
@@ -39,11 +37,16 @@ class _LessonScreenState extends State<LessonScreen>
   )..repeat();
 
   final BoojhoVoice _voice = BoojhoVoice.instance;
+  final Backend _backend = Backend.instance;
   bool _quizDone = false;
+
+  /// This lesson's saved progress (best score, done, bookmarked).
+  LessonProgress _progress = const LessonProgress();
 
   Lesson get _lesson => widget.lessons[widget.index];
   bool get _hasNext => widget.index < widget.lessons.length - 1;
-  bool get _saved => savedLessons.contains(_lesson.title);
+  bool get _saved => _progress.bookmarked;
+  bool get _loggedIn => _backend.currentProfile != null;
 
   @override
   void initState() {
@@ -51,6 +54,30 @@ class _LessonScreenState extends State<LessonScreen>
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => _voice.say(_lesson.boojhoIntro),
     );
+    _loadProgress();
+  }
+
+  Future<void> _loadProgress() async {
+    try {
+      final all = await _backend.lessonProgress();
+      if (mounted) {
+        setState(() => _progress = all[_lesson.id] ?? const LessonProgress());
+      }
+    } on BackendException {
+      // Not loaded: the lesson still works, just without the tick.
+    }
+  }
+
+  void _showMessage(String text) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(text),
+          behavior: SnackBarBehavior.floating,
+          duration: const Duration(seconds: 2),
+        ),
+      );
   }
 
   @override
@@ -75,34 +102,74 @@ class _LessonScreenState extends State<LessonScreen>
     _voice.say('${l.title}. ${points.join(' ')} Remember: ${l.remember}');
   }
 
-  void _toggleSaved() {
-    setState(() {
-      if (!savedLessons.remove(_lesson.title)) savedLessons.add(_lesson.title);
-    });
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(_saved ? 'Lesson saved' : 'Lesson removed from saved'),
-          behavior: SnackBarBehavior.floating,
-          duration: const Duration(seconds: 2),
-        ),
-      );
+  /// Bookmark: saved to the account, so it's still there next time.
+  Future<void> _toggleSaved() async {
+    if (!_loggedIn) {
+      _showMessage('Sign up to save lessons.');
+      return;
+    }
+    final on = !_saved;
+    try {
+      await _backend.setLessonBookmark(_lesson.id, on);
+      if (!mounted) return;
+      setState(() {
+        _progress = LessonProgress(
+          bestScore: _progress.bestScore,
+          completed: _progress.completed,
+          bookmarked: on,
+        );
+      });
+      _showMessage(on ? 'Lesson saved' : 'Lesson removed from saved');
+    } on BackendException catch (e) {
+      _showMessage(e.message);
+    }
   }
 
   Future<void> _takeQuiz() async {
     _voice.stop();
     final score = await Navigator.of(context).push<int>(
       MaterialPageRoute(
-        builder: (_) => QuizScreen(questions: _lesson.quiz, forLesson: true),
+        builder: (_) => QuizScreen(
+          questions: _lesson.quiz,
+          forLesson: true,
+          // XP only for beating your best score in this lesson.
+          xpForScore: (correct) =>
+              (correct - _progress.bestScore).clamp(0, correct) *
+              xpPerCorrectAnswer,
+        ),
       ),
     );
     if (!mounted || score == null) return;
-    setState(() => _quizDone = true);
+
+    // Save the score; the server gives XP only for an improvement.
+    var earned = 0;
+    if (_loggedIn) {
+      try {
+        earned = await _backend.recordLessonQuiz(
+          lessonId: _lesson.id,
+          correct: score,
+          total: _lesson.quiz.length,
+        );
+      } on BackendException catch (e) {
+        _showMessage(e.message);
+      }
+    }
+    if (!mounted) return;
+    setState(() {
+      _quizDone = true;
+      _progress = LessonProgress(
+        bestScore: score > _progress.bestScore ? score : _progress.bestScore,
+        completed: true,
+        bookmarked: _progress.bookmarked,
+      );
+    });
+    final xpText = earned > 0 ? 'You earned $earned XP. ' : '';
     _voice.say(
       _hasNext
-          ? 'Lesson done! Next up: ${widget.lessons[widget.index + 1].title}.'
-          : 'You finished all ${widget.lessons.length} lessons. Amazing work!',
+          ? 'Lesson done! $xpText'
+                'Next up: ${widget.lessons[widget.index + 1].title}.'
+          : 'You finished all ${widget.lessons.length} lessons. '
+                '${xpText}Amazing work!',
     );
   }
 
@@ -162,6 +229,13 @@ class _LessonScreenState extends State<LessonScreen>
                         children: [
                           _Chip(label: l.topic),
                           _Chip(label: l.unit),
+                          if (_progress.completed)
+                            _Chip(
+                              label:
+                                  '✓ Done · best ${_progress.bestScore}/'
+                                  '${l.quiz.length}',
+                              done: true,
+                            ),
                         ],
                       ),
                       const SizedBox(height: 12),
@@ -285,19 +359,25 @@ class _LessonProgress extends StatelessWidget {
 }
 
 class _Chip extends StatelessWidget {
-  const _Chip({required this.label});
+  const _Chip({required this.label, this.done = false});
 
   final String label;
+
+  /// true = green, for "✓ Done · best 3/3".
+  final bool done;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 32,
       padding: const EdgeInsets.symmetric(horizontal: 13),
-      decoration: const ShapeDecoration(
-        color: AppColors.white,
+      decoration: ShapeDecoration(
+        color: done ? AppColors.successLight : AppColors.white,
         shape: StadiumBorder(
-          side: BorderSide(color: AppColors.cardBorder, width: 1.2),
+          side: BorderSide(
+            color: done ? AppColors.success : AppColors.cardBorder,
+            width: 1.2,
+          ),
         ),
       ),
       // widthFactor: 1 keeps the pill only as wide as its text.
@@ -305,7 +385,10 @@ class _Chip extends StatelessWidget {
         widthFactor: 1,
         child: Text(
           label,
-          style: AppTextStyles.cardTitle.copyWith(fontSize: 13.5),
+          style: AppTextStyles.cardTitle.copyWith(
+            fontSize: 13.5,
+            color: done ? AppColors.success : AppColors.ink,
+          ),
         ),
       ),
     );

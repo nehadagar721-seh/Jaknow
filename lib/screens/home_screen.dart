@@ -15,10 +15,11 @@ import '../widgets/jaknow_logo.dart';
 import '../widgets/streak_pill.dart';
 import 'boojho_chat_screen.dart';
 import 'class_screen.dart';
+import '../data/lessons.dart';
+import 'leaderboard_screen.dart';
 import 'lesson_screen.dart';
 import 'news_screen.dart';
 import 'profile_screen.dart';
-import 'quiz_results_screen.dart' show xpPerCorrectAnswer, xpPerLevel;
 import 'quiz_screen.dart';
 
 /// Opens Home and removes the intro/sign-up screens behind it, so the
@@ -205,6 +206,9 @@ class _HomeScreenState extends State<HomeScreen>
           levelName: _levelName,
           streakDays: _doneToday ? _streakDays - 1 : _streakDays,
           xpBefore: (_profile?.xp ?? 0) % xpPerLevel,
+          // XP only for the first daily quiz of the day.
+          xpForScore: (correct) =>
+              _doneToday ? 0 : correct * xpPerCorrectAnswer,
         ),
       ),
     );
@@ -217,7 +221,10 @@ class _HomeScreenState extends State<HomeScreen>
     final wasDoneToday = _doneToday;
     if (_profile != null) {
       try {
-        await Backend.instance.recordQuiz(xpEarned: score * xpPerCorrectAnswer);
+        await Backend.instance.recordQuiz(
+          correct: score,
+          total: quizForLevel(_levelName).length,
+        );
       } on BackendException catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -234,10 +241,14 @@ class _HomeScreenState extends State<HomeScreen>
     }
     if (!mounted) return;
     setState(() {}); // redraw with the new streak
+    _refreshRank();
 
     // The results screen already told them the score.
     if (wasDoneToday) {
-      _boojhoSays('Nice practice! Your streak is still $_daysText.');
+      _boojhoSays(
+        'Nice practice! XP counts for the first quiz each day. '
+        'Your streak is still $_daysText.',
+      );
       return;
     }
     _boojhoSays(
@@ -252,6 +263,7 @@ class _HomeScreenState extends State<HomeScreen>
     await Navigator.of(context)
         .push(MaterialPageRoute(builder: (_) => const ProfileScreen()));
     if (mounted) setState(() {});
+    _refreshRank();
   }
 
   /// Opens Current affairs. If the user taps the Quiz tab there,
@@ -276,8 +288,49 @@ class _HomeScreenState extends State<HomeScreen>
   /// Opens the first History lesson (the only course so far).
   Future<void> _openLessons() async {
     _voice.stop();
+    // Carry on from the first lesson not finished yet.
+    var start = 0;
+    try {
+      final progress = await Backend.instance.lessonProgress();
+      final next = ancientIndiaLessons.indexWhere(
+        (l) => !(progress[l.id]?.completed ?? false),
+      );
+      start = next < 0 ? 0 : next; // all done: start again from lesson 1
+    } on BackendException {
+      // Couldn't load: just start at lesson 1.
+    }
+    if (!mounted) return;
     await Navigator.of(context)
-        .push(MaterialPageRoute(builder: (_) => const LessonScreen()));
+        .push(MaterialPageRoute(builder: (_) => LessonScreen(index: start)));
+    _refreshRank(); // lesson XP may have changed the leaderboard
+  }
+
+  /// Your place on this week's leaderboard (for the 🏆 card).
+  late Future<LeaderboardEntry?> _myRank = _loadRank();
+
+  Future<LeaderboardEntry?> _loadRank() async {
+    if (_profile == null) return null;
+    try {
+      final rows = await Backend.instance.leaderboard(thisWeek: true);
+      return rows.where((r) => r.isMe).firstOrNull;
+    } on BackendException {
+      return null;
+    }
+  }
+
+  void _refreshRank() {
+    if (!mounted) return;
+    // Curly braces: setState must not hand back the (unfinished) Future.
+    setState(() {
+      _myRank = _loadRank();
+    });
+  }
+
+  Future<void> _openLeaderboard() async {
+    _voice.stop();
+    await Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => const LeaderboardScreen()));
+    _refreshRank();
   }
 
   @override
@@ -373,6 +426,15 @@ class _HomeScreenState extends State<HomeScreen>
                       ),
                     ),
                   ],
+                ),
+                const SizedBox(height: 12),
+                FutureBuilder<LeaderboardEntry?>(
+                  future: _myRank,
+                  builder: (context, snapshot) => _LeaderboardCard(
+                    me: snapshot.data,
+                    signedIn: _profile != null,
+                    onTap: _openLeaderboard,
+                  ),
                 ),
                 const SizedBox(height: 22),
                 Text(
@@ -902,6 +964,72 @@ class _ProfileButton extends StatelessWidget {
                     ),
                   ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The 🏆 card: your place on this week's leaderboard.
+class _LeaderboardCard extends StatelessWidget {
+  const _LeaderboardCard({
+    required this.me,
+    required this.signedIn,
+    required this.onTap,
+  });
+
+  final LeaderboardEntry? me;
+  final bool signedIn;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final mine = me;
+    final subtitle = !signedIn
+        ? 'Sign up to compete with other learners'
+        : mine == null || mine.xp == 0
+        ? 'Finish today’s quiz to get on the board'
+        : 'You’re #${mine.rank} this week · ${mine.xp} XP';
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(22),
+      child: Ink(
+        padding: const EdgeInsets.fromLTRB(16, 14, 12, 14),
+        decoration: _cardDecoration(radius: 22),
+        child: Row(
+          children: [
+            Container(
+              width: 42,
+              height: 42,
+              decoration: BoxDecoration(
+                color: AppColors.amberLight,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Icon(
+                Icons.emoji_events_rounded,
+                color: AppColors.amber,
+                size: 24,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Leaderboard',
+                    style: AppTextStyles.cardTitle.copyWith(fontSize: 15.5),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    subtitle,
+                    style: AppTextStyles.cardBody.copyWith(fontSize: 13),
+                  ),
+                ],
+              ),
+            ),
+            const Icon(Icons.chevron_right_rounded, color: AppColors.muted),
+          ],
         ),
       ),
     );

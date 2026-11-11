@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jaknow/data/lessons.dart';
 import 'package:jaknow/screens/home_screen.dart';
 import 'package:jaknow/screens/lesson_screen.dart';
+import 'package:jaknow/services/backend.dart';
 import 'package:jaknow/theme/app_theme.dart';
 
 void main() {
@@ -51,17 +52,37 @@ void main() {
     expect(find.text('Take the 3-question quiz'), findsOneWidget);
   });
 
-  testWidgets('the bookmark saves the lesson', (tester) async {
+  testWidgets('the bookmark is saved to the account', (tester) async {
     tallScreen(tester);
-    savedLessons.clear();
+    Backend.instance = MemoryBackend();
+    await Backend.instance.signUp(
+      name: 'Neha',
+      mobile: '9876543210',
+      password: '123456',
+    );
     await tester.pumpWidget(
       MaterialApp(theme: AppTheme.light, home: const LessonScreen()),
     );
     await tester.pump();
     await tester.tap(find.byTooltip('Save lesson'));
     await tester.pump();
-    expect(savedLessons, contains('The Stone Age in India'));
+    final progress = await Backend.instance.lessonProgress();
+    expect(progress['ancient-india-1']?.bookmarked, isTrue);
     expect(find.byTooltip('Unsave lesson'), findsOneWidget);
+  });
+
+  testWidgets('without an account, the bookmark asks you to sign up', (
+    tester,
+  ) async {
+    tallScreen(tester);
+    Backend.instance = MemoryBackend();
+    await tester.pumpWidget(
+      MaterialApp(theme: AppTheme.light, home: const LessonScreen()),
+    );
+    await tester.pump();
+    await tester.tap(find.byTooltip('Save lesson'));
+    await tester.pump();
+    expect(find.text('Sign up to save lessons.'), findsOneWidget);
   });
 
   testWidgets('the quiz ends with "Lesson complete!", then Next lesson', (

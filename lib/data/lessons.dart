@@ -3,6 +3,7 @@ import 'quiz_questions.dart';
 /// One short lesson: key points, one thing to remember, and a quiz.
 class Lesson {
   const Lesson({
+    required this.id,
     required this.topic,
     required this.unit,
     required this.title,
@@ -11,6 +12,10 @@ class Lesson {
     required this.remember,
     required this.quiz,
   });
+
+  /// Fixed ID, e.g. 'ancient-india-2'. Must match the `lessons` table in
+  /// Supabase (supabase/progress_and_leaderboard.sql).
+  final String id;
 
   /// E.g. "History".
   final String topic;
@@ -35,6 +40,7 @@ class Lesson {
 /// History → Ancient India: six lessons, in order.
 const List<Lesson> ancientIndiaLessons = [
   Lesson(
+    id: 'ancient-india-1',
     topic: 'History',
     unit: 'Ancient India',
     title: 'The Stone Age in India',
@@ -84,6 +90,7 @@ const List<Lesson> ancientIndiaLessons = [
     ],
   ),
   Lesson(
+    id: 'ancient-india-2',
     topic: 'History',
     unit: 'Ancient India',
     title: 'The Indus Valley Civilisation',
@@ -137,6 +144,7 @@ const List<Lesson> ancientIndiaLessons = [
     ],
   ),
   Lesson(
+    id: 'ancient-india-3',
     topic: 'History',
     unit: 'Ancient India',
     title: 'The Vedic Age',
@@ -181,6 +189,7 @@ const List<Lesson> ancientIndiaLessons = [
     ],
   ),
   Lesson(
+    id: 'ancient-india-4',
     topic: 'History',
     unit: 'Ancient India',
     title: 'Buddhism and Jainism',
@@ -221,6 +230,7 @@ const List<Lesson> ancientIndiaLessons = [
     ],
   ),
   Lesson(
+    id: 'ancient-india-5',
     topic: 'History',
     unit: 'Ancient India',
     title: 'The Mauryan Empire',
@@ -271,6 +281,7 @@ const List<Lesson> ancientIndiaLessons = [
     ],
   ),
   Lesson(
+    id: 'ancient-india-6',
     topic: 'History',
     unit: 'Ancient India',
     title: 'The Gupta Empire',

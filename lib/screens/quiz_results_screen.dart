@@ -3,16 +3,11 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../data/quiz_questions.dart';
+import '../data/study_levels.dart';
 import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../widgets/boojho.dart';
-
-/// Points earned for each right answer.
-const int xpPerCorrectAnswer = 10;
-
-/// XP needed to go up one level.
-const int xpPerLevel = 100;
 
 /// The results shown after the last quiz question.
 ///
@@ -29,6 +24,7 @@ class QuizResultsView extends StatefulWidget {
     required this.xpBefore,
     required this.onContinue,
     this.forLesson = false,
+    this.xpForScore,
   });
 
   final List<QuizQuestion> questions;
@@ -48,6 +44,10 @@ class QuizResultsView extends StatefulWidget {
   /// true = this was a lesson's quiz: say "Lesson complete!" and leave out
   /// the streak (only the daily quiz counts for the streak).
   final bool forLesson;
+
+  /// The XP this score really earns (e.g. 0 for a practice round). If not
+  /// given: 10 per right answer.
+  final int Function(int correct)? xpForScore;
 
   @override
   State<QuizResultsView> createState() => _QuizResultsViewState();
@@ -75,7 +75,8 @@ class _QuizResultsViewState extends State<QuizResultsView>
       if (widget.picks[i] == widget.questions[i].correctIndex) i,
   ].length;
   int get _accuracy => (_score * 100 / _total).round();
-  int get _xpEarned => _score * xpPerCorrectAnswer;
+  int get _xpEarned =>
+      widget.xpForScore?.call(_score) ?? _score * xpPerCorrectAnswer;
   double get _levelProgress =>
       ((widget.xpBefore + _xpEarned) / xpPerLevel).clamp(0.0, 1.0);
 

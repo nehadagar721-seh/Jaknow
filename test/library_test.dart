@@ -27,12 +27,25 @@ void main() {
         expect(l.keyPoints.length, greaterThanOrEqualTo(5), reason: l.id);
         expect(l.quiz, isNotEmpty, reason: l.id);
         expect(l.remember, isNotEmpty, reason: l.id);
+        expect(l.sections, isNotEmpty, reason: '${l.id} needs a Full read');
         for (final q in l.quiz) {
           expect(q.options, hasLength(4), reason: q.question);
           expect(q.correctIndex, inInclusiveRange(0, 3), reason: q.question);
         }
       }
     }
+  });
+
+  test('the Indian Polity course has 10 lessons in 5 units', () {
+    final polity = builtInCourses.firstWhere((c) => c.id == 'gk-polity');
+    expect(polity.section, CourseSection.explore);
+    expect(polity.collection, generalKnowledge);
+    expect(polity.lessons, hasLength(10));
+    expect(polity.lessons.map((l) => l.unit).toSet(), hasLength(5));
+    expect(
+      LibraryService.search(builtInCourses, 'article 32').length,
+      greaterThanOrEqualTo(2),
+    );
   });
 
   test('search finds lessons by any word', () {

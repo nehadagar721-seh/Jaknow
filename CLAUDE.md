@@ -50,6 +50,8 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   `dart run tool/content_to_sql.dart` → `supabase/content.sql`, then apply
   it (lesson ids + question counts must match for scoring).
   `LibraryService` loads from Supabase, falling back to `builtInCourses`.
+  Big content batches live in `lib/data/content/` (one file per course,
+  e.g. `gk_polity.dart` → `polityLessons`, ids `gk-polity-1`…`10`).
   Content is written in our own words: never copy textbook text (NCERT,
   Lucent, Bharat Ko Jano are copyrighted); cover their topics instead.
 - Library screens: `library_screen.dart` ("For Class N" / "Explore more" /

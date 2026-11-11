@@ -1,3 +1,4 @@
+import 'content/gk_polity.dart';
 import 'lessons.dart';
 
 /// Where a course appears in the Library.
@@ -56,5 +57,17 @@ const List<Course> builtInCourses = [
     studentClass: 'Class 6',
     description: 'From the Stone Age to the Gupta Empire.',
     lessons: ancientIndiaLessons,
+  ),
+
+  // ---------- Explore more: General Knowledge ----------
+  Course(
+    id: 'gk-polity',
+    title: 'Indian Polity',
+    subject: 'Politics',
+    section: CourseSection.explore,
+    collection: generalKnowledge,
+    description:
+        'The Constitution, our rights and duties, and how India is governed.',
+    lessons: polityLessons,
   ),
 ];

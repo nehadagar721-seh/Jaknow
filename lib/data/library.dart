@@ -1,3 +1,4 @@
+import 'content/class5_environment.dart';
 import 'content/gk_indian_economy.dart';
 import 'content/gk_indian_geography.dart';
 import 'content/gk_medieval_india.dart';
@@ -54,6 +55,17 @@ const String bharatKoJano = 'Bharat Ko Jano';
 /// Supabase (made from this list by `dart run tool/content_to_sql.dart`),
 /// so new content can reach users without a new app version.
 const List<Course> builtInCourses = [
+  // ---------- For Class N ----------
+  Course(
+    id: 'class5-evs',
+    title: 'Our Environment',
+    subject: 'Science',
+    section: CourseSection.forClass,
+    studentClass: 'Class 5',
+    description:
+        'Our body, plants and animals, water, fuels, maps and our country.',
+    lessons: class5EnvironmentLessons,
+  ),
   Course(
     id: 'class6-history-ancient-india',
     title: 'Ancient India',

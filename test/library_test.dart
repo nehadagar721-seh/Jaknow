@@ -115,6 +115,20 @@ void main() {
     expect(LibraryService.search(builtInCourses, 'gst'), isNotEmpty);
   });
 
+  test('Class 5 has its own course: Our Environment', () {
+    final c5 = builtInCourses.where((c) => c.studentClass == 'Class 5');
+    expect(c5.map((c) => c.id), ['class5-evs']);
+    final evs = c5.first;
+    expect(evs.section, CourseSection.forClass);
+    expect(evs.lessons, hasLength(9));
+    for (final lesson in evs.lessons) {
+      expect(lesson.id, startsWith('class5-evs-'));
+      expect(lesson.keyPoints.length, greaterThanOrEqualTo(5));
+      expect(lesson.sections, hasLength(3));
+      expect(lesson.quiz.every((q) => q.options.length == 4), isTrue);
+    }
+  });
+
   test('every lesson id is unique', () {
     final ids = [
       for (final c in builtInCourses)

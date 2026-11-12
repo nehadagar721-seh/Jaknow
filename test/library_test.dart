@@ -86,6 +86,21 @@ void main() {
     expect(LibraryService.search(builtInCourses, 'monsoon'), isNotEmpty);
   });
 
+  test('the World Geography course has 10 lessons in 5 units', () {
+    final world = builtInCourses.firstWhere(
+      (c) => c.id == 'gk-world-geography',
+    );
+    expect(world.lessons, hasLength(10));
+    expect(world.lessons.map((l) => l.unit).toSet(), hasLength(5));
+    for (final lesson in world.lessons) {
+      expect(lesson.id, startsWith('gk-world-geo-'));
+      expect(lesson.keyPoints.length, greaterThanOrEqualTo(5));
+      expect(lesson.sections, hasLength(3));
+      expect(lesson.quiz.every((q) => q.options.length == 4), isTrue);
+    }
+    expect(LibraryService.search(builtInCourses, 'everest'), isNotEmpty);
+  });
+
   test('every lesson id is unique', () {
     final ids = [
       for (final c in builtInCourses)

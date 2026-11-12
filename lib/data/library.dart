@@ -2,6 +2,7 @@ import 'content/gk_indian_geography.dart';
 import 'content/gk_medieval_india.dart';
 import 'content/gk_modern_india.dart';
 import 'content/gk_polity.dart';
+import 'content/gk_world_geography.dart';
 import 'lessons.dart';
 
 /// Where a course appears in the Library.
@@ -102,5 +103,15 @@ const List<Course> builtInCourses = [
     description:
         'Mountains, rivers, climate, soils, forests and resources of India.',
     lessons: indianGeographyLessons,
+  ),
+  Course(
+    id: 'gk-world-geography',
+    title: 'World Geography',
+    subject: 'Geography',
+    section: CourseSection.explore,
+    collection: generalKnowledge,
+    description:
+        'The Solar System, the restless Earth, air, oceans and the world map.',
+    lessons: worldGeographyLessons,
   ),
 ];

@@ -129,6 +129,26 @@ void main() {
     }
   });
 
+  test('Class 6 and Class 7 each have History, Geography and Civics', () {
+    for (final grade in ['Class 6', 'Class 7']) {
+      final courses = builtInCourses.where((c) => c.studentClass == grade);
+      expect(courses.map((c) => c.subject).toSet(), {
+        'History',
+        'Geography',
+        'Politics',
+      });
+      for (final course in courses) {
+        expect(course.section, CourseSection.forClass);
+        expect(course.lessons.length, greaterThanOrEqualTo(6));
+        for (final lesson in course.lessons) {
+          expect(lesson.keyPoints.length, greaterThanOrEqualTo(5));
+          expect(lesson.sections, isNotEmpty);
+          expect(lesson.quiz.every((q) => q.options.length == 4), isTrue);
+        }
+      }
+    }
+  });
+
   test('every lesson id is unique', () {
     final ids = [
       for (final c in builtInCourses)
@@ -181,7 +201,10 @@ void main() {
       await settle(tester);
       expect(find.text('For Class 6'), findsOneWidget);
       expect(find.text('Ancient India'), findsOneWidget);
-      expect(find.text('0 of 6 done'), findsOneWidget);
+      expect(find.text('The Earth and Us'), findsOneWidget);
+      expect(find.text('Living Together'), findsOneWidget);
+      // History, Geography and Civics: 6 lessons each.
+      expect(find.text('0 of 6 done'), findsNWidgets(3));
     });
 
     testWidgets('a Class 8 student is told lessons are coming, can explore', (

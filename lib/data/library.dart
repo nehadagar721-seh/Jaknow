@@ -1,4 +1,9 @@
 import 'content/class5_environment.dart';
+import 'content/class6_civics.dart';
+import 'content/class6_geography.dart';
+import 'content/class7_civics.dart';
+import 'content/class7_geography.dart';
+import 'content/class7_history.dart';
 import 'content/gk_indian_economy.dart';
 import 'content/gk_indian_geography.dart';
 import 'content/gk_medieval_india.dart';
@@ -74,6 +79,51 @@ const List<Course> builtInCourses = [
     studentClass: 'Class 6',
     description: 'From the Stone Age to the Gupta Empire.',
     lessons: ancientIndiaLessons,
+  ),
+  Course(
+    id: 'class6-geography',
+    title: 'The Earth and Us',
+    subject: 'Geography',
+    section: CourseSection.forClass,
+    studentClass: 'Class 6',
+    description: 'The Earth in space, globes, maps and landforms.',
+    lessons: class6GeographyLessons,
+  ),
+  Course(
+    id: 'class6-civics',
+    title: 'Living Together',
+    subject: 'Politics',
+    section: CourseSection.forClass,
+    studentClass: 'Class 6',
+    description: 'Diversity, equality, government and earning a living.',
+    lessons: class6CivicsLessons,
+  ),
+  Course(
+    id: 'class7-history',
+    title: 'Kings and Kingdoms',
+    subject: 'History',
+    section: CourseSection.forClass,
+    studentClass: 'Class 7',
+    description: 'New kingdoms, the Delhi Sultans, the Mughals and after.',
+    lessons: class7HistoryLessons,
+  ),
+  Course(
+    id: 'class7-geography',
+    title: 'Our Environment',
+    subject: 'Geography',
+    section: CourseSection.forClass,
+    studentClass: 'Class 7',
+    description: 'The Earth inside and out, air, water and vegetation.',
+    lessons: class7GeographyLessons,
+  ),
+  Course(
+    id: 'class7-civics',
+    title: 'Democracy and Us',
+    subject: 'Politics',
+    section: CourseSection.forClass,
+    studentClass: 'Class 7',
+    description: 'Equality, health, state government, media and markets.',
+    lessons: class7CivicsLessons,
   ),
 
   // ---------- Explore more: General Knowledge ----------

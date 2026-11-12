@@ -7,6 +7,8 @@ import 'content/class7_history.dart';
 import 'content/class8_civics.dart';
 import 'content/class8_geography.dart';
 import 'content/class8_history.dart';
+import 'content/class10_civics.dart';
+import 'content/class10_history.dart';
 import 'content/class9_social_science.dart';
 import 'content/gk_indian_economy.dart';
 import 'content/gk_indian_geography.dart';
@@ -193,6 +195,27 @@ const List<Course> builtInCourses = [
     studentClass: 'Class 9',
     description: 'Scarcity, choices, production, demand and prices.',
     lessons: class9EconomicsLessons,
+  ),
+  // Class 10: current (rationalised) syllabus, one course per subject.
+  Course(
+    id: 'class10-history',
+    title: 'Making the Modern World',
+    subject: 'History',
+    section: CourseSection.forClass,
+    studentClass: 'Class 10',
+    description:
+        'Nationalism in Europe and India, the world economy, industry and '
+        'print.',
+    lessons: class10HistoryLessons,
+  ),
+  Course(
+    id: 'class10-civics',
+    title: 'How Democracy Works',
+    subject: 'Politics',
+    section: CourseSection.forClass,
+    studentClass: 'Class 10',
+    description: 'Power sharing, federalism, diversity, parties and outcomes.',
+    lessons: class10CivicsLessons,
   ),
 
   // ---------- Explore more: General Knowledge ----------

@@ -73,6 +73,19 @@ void main() {
     );
   });
 
+  test('the Indian Geography course has 10 lessons in 5 units', () {
+    final geo = builtInCourses.firstWhere((c) => c.id == 'gk-indian-geography');
+    expect(geo.subject, 'Geography');
+    expect(geo.lessons, hasLength(10));
+    expect(geo.lessons.map((l) => l.unit).toSet(), hasLength(5));
+    for (final lesson in geo.lessons) {
+      expect(lesson.id, startsWith('gk-geography-'));
+      expect(lesson.sections, hasLength(3));
+      expect(lesson.quiz.every((q) => q.options.length == 4), isTrue);
+    }
+    expect(LibraryService.search(builtInCourses, 'monsoon'), isNotEmpty);
+  });
+
   test('every lesson id is unique', () {
     final ids = [
       for (final c in builtInCourses)
@@ -87,10 +100,9 @@ void main() {
       'The Mauryan Empire',
     ]);
     final class6 = LibraryService.search(builtInCourses, 'class 6 history');
-    expect(
-      class6.take(6).map((r) => r.$1.id).toSet(),
-      {'class6-history-ancient-india'},
-    );
+    expect(class6.take(6).map((r) => r.$1.id).toSet(), {
+      'class6-history-ancient-india',
+    });
     expect(LibraryService.search(builtInCourses, 'zzzz'), isEmpty);
   });
 

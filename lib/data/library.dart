@@ -1,3 +1,4 @@
+import 'content/gk_indian_geography.dart';
 import 'content/gk_medieval_india.dart';
 import 'content/gk_modern_india.dart';
 import 'content/gk_polity.dart';
@@ -91,5 +92,15 @@ const List<Course> builtInCourses = [
     description:
         'From the first European traders to the freedom struggle and 1947.',
     lessons: modernIndiaLessons,
+  ),
+  Course(
+    id: 'gk-indian-geography',
+    title: 'Indian Geography',
+    subject: 'Geography',
+    section: CourseSection.explore,
+    collection: generalKnowledge,
+    description:
+        'Mountains, rivers, climate, soils, forests and resources of India.',
+    lessons: indianGeographyLessons,
   ),
 ];

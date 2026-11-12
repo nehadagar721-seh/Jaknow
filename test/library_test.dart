@@ -48,14 +48,48 @@ void main() {
     );
   });
 
+  test('the History GK courses: Medieval (8) and Modern India (10)', () {
+    final medieval = builtInCourses.firstWhere(
+      (c) => c.id == 'gk-medieval-india',
+    );
+    final modern = builtInCourses.firstWhere((c) => c.id == 'gk-modern-india');
+    expect(medieval.lessons, hasLength(8));
+    expect(modern.lessons, hasLength(10));
+    for (final course in [medieval, modern]) {
+      expect(course.section, CourseSection.explore);
+      expect(course.subject, 'History');
+      for (final lesson in course.lessons) {
+        expect(lesson.id, startsWith(course.id.replaceAll('-india', '')));
+        expect(lesson.keyPoints.length, greaterThanOrEqualTo(5));
+        expect(lesson.quiz, hasLength(3));
+        for (final q in lesson.quiz) {
+          expect(q.options, hasLength(4));
+        }
+      }
+    }
+    expect(
+      LibraryService.search(builtInCourses, 'panipat').length,
+      greaterThanOrEqualTo(3),
+    );
+  });
+
+  test('every lesson id is unique', () {
+    final ids = [
+      for (final c in builtInCourses)
+        for (final l in c.lessons) l.id,
+    ];
+    expect(ids.toSet(), hasLength(ids.length));
+  });
+
   test('search finds lessons by any word', () {
     final results = LibraryService.search(builtInCourses, 'mauryan');
     expect(results.map((r) => r.$1.lessons[r.$2].title), [
       'The Mauryan Empire',
     ]);
+    final class6 = LibraryService.search(builtInCourses, 'class 6 history');
     expect(
-      LibraryService.search(builtInCourses, 'class 6 history'),
-      hasLength(6),
+      class6.take(6).map((r) => r.$1.id).toSet(),
+      {'class6-history-ancient-india'},
     );
     expect(LibraryService.search(builtInCourses, 'zzzz'), isEmpty);
   });

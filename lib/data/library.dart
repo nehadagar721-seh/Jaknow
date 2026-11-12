@@ -1,3 +1,5 @@
+import 'content/gk_medieval_india.dart';
+import 'content/gk_modern_india.dart';
 import 'content/gk_polity.dart';
 import 'lessons.dart';
 
@@ -69,5 +71,25 @@ const List<Course> builtInCourses = [
     description:
         'The Constitution, our rights and duties, and how India is governed.',
     lessons: polityLessons,
+  ),
+  Course(
+    id: 'gk-medieval-india',
+    title: 'Medieval India',
+    subject: 'History',
+    section: CourseSection.explore,
+    collection: generalKnowledge,
+    description:
+        'Rajputs, Cholas, the Delhi Sultanate, the Mughals and the Marathas.',
+    lessons: medievalIndiaLessons,
+  ),
+  Course(
+    id: 'gk-modern-india',
+    title: 'Modern India',
+    subject: 'History',
+    section: CourseSection.explore,
+    collection: generalKnowledge,
+    description:
+        'From the first European traders to the freedom struggle and 1947.',
+    lessons: modernIndiaLessons,
   ),
 ];

@@ -156,16 +156,43 @@ const List<Course> builtInCourses = [
     description: 'The Constitution, Parliament, courts and social justice.',
     lessons: class8CivicsLessons,
   ),
+  // Class 9 follows the new 2026-27 book (Understanding Society, Part 1),
+  // split by subject.
   Course(
-    id: 'class9-social-science',
-    title: 'Understanding Society (Part 1)',
-    subject: 'Social Science',
+    id: 'class9-history',
+    title: 'Early India and the World',
+    subject: 'History',
     section: CourseSection.forClass,
     studentClass: 'Class 9',
-    description:
-        'New 2026-27 syllabus: Earth, climate, early India, democracy and '
-        'economics.',
-    lessons: class9SocialScienceLessons,
+    description: 'Social science, early humans, civilisations and states.',
+    lessons: class9HistoryLessons,
+  ),
+  Course(
+    id: 'class9-geography',
+    title: 'Earth and Climate',
+    subject: 'Geography',
+    section: CourseSection.forClass,
+    studentClass: 'Class 9',
+    description: 'How the Earth’s surface is shaped, the air and climate.',
+    lessons: class9GeographyLessons,
+  ),
+  Course(
+    id: 'class9-civics',
+    title: 'Democracy and Elections',
+    subject: 'Politics',
+    section: CourseSection.forClass,
+    studentClass: 'Class 9',
+    description: 'What democracy means and how India votes.',
+    lessons: class9CivicsLessons,
+  ),
+  Course(
+    id: 'class9-economics',
+    title: 'Economics: First Steps',
+    subject: 'Economy',
+    section: CourseSection.forClass,
+    studentClass: 'Class 9',
+    description: 'Scarcity, choices, production, demand and prices.',
+    lessons: class9EconomicsLessons,
   ),
 
   // ---------- Explore more: General Knowledge ----------

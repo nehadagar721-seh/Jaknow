@@ -2,9 +2,11 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import '../data/quiz_questions.dart';
+import '../data/daily_quiz.dart';
+import '../data/library.dart';
 import '../data/study_levels.dart';
 import '../services/backend.dart';
+import '../services/library_service.dart';
 import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
@@ -195,12 +197,26 @@ class _HomeScreenState extends State<HomeScreen>
   /// Opens today's quiz, then Boojho reacts to the score.
   Future<void> _openQuiz() async {
     _voice.stop();
+    // Today's questions come from the Library: new every day, matched to
+    // the student's class and level.
+    List<Course> courses;
+    try {
+      courses = await LibraryService.instance.courses();
+    } catch (_) {
+      courses = builtInCourses;
+    }
+    if (!mounted) return;
+    final questions = dailyQuiz(
+      courses: courses,
+      level: _levelName,
+      studentClass: _profile?.studentClass ?? '',
+    );
     final score = await Navigator.of(context).push<int>(
       MaterialPageRoute(
         // The quiz adds today to the streak itself, so if today is already
         // done, give it yesterday's number.
         builder: (_) => QuizScreen(
-          questions: quizForLevel(_levelName),
+          questions: questions,
           level: _level,
           levelName: _levelName,
           streakDays: _doneToday ? _streakDays - 1 : _streakDays,
@@ -222,7 +238,7 @@ class _HomeScreenState extends State<HomeScreen>
       try {
         await Backend.instance.recordQuiz(
           correct: score,
-          total: quizForLevel(_levelName).length,
+          total: questions.length,
         );
       } on BackendException catch (e) {
         if (mounted) {

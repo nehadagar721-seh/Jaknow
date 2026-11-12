@@ -149,20 +149,21 @@ void main() {
     }
   });
 
-  test('Class 9 follows the new book: Understanding Society, Part 1', () {
-    final c9 = builtInCourses.firstWhere((c) => c.studentClass == 'Class 9');
-    expect(c9.id, 'class9-social-science');
-    expect(c9.lessons, hasLength(9));
-    expect(c9.lessons.map((l) => l.topic).toSet(), {
-      'Social Science',
-      'Geography',
+  test('Class 9 is split by subject, with long Full reads', () {
+    final c9 = builtInCourses.where((c) => c.studentClass == 'Class 9');
+    expect(c9.map((c) => c.subject), [
       'History',
+      'Geography',
       'Politics',
       'Economy',
-    });
-    for (final lesson in c9.lessons) {
+    ]);
+    expect(c9.expand((c) => c.lessons), hasLength(9));
+    for (final lesson in c9.expand((c) => c.lessons)) {
+      final words = lesson.sections
+          .map((s) => s.text.split(RegExp(r'\s+')).length)
+          .fold(0, (a, b) => a + b);
+      expect(words, greaterThanOrEqualTo(400), reason: lesson.title);
       expect(lesson.keyPoints.length, greaterThanOrEqualTo(5));
-      expect(lesson.sections, hasLength(3));
       expect(lesson.quiz.every((q) => q.options.length == 4), isTrue);
     }
   });

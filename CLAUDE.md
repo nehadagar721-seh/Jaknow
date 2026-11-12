@@ -34,8 +34,11 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
 - `setState(() { x = future; })`: always use braces when assigning a
   Future inside setState (an arrow `=>` returns the Future and crashes).
 - Quiz questions live in `lib/data/quiz_questions.dart` (`QuizQuestion`;
-  `quizForLevel(level)` gives `beginnerQuiz`, `todaysQuiz` (Intermediate) or
-  `examReadyQuiz`: 5 sample questions each until there is a question bank).
+  `quizForLevel(level)` gives 5 sample questions per level, now only a
+  fallback). The DAILY QUIZ is `dailyQuiz()` in `lib/data/daily_quiz.dart`:
+  5 questions from the Library's lesson quizzes, same all day, new each day
+  (India date), Beginner → own class, Intermediate → class + GK, Exam
+  ready → GK. Home's "Take today's quiz" uses it.
 - Classes and levels live in `lib/data/study_levels.dart`: `studentClasses`,
   `suggestedLevel(class)` (Class 6–8 → Beginner, exams → Exam ready, else
   Intermediate), `levelNumber`, `quizLabel` (Basics/Foundation/Exam prep).
@@ -52,6 +55,13 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   `LibraryService` loads from Supabase, falling back to `builtInCourses`.
   Big content batches live in `lib/data/content/` (one file per course,
   e.g. `gk_polity.dart` → `polityLessons`, ids `gk-polity-1`…`10`).
+  FULL READ MUST BE A LONG READ: about one page, 450+ words per lesson
+  (5–6 sections of ~80–100 words), never just 2–3 short paragraphs.
+  Class 9 already follows this (a test checks 400+ words); older lessons
+  are being lengthened course by course. Class 9 follows the new 2026-27
+  NCERT book (Understanding Society, Part 1) but is split by subject
+  (History, Geography, Civics, Economics); its lesson ids stay
+  `class9-sst-N`.
   Content is written in our own words: never copy textbook text (NCERT,
   Lucent, Bharat Ko Jano are copyrighted); cover their topics instead.
 - Library screens: `library_screen.dart` ("For Class N" / "Explore more" /

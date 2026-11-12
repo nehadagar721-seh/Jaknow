@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jaknow/data/daily_quiz.dart';
+import 'package:jaknow/data/library.dart';
 import 'package:jaknow/data/quiz_questions.dart';
 import 'package:jaknow/screens/home_screen.dart';
 import 'package:jaknow/screens/quiz_screen.dart';
@@ -83,10 +85,13 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(seconds: 1));
 
+    // Today's questions come from the Library (a guest is Intermediate).
+    final quiz = dailyQuiz(courses: builtInCourses, level: 'Intermediate');
+
     // Answer everything correctly except the last question.
-    for (var i = 0; i < todaysQuiz.length; i++) {
-      final q = todaysQuiz[i];
-      final answer = i < todaysQuiz.length - 1
+    for (var i = 0; i < quiz.length; i++) {
+      final q = quiz[i];
+      final answer = i < quiz.length - 1
           ? q.correctAnswer
           : q.options.firstWhere((o) => o != q.correctAnswer);
       await tester.tap(find.text(answer));

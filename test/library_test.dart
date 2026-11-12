@@ -101,6 +101,20 @@ void main() {
     expect(LibraryService.search(builtInCourses, 'everest'), isNotEmpty);
   });
 
+  test('the Indian Economy course has 10 lessons in 5 units', () {
+    final eco = builtInCourses.firstWhere((c) => c.id == 'gk-indian-economy');
+    expect(eco.subject, 'Economy');
+    expect(eco.lessons, hasLength(10));
+    expect(eco.lessons.map((l) => l.unit).toSet(), hasLength(5));
+    for (final lesson in eco.lessons) {
+      expect(lesson.id, startsWith('gk-economy-'));
+      expect(lesson.keyPoints.length, greaterThanOrEqualTo(5));
+      expect(lesson.sections, hasLength(3));
+      expect(lesson.quiz.every((q) => q.options.length == 4), isTrue);
+    }
+    expect(LibraryService.search(builtInCourses, 'gst'), isNotEmpty);
+  });
+
   test('every lesson id is unique', () {
     final ids = [
       for (final c in builtInCourses)

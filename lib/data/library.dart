@@ -1,3 +1,4 @@
+import 'content/gk_indian_economy.dart';
 import 'content/gk_indian_geography.dart';
 import 'content/gk_medieval_india.dart';
 import 'content/gk_modern_india.dart';
@@ -113,5 +114,15 @@ const List<Course> builtInCourses = [
     description:
         'The Solar System, the restless Earth, air, oceans and the world map.',
     lessons: worldGeographyLessons,
+  ),
+  Course(
+    id: 'gk-indian-economy',
+    title: 'Indian Economy',
+    subject: 'Economy',
+    section: CourseSection.explore,
+    collection: generalKnowledge,
+    description:
+        'Planning, banking, inflation, the Budget, GST and welfare schemes.',
+    lessons: indianEconomyLessons,
   ),
 ];

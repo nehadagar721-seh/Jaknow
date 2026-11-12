@@ -4,6 +4,9 @@ import 'content/class6_geography.dart';
 import 'content/class7_civics.dart';
 import 'content/class7_geography.dart';
 import 'content/class7_history.dart';
+import 'content/class8_civics.dart';
+import 'content/class8_geography.dart';
+import 'content/class8_history.dart';
 import 'content/gk_indian_economy.dart';
 import 'content/gk_indian_geography.dart';
 import 'content/gk_medieval_india.dart';
@@ -124,6 +127,33 @@ const List<Course> builtInCourses = [
     studentClass: 'Class 7',
     description: 'Equality, health, state government, media and markets.',
     lessons: class7CivicsLessons,
+  ),
+  Course(
+    id: 'class8-history',
+    title: 'From Trade to Freedom',
+    subject: 'History',
+    section: CourseSection.forClass,
+    studentClass: 'Class 8',
+    description: 'Company rule, revolts, reforms and the road to 1947.',
+    lessons: class8HistoryLessons,
+  ),
+  Course(
+    id: 'class8-geography',
+    title: 'Resources and Development',
+    subject: 'Geography',
+    section: CourseSection.forClass,
+    studentClass: 'Class 8',
+    description: 'Land, water, forests, minerals, farming and industries.',
+    lessons: class8GeographyLessons,
+  ),
+  Course(
+    id: 'class8-civics',
+    title: 'The Constitution and Us',
+    subject: 'Politics',
+    section: CourseSection.forClass,
+    studentClass: 'Class 8',
+    description: 'The Constitution, Parliament, courts and social justice.',
+    lessons: class8CivicsLessons,
   ),
 
   // ---------- Explore more: General Knowledge ----------

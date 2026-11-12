@@ -129,8 +129,8 @@ void main() {
     }
   });
 
-  test('Class 6 and Class 7 each have History, Geography and Civics', () {
-    for (final grade in ['Class 6', 'Class 7']) {
+  test('Classes 6, 7 and 8 each have History, Geography and Civics', () {
+    for (final grade in ['Class 6', 'Class 7', 'Class 8']) {
       final courses = builtInCourses.where((c) => c.studentClass == grade);
       expect(courses.map((c) => c.subject).toSet(), {
         'History',
@@ -207,17 +207,17 @@ void main() {
       expect(find.text('0 of 6 done'), findsNWidgets(3));
     });
 
-    testWidgets('a Class 8 student is told lessons are coming, can explore', (
+    testWidgets('a Class 9 student is told lessons are coming, can explore', (
       tester,
     ) async {
       tallScreen(tester);
-      await signUpIn('Class 8');
+      await signUpIn('Class 9');
       await tester.pumpWidget(
         MaterialApp(theme: AppTheme.light, home: const LibraryScreen()),
       );
       await settle(tester);
       expect(
-        find.textContaining('Class 8 lessons are on their way'),
+        find.textContaining('Class 9 lessons are on their way'),
         findsOneWidget,
       );
       await tester.tap(find.text('Explore more'));

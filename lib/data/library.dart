@@ -8,6 +8,8 @@ import 'content/class8_civics.dart';
 import 'content/class8_geography.dart';
 import 'content/class8_history.dart';
 import 'content/class10_civics.dart';
+import 'content/class10_economics.dart';
+import 'content/class10_geography.dart';
 import 'content/class10_history.dart';
 import 'content/class9_social_science.dart';
 import 'content/gk_indian_economy.dart';
@@ -216,6 +218,26 @@ const List<Course> builtInCourses = [
     studentClass: 'Class 10',
     description: 'Power sharing, federalism, diversity, parties and outcomes.',
     lessons: class10CivicsLessons,
+  ),
+  Course(
+    id: 'class10-geography',
+    title: 'India’s Resources',
+    subject: 'Geography',
+    section: CourseSection.forClass,
+    studentClass: 'Class 10',
+    description:
+        'Land, forests, water, farming, minerals, industry and transport.',
+    lessons: class10GeographyLessons,
+  ),
+  Course(
+    id: 'class10-economics',
+    title: 'Understanding Development',
+    subject: 'Economy',
+    section: CourseSection.forClass,
+    studentClass: 'Class 10',
+    description:
+        'Development, sectors, money and credit, globalisation, consumers.',
+    lessons: class10EconomicsLessons,
   ),
 
   // ---------- Explore more: General Knowledge ----------

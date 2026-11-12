@@ -168,9 +168,15 @@ void main() {
     }
   });
 
-  test('Class 10 has History and Civics, with page-long Full reads', () {
+  test('Class 10 has all four subjects (22 lessons), with page-long reads', () {
     final c10 = builtInCourses.where((c) => c.studentClass == 'Class 10');
-    expect(c10.map((c) => c.id), ['class10-history', 'class10-civics']);
+    expect(c10.map((c) => c.id), [
+      'class10-history',
+      'class10-civics',
+      'class10-geography',
+      'class10-economics',
+    ]);
+    expect(c10.expand((c) => c.lessons), hasLength(22));
     for (final lesson in c10.expand((c) => c.lessons)) {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)

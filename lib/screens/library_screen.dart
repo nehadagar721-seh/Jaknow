@@ -18,6 +18,7 @@ IconData subjectIcon(String subject) => switch (subject) {
   'Science' || 'Physics' || 'Chemistry' || 'Biology' => Icons.science_outlined,
   'Economy' => Icons.currency_rupee_rounded,
   'Sports' => Icons.sports_cricket_outlined,
+  'Social Science' => Icons.public_rounded,
   'Culture' || 'Heritage' => Icons.temple_hindu_outlined,
   _ => Icons.menu_book_rounded,
 };

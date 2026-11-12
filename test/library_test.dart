@@ -149,6 +149,24 @@ void main() {
     }
   });
 
+  test('Class 9 follows the new book: Understanding Society, Part 1', () {
+    final c9 = builtInCourses.firstWhere((c) => c.studentClass == 'Class 9');
+    expect(c9.id, 'class9-social-science');
+    expect(c9.lessons, hasLength(9));
+    expect(c9.lessons.map((l) => l.topic).toSet(), {
+      'Social Science',
+      'Geography',
+      'History',
+      'Politics',
+      'Economy',
+    });
+    for (final lesson in c9.lessons) {
+      expect(lesson.keyPoints.length, greaterThanOrEqualTo(5));
+      expect(lesson.sections, hasLength(3));
+      expect(lesson.quiz.every((q) => q.options.length == 4), isTrue);
+    }
+  });
+
   test('every lesson id is unique', () {
     final ids = [
       for (final c in builtInCourses)
@@ -207,17 +225,17 @@ void main() {
       expect(find.text('0 of 6 done'), findsNWidgets(3));
     });
 
-    testWidgets('a Class 9 student is told lessons are coming, can explore', (
+    testWidgets('a Class 10 student is told lessons are coming, can explore', (
       tester,
     ) async {
       tallScreen(tester);
-      await signUpIn('Class 9');
+      await signUpIn('Class 10');
       await tester.pumpWidget(
         MaterialApp(theme: AppTheme.light, home: const LibraryScreen()),
       );
       await settle(tester);
       expect(
-        find.textContaining('Class 9 lessons are on their way'),
+        find.textContaining('Class 10 lessons are on their way'),
         findsOneWidget,
       );
       await tester.tap(find.text('Explore more'));

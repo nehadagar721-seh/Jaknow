@@ -7,6 +7,7 @@ import 'content/class7_history.dart';
 import 'content/class8_civics.dart';
 import 'content/class8_geography.dart';
 import 'content/class8_history.dart';
+import 'content/class9_social_science.dart';
 import 'content/gk_indian_economy.dart';
 import 'content/gk_indian_geography.dart';
 import 'content/gk_medieval_india.dart';
@@ -154,6 +155,17 @@ const List<Course> builtInCourses = [
     studentClass: 'Class 8',
     description: 'The Constitution, Parliament, courts and social justice.',
     lessons: class8CivicsLessons,
+  ),
+  Course(
+    id: 'class9-social-science',
+    title: 'Understanding Society (Part 1)',
+    subject: 'Social Science',
+    section: CourseSection.forClass,
+    studentClass: 'Class 9',
+    description:
+        'New 2026-27 syllabus: Earth, climate, early India, democracy and '
+        'economics.',
+    lessons: class9SocialScienceLessons,
   ),
 
   // ---------- Explore more: General Knowledge ----------

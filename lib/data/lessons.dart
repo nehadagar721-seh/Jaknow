@@ -99,6 +99,57 @@ const List<Lesson> ancientIndiaLessons = [
             'settled in villages. Mehrgarh, in present-day Pakistan, is one of '
             'the earliest such farming villages in South Asia.',
       ),
+      LessonSection(
+        'Finding food',
+        'Stone Age people did not grow their own food. They hunted '
+            'animals like deer and wild pigs, caught fish, and gathered '
+            'fruits, nuts, roots, seeds and honey. Because plants ripened '
+            'in different seasons and animals moved from place to place, '
+            'people also had to move. They usually lived in small groups '
+            'and shared what they found. Knowing which plants were safe to '
+            'eat and where water could be found was knowledge passed down '
+            'from parents to children.',
+      ),
+      LessonSection(
+        'Fire and shelter',
+        'Learning to control fire was one of the greatest discoveries '
+            'of early humans. Fire gave light and warmth, kept wild animals '
+            'away and let people cook food, which made it easier to eat and '
+            'digest. Traces of ash found in the Kurnool caves of Andhra '
+            'Pradesh show that people there used fire. Early humans often '
+            'lived in natural caves and rock shelters near rivers and '
+            'lakes, where they were protected from rain and cold.',
+      ),
+      LessonSection(
+        'Better tools',
+        'Over thousands of years, tools improved. In the earliest '
+            'period, people used big, rough stones as hand axes and '
+            'choppers to cut meat, dig roots and shape wood. Later, in the '
+            'Mesolithic period, they made tiny, sharp stone tools called '
+            'microliths, often fixed onto handles of wood or bone to make '
+            'spears, arrows and sickles. In the Neolithic period, tools '
+            'were ground and polished, making them smoother and stronger.',
+      ),
+      LessonSection(
+        'From hunters to farmers',
+        'Slowly, people noticed that seeds dropped on the ground grew '
+            'into plants. They began to sow seeds and grow crops such as '
+            'wheat, barley and rice. They also tamed animals like sheep, '
+            'goats, cattle and dogs. Farming meant staying in one place to '
+            'look after crops, so people built houses and lived in '
+            'villages. At Mehrgarh, people were farming very early, and at '
+            'Burzahom in Kashmir, people lived in pit houses dug into the '
+            'ground.',
+      ),
+      LessonSection(
+        'Why the Stone Age matters',
+        'The Stone Age was the longest part of human history. During '
+            'this time, people learnt to make tools, use fire, paint, grow '
+            'crops, tame animals and live together in villages. Every later '
+            'achievement, from cities to computers, was built on these '
+            'first steps. Archaeologists still study stone tools, bones and '
+            'paintings to understand how our ancestors lived and changed.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -168,6 +219,58 @@ const List<Lesson> ancientIndiaLessons = [
             'objects. Lothal in Gujarat had a dockyard, and Harappan goods have '
             'been found as far away as Mesopotamia. Their script is seen on '
             'many seals, but nobody has been able to read it yet.',
+      ),
+      LessonSection(
+        'How the cities were found',
+        'For thousands of years, the Harappan cities lay buried and '
+            'forgotten. In the 1920s, archaeologists began digging at '
+            'Harappa in Punjab (now in Pakistan) and then at Mohenjo-daro '
+            'in Sindh. They were amazed to find well-planned cities built '
+            'about 4,500 years ago. Since Harappa was found first, the '
+            'whole civilisation is often called the Harappan civilisation. '
+            'Later, many more sites were discovered in India, such as '
+            'Dholavira and Lothal in Gujarat, Kalibangan in Rajasthan and '
+            'Rakhigarhi in Haryana.',
+      ),
+      LessonSection(
+        'Inside a Harappan city',
+        'Many cities were divided into two parts. A raised western '
+            'part, called the citadel, had special buildings, like the '
+            'Great Bath at Mohenjo-daro. A larger lower town had houses for '
+            'ordinary people. Houses were made of baked bricks of the same '
+            'size and often had a courtyard, a well and a bathroom. Streets '
+            'were straight and crossed each other at right angles, and '
+            'covered drains ran along them.',
+      ),
+      LessonSection(
+        'Farmers and herders',
+        'The cities depended on villages nearby. Farmers grew wheat, '
+            'barley, peas, sesame and cotton, and kept cattle, sheep and '
+            'goats. Ploughed fields have been found at Kalibangan. Food '
+            'grains were stored in large buildings called granaries. '
+            'Without the surplus food grown by farmers, the people in the '
+            'cities, such as crafts-people, traders and priests, could not '
+            'have lived.',
+      ),
+      LessonSection(
+        'Crafts and seals',
+        'Harappan crafts-people were very skilled. They made beautiful '
+            'beads from carnelian and other stones, pots with black '
+            'designs, tools of copper and bronze, and toys and figurines of '
+            'clay. They also made square stone seals with animals like the '
+            'bull and the unicorn, and a short line of writing. Seals may '
+            'have been used by traders to stamp their goods. Their script '
+            'has not yet been read.',
+      ),
+      LessonSection(
+        'The end of the cities',
+        'Around 3,900 years ago, many Harappan cities began to decline. '
+            'People stopped building big houses and drains, and many left '
+            'for smaller villages. Historians are not sure why. Some think '
+            'rivers dried up or changed course, others think forests were '
+            'cut, floods came or trade fell. Whatever the reasons, the '
+            'people moved east and south, and many of their skills lived on '
+            'in later Indian culture.',
       ),
     ],
     quiz: [
@@ -244,6 +347,66 @@ const List<Lesson> ancientIndiaLessons = [
             'farmers. Later, society came to be divided into four groups called '
             'varnas.',
       ),
+      LessonSection(
+        'The four Vedas',
+        'The Vedas are among the oldest books in the world. There are '
+            'four: the Rigveda, the Samaveda, the Yajurveda and the '
+            'Atharvaveda. The Rigveda is the oldest and has more than a '
+            'thousand hymns praising gods such as Agni (fire), Indra (a '
+            'warrior god) and Soma (a plant drink). The Samaveda has hymns '
+            'set to music, the Yajurveda has prayers for rituals, and the '
+            'Atharvaveda has charms and spells.',
+      ),
+      LessonSection(
+        'Life in early Vedic times',
+        'In the early Vedic period, people were mostly herders and '
+            'farmers. Cattle were their most important wealth, and many '
+            'hymns pray for more cows and horses. People lived in small '
+            'groups called janas, led by a chief called a raja. The raja '
+            'was not a powerful king with a palace; he led people in '
+            'battles and was helped by assemblies called the sabha and '
+            'samiti, where men discussed matters together.',
+      ),
+      LessonSection(
+        'Changes in later Vedic times',
+        'Over time, people moved east into the Ganga plains. They used '
+            'iron tools to clear forests and grow more crops like rice. '
+            'Small groups grew into larger kingdoms, and rajas became more '
+            'powerful, performing big rituals to show their power. Society '
+            'became divided into four groups, called varnas: priests, '
+            'warriors, traders and farmers, and those who served the '
+            'others. Over time, these divisions became more rigid.',
+      ),
+      LessonSection(
+        'Language and learning',
+        'The Vedas were composed in early Sanskrit, an old Indian '
+            'language. Many modern Indian languages, such as Hindi, Bengali '
+            'and Marathi, grew from languages related to it. Learning '
+            'happened through gurus, or teachers, who taught students by '
+            'heart. Students lived with their teachers, helped with work '
+            'and memorised hymns exactly, word for word, which is how the '
+            'Vedas survived for thousands of years without being written '
+            'down.',
+      ),
+      LessonSection(
+        'Women in Vedic times',
+        'Some women in Vedic times were learned and took part in '
+            'discussions. Hymns were composed by a few women, and later '
+            'texts mention wise women like Gargi and Maitreyi, who asked '
+            'deep questions about life and the universe. However, women '
+            'generally had fewer rights than men, and over time their '
+            'position became weaker. Studying these texts helps us '
+            'understand how society changed.',
+      ),
+      LessonSection(
+        'Why the Vedic age matters',
+        'Many ideas from the Vedic age are still part of Indian life. '
+            'Some hymns are recited at weddings and festivals even today. '
+            'Words in many Indian languages come from Vedic Sanskrit. '
+            'Studying this period helps us understand how villages, '
+            'kingdoms, rituals and social groups developed in early India, '
+            'and how they changed over time.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -309,6 +472,57 @@ const List<Lesson> ancientIndiaLessons = [
             'teacher, of Jainism. He taught that people should not harm any '
             'living being. This idea, ahimsa or non-violence, is central to '
             'both Jainism and Buddhism.',
+      ),
+      LessonSection(
+        'The prince who left home',
+        'Siddhartha Gautama was born about 2,500 years ago into a '
+            'ruling family of the Sakya clan, at Lumbini in present-day '
+            'Nepal. He lived a comfortable life, but he was troubled when '
+            'he saw old age, sickness and death. At the age of about 29, he '
+            'left his palace to find the answer to why people suffer. He '
+            'wandered for years, meditating and talking to teachers, before '
+            'finding his answer at Bodh Gaya.',
+      ),
+      LessonSection(
+        'The middle path',
+        'The Buddha taught that life is full of suffering, and that '
+            'suffering comes from our endless desires. If we learn to '
+            'control our desires, we can find peace. He asked people to '
+            'follow a middle path, neither too much luxury nor too much '
+            'hardship, and to be kind, truthful and non-violent. He gave '
+            'his first sermon at Sarnath, near Varanasi, and taught in Pali '
+            'and Prakrit, the languages ordinary people spoke.',
+      ),
+      LessonSection(
+        'The sangha',
+        'Followers of the Buddha who left their homes to live as monks '
+            'and nuns formed a community called the sangha. They lived '
+            'simply, begged for food, and spent time meditating and '
+            'teaching. Rules for the sangha were written in a book called '
+            'the Vinaya Pitaka. Many people, including kings, merchants, '
+            'farmers and even former servants, joined the sangha. '
+            'Monasteries, called viharas, were built for them to live in '
+            'during the rainy season.',
+      ),
+      LessonSection(
+        'Mahavira’s teaching',
+        'Vardhamana Mahavira, born a prince of the Vajji confederacy, '
+            'also left home to seek truth. He became the 24th and last '
+            'tirthankara of the Jains. He taught that people should not '
+            'harm any living thing, not even insects. Jains were asked to '
+            'be truthful, not steal, and give up greed. Because farming '
+            'could harm small creatures, many Jains became traders. Jain '
+            'teachings were later written down at Valabhi in Gujarat.',
+      ),
+      LessonSection(
+        'How the ideas spread',
+        'Both Buddhism and Jainism spread far and wide. Monks and nuns '
+            'travelled from place to place, teaching people. Kings like '
+            'Ashoka supported Buddhism and sent messengers to other lands, '
+            'including Sri Lanka. Stupas, such as the one at Sanchi, were '
+            'built to hold relics of the Buddha. Over centuries, Buddhism '
+            'spread to China, Japan, Tibet and South-East Asia, and both '
+            'faiths continue to be followed today.',
       ),
     ],
     quiz: [
@@ -376,6 +590,59 @@ const List<Lesson> ancientIndiaLessons = [
             'pillars across his empire. They asked people to be kind, respect '
             'elders and all religions, and treat animals well. The Lion Capital '
             'of his pillar at Sarnath is now India’s National Emblem.',
+      ),
+      LessonSection(
+        'Chandragupta and Chanakya',
+        'Around 2,300 years ago, Chandragupta Maurya founded a great '
+            'empire in north India, with the help of a wise adviser named '
+            'Chanakya, also known as Kautilya. Chanakya’s ideas about how '
+            'to rule are collected in a book called the Arthashastra. '
+            'Chandragupta defeated the Nanda kings of Magadha and made '
+            'Pataliputra, near modern Patna, his capital. His empire '
+            'stretched from the north-west to the Deccan.',
+      ),
+      LessonSection(
+        'Ruling a huge empire',
+        'The empire was too big to rule from one city alone. The area '
+            'around Pataliputra was ruled directly by the emperor. Other '
+            'areas were ruled from provincial capitals like Taxila and '
+            'Ujjain, by princes sent as governors. Officials collected '
+            'taxes from farmers, herders, crafts-people and traders, and '
+            'messengers and spies kept the emperor informed. Megasthenes, a '
+            'Greek ambassador, described Pataliputra as a large city with a '
+            'wooden wall and many gates.',
+      ),
+      LessonSection(
+        'The Kalinga war',
+        'Chandragupta’s grandson, Ashoka, is the most famous ruler of '
+            'the dynasty. About eight years after becoming king, he '
+            'attacked Kalinga, which is in present-day Odisha. The war was '
+            'terrible: many thousands of people were killed, wounded or '
+            'taken away as prisoners. Ashoka was filled with sorrow when he '
+            'saw the suffering. He decided never to fight a war of conquest '
+            'again. He is the only king in history known to give up war '
+            'after winning one.',
+      ),
+      LessonSection(
+        'Ashoka’s dhamma',
+        'Ashoka wanted people to follow dhamma, a set of good values. '
+            'He asked people to respect elders, be kind to servants and '
+            'slaves, treat animals gently, and respect all religions. He '
+            'appointed officials called dhamma mahamattas to spread these '
+            'ideas. He also built roads, rest houses and wells, planted '
+            'trees and opened hospitals for people and animals. He sent '
+            'messengers to Sri Lanka, Syria, Egypt and Greece to spread his '
+            'message.',
+      ),
+      LessonSection(
+        'Reading the inscriptions',
+        'Ashoka’s messages were carved on rocks and polished stone '
+            'pillars across his empire, mostly in the Prakrit language and '
+            'the Brahmi script. For centuries, nobody could read Brahmi. In '
+            'the 19th century, a scholar named James Prinsep finally '
+            'deciphered it, and people could read Ashoka’s own words again. '
+            'The lion capital from his pillar at Sarnath, with four lions, '
+            'is today the national emblem of India.',
       ),
     ],
     quiz: [
@@ -450,6 +717,66 @@ const List<Lesson> ancientIndiaLessons = [
         'The Chinese Buddhist traveller Faxian (Fa-Hien) visited India during '
             'the Gupta period to collect Buddhist texts, and wrote about what '
             'he saw on his journey.',
+      ),
+      LessonSection(
+        'Samudragupta',
+        'The Gupta dynasty began with Chandragupta I, but his son '
+            'Samudragupta made the kingdom into a great empire about 1,700 '
+            'years ago. A court poet named Harishena wrote a long poem in '
+            'praise of him, carved on an Ashokan pillar at Prayagraj. It '
+            'tells us that Samudragupta defeated many kings, made others '
+            'pay tribute, and was also a fine poet and musician. Some of '
+            'his coins show him playing the veena.',
+      ),
+      LessonSection(
+        'Chandragupta II',
+        'Samudragupta’s son, Chandragupta II, also called Vikramaditya, '
+            'expanded the empire further west. His court is said to have '
+            'had many learned people. During his rule, the Chinese pilgrim '
+            'Faxian visited India to collect Buddhist texts. Faxian wrote '
+            'that the people were prosperous and that there were free '
+            'hospitals in some cities. The famous iron pillar at Mehrauli '
+            'in Delhi, which has not rusted for centuries, is from this '
+            'period.',
+      ),
+      LessonSection(
+        'Science and mathematics',
+        'The Gupta period is famous for science. Aryabhata, a great '
+            'mathematician and astronomer, wrote that the Earth rotates on '
+            'its axis and explained eclipses scientifically. Indian '
+            'mathematicians used the decimal place-value system and the '
+            'zero, ideas that later spread to the Arab world and Europe and '
+            'are used everywhere today. Varahamihira wrote about astronomy '
+            'and nature, and doctors like Sushruta and Charaka had written '
+            'about medicine and surgery.',
+      ),
+      LessonSection(
+        'Art and literature',
+        'Great poems and plays were written in Sanskrit. Kalidasa, '
+            'perhaps India’s most famous poet, wrote the play Abhijnana '
+            'Shakuntalam and the poem Meghaduta, in which a cloud carries a '
+            'message. Beautiful paintings on the walls of the Ajanta caves '
+            'in Maharashtra show stories from the Buddha’s life. Temples '
+            'began to be built of stone, such as the early temple at '
+            'Deogarh in Uttar Pradesh.',
+      ),
+      LessonSection(
+        'Learning at Nalanda',
+        'Nalanda, in Bihar, grew into one of the world’s greatest '
+            'centres of learning in this period and after. Students came '
+            'from China, Korea and other lands to study Buddhism, medicine, '
+            'mathematics, logic and grammar. Later, the Chinese pilgrim '
+            'Xuanzang studied there and wrote about its huge libraries and '
+            'strict entrance tests. Today, a new Nalanda University stands '
+            'near the ruins of the old one.',
+      ),
+      LessonSection(
+        'Life of ordinary people',
+        'Not everyone lived like kings and poets. Most people were '
+            'farmers, crafts-people and labourers who paid taxes and worked '
+            'hard. Some groups were treated as untouchable and had to live '
+            'outside towns, as Faxian noticed. Remembering their lives '
+            'gives us a fuller and fairer picture of the past.',
       ),
     ],
     quiz: [

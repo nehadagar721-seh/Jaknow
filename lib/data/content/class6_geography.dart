@@ -45,6 +45,64 @@ const List<Lesson> class6GeographyLessons = [
             'launched by countries like India, also circle the Earth and help '
             'with weather forecasts, TV and phones.',
       ),
+      LessonSection(
+        'The Sun, our star',
+        'The Sun is a star, a giant ball of very hot gases. It is about '
+            '150 million kilometres away from the Earth, and its light '
+            'takes about eight minutes to reach us. The Sun gives the Earth '
+            'light and heat, without which nothing could live. All the '
+            'planets, their moons and many smaller objects move around the '
+            'Sun. Together they make up the solar system, which means the '
+            'family of the Sun.',
+      ),
+      LessonSection(
+        'The eight planets',
+        'The planets, in order from the Sun, are Mercury, Venus, Earth, '
+            'Mars, Jupiter, Saturn, Uranus and Neptune. Mercury is the '
+            'closest and smallest. Venus is the hottest and is often called '
+            'the Earth’s twin because it is nearly the same size. Jupiter '
+            'is the biggest, and Saturn is famous for its beautiful rings. '
+            'Pluto was once called a planet, but in 2006 scientists decided '
+            'to call it a dwarf planet.',
+      ),
+      LessonSection(
+        'Other members of the family',
+        'Besides planets, the solar system has many smaller bodies. '
+            'Asteroids are rocky pieces that mostly move around the Sun '
+            'between Mars and Jupiter, in a belt called the asteroid belt. '
+            'Comets are balls of ice and dust; when they come near the Sun, '
+            'they grow long, shining tails. Meteoroids are tiny pieces of '
+            'rock. When they burn up in our air, we see a streak of light, '
+            'called a shooting star.',
+      ),
+      LessonSection(
+        'Watching the night sky',
+        'On a clear night, away from city lights, you can see thousands '
+            'of stars. People long ago grouped stars into patterns called '
+            'constellations, like the Saptarishi (Great Bear), which looks '
+            'like a big ladle, and Orion, the hunter. Travellers used the '
+            'Pole Star to find north. The Moon changes its shape every '
+            'night, from new moon to full moon and back, over about a '
+            'month.',
+      ),
+      LessonSection(
+        'The Earth, our home',
+        'The Earth is the fifth largest planet. Seen from space it '
+            'looks blue because about two-thirds of it is covered by water. '
+            'It has just the right temperature, air with oxygen and plenty '
+            'of water, so plants, animals and people can live here. As far '
+            'as we know, it is the only planet with life. That is why we '
+            'must take care of it and keep its air, water and land clean.',
+      ),
+      LessonSection(
+        'Exploring space',
+        'India explores space through its space agency, ISRO. It '
+            'launched its first satellite, Aryabhata, in 1975. Chandrayaan '
+            'missions have studied the Moon, and in 2023 Chandrayaan-3 '
+            'landed near the Moon’s south pole. Mangalyaan reached Mars in '
+            '2014. These missions help us learn more about our solar '
+            'system.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -115,6 +173,62 @@ const List<Lesson> class6GeographyLessons = [
             '15° each hour, places to the east see sunrise earlier. That is '
             'why countries use a standard time.',
       ),
+      LessonSection(
+        'What a globe shows',
+        'A globe is a small model of the Earth. It shows the shapes of '
+            'continents and oceans correctly, because the Earth itself is '
+            'nearly round, like a ball slightly flattened at the poles. A '
+            'needle runs through the globe at a tilt, showing the Earth’s '
+            'axis, an imaginary line around which the Earth spins. The two '
+            'ends of the axis are the North Pole and the South Pole.',
+      ),
+      LessonSection(
+        'Important latitudes',
+        'Lines of latitude are measured in degrees from the Equator. '
+            'The Equator is 0 degrees. The Tropic of Cancer, at about 23.5 '
+            'degrees north, passes through the middle of India. The Tropic '
+            'of Capricorn is at about 23.5 degrees south. The Arctic '
+            'Circle, near the North Pole, and the Antarctic Circle, near '
+            'the South Pole, are at about 66.5 degrees. The poles '
+            'themselves are at 90 degrees.',
+      ),
+      LessonSection(
+        'The heat zones',
+        'The Sun’s rays fall straight on the area between the two '
+            'Tropics at some time of the year, so it is hot: this is the '
+            'Torrid Zone. Near the poles, the Sun’s rays are always '
+            'slanting and weak, so these areas are very cold: these are the '
+            'Frigid Zones. Between them are the Temperate Zones, with mild '
+            'weather. Most of India lies in the Torrid Zone.',
+      ),
+      LessonSection(
+        'Lines of longitude',
+        'Lines of longitude, also called meridians, run from the North '
+            'Pole to the South Pole. Unlike latitudes, they are all the '
+            'same length. The meridian passing through Greenwich, near '
+            'London, is taken as 0 degrees and is called the Prime '
+            'Meridian. There are 180 degrees to its east and 180 degrees to '
+            'its west. Using both latitude and longitude, we can find the '
+            'exact location of any place on Earth, like an address.',
+      ),
+      LessonSection(
+        'Time zones and India',
+        'The Earth turns 360 degrees in 24 hours, so places 15 degrees '
+            'apart in longitude have a time difference of one hour. Places '
+            'to the east see the Sun earlier. India stretches over about 30 '
+            'degrees of longitude, which could mean a two-hour difference '
+            'between east and west. To avoid confusion, India uses one '
+            'standard time, based on 82.5 degrees east, which passes near '
+            'Mirzapur. Indian Standard Time is 5 hours 30 minutes ahead of '
+            'Greenwich time.',
+      ),
+      LessonSection(
+        'Using a globe',
+        'Try this with a globe: find the Equator, the two Tropics and '
+            'the Prime Meridian. Then find India and see that the Tropic of '
+            'Cancer passes through it. Spin the globe slowly from west to '
+            'east, and imagine how places see sunrise one after another.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -184,6 +298,61 @@ const List<Lesson> class6GeographyLessons = [
             '(summer) and away in December (winter). On about 21 March and 23 '
             'September, day and night are equal everywhere.',
       ),
+      LessonSection(
+        'Day and night',
+        'The Earth spins on its axis from west to east, completing one '
+            'turn in about 24 hours. This movement is called rotation. At '
+            'any time, the half of the Earth facing the Sun has day, while '
+            'the other half has night. The line that separates day and '
+            'night is called the circle of illumination. If the Earth did '
+            'not rotate, one side would always be hot and bright and the '
+            'other always cold and dark.',
+      ),
+      LessonSection(
+        'Why the Sun seems to move',
+        'When we watch the Sun rise in the east and set in the west, it '
+            'looks as if the Sun is moving across the sky. In fact, it is '
+            'the Earth that is turning. It is like sitting in a moving '
+            'train: trees outside seem to move backwards, though it is the '
+            'train that moves. Because the Earth turns from west to east, '
+            'the Sun appears to move from east to west.',
+      ),
+      LessonSection(
+        'A trip around the Sun',
+        'While spinning, the Earth also travels around the Sun in a '
+            'fixed path called its orbit. One full trip takes 365 days and '
+            'about 6 hours. This movement is called revolution. We count a '
+            'year as 365 days and add the extra hours together every four '
+            'years, making February 29 days long. That year, with 366 days, '
+            'is called a leap year.',
+      ),
+      LessonSection(
+        'Summer and winter',
+        'The Earth’s axis is tilted, always pointing in the same '
+            'direction in space. So during one part of the year, the '
+            'Northern Hemisphere leans towards the Sun and gets more direct '
+            'sunlight and longer days: it is summer there. Around 21 June '
+            'the Northern Hemisphere has its longest day. Around 22 '
+            'December, it leans away from the Sun, so days are short and it '
+            'is winter, while the Southern Hemisphere has summer.',
+      ),
+      LessonSection(
+        'Equal days and nights',
+        'On two days of the year, around 21 March and 23 September, the '
+            'Sun shines directly over the Equator. Neither hemisphere leans '
+            'towards the Sun, so day and night are almost equal all over '
+            'the world. These days are called equinoxes. The changing '
+            'seasons, caused by the tilt and the revolution of the Earth, '
+            'bring the rhythm of sowing, harvesting and festivals in our '
+            'lives.',
+      ),
+      LessonSection(
+        'Seasons in India',
+        'In India we feel these changes as summer, the rainy season and '
+            'winter. Our long, hot summer comes in May and June, when the '
+            'Sun is high overhead in the north. The monsoon follows, and '
+            'the cool winter months come in December and January.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -251,6 +420,61 @@ const List<Lesson> class6GeographyLessons = [
             'green for plains. These same colours are used on maps all over '
             'the world.',
       ),
+      LessonSection(
+        'Why we need maps',
+        'A map is a drawing of the whole or a part of the Earth’s '
+            'surface on a flat sheet. A globe is useful for seeing the '
+            'whole Earth, but it is hard to carry and cannot show small '
+            'details. Maps can show a country, a city, or even your school, '
+            'in as much detail as we need. Many maps together are put into '
+            'a book called an atlas.',
+      ),
+      LessonSection(
+        'Kinds of maps',
+        'Physical maps show natural features like mountains, plateaus, '
+            'plains, rivers and oceans. Political maps show countries, '
+            'states, cities and towns, with their boundaries. Thematic maps '
+            'focus on one topic, such as rainfall, forests, roads, or where '
+            'crops are grown. When you look at a map, the first thing to '
+            'check is its title, so you know what it is showing.',
+      ),
+      LessonSection(
+        'Distance and scale',
+        'A real place is much bigger than its map, so distances are '
+            'reduced. The scale is the ratio between the distance on the '
+            'map and the actual distance on the ground. For example, 1 '
+            'centimetre on a map may stand for 1 kilometre on the ground. A '
+            'large-scale map shows a small area in great detail, like a '
+            'town, while a small-scale map shows a big area, like a '
+            'country, with less detail.',
+      ),
+      LessonSection(
+        'Direction and symbols',
+        'Most maps have an arrow marked N, showing north. The four main '
+            'directions, North, South, East and West, are called cardinal '
+            'points, and between them are north-east, south-east, '
+            'south-west and north-west. A compass helps us find directions, '
+            'because its needle always points north. Since there is no '
+            'space to draw real buildings and roads, maps use symbols. A '
+            'key, or legend, explains what each symbol means.',
+      ),
+      LessonSection(
+        'Sketches and plans',
+        'A sketch is a rough drawing made from memory, without an exact '
+            'scale, like a quick drawing of the way from your house to '
+            'school. A plan is a drawing of a small area, such as a room or '
+            'a building, drawn to scale. Architects use plans to build '
+            'houses. Learning to read and draw maps, sketches and plans '
+            'helps us understand places and find our way.',
+      ),
+      LessonSection(
+        'Colours on maps',
+        'Maps also use colours in a standard way. Blue shows water '
+            'bodies like oceans, lakes and rivers. Green shows plains, '
+            'yellow or light brown shows plateaus, and dark brown shows '
+            'mountains. Once you know these colours, you can tell at a '
+            'glance whether an area is high or low, wet or dry.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -314,6 +538,62 @@ const List<Lesson> class6GeographyLessons = [
             'Earth warm. Where land, water and air meet, plants, animals and '
             'people live together in the biosphere.',
       ),
+      LessonSection(
+        'The four realms',
+        'The surface of the Earth has four main parts, called realms. '
+            'The lithosphere is the solid land, the hydrosphere is all the '
+            'water, and the atmosphere is the blanket of air around the '
+            'Earth. The biosphere is the narrow zone where these three '
+            'meet, and where life exists. Plants, animals and people depend '
+            'on all three realms for food, water and air.',
+      ),
+      LessonSection(
+        'Continents',
+        'The great land masses are called continents. Asia is the '
+            'largest and has the most people; it is separated from Europe '
+            'by the Ural Mountains. Africa is the second largest, crossed '
+            'by the Equator, and has the world’s largest hot desert, the '
+            'Sahara. North and South America are joined by a narrow strip '
+            'of land. Australia is the smallest continent, and Antarctica, '
+            'around the South Pole, is covered with thick ice.',
+      ),
+      LessonSection(
+        'Oceans',
+        'The oceans are huge water bodies that are connected to each '
+            'other. The Pacific Ocean is the largest and deepest; its '
+            'deepest point, the Mariana Trench, is nearly 11 kilometres '
+            'deep. The Atlantic Ocean is shaped like the letter S. The '
+            'Indian Ocean is the only ocean named after a country. The '
+            'Arctic Ocean, around the North Pole, is the smallest. The '
+            'Southern Ocean surrounds Antarctica.',
+      ),
+      LessonSection(
+        'The air around us',
+        'The atmosphere stretches hundreds of kilometres above us, but '
+            'most air is close to the ground. It is made mostly of nitrogen '
+            'and oxygen, with small amounts of carbon dioxide and other '
+            'gases. We breathe oxygen, while plants use carbon dioxide to '
+            'make food. The atmosphere also protects us from the harmful '
+            'rays of the Sun and keeps the Earth warm. As we go higher, the '
+            'air becomes thinner.',
+      ),
+      LessonSection(
+        'Protecting the biosphere',
+        'All living things in the biosphere are linked. If forests are '
+            'cut, animals lose their homes and soil is washed away. If '
+            'rivers are polluted, fish die and people fall ill. Burning '
+            'fuels makes the air dirty. By planting trees, saving water, '
+            'reducing waste and keeping our surroundings clean, we can help '
+            'protect the land, water and air on which all life depends.',
+      ),
+      LessonSection(
+        'Land and water on the globe',
+        'Only about 29 per cent of the Earth’s surface is land; the '
+            'rest is water. The Northern Hemisphere has much more land than '
+            'the Southern Hemisphere, which is why it is sometimes called '
+            'the land hemisphere, while the Southern Hemisphere is called '
+            'the water hemisphere.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -374,6 +654,63 @@ const List<Lesson> class6GeographyLessons = [
         'Rivers carry soil down from mountains and spread it over plains, '
             'making them fertile. Building houses, roads and railways is easy '
             'on flat land, so plains are crowded, like the Ganga plains.',
+      ),
+      LessonSection(
+        'How landforms are made',
+        'The land is shaped by forces inside the Earth and on its '
+            'surface. Movements inside the Earth can lift up land, fold '
+            'rocks into mountains, or cause earthquakes. On the surface, '
+            'wind, water and ice slowly wear away rocks and carry the '
+            'pieces elsewhere. Over millions of years, these forces have '
+            'created the mountains, plateaus and plains we see today.',
+      ),
+      LessonSection(
+        'Kinds of mountains',
+        'Fold mountains form when rocks are pushed and folded, like the '
+            'Himalayas and the Alps; young fold mountains have tall, sharp '
+            'peaks. Block mountains form when large blocks of land are '
+            'lifted or sink, like the Vosges in Europe. Volcanic mountains, '
+            'like Mount Kilimanjaro in Africa and Mount Fuji in Japan, form '
+            'from lava. The Aravalli range in India is one of the oldest '
+            'fold mountains in the world, now worn down.',
+      ),
+      LessonSection(
+        'Life in the mountains',
+        'Mountains are cold, and their slopes are steep, so there is '
+            'little flat land for farming. People in hills grow crops on '
+            'terraces cut into slopes. Mountains are a store of water: many '
+            'rivers begin from glaciers in the mountains. They also have '
+            'forests, which give wood, fruits and medicines. Mountains '
+            'attract tourists, and people enjoy activities like trekking '
+            'and skiing there.',
+      ),
+      LessonSection(
+        'Riches of plateaus',
+        'Plateaus are raised areas of land with a flat top. They may '
+            'have steep sides. The Deccan plateau in India is one of the '
+            'oldest, and the Tibet plateau is the highest in the world. '
+            'Plateaus are often rich in minerals: the Chota Nagpur plateau '
+            'has a lot of iron, coal and manganese. Some plateaus have '
+            'beautiful waterfalls, like the Hundru Falls in Jharkhand and '
+            'the Jog Falls in Karnataka.',
+      ),
+      LessonSection(
+        'Plains, the busiest lands',
+        'Plains are large stretches of flat land, usually not more than '
+            '200 metres above sea level. Most plains are made by rivers, '
+            'which carry soil from the mountains and spread it out. This '
+            'soil is very fertile. Because farming, building houses and '
+            'making roads is easy on flat land, plains are thickly '
+            'populated. The Ganga–Brahmaputra plains in India are among the '
+            'most crowded places in the world.',
+      ),
+      LessonSection(
+        'Landforms of India',
+        'India has all three major landforms. The Himalayas stand in '
+            'the north, the great Northern Plains lie in the middle, and '
+            'the ancient Peninsular plateau covers the south. Each landform '
+            'has shaped how people live, what they grow and where cities '
+            'have grown.',
       ),
     ],
     quiz: [

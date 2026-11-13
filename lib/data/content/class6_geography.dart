@@ -468,12 +468,12 @@ const List<Lesson> class6GeographyLessons = [
             'helps us understand places and find our way.',
       ),
       LessonSection(
-        'Colours on maps',
-        'Maps also use colours in a standard way. Blue shows water '
-            'bodies like oceans, lakes and rivers. Green shows plains, '
-            'yellow or light brown shows plateaus, and dark brown shows '
-            'mountains. Once you know these colours, you can tell at a '
-            'glance whether an area is high or low, wet or dry.',
+        'Maps in daily life',
+        'We use maps more often than we think. A map on a phone shows '
+            'the quickest road, a bus route map shows where to get off, and a '
+            'weather map on TV shows where rain is coming. Pilots, sailors, '
+            'soldiers, farmers and town planners all depend on maps. Learning '
+            'to read them carefully is a skill that helps us all our lives.',
       ),
     ],
     quiz: [

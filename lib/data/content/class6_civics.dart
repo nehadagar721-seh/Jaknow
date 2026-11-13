@@ -233,7 +233,7 @@ const List<Lesson> class6CivicsLessons = [
             'India’s Constitution.',
       ),
       LessonSection(
-        'Working for equality',
+        'Equal rights for all',
         'The Constitution says that all people are equal and that '
             'untouchability is a crime. It also gives special help, such as '
             'reserved seats in schools and jobs, to groups who faced '
@@ -446,7 +446,7 @@ const List<Lesson> class6CivicsLessons = [
             'five years, and a third of the seats are reserved for women.',
       ),
       LessonSection(
-        'The Gram Sabha',
+        'Why the Gram Sabha matters',
         'The Gram Sabha is a meeting of all adults in a village who '
             'have the right to vote. It is the heart of Panchayati Raj. At '
             'its meetings, people discuss village problems, suggest plans, '

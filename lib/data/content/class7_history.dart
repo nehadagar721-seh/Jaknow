@@ -47,6 +47,69 @@ const List<Lesson> class7HistoryLessons = [
             'a navy. Their temples were centres of art and village life, and '
             'their bronze statues are famous.',
       ),
+      LessonSection(
+        'What historians read',
+        'Historians studying the years between about 700 and 1750 use '
+            'many kinds of sources. Inscriptions on temple walls and copper '
+            'plates record gifts of land. Coins show the names of rulers. '
+            'Chronicles written in royal courts describe kings and battles. '
+            'Travellers from other lands, such as Al-Biruni from Central '
+            'Asia, wrote about India’s people, customs and learning. Each '
+            'source tells only part of the story, so historians compare '
+            'many sources to understand the past.',
+      ),
+      LessonSection(
+        'Manuscripts and changing words',
+        'Before printing, books were copied by hand on palm leaves or '
+            'paper. These handwritten books are called manuscripts. '
+            'Copyists sometimes made small mistakes, or changed words they '
+            'thought were wrong. Over centuries, copies of the same book '
+            'could become quite different. Historians compare old '
+            'manuscripts carefully to guess what the author first wrote. '
+            'Many old manuscripts are kept today in libraries, temples, '
+            'monasteries and museums.',
+      ),
+      LessonSection(
+        'How new kingdoms arose',
+        'From the 7th century, powerful landlords and warrior chiefs '
+            'grew strong in many regions. At first they served bigger kings '
+            'as samantas, or subordinates, bringing gifts and soldiers. '
+            'When they became strong enough, they declared themselves '
+            'kings, called maharaja-adhiraja, which means great king and '
+            'lord of kings. Rajput families like the Pratiharas, Chahamanas '
+            '(Chauhans) and others ruled in the north and west, while the '
+            'Rashtrakutas ruled the Deccan.',
+      ),
+      LessonSection(
+        'The fight for Kannauj',
+        'Kannauj, in the Ganga valley, was a rich and famous city. For '
+            'many years, three dynasties fought to control it: the '
+            'Gurjara-Pratiharas from the west, the Palas from Bengal and '
+            'the Rashtrakutas from the Deccan. Historians call this the '
+            'tripartite struggle. Meanwhile, rulers like Mahmud of Ghazni '
+            'raided parts of north India, and later Muhammad Ghori defeated '
+            'Prithviraj Chauhan in 1192.',
+      ),
+      LessonSection(
+        'Temples and villages under the Cholas',
+        'The Chola kings built huge temples, like the Brihadeeswarar '
+            'temple at Thanjavur. Temples were centres of village life, '
+            'with priests, musicians, dancers, cooks and craftspeople '
+            'working there. Chola bronze statues, especially of Shiva as '
+            'Nataraja, are famous across the world. Villages had '
+            'assemblies, called ur and sabha, that looked after irrigation, '
+            'gardens and temples. The Uttaramerur inscriptions explain how '
+            'members of these assemblies were chosen.',
+      ),
+      LessonSection(
+        'Looking at a map of the past',
+        'Maps made long ago look very different from today’s maps. Old '
+            'maps made by Arab and European geographers often showed India '
+            'in strange shapes, because they had limited information. Words '
+            'also changed their meanings over time: the word Hindustan once '
+            'meant only the lands of north India. Historians must keep such '
+            'changes in mind when they read old sources.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -110,6 +173,65 @@ const List<Lesson> class7HistoryLessons = [
         'The last Sultan, Ibrahim Lodi, was defeated by Babur at the First '
             'Battle of Panipat in 1526, and the Mughal Empire began.',
       ),
+      LessonSection(
+        'Delhi becomes a capital',
+        'Delhi first became the capital of a kingdom under the Tomara '
+            'Rajputs, and later the Chauhans of Ajmer. After the defeat of '
+            'Prithviraj Chauhan in 1192, Delhi came under the control of '
+            'Muhammad Ghori’s generals. In 1206, Qutb-ud-din Aibak became '
+            'the first Sultan of Delhi. For the next 300 years, five '
+            'dynasties ruled from Delhi: the Mamluks (Slave dynasty), '
+            'Khaljis, Tughlaqs, Sayyids and Lodis.',
+      ),
+      LessonSection(
+        'Famous Sultans',
+        'Iltutmish strengthened the Sultanate and finished building the '
+            'Qutb Minar. His daughter, Razia Sultan, became the only woman '
+            'to rule as Sultan of Delhi, from 1236 to 1240; nobles did not '
+            'like being ruled by a woman and removed her. Alauddin Khalji '
+            'fought off Mongol attacks and controlled the prices of goods '
+            'in Delhi’s markets. Muhammad bin Tughlaq tried bold ideas, '
+            'such as moving the capital to Daulatabad and using token coins '
+            'of copper.',
+      ),
+      LessonSection(
+        'How the Sultans ruled',
+        'The Sultans could not rule a big area alone. They gave lands, '
+            'called iqtas, to military commanders called iqtadars or '
+            'muqtis. These commanders collected taxes from their iqtas, '
+            'paid their soldiers from the money and kept law and order. The '
+            'Sultans transferred them often so they would not become too '
+            'powerful. Farmers paid about half their crop as tax in some '
+            'periods, which was a heavy burden.',
+      ),
+      LessonSection(
+        'Mosques and buildings',
+        'The Sultans built many mosques, forts and tombs in and around '
+            'Delhi. The Quwwat-ul-Islam mosque and the Qutb Minar are among '
+            'the earliest. Builders began using true arches and domes. Each '
+            'new dynasty often built its own city, so Delhi grew as a group '
+            'of several cities, such as Siri, built by Alauddin Khalji, and '
+            'Tughlaqabad, built by the Tughlaqs.',
+      ),
+      LessonSection(
+        'Timur’s raid and the Lodis',
+        'In 1398, Timur, a ruler from Central Asia, attacked Delhi and '
+            'looted it. After this, the Sultanate became weak, and many '
+            'provinces broke away. The Lodis, the last dynasty, tried to '
+            'rebuild power; Sikandar Lodi founded the city of Agra. In '
+            '1526, Babur defeated Ibrahim Lodi at the First Battle of '
+            'Panipat, and a new empire, the Mughal Empire, began.',
+      ),
+      LessonSection(
+        'Life under the Sultans',
+        'Most people under the Delhi Sultans were farmers who lived in '
+            'villages and paid taxes in grain or cash. Towns grew as '
+            'centres of trade and crafts, and Delhi became a large, busy '
+            'city with markets full of goods from many lands. Travellers '
+            'like Ibn Battuta from Morocco visited the court of Muhammad '
+            'bin Tughlaq and wrote about Delhi’s wealth, its postal system '
+            'and its bustling markets.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -170,6 +292,66 @@ const List<Lesson> class7HistoryLessons = [
         'After Aurangzeb',
         'Aurangzeb ruled the largest Mughal empire, but long wars weakened '
             'it. After his death in 1707, many governors became independent.',
+      ),
+      LessonSection(
+        'Babur and Humayun',
+        'Babur came from Central Asia and won the First Battle of '
+            'Panipat in 1526 using cannons and clever tactics. He wrote his '
+            'memoirs, called the Baburnama, describing India’s plants, '
+            'animals and people. His son Humayun lost the throne to Sher '
+            'Shah Suri, an Afghan ruler, in 1540 and had to flee to Persia. '
+            'Sher Shah built roads and reformed taxes. Humayun won back his '
+            'kingdom in 1555 but died soon after.',
+      ),
+      LessonSection(
+        'Akbar the great ruler',
+        'Akbar became emperor at the age of 13, in 1556. He won the '
+            'Second Battle of Panipat against Hemu and went on to rule a '
+            'huge empire for nearly fifty years. He married Rajput '
+            'princesses and gave high posts to Rajput kings, which brought '
+            'them close to the empire. He removed the jizya tax on '
+            'non-Muslims and the tax on pilgrims. He built the city of '
+            'Fatehpur Sikri near Agra.',
+      ),
+      LessonSection(
+        'Mansabdars and land revenue',
+        'Akbar organised his officers through the mansabdari system. '
+            'Every officer, called a mansabdar, held a rank, or mansab, '
+            'which decided his pay and the number of horsemen he had to '
+            'keep. Mansabdars were paid through revenue from land called '
+            'jagirs. Akbar’s minister Raja Todar Mal measured land '
+            'carefully and fixed taxes according to the average crop, a '
+            'system called zabt. This made taxes fairer and steadier.',
+      ),
+      LessonSection(
+        'Sulh-i kul: peace with all',
+        'Akbar was curious about all religions. In a building called '
+            'the Ibadat Khana at Fatehpur Sikri, he held discussions with '
+            'scholars of Islam, Hinduism, Jainism, Christianity and '
+            'Zoroastrianism. From these talks, he developed the idea of '
+            'sulh-i kul, or universal peace, which meant that the empire '
+            'should treat people of all religions fairly. His friend and '
+            'historian Abul Fazl wrote the Akbarnama and Ain-i Akbari about '
+            'his rule.',
+      ),
+      LessonSection(
+        'Jahangir, Shah Jahan and Aurangzeb',
+        'After Akbar, Jahangir loved painting and nature, and his wife '
+            'Nur Jahan had great influence. Shah Jahan was a great builder: '
+            'he built the Taj Mahal in Agra and Shahjahanabad, with the Red '
+            'Fort and Jama Masjid, in Delhi. Aurangzeb spent many years '
+            'fighting in the Deccan. By the time of his death in 1707, the '
+            'empire was at its largest but also very tired from long wars.',
+      ),
+      LessonSection(
+        'Life in Mughal times',
+        'Mughal India was one of the richest lands in the world. '
+            'Farmers grew wheat, rice, cotton, sugarcane and indigo. '
+            'Craftspeople made fine textiles, jewellery and metalwork that '
+            'were sold across Asia and Europe. European traders, such as '
+            'the Portuguese, Dutch and English, came to buy Indian goods. '
+            'Mughal painting, music, poetry and architecture blended '
+            'Persian and Indian styles, creating a rich culture.',
       ),
     ],
     quiz: [
@@ -233,6 +415,67 @@ const List<Lesson> class7HistoryLessons = [
             'sandstone and white marble. Many of these are now World Heritage '
             'Sites.',
       ),
+      LessonSection(
+        'Why rulers built',
+        'Kings built grand buildings for many reasons. Temples showed '
+            'their devotion to God and their power. Forts protected them '
+            'from enemies. Tombs remembered them after death, and mosques '
+            'and gardens served the public. Building also gave work to '
+            'thousands of masons, carpenters, artists and labourers. Great '
+            'buildings made people admire the ruler and remember his name '
+            'long after he was gone.',
+      ),
+      LessonSection(
+        'Temples of medieval India',
+        'Temples became larger and more richly decorated. The Kandariya '
+            'Mahadeva temple at Khajuraho, built by the Chandela kings, has '
+            'a tall shikhara, or tower, and finely carved walls. The '
+            'Rajarajeshvara (Brihadeeswarar) temple at Thanjavur, built by '
+            'the Chola king Rajaraja I, had the tallest temple tower of its '
+            'time. Temples had a main shrine, called the garbhagriha, where '
+            'the image of the deity was kept.',
+      ),
+      LessonSection(
+        'Arches and domes',
+        'From the 12th century, builders in north India began to use '
+            'new methods. A true arch is made of wedge-shaped stones that '
+            'hold each other in place, and a dome is like an arch turned '
+            'around in a circle. These allowed builders to make large open '
+            'halls and high roofs. Limestone cement made of lime and other '
+            'materials helped hold stones together. The Alai Darwaza near '
+            'the Qutb Minar is an early example.',
+      ),
+      LessonSection(
+        'Mughal gardens and tombs',
+        'The Mughals loved gardens. Their formal gardens, called '
+            'charbaghs, were divided into four parts by water channels, '
+            'with fountains and fruit trees. Tombs were often placed in the '
+            'middle of such gardens. Humayun’s Tomb in Delhi, built in the '
+            '16th century, is one of the first great Mughal garden tombs. '
+            'Its design, with a high dome on a raised platform, inspired '
+            'the Taj Mahal.',
+      ),
+      LessonSection(
+        'Building materials and skills',
+        'Mughal buildings used red sandstone and white marble, often '
+            'decorated with inlay work called pietra dura, in which '
+            'coloured stones are set into marble to make patterns of '
+            'flowers. Skilled craftspeople came from many regions. Many of '
+            'these buildings, such as the Qutb Minar, Humayun’s Tomb, the '
+            'Red Fort, Fatehpur Sikri and the Taj Mahal, are now UNESCO '
+            'World Heritage Sites, visited by millions of people every '
+            'year.',
+      ),
+      LessonSection(
+        'Looking after our heritage',
+        'Old buildings are part of our heritage: they tell us how '
+            'people lived, worshipped and ruled. Many of them are damaged '
+            'by pollution, by people writing on walls, and by neglect. The '
+            'Archaeological Survey of India looks after many important '
+            'monuments. When we visit them, we should not damage, scribble '
+            'on or litter them, so that future generations can enjoy them '
+            'too.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -295,6 +538,74 @@ const List<Lesson> class7HistoryLessons = [
         'Sufis were Muslim mystics. Their dargahs, such as at Ajmer and '
             'Nizamuddin in Delhi, are visited by people of all religions.',
       ),
+      LessonSection(
+        'A new way of worship',
+        'In the medieval period, many saints taught that people could '
+            'reach God through love and devotion, called bhakti, rather '
+            'than through costly rituals. They said that caste and wealth '
+            'did not matter to God. They sang their teachings in the '
+            'languages people spoke every day, like Tamil, Kannada, '
+            'Marathi, Hindi and Bengali, so that ordinary people could '
+            'understand them.',
+      ),
+      LessonSection(
+        'Alvars and Nayanars',
+        'Some of the earliest bhakti saints lived in the Tamil region '
+            'between the 6th and 9th centuries. The Alvars were devotees of '
+            'Vishnu, and the Nayanars were devotees of Shiva. They came '
+            'from all castes, including those considered low, and some were '
+            'women. They travelled from temple to temple singing hymns. '
+            'Their songs were collected and are still sung in temples in '
+            'Tamil Nadu today.',
+      ),
+      LessonSection(
+        'Saints of Karnataka and Maharashtra',
+        'In Karnataka, in the 12th century, Basavanna and his followers '
+            'started the Virashaiva or Lingayat movement. They rejected '
+            'caste and rituals and wrote short poems called vachanas. In '
+            'Maharashtra, saints like Jnaneshwar, Namdev, Eknath and '
+            'Tukaram worshipped Vitthala, a form of Vishnu, at Pandharpur. '
+            'Their songs, called abhangs, are still sung by pilgrims who '
+            'walk to Pandharpur every year.',
+      ),
+      LessonSection(
+        'Kabir, Guru Nanak and Mirabai',
+        'Kabir, who lived in Varanasi, was a weaver. He taught that God '
+            'is one, whether called Rama or Allah, and mocked empty rituals '
+            'of all religions. Guru Nanak, born in 1469, founded Sikhism at '
+            'Kartarpur; he taught equality, honest work and sharing with '
+            'others, and started the langar, a common kitchen. Mirabai, a '
+            'Rajput princess, gave up palace life to sing songs of love for '
+            'Krishna.',
+      ),
+      LessonSection(
+        'Sufi saints and their dargahs',
+        'Sufis were Muslim mystics who believed in love and devotion to '
+            'God and service to people. They lived in khanqahs, or '
+            'hospices, where people of all faiths came to listen to them. '
+            'They used music and poetry, called qawwali, to bring people '
+            'closer to God. Khwaja Moinuddin Chishti of Ajmer and '
+            'Nizamuddin Auliya of Delhi were famous Chishti Sufi saints. '
+            'Their dargahs are still visited by thousands of people every '
+            'day.',
+      ),
+      LessonSection(
+        'A shared message',
+        'Though they lived in different regions and spoke different '
+            'languages, bhakti saints and Sufis shared many ideas. They '
+            'taught love for God, respect for all people, and service to '
+            'others. They questioned caste and empty rituals. Their songs '
+            'and poems, sung in many languages, are still loved across '
+            'India, and they helped people of different faiths live '
+            'together in harmony.',
+      ),
+      LessonSection(
+        'Think about it',
+        'Many bhakti and Sufi songs are still sung today, at temples, '
+            'gurdwaras, dargahs and concerts. Do you know any? Ask your '
+            'family about songs or poems by Kabir, Mirabai, Tulsidas or '
+            'other saints.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -354,6 +665,71 @@ const List<Lesson> class7HistoryLessons = [
         'The Sikhs and Jats',
         'Sikh groups called misls joined under Ranjit Singh. In the region '
             'around Delhi and Agra, the Jats became strong.',
+      ),
+      LessonSection(
+        'The Mughal empire weakens',
+        'After Aurangzeb’s death in 1707, the Mughal Empire began to '
+            'break up. Long wars had emptied the treasury. Later emperors '
+            'were weak, and nobles fought among themselves. In 1739, Nadir '
+            'Shah of Persia attacked Delhi and carried away huge wealth, '
+            'including the Peacock Throne. Later, Ahmad Shah Abdali of '
+            'Afghanistan invaded north India several times. Many new states '
+            'rose in different regions.',
+      ),
+      LessonSection(
+        'New states from old provinces',
+        'Powerful Mughal governors set up states of their own while '
+            'still showing respect to the emperor. Hyderabad was founded by '
+            'Nizam-ul-Mulk Asaf Jah, Awadh by Saadat Khan, and Bengal by '
+            'Murshid Quli Khan. These rulers collected taxes themselves, '
+            'kept their own armies and passed power to their sons. They '
+            'encouraged trade, and some of their capitals, like Lucknow and '
+            'Hyderabad, became famous for art and culture.',
+      ),
+      LessonSection(
+        'Shivaji and the Maratha kingdom',
+        'Shivaji, born in 1630, built a strong Maratha kingdom in '
+            'western India. He used hill forts and fast, light cavalry to '
+            'fight the Mughals and the Bijapur Sultanate. He was crowned '
+            'Chhatrapati at Raigad in 1674. He ruled with a council of '
+            'eight ministers, called the Ashtapradhan. After Shivaji, '
+            'Maratha power was led by the Peshwas from Pune, who spread '
+            'Maratha influence across much of India.',
+      ),
+      LessonSection(
+        'The Sikhs',
+        'After Guru Gobind Singh created the Khalsa in 1699, the Sikhs '
+            'became a strong community. In the 18th century, Sikh groups '
+            'called misls controlled different parts of Punjab. In 1799, '
+            'Maharaja Ranjit Singh united them and made Lahore his capital. '
+            'His strong army, trained in modern methods, kept Punjab '
+            'independent until after his death in 1839.',
+      ),
+      LessonSection(
+        'The Jats and the Rajputs',
+        'Around Delhi and Agra, the Jats became powerful under leaders '
+            'like Churaman and Suraj Mal. They built the city of Bharatpur '
+            'and strong forts. Rajput kings of Amber (Jaipur) and Jodhpur '
+            'also gained power and territory. Sawai Raja Jai Singh of Amber '
+            'built the city of Jaipur and observatories called Jantar '
+            'Mantar in several cities. The 18th century was a time of '
+            'change, which also allowed the British to grow powerful.',
+      ),
+      LessonSection(
+        'Changing times',
+        'The 18th century was a time of great change. The old Mughal '
+            'power faded, and many regional states, like Hyderabad, Awadh, '
+            'Bengal, the Marathas, the Sikhs, the Jats and the Rajputs, '
+            'became strong. They fought one another for land and power. '
+            'European trading companies, especially the English East India '
+            'Company, took advantage of these quarrels. Within a hundred '
+            'years, the British would rule most of India.',
+      ),
+      LessonSection(
+        'Think about it',
+        'Why do you think the quarrels between Indian rulers made it '
+            'easier for foreign companies to gain power? What lessons can '
+            'we learn from this today?',
       ),
     ],
     quiz: [

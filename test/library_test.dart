@@ -187,9 +187,11 @@ void main() {
     }
   });
 
-  test('Class 6 Full reads are a page long (450+ words)', () {
-    final c6 = builtInCourses.where((c) => c.studentClass == 'Class 6');
-    expect(c6, hasLength(3));
+  test('Class 6 and 7 Full reads are a page long (450+ words)', () {
+    final c6 = builtInCourses.where(
+      (c) => c.studentClass == 'Class 6' || c.studentClass == 'Class 7',
+    );
+    expect(c6, hasLength(6));
     for (final lesson in c6.expand((c) => c.lessons)) {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)

@@ -50,6 +50,63 @@ const List<Lesson> worldGeographyLessons = [
             'first mission to land near the Moon’s south pole; 23 August is '
             'now National Space Day.',
       ),
+      LessonSection(
+        'How the Solar System formed',
+        'The Solar System formed about 4.6 billion years ago from a '
+            'huge spinning cloud of gas and dust. Most of the material '
+            'collected in the centre and became the Sun. The rest flattened '
+            'into a disc, where dust and rock stuck together to form '
+            'planets, moons, asteroids and comets. That is why all the '
+            'planets go round the Sun in the same direction and almost in '
+            'the same flat plane. The Sun holds over 99 per cent of the '
+            'Solar System’s mass.',
+      ),
+      LessonSection(
+        'The inner planets',
+        'Mercury is the closest planet to the Sun and the smallest '
+            'planet; a year there lasts only 88 days. Venus is the hottest '
+            'planet because its thick carbon dioxide atmosphere traps heat; '
+            'it spins backwards and is the brightest planet in our sky, '
+            'called the morning or evening star. Earth is the only planet '
+            'known to have life and liquid water on its surface. Mars, the '
+            'red planet, has Olympus Mons, the tallest volcano in the Solar '
+            'System.',
+      ),
+      LessonSection(
+        'The giant planets',
+        'Jupiter is the largest planet; more than 1,300 Earths could '
+            'fit inside it. Its Great Red Spot is a storm bigger than '
+            'Earth, and Ganymede, its moon, is the largest moon in the '
+            'Solar System. Saturn has the most beautiful rings, made of ice '
+            'and rock, and its moon Titan has a thick atmosphere. Uranus '
+            'rolls on its side, and Neptune, the farthest planet, has the '
+            'fastest winds. Jupiter and Saturn are gas giants, while Uranus '
+            'and Neptune are ice giants.',
+      ),
+      LessonSection(
+        'Dwarf planets, asteroids and comets',
+        'In 2006, the International Astronomical Union decided that '
+            'Pluto is a dwarf planet, so the Solar System now has eight '
+            'planets. Other dwarf planets include Ceres, Eris, Haumea and '
+            'Makemake. The asteroid belt lies between Mars and Jupiter and '
+            'holds millions of rocky pieces. Comets are balls of ice and '
+            'dust; when they come near the Sun, they grow long glowing '
+            'tails. Halley’s Comet returns about every 76 years and will '
+            'next be seen in 2061. A meteor that reaches the ground is a '
+            'meteorite.',
+      ),
+      LessonSection(
+        'India in space',
+        'The Indian Space Research Organisation (ISRO), founded in '
+            '1969, has its headquarters in Bengaluru. Aryabhata, India’s '
+            'first satellite, was launched in 1975. Chandrayaan-1 (2008) '
+            'found signs of water on the Moon, and Mangalyaan (2013) made '
+            'India the first Asian nation to reach Mars orbit, and the '
+            'first in the world to do so on its first try. On 23 August '
+            '2023, Chandrayaan-3 landed near the Moon’s south pole, now '
+            'marked as National Space Day. Aditya-L1, launched in 2023, '
+            'studies the Sun.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -121,6 +178,61 @@ const List<Lesson> worldGeographyLessons = [
             'Equator. Lines of longitude run from pole to pole. The Earth '
             'turns 360° in 24 hours, so every 15° of longitude is one hour, '
             'and every 1° is four minutes.',
+      ),
+      LessonSection(
+        'Day, night and the axis',
+        'The Earth spins on its axis, an imaginary line through the '
+            'North and South Poles, from west to east. One full spin takes '
+            'about 24 hours and gives us day and night. That is why the Sun '
+            'seems to rise in the east and set in the west. The line '
+            'between day and night is called the circle of illumination. '
+            'The Earth’s axis is tilted at about 23.5 degrees from the '
+            'vertical, and it makes an angle of 66.5 degrees with the plane '
+            'of its orbit.',
+      ),
+      LessonSection(
+        'A year and a leap year',
+        'The Earth goes round the Sun in an elliptical, or oval, orbit. '
+            'One revolution takes about 365 and a quarter days. Since a '
+            'calendar year has 365 days, an extra day is added every four '
+            'years, giving 29 February in a leap year of 366 days. The '
+            'Earth is closest to the Sun, called perihelion, around 3 '
+            'January, and farthest, called aphelion, around 4 July. So the '
+            'seasons are caused by the tilt of the axis, not by the '
+            'distance from the Sun.',
+      ),
+      LessonSection(
+        'Solstices and equinoxes',
+        'On 21 June, the summer solstice, the Sun shines directly over '
+            'the Tropic of Cancer; the Northern Hemisphere has its longest '
+            'day and summer begins. On 22 December, the winter solstice, '
+            'the Sun is over the Tropic of Capricorn, giving the north its '
+            'shortest day. On 21 March and 23 September, the equinoxes, the '
+            'Sun is over the Equator, and day and night are equal '
+            'everywhere. Near the poles, there are times of 24-hour '
+            'daylight, like the midnight sun in Norway.',
+      ),
+      LessonSection(
+        'Latitudes and heat zones',
+        'Latitudes are imaginary lines running east-west, measured from '
+            '0 degrees at the Equator to 90 degrees at the poles. Important '
+            'ones are the Tropic of Cancer (23.5° N), the Tropic of '
+            'Capricorn (23.5° S), the Arctic Circle (66.5° N) and the '
+            'Antarctic Circle (66.5° S). They divide the Earth into heat '
+            'zones. The Torrid Zone, between the two tropics, is the '
+            'hottest. The Temperate Zones lie between the tropics and polar '
+            'circles, and the Frigid Zones are near the poles.',
+      ),
+      LessonSection(
+        'Longitudes, GMT and the date line',
+        'Longitudes, or meridians, run from pole to pole. The Prime '
+            'Meridian, 0 degrees, passes through Greenwich near London, and '
+            'there are 360 degrees of longitude in all. Since the Earth '
+            'turns 360 degrees in 24 hours, every 15 degrees of longitude '
+            'makes a time difference of one hour, or 4 minutes for each '
+            'degree. Time at Greenwich is Greenwich Mean Time. The '
+            'International Date Line, roughly along 180 degrees in the '
+            'Pacific Ocean, is where the date changes by one day.',
       ),
     ],
     quiz: [
@@ -201,6 +313,64 @@ const List<Lesson> worldGeographyLessons = [
             'into pieces, rivers carry the pieces away to form new layers, '
             'and heat inside the Earth melts and changes them again.',
       ),
+      LessonSection(
+        'Crust, mantle and core',
+        'The crust is the thin outer layer of the Earth, about 35 km '
+            'thick under continents and 5 km under oceans. Continental '
+            'crust is made mostly of silica and alumina (sial), and oceanic '
+            'crust of silica and magnesium (sima). Below it is the mantle, '
+            'about 2,900 km thick; its upper part, the asthenosphere, is '
+            'soft and partly molten, and plates move on it. At the centre '
+            'is the core, made mainly of nickel and iron (nife), with a '
+            'liquid outer core and a solid inner core.',
+      ),
+      LessonSection(
+        'How we know about the inside',
+        'No one has drilled through the crust; the deepest hole, the '
+            'Kola Superdeep Borehole in Russia, is about 12 km deep. '
+            'Scientists learn about the interior by studying earthquake '
+            'waves. P-waves, or primary waves, travel through solids and '
+            'liquids, while S-waves, or secondary waves, travel only '
+            'through solids. Because S-waves do not pass through the outer '
+            'core, scientists know it is liquid. Lava from volcanoes and '
+            'meteorites also give clues about what the Earth is made of.',
+      ),
+      LessonSection(
+        'Igneous rocks',
+        'Igneous rocks form when hot molten rock cools and becomes '
+            'solid; they are called primary rocks because all other rocks '
+            'come from them. Molten rock inside the Earth is called magma, '
+            'and on the surface it is lava. When magma cools slowly deep '
+            'inside the Earth, it forms intrusive rocks with large '
+            'crystals, like granite. When lava cools quickly on the '
+            'surface, it forms extrusive rocks with fine grains, like '
+            'basalt. The Deccan Plateau in India is made of basalt from '
+            'ancient lava flows.',
+      ),
+      LessonSection(
+        'Sedimentary and metamorphic rocks',
+        'Rocks break into small pieces that are carried by wind, water '
+            'and ice and laid down in layers. Over time the layers are '
+            'pressed and cemented to form sedimentary rocks, like '
+            'sandstone, shale, limestone and coal. They often contain '
+            'fossils. When igneous or sedimentary rocks are changed by '
+            'great heat and pressure, they become metamorphic rocks. Clay '
+            'changes into slate, limestone into marble, sandstone into '
+            'quartzite, and granite into gneiss. Marble from Makrana was '
+            'used to build the Taj Mahal.',
+      ),
+      LessonSection(
+        'Minerals and their uses',
+        'Rocks are made of minerals, natural substances with a fixed '
+            'chemical composition. There are over 4,000 known minerals. '
+            'Feldspar and quartz are the most common minerals in the crust. '
+            'Oxygen is the most abundant element in the crust, followed by '
+            'silicon, aluminium and iron. Diamond, a form of carbon, is the '
+            'hardest natural mineral, and talc the softest, on the Mohs '
+            'scale of hardness. Minerals give us metals, building '
+            'materials, salt and gems, and coal and petroleum are found in '
+            'sedimentary rocks.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -276,6 +446,63 @@ const List<Lesson> worldGeographyLessons = [
             'Active volcanoes erupt often, dormant ones are sleeping, and '
             'extinct ones are not expected to erupt again. Mount Fuji in '
             'Japan and Mount Etna in Italy are famous examples.',
+      ),
+      LessonSection(
+        'Continental drift and plate tectonics',
+        'In 1912, Alfred Wegener suggested the theory of continental '
+            'drift: all continents were once joined in one huge landmass '
+            'called Pangaea, surrounded by a single ocean, Panthalassa. '
+            'Pangaea split into Laurasia in the north and Gondwanaland in '
+            'the south, which then broke into today’s continents. The '
+            'matching coastlines of South America and Africa and similar '
+            'fossils on different continents support this idea. The later '
+            'theory of plate tectonics explains that the crust is broken '
+            'into about seven major plates and many smaller ones.',
+      ),
+      LessonSection(
+        'Types of plate boundaries',
+        'Plates meet at three kinds of boundaries. At divergent '
+            'boundaries, plates move apart, and new crust forms, as along '
+            'the Mid-Atlantic Ridge. At convergent boundaries, plates '
+            'collide; one may sink under the other, forming deep trenches '
+            'and volcanoes, or both may crumple up into fold mountains, '
+            'like the Himalayas. At transform boundaries, plates slide past '
+            'each other, like the San Andreas Fault in California. Most '
+            'earthquakes and volcanoes happen along these boundaries.',
+      ),
+      LessonSection(
+        'Measuring earthquakes',
+        'The point inside the Earth where an earthquake starts is the '
+            'focus, or hypocentre, and the point on the surface directly '
+            'above it is the epicentre. Earthquakes are recorded by a '
+            'seismograph. Their magnitude, or energy, was measured on the '
+            'Richter scale and is now usually given on the moment magnitude '
+            'scale. Their intensity, or the damage they cause, is measured '
+            'on the Mercalli scale. Large undersea earthquakes can cause '
+            'tsunamis, like the Indian Ocean tsunami of 26 December 2004.',
+      ),
+      LessonSection(
+        'Kinds of volcanoes',
+        'A volcano is an opening in the crust through which magma, '
+            'gases and ash come out. Active volcanoes erupt often, dormant '
+            'ones have not erupted for a long time but may, and extinct '
+            'ones are not expected to erupt again. Shield volcanoes, like '
+            'Mauna Loa in Hawaii, have gentle slopes made of runny lava. '
+            'Composite or strato volcanoes, like Mount Fuji in Japan and '
+            'Vesuvius in Italy, are steep and explosive. Barren Island in '
+            'the Andaman Sea is India’s only active volcano.',
+      ),
+      LessonSection(
+        'The Ring of Fire',
+        'The Pacific Ring of Fire is a horseshoe-shaped belt around the '
+            'Pacific Ocean, where many plates meet. About three-quarters of '
+            'the world’s active volcanoes and most of its earthquakes are '
+            'found here, in countries like Japan, Indonesia, the '
+            'Philippines, Chile and the west coast of the USA. Ojos del '
+            'Salado, on the border of Chile and Argentina, is the highest '
+            'active volcano. Volcanoes can be dangerous, but volcanic soil '
+            'is very fertile, and volcanic heat gives geothermal energy, as '
+            'in Iceland.',
       ),
     ],
     quiz: [
@@ -353,6 +580,63 @@ const List<Lesson> worldGeographyLessons = [
             'banned them. Greenhouse gases such as carbon dioxide trap heat; '
             'adding too much of them is warming the Earth.',
       ),
+      LessonSection(
+        'Gases in the air',
+        'The atmosphere is a blanket of air held around the Earth by '
+            'gravity. Dry air is made of about 78 per cent nitrogen, 21 per '
+            'cent oxygen, 0.93 per cent argon, and about 0.04 per cent '
+            'carbon dioxide, along with tiny amounts of other gases. Air '
+            'also contains water vapour, which varies from place to place, '
+            'and dust particles, which help water vapour form droplets for '
+            'clouds. Half of the atmosphere’s mass lies within about 5.5 km '
+            'of the surface.',
+      ),
+      LessonSection(
+        'From troposphere to exosphere',
+        'The troposphere is the lowest layer, about 8 km thick at the '
+            'poles and 18 km at the Equator; almost all weather happens '
+            'here, and temperature falls by about 6.5 degrees Celsius for '
+            'every kilometre of height. The stratosphere, up to about 50 '
+            'km, has the ozone layer and calm air, good for jet planes. In '
+            'the mesosphere, meteors burn up. The thermosphere has the '
+            'ionosphere, which reflects radio waves, and auroras. The '
+            'exosphere is the outermost layer, where satellites orbit.',
+      ),
+      LessonSection(
+        'The ozone layer',
+        'The ozone layer, in the stratosphere, absorbs most of the '
+            'Sun’s harmful ultraviolet rays, which can cause skin cancer '
+            'and harm plants and animals. In the 1980s, scientists found a '
+            'hole in the ozone layer over Antarctica, caused by '
+            'chlorofluorocarbons (CFCs) used in refrigerators, aerosol '
+            'sprays and air conditioners. The Montreal Protocol of 1987 '
+            'banned these chemicals, and the ozone layer is slowly healing. '
+            'World Ozone Day is celebrated on 16 September.',
+      ),
+      LessonSection(
+        'The greenhouse effect and global warming',
+        'Some gases, like carbon dioxide, methane, nitrous oxide and '
+            'water vapour, trap heat from the Sun, keeping the Earth warm '
+            'enough for life; this is the greenhouse effect. But burning '
+            'coal, oil and gas and cutting forests have added more '
+            'greenhouse gases, causing global warming. Glaciers are '
+            'melting, sea levels are rising, and extreme weather is '
+            'becoming more common. Under the Paris Agreement of 2015, '
+            'countries agreed to try to limit warming to well below 2 '
+            'degrees Celsius.',
+      ),
+      LessonSection(
+        'Weather instruments',
+        'Weather is the condition of the atmosphere at a place and '
+            'time, while climate is the average weather over a long period, '
+            'usually 30 years or more. A thermometer measures temperature, '
+            'a barometer measures air pressure, a hygrometer measures '
+            'humidity, an anemometer measures wind speed, a wind vane shows '
+            'wind direction, and a rain gauge measures rainfall. In India, '
+            'the India Meteorological Department (IMD), set up in 1875, '
+            'forecasts the weather. World Meteorological Day is on 23 '
+            'March.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -419,6 +703,64 @@ const List<Lesson> worldGeographyLessons = [
             'the Rockies, the hot dusty Sirocco from the Sahara, and the dry '
             'Harmattan of West Africa. Broadly, the world has hot equatorial '
             'and tropical zones, mild temperate zones and cold polar zones.',
+      ),
+      LessonSection(
+        'Pressure belts of the world',
+        'Air pressure is the weight of air pressing down on the Earth. '
+            'It is measured in millibars with a barometer and falls as we '
+            'go higher. The Earth has seven pressure belts. Near the '
+            'Equator is the Equatorial Low, also called the doldrums, where '
+            'hot air rises and the air is calm. Around 30 degrees north and '
+            'south are the Subtropical Highs, called the horse latitudes. '
+            'Around 60 degrees are the Subpolar Lows, and at the poles are '
+            'the Polar Highs.',
+      ),
+      LessonSection(
+        'Planetary winds',
+        'Winds blow from high pressure to low pressure. Because the '
+            'Earth spins, they are turned to the right in the Northern '
+            'Hemisphere and to the left in the Southern Hemisphere; this is '
+            'the Coriolis effect, described by Ferrel’s law. The trade '
+            'winds blow from the subtropical highs towards the Equator. The '
+            'westerlies blow from the subtropical highs towards the '
+            'subpolar lows; in the Southern Hemisphere they are so strong '
+            'that they are called the Roaring Forties, Furious Fifties and '
+            'Screaming Sixties. Polar easterlies blow from the poles.',
+      ),
+      LessonSection(
+        'Tropical cyclones',
+        'A tropical cyclone is a huge, spinning storm with very low '
+            'pressure at its centre, formed over warm oceans above about 27 '
+            'degrees Celsius. The calm centre is called the eye. Cyclones '
+            'spin anticlockwise in the Northern Hemisphere and clockwise in '
+            'the Southern. They are called hurricanes in the Atlantic and '
+            'eastern Pacific, typhoons in the western Pacific, cyclones in '
+            'the Indian Ocean and willy-willies in Australia. Countries '
+            'around the Indian Ocean take turns giving names to cyclones in '
+            'this region.',
+      ),
+      LessonSection(
+        'Local winds of the world',
+        'Some winds blow only in certain areas. The Chinook is a warm, '
+            'dry wind on the eastern side of the Rocky Mountains; it melts '
+            'snow quickly and is called the snow eater. The Foehn is a '
+            'similar wind in the Alps. The Sirocco is a hot, dusty wind '
+            'blowing from the Sahara to southern Europe. The Harmattan is a '
+            'dry wind of West Africa, called the doctor because it brings '
+            'relief from humid heat. The Mistral is a cold wind in France, '
+            'and the Loo blows in north India.',
+      ),
+      LessonSection(
+        'Climate zones',
+        'The German scientist Wladimir Koppen classified world climates '
+            'based on temperature and rainfall. Equatorial climates, like '
+            'the Amazon and Congo basins, are hot and wet all year. '
+            'Tropical monsoon climates, like India, have wet summers and '
+            'dry winters. Hot deserts, like the Sahara, are very dry. The '
+            'Mediterranean climate has hot, dry summers and mild, wet '
+            'winters, good for grapes and olives. Temperate, taiga and '
+            'tundra climates become colder towards the poles, and ice cap '
+            'climates cover Antarctica and Greenland.',
       ),
     ],
     quiz: [
@@ -496,6 +838,64 @@ const List<Lesson> worldGeographyLessons = [
             'Where warm and cold currents meet, near Newfoundland, there is '
             'thick fog and rich fishing.',
       ),
+      LessonSection(
+        'The oceans compared',
+        'The Pacific Ocean is the largest and deepest ocean, covering '
+            'about a third of the Earth’s surface; it is larger than all '
+            'the land put together. The Atlantic Ocean is the second '
+            'largest and has the busiest shipping routes; it is shaped like '
+            'the letter S. The Indian Ocean is the third largest and the '
+            'only ocean named after a country. The Southern Ocean surrounds '
+            'Antarctica, and the Arctic Ocean, around the North Pole, is '
+            'the smallest and shallowest, covered with ice for much of the '
+            'year.',
+      ),
+      LessonSection(
+        'The ocean floor',
+        'The ocean floor has different parts. The continental shelf is '
+            'the shallow, gently sloping edge of a continent under the sea; '
+            'it has rich fishing grounds and oil, like Mumbai High. The '
+            'continental slope drops steeply to the deep ocean floor, '
+            'called the abyssal plain. Long underwater mountain chains are '
+            'called mid-ocean ridges, the longest being the Mid-Atlantic '
+            'Ridge. The deepest parts are trenches; the Mariana Trench in '
+            'the Pacific is the deepest, with the Challenger Deep about '
+            '11,000 metres below sea level.',
+      ),
+      LessonSection(
+        'Spring and neap tides',
+        'Tides are the regular rise and fall of sea level, caused by '
+            'the pull of the Moon and, to a smaller extent, the Sun. Most '
+            'coasts have two high tides and two low tides each day, about '
+            '12 hours and 25 minutes apart. When the Sun, Moon and Earth '
+            'are in a straight line, at new moon and full moon, the pull is '
+            'strongest, causing very high spring tides. When the Sun and '
+            'Moon are at right angles, during the quarter moons, the tides '
+            'are weaker; these are neap tides.',
+      ),
+      LessonSection(
+        'Warm and cold currents',
+        'Ocean currents are large streams of water flowing in the '
+            'oceans, driven by winds, differences in temperature and salt, '
+            'and the Earth’s rotation. Warm currents flow from the Equator '
+            'towards the poles, and cold currents flow from the poles '
+            'towards the Equator. The Gulf Stream, a warm current, keeps '
+            'western Europe mild in winter. The cold Labrador Current meets '
+            'the Gulf Stream near Newfoundland, creating fog and the rich '
+            'Grand Banks fishing ground. The cold Humboldt or Peru Current '
+            'flows along South America.',
+      ),
+      LessonSection(
+        'Salinity and the seas',
+        'Salinity is the amount of salt in sea water; on average, it is '
+            'about 35 grams per 1,000 grams of water. It is higher where '
+            'evaporation is high and rainfall is low. Lake Van in Turkey, '
+            'the Dead Sea and the Great Salt Lake are very salty, and the '
+            'Red Sea is one of the saltiest seas. The Baltic Sea has low '
+            'salinity because many rivers flow into it. Oceans give us '
+            'fish, salt, minerals, oil and energy from waves and tides, so '
+            'they must be protected from pollution and overfishing.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -568,6 +968,63 @@ const List<Lesson> worldGeographyLessons = [
             'Canal saves the long trip around South America. The Strait of '
             'Gibraltar separates Europe from Africa.',
       ),
+      LessonSection(
+        'Asia and Africa',
+        'Asia is the largest continent by area and population, with '
+            'about 60 per cent of the world’s people. It has the highest '
+            'point on land, Mount Everest, and the lowest, the shore of the '
+            'Dead Sea. China and India are its most populous countries. '
+            'Africa is the second largest continent and is crossed by the '
+            'Equator, the Tropic of Cancer and the Tropic of Capricorn. It '
+            'has the Sahara, the largest hot desert, and the Nile, one of '
+            'the longest rivers. Nigeria is its most populous country.',
+      ),
+      LessonSection(
+        'The Americas',
+        'North America includes Canada, the USA, Mexico and the '
+            'countries of Central America and the Caribbean. It has the '
+            'Rocky Mountains, the Great Lakes and the Mississippi river. '
+            'Greenland, the world’s largest island, is geographically part '
+            'of North America. South America has the Andes, the longest '
+            'mountain range, the Amazon, the largest river by volume, and '
+            'the Amazon rainforest, the largest tropical rainforest. Brazil '
+            'is its largest country. The Atacama Desert in Chile is one of '
+            'the driest places on Earth.',
+      ),
+      LessonSection(
+        'Europe, Australia and Antarctica',
+        'Europe is the second smallest continent by area but has many '
+            'countries; Russia, which lies in both Europe and Asia, is the '
+            'largest country in the world. The Ural Mountains separate '
+            'Europe from Asia. Australia is the smallest continent and is '
+            'also a country; it is called the island continent and has '
+            'unique animals like the kangaroo and koala. Antarctica, around '
+            'the South Pole, is the coldest, windiest and driest continent. '
+            'It has no permanent residents, only scientists at research '
+            'stations.',
+      ),
+      LessonSection(
+        'The Suez and Panama Canals',
+        'The Suez Canal in Egypt, opened in 1869, links the '
+            'Mediterranean Sea and the Red Sea, so ships between Europe and '
+            'Asia do not have to sail around Africa. It is about 193 km '
+            'long and has no locks. The Panama Canal, opened in 1914, cuts '
+            'across the narrow Isthmus of Panama to link the Atlantic and '
+            'Pacific Oceans. It uses locks to lift ships up to Gatun Lake '
+            'and down again. Both canals greatly shortened sea journeys and '
+            'are vital to world trade.',
+      ),
+      LessonSection(
+        'Straits and isthmuses',
+        'A strait is a narrow stretch of water joining two larger '
+            'bodies of water, and an isthmus is a narrow strip of land '
+            'joining two larger land areas. The Strait of Gibraltar links '
+            'the Atlantic and the Mediterranean, the Bering Strait '
+            'separates Asia from North America, the Strait of Malacca links '
+            'the Indian Ocean and the Pacific, and the Strait of Hormuz is '
+            'vital for oil shipping. The Palk Strait lies between India and '
+            'Sri Lanka. The Isthmus of Suez joins Africa and Asia.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -639,6 +1096,63 @@ const List<Lesson> worldGeographyLessons = [
             'as one. The Sahara, in North Africa, is the biggest hot desert. '
             'Greenland is the largest island; Australia is bigger but is '
             'counted as a continent.',
+      ),
+      LessonSection(
+        'Highest peaks and ranges',
+        'Mount Everest, 8,849 metres, on the Nepal-China border, is the '
+            'highest mountain in the world; Nepalis call it Sagarmatha and '
+            'Tibetans Chomolungma. Tenzing Norgay and Edmund Hillary first '
+            'climbed it on 29 May 1953. K2, in the Karakoram, is the second '
+            'highest. The highest peaks of other continents include '
+            'Aconcagua in South America, Denali in North America, '
+            'Kilimanjaro in Africa, Elbrus in Europe, Vinson in Antarctica '
+            'and Kosciuszko in Australia. The Andes are the longest '
+            'mountain range above water.',
+      ),
+      LessonSection(
+        'Great rivers',
+        'The Nile, flowing through north-east Africa into the '
+            'Mediterranean, is usually called the longest river, about '
+            '6,650 km, though some measurements make the Amazon longer. The '
+            'Amazon carries the most water of any river, more than the next '
+            'several rivers put together. The Yangtze in China is the '
+            'longest river in Asia, and its Three Gorges Dam is the world’s '
+            'largest power station. The Mississippi-Missouri is the longest '
+            'in North America, and the Volga is the longest in Europe.',
+      ),
+      LessonSection(
+        'Lakes and waterfalls',
+        'The Caspian Sea, between Europe and Asia, is the largest lake '
+            'in the world by area, though its water is salty. Lake '
+            'Superior, in North America, is the largest freshwater lake by '
+            'area, while Lake Baikal in Russia is the deepest and oldest, '
+            'holding about a fifth of the world’s fresh surface water. Lake '
+            'Titicaca, in the Andes, is one of the highest navigable lakes. '
+            'Angel Falls in Venezuela is the highest waterfall, and '
+            'Victoria Falls on the Zambezi is among the largest.',
+      ),
+      LessonSection(
+        'Deserts hot and cold',
+        'A desert is a place that gets very little rain, less than '
+            'about 25 cm a year; deserts can be hot or cold. Antarctica is '
+            'the largest desert in the world, a cold desert. The Sahara in '
+            'North Africa is the largest hot desert. Other large deserts '
+            'include the Arabian Desert, the Gobi in Mongolia and China, '
+            'the Kalahari in southern Africa, the Great Australian Desert, '
+            'and the Thar in India and Pakistan. The Atacama in Chile is '
+            'one of the driest places, with some areas getting almost no '
+            'rain.',
+      ),
+      LessonSection(
+        'Islands and other records',
+        'Greenland is the largest island in the world; Australia is '
+            'larger but is counted as a continent. New Guinea and Borneo '
+            'are the next largest islands. Indonesia has the most islands '
+            'of any country, over 17,000. The Dead Sea shore, on the border '
+            'of Jordan and Israel, is the lowest land point on Earth, more '
+            'than 400 metres below sea level. The Great Barrier Reef, off '
+            'Australia, is the largest coral reef system, and Death Valley '
+            'in the USA holds the record for the highest air temperature.',
       ),
     ],
     quiz: [
@@ -713,6 +1227,61 @@ const List<Lesson> worldGeographyLessons = [
             'In northern Norway the summer Sun does not set, so it is the '
             'Land of the Midnight Sun. Cuba was called the “Sugar Bowl of the '
             'World” for its sugarcane.',
+      ),
+      LessonSection(
+        'Largest and smallest countries',
+        'Russia is the largest country by area, followed by Canada, the '
+            'USA, China, Brazil, Australia and India. India became the most '
+            'populous country in 2023, overtaking China. Vatican City, '
+            'inside Rome, is the smallest country both by area and '
+            'population; it is the headquarters of the Roman Catholic '
+            'Church. Monaco is the second smallest and one of the most '
+            'densely populated. Some countries, like Nepal, Bhutan, '
+            'Afghanistan and Switzerland, are landlocked, which means they '
+            'have no coastline.',
+      ),
+      LessonSection(
+        'Borders of India and its neighbours',
+        'The Radcliffe Line, drawn in 1947 by Sir Cyril Radcliffe, '
+            'divides India from Pakistan and Bangladesh. The McMahon Line, '
+            'drawn in 1914 at the Shimla Convention, marks the eastern '
+            'border between India and China, which China does not accept. '
+            'The Line of Actual Control separates Indian and Chinese areas, '
+            'and the Line of Control separates the parts of Kashmir held by '
+            'India and Pakistan. The Durand Line, drawn in 1893, separates '
+            'Pakistan from Afghanistan.',
+      ),
+      LessonSection(
+        'Famous lines around the world',
+        'The 38th Parallel divides North Korea and South Korea. The '
+            '49th Parallel forms much of the border between the USA and '
+            'Canada. The Mason-Dixon Line was a historic boundary in the '
+            'USA between the northern and southern states. The Oder-Neisse '
+            'Line forms the border between Germany and Poland. The Maginot '
+            'Line was a line of French forts built before the Second World '
+            'War, and the Hindenburg Line was a German line of defence in '
+            'the First World War.',
+      ),
+      LessonSection(
+        'Cities and countries with nicknames',
+        'Japan is called the Land of the Rising Sun, Norway the Land of '
+            'the Midnight Sun, Finland the Land of a Thousand Lakes and '
+            'Thailand the Land of White Elephants. Bhutan is the Land of '
+            'the Thunder Dragon, and Sri Lanka was called the Pearl of the '
+            'Indian Ocean. Cuba is the Sugar Bowl of the World. Among '
+            'cities, Rome is the Eternal City, Paris the City of Light, New '
+            'York the Big Apple, and Venice the Queen of the Adriatic.',
+      ),
+      LessonSection(
+        'Indian places with nicknames',
+        'India also has many nicknames for its places. Jaipur is the '
+            'Pink City, Jodhpur the Blue City, Udaipur the City of Lakes '
+            'and Jaisalmer the Golden City. Kolkata is the City of Joy, '
+            'Bengaluru the Silicon Valley of India and the Garden City, and '
+            'Mumbai the City of Dreams. Kerala is called God’s Own Country, '
+            'Assam the Land of Red River and Blue Hills, and Punjab the '
+            'Granary of India. Meghalaya means Abode of Clouds, and '
+            'Darjeeling is the Queen of the Hills.',
       ),
     ],
     quiz: [

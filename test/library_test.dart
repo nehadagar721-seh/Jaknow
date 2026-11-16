@@ -95,7 +95,7 @@ void main() {
     for (final lesson in world.lessons) {
       expect(lesson.id, startsWith('gk-world-geo-'));
       expect(lesson.keyPoints.length, greaterThanOrEqualTo(5));
-      expect(lesson.sections, hasLength(3));
+      expect(lesson.sections.length, greaterThanOrEqualTo(5));
       expect(lesson.quiz.every((q) => q.options.length == 4), isTrue);
     }
     expect(LibraryService.search(builtInCourses, 'everest'), isNotEmpty);
@@ -196,9 +196,10 @@ void main() {
             'gk-medieval-india',
             'gk-modern-india',
             'gk-indian-geography',
+            'gk-world-geography',
           ].contains(c.id),
     );
-    expect(c6, hasLength(13));
+    expect(c6, hasLength(14));
     for (final lesson in c6.expand((c) => c.lessons)) {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)

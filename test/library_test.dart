@@ -191,9 +191,13 @@ void main() {
     final c6 = builtInCourses.where(
       (c) =>
           const ['Class 6', 'Class 7', 'Class 8'].contains(c.studentClass) ||
-          const ['gk-polity', 'gk-medieval-india'].contains(c.id),
+          const [
+            'gk-polity',
+            'gk-medieval-india',
+            'gk-modern-india',
+          ].contains(c.id),
     );
-    expect(c6, hasLength(11));
+    expect(c6, hasLength(12));
     for (final lesson in c6.expand((c) => c.lessons)) {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)

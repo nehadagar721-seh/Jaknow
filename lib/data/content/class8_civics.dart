@@ -43,6 +43,63 @@ const List<Lesson> class8CivicsLessons = [
             'carries them out, and the judiciary (courts) settles disputes and '
             'checks that laws follow the Constitution.',
       ),
+      LessonSection(
+        'What a Constitution does',
+        'A Constitution is a document that sets out the basic rules of '
+            'how a country will be governed. It says what kind of '
+            'government the country will have, how leaders are chosen, what '
+            'powers they have, and what they cannot do. It also lists the '
+            'rights of citizens. A Constitution protects people against '
+            'misuse of power by those who govern, and it protects '
+            'minorities from being ruled unfairly by the majority. All '
+            'other laws must follow it.',
+      ),
+      LessonSection(
+        'A story from Nepal',
+        'Nepal shows why a Constitution matters. For many years, Nepal '
+            'was ruled by a king. People struggled for democracy, and after '
+            'a long people’s movement, the king’s rule ended in 2008. Nepal '
+            'then had to write a new Constitution, because the old rules '
+            'gave power to the king, not to the people. In 2015, Nepal '
+            'adopted its new Constitution, which made it a democratic '
+            'republic. Writing it took years of discussion among different '
+            'groups.',
+      ),
+      LessonSection(
+        'The makers of our Constitution',
+        'India’s Constitution was written by the Constituent Assembly, '
+            'which had about 300 members and met from December 1946. Dr '
+            'Rajendra Prasad was its President, and Dr B. R. Ambedkar '
+            'chaired the Drafting Committee; he is called the father of the '
+            'Indian Constitution. Members discussed every article '
+            'carefully, over almost three years. The Constitution was '
+            'adopted on 26 November 1949, now celebrated as Constitution '
+            'Day, and came into force on 26 January 1950, our Republic Day.',
+      ),
+      LessonSection(
+        'Key features',
+        'The Constitution has several key features. Federalism means '
+            'there are governments at more than one level: the Union '
+            'government in Delhi and state governments, each with its own '
+            'powers. India has a parliamentary form of government, where '
+            'people elect representatives. Separation of powers divides '
+            'power among the legislature, executive and judiciary. '
+            'Fundamental Rights protect citizens, and India is secular, '
+            'which means the state does not favour any religion. The '
+            'Constitution can be amended when needed.',
+      ),
+      LessonSection(
+        'Fundamental Rights and duties',
+        'The Constitution gives six Fundamental Rights: the Right to '
+            'Equality, the Right to Freedom, the Right against '
+            'Exploitation, the Right to Freedom of Religion, Cultural and '
+            'Educational Rights, and the Right to Constitutional Remedies. '
+            'The last one lets citizens go to court if any other right is '
+            'taken away; Dr Ambedkar called it the heart and soul of the '
+            'Constitution. It also lists Fundamental Duties, such as '
+            'respecting the national flag, protecting the environment and '
+            'promoting harmony.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -117,6 +174,69 @@ const List<Lesson> class8CivicsLessons = [
             'make laws for equality, for example to end discrimination '
             'inside religious practices.',
       ),
+      LessonSection(
+        'When religion and power mix',
+        'History shows that when one religious group controls the '
+            'government, people of other faiths can suffer. In Nazi '
+            'Germany, Jews were cruelly persecuted, and millions were '
+            'killed in the Holocaust. In some countries even today, people '
+            'of minority religions cannot practise their faith freely. This '
+            'is why many democracies keep religion separate from the '
+            'government. Secularism means the state does not belong to any '
+            'one religion, and all citizens are free to follow their own '
+            'faith.',
+      ),
+      LessonSection(
+        'Protecting the minority',
+        'In a democracy, the majority usually decides, but that does '
+            'not mean it can take away the rights of smaller groups. '
+            'Secularism protects religious minorities from being dominated '
+            'by the majority. It also protects people within a religion: '
+            'everyone has the right to follow their faith in their own way, '
+            'to change their religion, or to follow no religion at all. Our '
+            'Constitution makes sure that no religious group is forced to '
+            'give up its beliefs.',
+      ),
+      LessonSection(
+        'The Indian way',
+        'The Indian government follows secularism in three ways. First, '
+            'it keeps a distance from all religions: government schools '
+            'cannot hold religious prayers or celebrate one religion’s '
+            'festivals as official functions. Second, it does not '
+            'interfere, out of respect, in the customs of religious groups; '
+            'for example, Sikhs may wear a turban instead of a helmet. '
+            'Third, it may step in to stop harmful practices, as it did by '
+            'banning untouchability.',
+      ),
+      LessonSection(
+        'India and the USA',
+        'In the USA, the First Amendment to its Constitution keeps the '
+            'government and religion strictly apart: the government cannot '
+            'pass laws about religion or help any religious body. India’s '
+            'idea of secularism is a little different. The Indian state can '
+            'step in to stop religious practices that harm people, such as '
+            'untouchability or unfair treatment of women. It can also give '
+            'help to schools run by religious communities, as long as it '
+            'treats all religions fairly.',
+      ),
+      LessonSection(
+        'Secularism in daily life',
+        'Secularism is not only about laws; it is about how we live '
+            'together. India is home to people of many faiths, including '
+            'Hindus, Muslims, Christians, Sikhs, Buddhists, Jains and '
+            'Parsis. People celebrate each other’s festivals, like Diwali, '
+            'Eid, Christmas and Guru Nanak Jayanti. When we respect our '
+            'friends’ beliefs, refuse to spread hatred and stand up against '
+            'unfair treatment based on religion, we keep the spirit of '
+            'secularism alive.',
+      ),
+      LessonSection(
+        'Think about it',
+        'Make a list of the festivals your class celebrates in a year, '
+            'and the faiths they come from. How do friends of different '
+            'religions join in each other’s celebrations? Why is it '
+            'important that the government treats every religion equally?',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -186,6 +306,61 @@ const List<Lesson> class8CivicsLessons = [
         'A bill is discussed and voted on in both Houses. After the President '
             'signs it, it becomes law. People and groups often campaign for '
             'years to get important laws passed.',
+      ),
+      LessonSection(
+        'Why we need a Parliament',
+        'In a democracy, people rule themselves, but a country as large '
+            'as India cannot gather everyone to make decisions. So citizens '
+            'elect representatives to the Parliament. The idea that people '
+            'must give their consent to the government came from the '
+            'freedom struggle, when Indians demanded a say in how they were '
+            'ruled. After independence, every adult citizen got the right '
+            'to vote, and Parliament became the place where the people’s '
+            'wishes are discussed.',
+      ),
+      LessonSection(
+        'Two houses and the President',
+        'India’s Parliament has two houses and the President. The Lok '
+            'Sabha, or House of the People, has up to 543 elected members, '
+            'chosen directly by citizens every five years. The Rajya Sabha, '
+            'or Council of States, has up to 250 members; most are elected '
+            'by the members of state assemblies, and 12 are nominated by '
+            'the President for their work in art, science, literature or '
+            'social service. A bill becomes law only after the President '
+            'signs it.',
+      ),
+      LessonSection(
+        'Forming the government',
+        'After the Lok Sabha elections, the party or group of parties '
+            'that has a majority, more than half of the seats, forms the '
+            'government. Its leader becomes the Prime Minister, who chooses '
+            'ministers to look after departments like defence, health and '
+            'education. The Prime Minister and ministers form the Union '
+            'Cabinet. If no single party has a majority, several parties '
+            'join to form a coalition government. The government must keep '
+            'the support of the Lok Sabha to stay in power.',
+      ),
+      LessonSection(
+        'Question Hour and the opposition',
+        'Parliament keeps a close watch on the government. In Question '
+            'Hour, members ask ministers about their work, like rising '
+            'prices or problems faced by farmers, and ministers must '
+            'answer. Members from parties not in power form the opposition. '
+            'They point out mistakes, suggest changes and criticise the '
+            'government’s plans. Parliament also controls money: the '
+            'government cannot spend or collect taxes without Parliament’s '
+            'approval. This keeps the government answerable to the people.',
+      ),
+      LessonSection(
+        'Who are our representatives',
+        'Parliament now has members from many backgrounds, including '
+            'farmers, teachers, doctors, lawyers, businesspeople and social '
+            'workers. Some seats are reserved for Scheduled Castes and '
+            'Scheduled Tribes, so that they are fairly represented. The '
+            'number of women members has grown, and the Women’s Reservation '
+            'Act of 2023 provides for one-third of seats in the Lok Sabha '
+            'and state assemblies to be reserved for women once it comes '
+            'into force. A strong Parliament reflects the variety of India.',
       ),
     ],
     quiz: [
@@ -260,6 +435,62 @@ const List<Lesson> class8CivicsLessons = [
         'Through PIL, courts have helped bonded labourers, prisoners and '
             'children. The court can be reached even by a letter about a '
             'serious injustice.',
+      ),
+      LessonSection(
+        'Why we need courts',
+        'Laws are made by Parliament, but someone must decide what to '
+            'do when a law is broken, or when people quarrel over property, '
+            'contracts or rights. This is the job of the judiciary, or the '
+            'courts. Courts settle disputes between citizens, between '
+            'citizens and the government, and between different '
+            'governments. They also make sure that the government does not '
+            'break the Constitution. If a law goes against the '
+            'Constitution, courts can strike it down; this is called '
+            'judicial review.',
+      ),
+      LessonSection(
+        'An independent judiciary',
+        'For courts to be fair, they must be independent, which means '
+            'free from pressure by the government, political parties or '
+            'rich and powerful people. In India, judges are not chosen by '
+            'the people in elections, and they cannot easily be removed. '
+            'Senior judges recommend new judges to the higher courts. '
+            'Because judges are independent, an ordinary citizen can take '
+            'even the government to court and expect a fair decision based '
+            'only on the law.',
+      ),
+      LessonSection(
+        'Three levels of courts',
+        'India’s courts are arranged like a pyramid. At the bottom are '
+            'district courts, also called subordinate courts, where most '
+            'people first go. Above them, each state, or group of states, '
+            'has a High Court; the first High Courts were set up in 1862 in '
+            'Calcutta, Bombay and Madras. At the top is the Supreme Court '
+            'in New Delhi, headed by the Chief Justice of India. A person '
+            'not satisfied with a lower court’s decision can appeal to a '
+            'higher court.',
+      ),
+      LessonSection(
+        'How a criminal case moves',
+        'In a criminal case, such as theft or murder, the police first '
+            'register a report called an FIR, or First Information Report. '
+            'They investigate, collect evidence and may arrest the accused. '
+            'The public prosecutor presents the case against the accused in '
+            'court on behalf of the state. The accused has the right to a '
+            'lawyer, and if they cannot afford one, the state must provide '
+            'one. The judge listens to both sides and decides whether the '
+            'accused is guilty.',
+      ),
+      LessonSection(
+        'Justice for the poor',
+        'Going to court can be expensive and slow, which makes it hard '
+            'for poor people to get justice. In the 1980s, the Supreme '
+            'Court began public interest litigation, or PIL. Any person or '
+            'group can now file a case in the High Court or Supreme Court '
+            'on behalf of people whose rights are being violated, even by '
+            'writing a letter. Through PILs, courts have freed bonded '
+            'labourers, ordered midday meals in schools and acted against '
+            'pollution.',
       ),
     ],
     quiz: [
@@ -336,6 +567,70 @@ const List<Lesson> class8CivicsLessons = [
             'Constitution to demand their rights. Many poets and writers have '
             'also spoken out for dignity.',
       ),
+      LessonSection(
+        'What marginalisation means',
+        'To be marginalised means to be pushed to the side, or the '
+            'margins, of society, away from its centre. Marginalised people '
+            'may be poor, may speak a different language, follow different '
+            'customs or belong to a minority, and they are often treated '
+            'unfairly. They may not get equal chances in education, jobs '
+            'and housing, and their voices are not heard. Adivasis, Dalits, '
+            'religious minorities and women in many places have faced '
+            'marginalisation in India.',
+      ),
+      LessonSection(
+        'Adivasis and the forests',
+        'Adivasis, which means original inhabitants, are communities '
+            'who have lived in close contact with forests. There are over '
+            '500 Adivasi groups in India, and many live in Jharkhand, '
+            'Chhattisgarh, Odisha, Madhya Pradesh and the north-east. Their '
+            'lands and forests have often been taken for mines, dams and '
+            'factories, and millions have been forced to leave their homes. '
+            'Many end up as poorly paid workers in cities. They are often '
+            'shown in stereotyped ways, with colourful costumes only.',
+      ),
+      LessonSection(
+        'Minorities and equal chances',
+        'Minorities are communities that are small in number compared '
+            'with the rest of the population. The Constitution protects '
+            'their right to their own culture, language and religion. '
+            'Studies such as the Sachar Committee report of 2006 found that '
+            'many Muslims lagged behind in education, jobs and income. The '
+            'government runs scholarships and other schemes to help '
+            'minority students. Real equality means making sure that every '
+            'community has equal chances to learn, work and take part in '
+            'public life.',
+      ),
+      LessonSection(
+        'Safeguards in the Constitution',
+        'The Constitution gives special protection to marginalised '
+            'groups. Article 17 abolished untouchability. Article 15 says '
+            'no citizen can be discriminated against because of religion, '
+            'race, caste, sex or place of birth. The government has a '
+            'policy of reservation, which keeps a share of seats in '
+            'schools, colleges, government jobs and legislatures for '
+            'Scheduled Castes, Scheduled Tribes and Other Backward Classes. '
+            'Scholarships and hostels help students from these groups to '
+            'study further.',
+      ),
+      LessonSection(
+        'Laws that protect',
+        'The Scheduled Castes and Scheduled Tribes (Prevention of '
+            'Atrocities) Act of 1989 punishes people who insult, harm or '
+            'take away the land of Dalits and Adivasis. Dalit and Adivasi '
+            'groups fought hard for this law. The Forest Rights Act of 2006 '
+            'recognises the rights of forest dwellers to the land they have '
+            'lived on. The Manual Scavengers Act of 2013 bans the cruel '
+            'practice of cleaning toilets and sewers by hand and asks for '
+            'rehabilitation of workers.',
+      ),
+      LessonSection(
+        'Think about it',
+        'Have you ever felt left out because of the way you speak, '
+            'dress or look? How did it feel? Think of one thing you could '
+            'do to make a classmate who feels left out feel welcome and '
+            'respected.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -405,6 +700,69 @@ const List<Lesson> class8CivicsLessons = [
         'When poisonous gas leaked in Bhopal, thousands died and many more '
             'fell ill. It showed the need for strict safety and environment '
             'laws.',
+      ),
+      LessonSection(
+        'Water as a public facility',
+        'Some services, like water, health care, electricity, public '
+            'transport and schools, are so important that they must reach '
+            'everyone. These are public facilities. Water is essential for '
+            'life, and courts have said that the right to water is part of '
+            'the right to life under Article 21. Yet many people, '
+            'especially in poor areas, still lack safe drinking water. In '
+            'Chennai, for example, some areas get regular piped water while '
+            'others depend on tankers.',
+      ),
+      LessonSection(
+        'Government’s role',
+        'Private companies usually provide goods only where they can '
+            'make a profit, so poor people may be left out. That is why the '
+            'government must take the lead in providing public facilities, '
+            'at low or no cost. Public facilities are paid for through '
+            'taxes collected by the government. Porto Alegre in Brazil '
+            'showed how a city can provide clean water to almost everyone '
+            'through good public planning. Ensuring fair access to such '
+            'facilities is part of social justice.',
+      ),
+      LessonSection(
+        'Workers and minimum wages',
+        'Laws also protect workers in markets and factories. The '
+            'Minimum Wages Act says workers must be paid at least a fixed '
+            'amount, so they are not underpaid. Laws limit working hours, '
+            'require safety equipment and ban employing children in '
+            'dangerous work; the Child Labour Act protects children. Many '
+            'workers, like construction labourers and domestic workers, '
+            'still face low pay and unsafe conditions because laws are not '
+            'always enforced. Workers’ unions help them demand their '
+            'rights.',
+      ),
+      LessonSection(
+        'The Bhopal gas tragedy',
+        'On the night of 2 December 1984, poisonous gas called methyl '
+            'isocyanate leaked from a pesticide factory owned by Union '
+            'Carbide, an American company, in Bhopal. Thousands of people '
+            'died within days, and many more suffered lifelong illnesses. '
+            'Safety systems at the plant had not been working properly. The '
+            'victims fought for years for justice and fair compensation. '
+            'The disaster showed how weak safety laws and poor enforcement '
+            'can cost thousands of lives.',
+      ),
+      LessonSection(
+        'Protecting the environment',
+        'After Bhopal, India passed stronger laws on the environment, '
+            'such as the Environment Protection Act of 1986. Courts have '
+            'also said that a clean environment is part of the right to '
+            'life. They have ordered factories that pollute rivers to close '
+            'or move, and ordered cleaner fuel, like CNG, for buses in '
+            'Delhi. Laws are useful only when the government enforces them '
+            'and citizens stay alert, raise their voices and use courts to '
+            'demand their rights.',
+      ),
+      LessonSection(
+        'Think about it',
+        'Is there a public tap, government school, health centre or bus '
+            'service near your home? Find out who runs it and how well it '
+            'works. What would you suggest to the government to make such '
+            'facilities better for everyone?',
       ),
     ],
     quiz: [

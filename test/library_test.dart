@@ -187,13 +187,13 @@ void main() {
     }
   });
 
-  test('Class 6-8 and GK Polity Full reads are a page long (450+ words)', () {
+  test('Class 6-8 and finished GK Full reads are a page long (450+)', () {
     final c6 = builtInCourses.where(
       (c) =>
           const ['Class 6', 'Class 7', 'Class 8'].contains(c.studentClass) ||
-          c.id == 'gk-polity',
+          const ['gk-polity', 'gk-medieval-india'].contains(c.id),
     );
-    expect(c6, hasLength(10));
+    expect(c6, hasLength(11));
     for (final lesson in c6.expand((c) => c.lessons)) {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)

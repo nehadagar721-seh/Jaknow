@@ -51,6 +51,61 @@ const List<Lesson> polityLessons = [
             'now marked as Constitution Day. It came into force on 26 January '
             '1950, which we celebrate as Republic Day.',
       ),
+      LessonSection(
+        'Steps before 1946',
+        'The demand for a constitution made by Indians grew during the '
+            'freedom struggle. In 1934, M. N. Roy first put forward the '
+            'idea of a Constituent Assembly, and in 1935 the Congress made '
+            'it an official demand. British laws like the Government of '
+            'India Act 1935 had already set up provinces, a federal plan '
+            'and many rules about administration. In 1946, the Cabinet '
+            'Mission Plan finally laid down how a Constituent Assembly '
+            'would be formed, with members elected by the provincial '
+            'assemblies.',
+      ),
+      LessonSection(
+        'Who was in the Assembly',
+        'The Constituent Assembly first met on 9 December 1946, with Dr '
+            'Sachchidananda Sinha as its temporary chairman. On 11 December '
+            '1946, Dr Rajendra Prasad was elected its permanent President, '
+            'and H. C. Mukherjee became Vice-President. B. N. Rau was the '
+            'constitutional adviser. After partition, the Assembly had 299 '
+            'members. It included leaders such as Jawaharlal Nehru, Sardar '
+            'Patel, Maulana Azad and Dr B. R. Ambedkar, and fifteen women, '
+            'including Sarojini Naidu, Hansa Mehta and Durgabai Deshmukh.',
+      ),
+      LessonSection(
+        'Committees and the Objectives Resolution',
+        'On 13 December 1946, Nehru moved the Objectives Resolution, '
+            'which set out the ideals of the future Constitution; it was '
+            'adopted on 22 January 1947 and later shaped the Preamble. The '
+            'Assembly worked through many committees. The Drafting '
+            'Committee, set up on 29 August 1947, was chaired by Dr '
+            'Ambedkar. Nehru headed the Union Powers and Union Constitution '
+            'Committees, and Sardar Patel headed the committee on '
+            'Fundamental Rights, Minorities and Tribal Areas, as well as '
+            'the Provincial Constitution Committee.',
+      ),
+      LessonSection(
+        'Facts to remember',
+        'The Assembly took 2 years, 11 months and 18 days to complete '
+            'the Constitution, holding 11 sessions. When adopted on 26 '
+            'November 1949, it had a Preamble, 395 articles and 8 '
+            'schedules. Some provisions, like those on citizenship and '
+            'elections, came into force at once. The rest began on 26 '
+            'January 1950, chosen because the Congress had declared Purna '
+            'Swaraj on that date in 1930. The Assembly also adopted the '
+            'national flag on 22 July 1947 and the national anthem and song '
+            'on 24 January 1950.',
+      ),
+      LessonSection(
+        'A handwritten original',
+        'The original Constitution was handwritten in Hindi and English '
+            'by Prem Behari Narain Raizada, in flowing calligraphy. Artists '
+            'from Santiniketan, led by Nandalal Bose, decorated its pages. '
+            'Members signed it on 24 January 1950, and the copies are kept '
+            'in nitrogen-filled cases in the Parliament library.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -143,6 +198,61 @@ const List<Lesson> polityLessons = [
             'the Union and the states. Citizens have a single citizenship, '
             'courts are independent, and every adult can vote.',
       ),
+      LessonSection(
+        'The longest written constitution',
+        'India’s Constitution is the longest written constitution of '
+            'any country. It is long because India is large and diverse, '
+            'because it contains rules for both the Union and the states, '
+            'and because it includes detailed rules on elections, services, '
+            'languages and special areas. Originally it had 395 articles in '
+            '22 parts and 8 schedules. Today, after many amendments, it has '
+            'about 470 articles in 25 parts and 12 schedules, although the '
+            'articles are still numbered up to 395, using letters like 21A.',
+      ),
+      LessonSection(
+        'Features borrowed from other countries',
+        'The makers studied many constitutions and took good ideas from '
+            'them. From Britain came parliamentary government, the rule of '
+            'law, single citizenship and law-making procedure. From the USA '
+            'came Fundamental Rights, judicial review, an independent '
+            'judiciary and the removal of the President. Ireland gave the '
+            'Directive Principles. Canada gave a federation with a strong '
+            'Centre. Australia gave the Concurrent List. The former USSR '
+            'gave Fundamental Duties, and the Weimar constitution of '
+            'Germany gave the suspension of rights during an emergency.',
+      ),
+      LessonSection(
+        'Federal with a strong Centre',
+        'India has a federal system, with powers divided between the '
+            'Union and the states through three lists in the Seventh '
+            'Schedule: the Union List, the State List and the Concurrent '
+            'List. But the Centre is stronger: there is a single '
+            'constitution, single citizenship, an integrated judiciary, '
+            'all-India services and an appointed Governor in each state. '
+            'During an emergency, the Union can take over many state '
+            'powers. This is why the Constitution is often described as '
+            'quasi-federal, or federal in form but unitary in spirit.',
+      ),
+      LessonSection(
+        'Rigid and flexible',
+        'The Constitution can be amended under Article 368. Some parts '
+            'can be changed by a simple majority in Parliament, like '
+            'forming new states. Most need a special majority: two-thirds '
+            'of members present and voting, and a majority of the total '
+            'membership of each House. Parts that affect the federal '
+            'structure also need approval by half the state legislatures. '
+            'So the Constitution is partly rigid and partly flexible. In '
+            'the Kesavananda Bharati case of 1973, the Supreme Court said '
+            'Parliament cannot change its basic structure.',
+      ),
+      LessonSection(
+        'Exam tip',
+        'Questions often ask which country a feature came from. A '
+            'simple way to remember: Britain for Parliament, the USA for '
+            'rights and courts, Ireland for Directive Principles, Canada '
+            'for a strong Centre, Australia for the Concurrent List, and '
+            'the USSR for Fundamental Duties.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -214,6 +324,61 @@ const List<Lesson> polityLessons = [
             'Liberty (of thought, expression, belief, faith and worship), '
             'Equality (of status and opportunity) and Fraternity (the dignity '
             'of each person and the unity and integrity of the nation).',
+      ),
+      LessonSection(
+        'Where the Preamble came from',
+        'The Preamble is the introduction to the Constitution. It is '
+            'based on the Objectives Resolution moved by Jawaharlal Nehru '
+            'in 1946. The idea of a preamble came from the Constitution of '
+            'the USA, which also begins with the words We the People. Nani '
+            'Palkhivala called the Preamble the identity card of the '
+            'Constitution. It tells us the source of authority, which is '
+            'the people of India, the nature of the Indian state, and the '
+            'goals the Constitution seeks to achieve.',
+      ),
+      LessonSection(
+        'Key words explained',
+        'Sovereign means India is free to decide its own internal and '
+            'external matters. Socialist means the state aims to reduce '
+            'inequality, through a mixed economy. Secular means the state '
+            'has no religion of its own and treats all faiths equally. '
+            'Democratic means power comes from the people, who elect their '
+            'government. Republic means the head of state, the President, '
+            'is elected and not a hereditary ruler. Justice, liberty, '
+            'equality and fraternity are the four ideals the Constitution '
+            'promises.',
+      ),
+      LessonSection(
+        'The 42nd Amendment',
+        'The Preamble has been amended only once. The 42nd Amendment '
+            'Act of 1976, passed during the Emergency, added three words: '
+            'socialist, secular and integrity. The phrase unity of the '
+            'nation became unity and integrity of the nation. Because it '
+            'was passed during the Emergency and made many other big '
+            'changes, the 42nd Amendment is sometimes called a '
+            'mini-constitution. Later, the 44th Amendment of 1978 reversed '
+            'some of its changes, but the words added to the Preamble '
+            'remained.',
+      ),
+      LessonSection(
+        'Is the Preamble part of the Constitution?',
+        'In the Berubari case of 1960, the Supreme Court said the '
+            'Preamble was not part of the Constitution. In the Kesavananda '
+            'Bharati case of 1973, it changed this view and said the '
+            'Preamble is a part of the Constitution and can be amended, but '
+            'its basic features cannot be destroyed. In 1995, in the LIC '
+            'case, the court again said it is an integral part. The '
+            'Preamble cannot be enforced in a court, but it helps judges '
+            'understand the meaning of the articles.',
+      ),
+      LessonSection(
+        'The full Preamble in short',
+        'In simple words, the Preamble says: we, the people of India, '
+            'resolve to make India a sovereign, socialist, secular, '
+            'democratic republic, and to secure for all citizens justice, '
+            'liberty and equality, and to promote fraternity, ensuring the '
+            'dignity of the individual and the unity and integrity of the '
+            'nation. It was adopted on 26 November 1949.',
       ),
     ],
     quiz: [
@@ -309,6 +474,54 @@ const List<Lesson> polityLessons = [
             'of orders, called writs: habeas corpus, mandamus, prohibition, '
             'certiorari and quo warranto.',
       ),
+      LessonSection(
+        'Equality and freedom',
+        'The Right to Equality covers Articles 14 to 18. Article 14 '
+            'gives equality before the law and equal protection of laws. '
+            'Article 15 forbids discrimination on grounds of religion, '
+            'race, caste, sex or place of birth. Article 16 gives equal '
+            'chances in government jobs. Article 17 abolishes '
+            'untouchability, and Article 18 abolishes titles, except '
+            'military and academic ones. The Right to Freedom covers '
+            'Articles 19 to 22, and Article 19 gives six freedoms, '
+            'including speech, assembly, movement and profession.',
+      ),
+      LessonSection(
+        'Life, liberty and education',
+        'Article 21 says no person shall be deprived of life or '
+            'personal liberty except according to procedure established by '
+            'law. Courts have widened this to include the right to privacy, '
+            'clean environment, shelter, livelihood, health and a speedy '
+            'trial. The 86th Amendment of 2002 added Article 21A, making '
+            'free and compulsory education a Fundamental Right for children '
+            'aged 6 to 14. Article 22 protects people who are arrested: '
+            'they must be told why and be produced before a magistrate '
+            'within 24 hours.',
+      ),
+      LessonSection(
+        'Against exploitation, and religion',
+        'The Right against Exploitation is in Articles 23 and 24. '
+            'Article 23 bans human trafficking and forced labour, called '
+            'begar. Article 24 bans employing children below 14 in '
+            'factories, mines and other dangerous work. The Right to '
+            'Freedom of Religion is in Articles 25 to 28: every person can '
+            'freely profess, practise and spread their religion, subject to '
+            'public order, morality and health. Articles 29 and 30 protect '
+            'the culture of minorities and their right to set up '
+            'educational institutions.',
+      ),
+      LessonSection(
+        'Writs and emergencies',
+        'Article 32 lets a person go directly to the Supreme Court if a '
+            'Fundamental Right is violated; High Courts have similar power '
+            'under Article 226. Courts can issue five writs: habeas corpus, '
+            'to produce a detained person; mandamus, ordering an official '
+            'to do their duty; prohibition and certiorari, to stop or '
+            'correct a lower court; and quo warranto, asking by what '
+            'authority someone holds a public office. During a national '
+            'emergency, some rights can be suspended, but Articles 20 and '
+            '21 can never be suspended.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -392,6 +605,55 @@ const List<Lesson> polityLessons = [
             'protecting the environment and developing a scientific temper. '
             'An eleventh duty, for parents to give children aged 6 to 14 a '
             'chance to study, was added in 2002.',
+      ),
+      LessonSection(
+        'Idea from Ireland',
+        'The Directive Principles of State Policy are in Part IV, '
+            'Articles 36 to 51. The idea was borrowed from the Constitution '
+            'of Ireland. They are instructions to the government to work '
+            'towards a welfare state, where everyone has a decent life. '
+            'Unlike Fundamental Rights, they cannot be enforced in a court; '
+            'this is said in Article 37. But they are fundamental in '
+            'governing the country, and the government must keep them in '
+            'mind while making laws. Dr Ambedkar called them a novel '
+            'feature.',
+      ),
+      LessonSection(
+        'Three groups of principles',
+        'The principles can be grouped into three kinds. Socialistic '
+            'principles ask the state to reduce inequality, give adequate '
+            'livelihood, equal pay for equal work, and help in old age and '
+            'sickness. Gandhian principles ask the state to organise '
+            'village panchayats (Article 40), promote cottage industries, '
+            'ban intoxicating drinks and protect cows. Liberal-intellectual '
+            'principles ask for a uniform civil code (Article 44), '
+            'separation of the judiciary from the executive (Article 50), '
+            'protection of monuments and the environment, and promotion of '
+            'international peace (Article 51).',
+      ),
+      LessonSection(
+        'Principles turned into laws',
+        'Many Directive Principles have become reality through laws and '
+            'schemes. Land reforms abolished zamindari. The 73rd Amendment '
+            'created panchayats, as Article 40 asked. Free legal aid '
+            '(Article 39A) is given through the Legal Services Authorities '
+            'Act. Minimum wage laws, maternity benefits and schemes like '
+            'MGNREGA support workers. Article 45, which earlier promised '
+            'education for children, now asks for early childhood care for '
+            'children below six, since education for 6 to 14 became a '
+            'Fundamental Right.',
+      ),
+      LessonSection(
+        'The eleven Fundamental Duties',
+        'Fundamental Duties were added in Part IVA, Article 51A, by the '
+            '42nd Amendment of 1976, on the recommendation of the Swaran '
+            'Singh Committee. The idea came from the former USSR. There '
+            'were ten duties at first; the 86th Amendment of 2002 added an '
+            'eleventh, asking parents to provide education to children aged '
+            '6 to 14. Duties include respecting the Constitution, flag and '
+            'anthem, protecting the environment, developing scientific '
+            'temper, protecting public property and promoting harmony. Like '
+            'the Directive Principles, they cannot be enforced in court.',
       ),
     ],
     quiz: [
@@ -480,6 +742,65 @@ const List<Lesson> polityLessons = [
             'emergency (Article 360). The President can also grant pardons. '
             'Removal is only through impeachment by Parliament.',
       ),
+      LessonSection(
+        'Who can become President',
+        'Under Article 58, a candidate for President must be a citizen '
+            'of India, at least 35 years old, and qualified to be elected '
+            'to the Lok Sabha. They must not hold any office of profit '
+            'under the government. A candidate’s nomination must be '
+            'proposed by at least 50 electors and seconded by another 50. A '
+            'security deposit of 15,000 rupees is paid. The President is '
+            'elected for five years and can be re-elected; Dr Rajendra '
+            'Prasad was the only President elected twice.',
+      ),
+      LessonSection(
+        'The electoral college',
+        'The President is elected indirectly, by an electoral college '
+            'made up of the elected members of both Houses of Parliament '
+            'and the elected members of the Legislative Assemblies of all '
+            'states, as well as of Delhi and Puducherry. Nominated members '
+            'and members of state Legislative Councils do not vote. The '
+            'election uses proportional representation by means of the '
+            'single transferable vote, and voting is by secret ballot. '
+            'Disputes about the election are decided only by the Supreme '
+            'Court.',
+      ),
+      LessonSection(
+        'Executive and legislative powers',
+        'All executive actions of the Union government are taken in the '
+            'President’s name. The President appoints the Prime Minister '
+            'and other ministers, the Attorney General, the Comptroller and '
+            'Auditor General, the Chief Election Commissioner, Governors '
+            'and judges of the Supreme Court and High Courts. The President '
+            'summons and prorogues Parliament, can dissolve the Lok Sabha, '
+            'addresses the first session after each general election, and '
+            'can issue ordinances under Article 123 when Parliament is not '
+            'in session.',
+      ),
+      LessonSection(
+        'Veto, pardon and emergencies',
+        'When a bill is sent for assent, the President can sign it, '
+            'withhold assent (absolute veto), or return it for '
+            'reconsideration (suspensive veto); if Parliament passes it '
+            'again, the President must sign. The President can also keep a '
+            'bill pending with no time limit, called a pocket veto, used by '
+            'Giani Zail Singh in 1986. Under Article 72, the President can '
+            'pardon or reduce sentences. The President can declare a '
+            'national emergency (Article 352), President’s Rule in a state '
+            '(Article 356) and a financial emergency (Article 360).',
+      ),
+      LessonSection(
+        'Removal and the Vice-President',
+        'The President can be removed by impeachment under Article 61 '
+            'for violation of the Constitution. The charge must be passed '
+            'by a two-thirds majority of the total membership of each '
+            'House; no President has ever been impeached. The '
+            'Vice-President is the ex officio Chairman of the Rajya Sabha '
+            'and acts as President if the office falls vacant, for up to '
+            'six months. The Vice-President is elected by members of both '
+            'Houses of Parliament. Dr S. Radhakrishnan was India’s first '
+            'Vice-President.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -555,6 +876,64 @@ const List<Lesson> polityLessons = [
             'Sabha: if the Lok Sabha passes a vote of no confidence, the '
             'whole government must resign. Since 2003, the Council can have '
             'at most 15% as many members as the Lok Sabha.',
+      ),
+      LessonSection(
+        'A parliamentary system',
+        'India follows the British model of parliamentary government. '
+            'The President is the nominal or formal head, while real power '
+            'lies with the Council of Ministers headed by the Prime '
+            'Minister. Article 74 says there shall be a Council of '
+            'Ministers with the Prime Minister at its head to aid and '
+            'advise the President, and the President must act on this '
+            'advice. After the 44th Amendment, the President can send the '
+            'advice back once for reconsideration, but must accept it the '
+            'second time.',
+      ),
+      LessonSection(
+        'Appointment of the Prime Minister',
+        'Under Article 75, the President appoints the Prime Minister. '
+            'Usually, this is the leader of the party or coalition that has '
+            'a majority in the Lok Sabha. If no party has a clear majority, '
+            'the President uses discretion and may ask the leader to prove '
+            'majority on the floor of the House within a set time. A person '
+            'who is not a member of Parliament can be appointed Prime '
+            'Minister or minister, but must become a member within six '
+            'months.',
+      ),
+      LessonSection(
+        'Kinds of ministers',
+        'The Council of Ministers has three ranks. Cabinet ministers '
+            'head important ministries, like Home, Defence, Finance and '
+            'External Affairs, and meet regularly as the Cabinet, which '
+            'takes the main decisions. Ministers of State may hold '
+            'independent charge of a ministry or assist Cabinet ministers. '
+            'Deputy Ministers assist other ministers. The 91st Amendment of '
+            '2003 limited the total number of ministers, including the '
+            'Prime Minister, to 15 per cent of the strength of the Lok '
+            'Sabha. The same limit applies to states.',
+      ),
+      LessonSection(
+        'Collective responsibility',
+        'Article 75(3) says the Council of Ministers is collectively '
+            'responsible to the Lok Sabha. This means all ministers swim '
+            'and sink together: if the Lok Sabha passes a motion of no '
+            'confidence, the whole ministry must resign. Ministers must '
+            'support Cabinet decisions in public, even if they disagreed in '
+            'private. Ministers are also individually responsible to the '
+            'President and hold office during the President’s pleasure, '
+            'which in practice means the Prime Minister can ask any '
+            'minister to resign.',
+      ),
+      LessonSection(
+        'Prime Ministers to remember',
+        'Jawaharlal Nehru was India’s first and longest-serving Prime '
+            'Minister, from 1947 to 1964. Gulzarilal Nanda was acting Prime '
+            'Minister twice. Lal Bahadur Shastri gave the slogan Jai Jawan '
+            'Jai Kisan. Indira Gandhi was the first woman Prime Minister. '
+            'Morarji Desai was the first non-Congress Prime Minister, in '
+            '1977. Rajiv Gandhi became the youngest, at 40. Manmohan Singh '
+            'was the first Sikh Prime Minister. Narendra Modi became Prime '
+            'Minister in 2014 and was sworn in for a third term in 2024.',
       ),
     ],
     quiz: [
@@ -637,6 +1016,64 @@ const List<Lesson> polityLessons = [
             'Rajya Sabha can hold it back for at most 14 days. If the Houses '
             'disagree on an ordinary bill, the President can call a joint '
             'sitting, presided over by the Speaker.',
+      ),
+      LessonSection(
+        'Lok Sabha and Rajya Sabha',
+        'Parliament, under Article 79, consists of the President and '
+            'two Houses. The Lok Sabha is the House of the People; its '
+            'members are directly elected, and its maximum strength is 550, '
+            'with 543 elected seats at present. The Rajya Sabha is the '
+            'Council of States; its maximum strength is 250, of whom 238 '
+            'represent states and union territories and 12 are nominated by '
+            'the President for knowledge in literature, science, art and '
+            'social service. Members of the Rajya Sabha are elected by '
+            'state legislative assemblies.',
+      ),
+      LessonSection(
+        'Age, terms and presiding officers',
+        'A person must be at least 25 years old to be a member of the '
+            'Lok Sabha and 30 years old for the Rajya Sabha. The Lok Sabha '
+            'has a term of five years but can be dissolved earlier. The '
+            'Rajya Sabha is a permanent House: it is never dissolved, and '
+            'one-third of its members retire every two years, each serving '
+            'six years. The Lok Sabha is presided over by the Speaker, '
+            'elected by its members; G. V. Mavalankar was the first '
+            'Speaker. The Vice-President chairs the Rajya Sabha.',
+      ),
+      LessonSection(
+        'Stages of a bill',
+        'A bill is a proposed law. It goes through first reading, when '
+            'it is introduced; second reading, when it is discussed in '
+            'detail, often by a committee; and third reading, when it is '
+            'passed or rejected. It then goes to the other House and '
+            'follows the same steps. If the two Houses disagree on an '
+            'ordinary bill, the President can call a joint sitting under '
+            'Article 108, presided over by the Speaker. Joint sittings have '
+            'been held only three times, the last in 2002 for the '
+            'anti-terrorism law POTA.',
+      ),
+      LessonSection(
+        'Money bills and the budget',
+        'A Money Bill, defined in Article 110, deals with taxes, '
+            'borrowing and government spending. It can be introduced only '
+            'in the Lok Sabha, with the President’s recommendation, and the '
+            'Speaker decides whether a bill is a Money Bill. The Rajya '
+            'Sabha cannot reject it; it can only suggest changes within 14 '
+            'days, which the Lok Sabha may accept or reject. The Union '
+            'Budget, called the Annual Financial Statement in Article 112, '
+            'is presented every year, usually on 1 February.',
+      ),
+      LessonSection(
+        'How Parliament controls the government',
+        'Parliament uses many tools to keep the government answerable. '
+            'The first hour of a sitting is usually Question Hour, and the '
+            'time after it is Zero Hour, an Indian practice where urgent '
+            'matters are raised. Members can move adjournment motions, '
+            'calling attention motions and no-confidence motions, which can '
+            'be moved only in the Lok Sabha. Committees like the Public '
+            'Accounts Committee, which studies the reports of the '
+            'Comptroller and Auditor General, check how government money is '
+            'spent.',
       ),
     ],
     quiz: [
@@ -722,6 +1159,64 @@ const List<Lesson> polityLessons = [
             'writs under Articles 32 and 226, and through public interest '
             'litigation, they protect people’s rights.',
       ),
+      LessonSection(
+        'The Supreme Court',
+        'The Supreme Court was inaugurated on 28 January 1950 and is '
+            'the highest court in India. Article 124 provides for it. '
+            'Originally it had a Chief Justice and seven other judges; '
+            'Parliament has increased the number, and today it can have 34 '
+            'judges, including the Chief Justice. H. J. Kania was the first '
+            'Chief Justice of India. Judges hold office until the age of '
+            '65. Article 141 says the law declared by the Supreme Court is '
+            'binding on all courts in India.',
+      ),
+      LessonSection(
+        'Jurisdiction of the Supreme Court',
+        'The Supreme Court has original jurisdiction over disputes '
+            'between the Centre and states, or between states (Article '
+            '131). It has writ jurisdiction to protect Fundamental Rights '
+            '(Article 32). It hears appeals from High Courts in '
+            'constitutional, civil and criminal cases. Under Article 136, '
+            'it can grant special leave to appeal from any court. Under '
+            'Article 143, the President can ask for its advisory opinion on '
+            'a question of law. It is also a court of record, and can '
+            'punish for contempt of court.',
+      ),
+      LessonSection(
+        'High Courts and lower courts',
+        'Article 214 provides a High Court for each state, though some '
+            'states share one; for example, Punjab, Haryana and Chandigarh '
+            'share a High Court. India has 25 High Courts. The Calcutta '
+            'High Court, set up in 1862, is the oldest. High Court judges '
+            'retire at 62. Below the High Courts are district courts and '
+            'subordinate courts. Lok Adalats, or people’s courts, settle '
+            'disputes quickly through compromise, and family courts and '
+            'consumer courts deal with special kinds of cases.',
+      ),
+      LessonSection(
+        'Appointment and removal of judges',
+        'Judges of the Supreme Court and High Courts are appointed by '
+            'the President. In practice, they are recommended by a '
+            'collegium of senior judges, a system developed through cases '
+            'known as the Judges cases of 1981, 1993 and 1998. The National '
+            'Judicial Appointments Commission, created in 2014, was struck '
+            'down by the Supreme Court in 2015. A judge can be removed only '
+            'by Parliament for proved misbehaviour or incapacity, by a '
+            'special majority in each House; no judge has ever been removed '
+            'this way.',
+      ),
+      LessonSection(
+        'Judicial review and activism',
+        'Judicial review is the power of courts to examine whether laws '
+            'and government actions follow the Constitution, and to strike '
+            'them down if they do not. Articles 13, 32 and 226 support this '
+            'power. Judicial activism means courts taking an active role to '
+            'protect rights, for example through public interest '
+            'litigation. In the Kesavananda Bharati case (1973), the '
+            'Supreme Court gave the basic structure doctrine. In the Maneka '
+            'Gandhi case (1978), it widened the meaning of personal liberty '
+            'under Article 21.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -802,6 +1297,65 @@ const List<Lesson> polityLessons = [
             'Part IXA on municipalities: nagar panchayats, municipal councils '
             'and municipal corporations. The Twelfth Schedule lists 18 '
             'subjects they handle.',
+      ),
+      LessonSection(
+        'Committees on local government',
+        'After independence, the Community Development Programme of '
+            '1952 tried to involve villages in development, but it did not '
+            'work well. In 1957, the Balwantrai Mehta Committee recommended '
+            'a three-tier system of panchayats, which it called democratic '
+            'decentralisation. Rajasthan became the first state to set it '
+            'up, at Nagaur on 2 October 1959, followed by Andhra Pradesh. '
+            'Later, the Ashok Mehta Committee (1977) and the L. M. Singhvi '
+            'Committee (1986) suggested giving panchayats constitutional '
+            'status.',
+      ),
+      LessonSection(
+        'The 73rd Amendment',
+        'The 73rd Amendment Act of 1992 came into force on 24 April '
+            '1993, now celebrated as National Panchayati Raj Day. It added '
+            'Part IX and the Eleventh Schedule, which lists 29 subjects '
+            'that can be given to panchayats, such as farming, drinking '
+            'water, roads and primary education. It set up a three-tier '
+            'system: gram panchayat at the village level, panchayat samiti '
+            'at the block level and zila parishad at the district level. '
+            'States with a population below 20 lakh need not have the '
+            'middle tier.',
+      ),
+      LessonSection(
+        'Gram Sabha and elections',
+        'The Gram Sabha includes all adults registered as voters in a '
+            'village. It is the foundation of Panchayati Raj, where '
+            'villagers discuss plans, choose beneficiaries of schemes and '
+            'check the panchayat’s accounts. Panchayat elections are held '
+            'every five years by the State Election Commission. One-third '
+            'of seats must be reserved for women, and many states have '
+            'raised this to half. Seats are also reserved for Scheduled '
+            'Castes and Scheduled Tribes. A State Finance Commission '
+            'reviews panchayat finances every five years.',
+      ),
+      LessonSection(
+        'The 74th Amendment',
+        'The 74th Amendment Act of 1992 came into force on 1 June 1993. '
+            'It added Part IXA and the Twelfth Schedule, listing 18 '
+            'subjects for urban local bodies, like town planning, water '
+            'supply, public health, slum improvement and fire services. It '
+            'provides for three kinds of bodies: a nagar panchayat for an '
+            'area changing from rural to urban, a municipal council for a '
+            'smaller town, and a municipal corporation for a large city. A '
+            'Mayor heads a corporation, while a commissioner manages its '
+            'daily work.',
+      ),
+      LessonSection(
+        'Why local government matters',
+        'Local governments bring democracy closest to the people. They '
+            'understand local problems best, like a broken handpump or a '
+            'poorly run school, and can act quickly. Reservation for women '
+            'has brought lakhs of women into public life as panchayat '
+            'members and sarpanches. But many local bodies still lack '
+            'money, staff and real powers, since states decide how much to '
+            'hand over. Strong local bodies, active Gram Sabhas and '
+            'informed citizens together make grassroots democracy work.',
       ),
     ],
     quiz: [

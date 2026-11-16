@@ -80,7 +80,7 @@ void main() {
     expect(geo.lessons.map((l) => l.unit).toSet(), hasLength(5));
     for (final lesson in geo.lessons) {
       expect(lesson.id, startsWith('gk-geography-'));
-      expect(lesson.sections, hasLength(3));
+      expect(lesson.sections.length, greaterThanOrEqualTo(5));
       expect(lesson.quiz.every((q) => q.options.length == 4), isTrue);
     }
     expect(LibraryService.search(builtInCourses, 'monsoon'), isNotEmpty);
@@ -195,9 +195,10 @@ void main() {
             'gk-polity',
             'gk-medieval-india',
             'gk-modern-india',
+            'gk-indian-geography',
           ].contains(c.id),
     );
-    expect(c6, hasLength(12));
+    expect(c6, hasLength(13));
     for (final lesson in c6.expand((c) => c.lessons)) {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)

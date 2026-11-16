@@ -109,7 +109,7 @@ void main() {
     for (final lesson in eco.lessons) {
       expect(lesson.id, startsWith('gk-economy-'));
       expect(lesson.keyPoints.length, greaterThanOrEqualTo(5));
-      expect(lesson.sections, hasLength(3));
+      expect(lesson.sections.length, greaterThanOrEqualTo(5));
       expect(lesson.quiz.every((q) => q.options.length == 4), isTrue);
     }
     expect(LibraryService.search(builtInCourses, 'gst'), isNotEmpty);
@@ -197,9 +197,10 @@ void main() {
             'gk-modern-india',
             'gk-indian-geography',
             'gk-world-geography',
+            'gk-indian-economy',
           ].contains(c.id),
     );
-    expect(c6, hasLength(14));
+    expect(c6, hasLength(15));
     for (final lesson in c6.expand((c) => c.lessons)) {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)

@@ -54,6 +54,66 @@ const List<Lesson> indianEconomyLessons = [
             'socialist economy, the state owns most of them. India chose a '
             'mixed economy, where both work side by side.',
       ),
+      LessonSection(
+        'Needs, wants and scarcity',
+        'Economics is the study of how people, businesses and '
+            'governments use limited resources to meet their needs and '
+            'wants. Needs are things we must have, like food, water and '
+            'shelter; wants are things we would like, like a new phone. '
+            'Resources such as land, money and time are scarce, so every '
+            'choice has a cost. The value of the next best thing we give up '
+            'is called opportunity cost. The four factors of production are '
+            'land, labour, capital and entrepreneurship.',
+      ),
+      LessonSection(
+        'Primary, secondary and tertiary',
+        'The primary sector uses natural resources directly: farming, '
+            'fishing, forestry and mining. The secondary sector changes raw '
+            'materials into goods, like factories making cloth, steel or '
+            'cars, and also includes construction and electricity. The '
+            'tertiary sector, or service sector, provides services such as '
+            'banking, transport, trade, teaching, health care and '
+            'information technology. In India, the service sector gives the '
+            'largest share of national income, while agriculture still '
+            'employs the largest number of people. Some experts add a '
+            'quaternary sector for knowledge-based work.',
+      ),
+      LessonSection(
+        'GDP, GNP and per capita income',
+        'Gross Domestic Product, or GDP, is the total value of all '
+            'final goods and services produced within a country in a year. '
+            'Gross National Product, or GNP, adds the income earned by '
+            'citizens abroad and subtracts what foreigners earn in the '
+            'country. Net figures subtract depreciation, the wear and tear '
+            'of machines. Per capita income is the national income divided '
+            'by the population, showing average income per person. Nominal '
+            'GDP uses current prices, while real GDP removes the effect of '
+            'rising prices.',
+      ),
+      LessonSection(
+        'Who measures it',
+        'In India, the National Statistical Office (NSO), under the '
+            'Ministry of Statistics and Programme Implementation, measures '
+            'national income. It uses a base year to compare growth; GDP is '
+            'measured at constant prices of that base year. The Gross Value '
+            'Added, or GVA, shows the value added by each sector. '
+            'Economists also use the Human Development Index, made by the '
+            'United Nations Development Programme, which looks at health, '
+            'education and income together, because income alone does not '
+            'show how well people live.',
+      ),
+      LessonSection(
+        'Capitalist, socialist and mixed',
+        'In a capitalist or market economy, like the USA, most '
+            'businesses are privately owned, and prices are set by demand '
+            'and supply. In a socialist economy, like the former Soviet '
+            'Union, the government owns most resources and plans what to '
+            'produce. A mixed economy combines both: private businesses and '
+            'government enterprises work side by side. India chose a mixed '
+            'economy after independence, with the government running key '
+            'industries like railways and steel, while private companies '
+            'run most shops, farms and factories.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -127,6 +187,65 @@ const List<Lesson> indianEconomyLessons = [
             'private firms into more areas (privatisation), and welcomed '
             'foreign trade and investment (globalisation). Growth sped up '
             'after this.',
+      ),
+      LessonSection(
+        'Planning begins',
+        'After independence, India decided to develop through planning. '
+            'The Planning Commission was set up on 15 March 1950, with '
+            'Prime Minister Jawaharlal Nehru as its chairman. The first '
+            'Five-Year Plan (1951 to 1956), based on the Harrod-Domar '
+            'model, focused on agriculture and irrigation. The second Plan '
+            '(1956 to 1961), based on the model of P. C. Mahalanobis, '
+            'focused on heavy industries like steel. The National '
+            'Development Council, set up in 1952, brought the Centre and '
+            'states together to approve plans.',
+      ),
+      LessonSection(
+        'Twelve plans and their goals',
+        'India had twelve Five-Year Plans in all. Plan holidays, with '
+            'only annual plans, happened from 1966 to 1969 and in 1990 to '
+            '1992. The fifth Plan (1974 to 1979) aimed at Garibi Hatao, or '
+            'removing poverty. The eighth Plan (1992 to 1997) supported the '
+            'new economic reforms. The eleventh Plan aimed at faster and '
+            'more inclusive growth, and the twelfth (2012 to 2017), the '
+            'last, aimed at faster, more inclusive and sustainable growth. '
+            'Some plans met their targets, while others fell short.',
+      ),
+      LessonSection(
+        'From Planning Commission to NITI Aayog',
+        'On 1 January 2015, the Planning Commission was replaced by '
+            'NITI Aayog, the National Institution for Transforming India. '
+            'The Prime Minister is its chairperson, and it has a '
+            'Vice-Chairperson, full-time members and a Chief Executive '
+            'Officer. Its Governing Council includes all Chief Ministers. '
+            'Unlike the Planning Commission, NITI Aayog does not give money '
+            'to states; it acts as a think tank, giving advice, promoting '
+            'cooperative federalism and tracking progress through indices '
+            'on health, education and the Sustainable Development Goals.',
+      ),
+      LessonSection(
+        'The 1991 crisis',
+        'By 1991, India faced a serious balance of payments crisis. Its '
+            'foreign exchange reserves had fallen so low that they could '
+            'pay for only about two weeks of imports. Oil prices had risen '
+            'during the Gulf War, and government debt was high. India had '
+            'to pledge gold with foreign banks to borrow money. The new '
+            'government of Prime Minister P. V. Narasimha Rao, with Dr '
+            'Manmohan Singh as Finance Minister, decided to change economic '
+            'policy completely, with help from the IMF and World Bank.',
+      ),
+      LessonSection(
+        'LPG reforms',
+        'The 1991 reforms are known as LPG: Liberalisation, '
+            'Privatisation and Globalisation. Liberalisation ended most of '
+            'the licence raj, the system of permits needed to start or '
+            'expand businesses. Privatisation reduced the government’s '
+            'role, selling shares in public sector companies, called '
+            'disinvestment. Globalisation opened India to foreign trade and '
+            'investment by lowering import duties and allowing foreign '
+            'companies to invest. The rupee was devalued. After the '
+            'reforms, India’s economy grew faster, and industries like '
+            'information technology boomed.',
       ),
     ],
     quiz: [
@@ -203,6 +322,62 @@ const List<Lesson> indianEconomyLessons = [
             'Government of India; the ₹1 note carries the Finance '
             'Secretary’s signature instead of the RBI Governor’s.',
       ),
+      LessonSection(
+        'History of the RBI',
+        'The Reserve Bank of India was set up on 1 April 1935 under the '
+            'Reserve Bank of India Act, 1934, based on the recommendations '
+            'of the Hilton Young Commission. Its first headquarters was in '
+            'Calcutta; it moved to Mumbai in 1937. Sir Osborne Smith was '
+            'its first Governor, and C. D. Deshmukh was the first Indian '
+            'Governor. The RBI was nationalised on 1 January 1949, so it is '
+            'now fully owned by the Government of India. Its Governor is '
+            'appointed by the government.',
+      ),
+      LessonSection(
+        'What the RBI does',
+        'The RBI is India’s central bank. It issues currency notes, '
+            'except the one-rupee note, which is issued by the Ministry of '
+            'Finance. It is the banker to the government, managing its '
+            'accounts and borrowing. It is the banker’s bank, keeping a '
+            'part of banks’ deposits and lending to them when needed; it is '
+            'called the lender of last resort. It regulates and supervises '
+            'banks, manages foreign exchange reserves and the value of the '
+            'rupee, and runs payment systems.',
+      ),
+      LessonSection(
+        'Monetary policy tools',
+        'Monetary policy controls the amount of money and credit in the '
+            'economy. The Monetary Policy Committee, with six members '
+            'headed by the RBI Governor, decides the repo rate, the rate at '
+            'which the RBI lends to banks for short periods. The reverse '
+            'repo rate is the rate at which it borrows from banks. The Cash '
+            'Reserve Ratio (CRR) is the share of deposits that banks must '
+            'keep with the RBI, and the Statutory Liquidity Ratio (SLR) is '
+            'the share they must keep in safe assets like gold and '
+            'government bonds.',
+      ),
+      LessonSection(
+        'Inflation targeting',
+        'Since 2016, the RBI has followed a system called inflation '
+            'targeting. The government sets a target for consumer price '
+            'inflation of 4 per cent, with a range of 2 to 6 per cent. When '
+            'inflation is too high, the RBI usually raises the repo rate, '
+            'making loans costlier so that people spend less and prices '
+            'cool down. When growth is slow, it may cut rates to make '
+            'borrowing cheaper. This system was introduced after the '
+            'recommendations of the Urjit Patel Committee.',
+      ),
+      LessonSection(
+        'Notes, coins and the digital rupee',
+        'Currency notes carry the signature of the RBI Governor and a '
+            'promise to pay the bearer, while the one-rupee note carries '
+            'the Finance Secretary’s signature. Coins are minted by the '
+            'government at mints in Mumbai, Kolkata, Hyderabad and Noida. '
+            'Notes are printed at presses in Nashik, Dewas, Mysuru and '
+            'Salboni. The rupee symbol, designed by D. Udaya Kumar, was '
+            'adopted in 2010. In 2022, the RBI began pilots of the e-rupee, '
+            'India’s central bank digital currency.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -271,6 +446,63 @@ const List<Lesson> indianEconomyLessons = [
             'and UPI. With UPI, you can send money with a QR code or a phone '
             'number in seconds. India now makes a huge number of digital '
             'payments every day.',
+      ),
+      LessonSection(
+        'Kinds of banks',
+        'Banks accept deposits and give loans. India has public sector '
+            'banks, owned mostly by the government, like the State Bank of '
+            'India, the largest bank; private sector banks; foreign banks; '
+            'regional rural banks, set up in 1975 to serve villages; '
+            'cooperative banks; small finance banks; and payments banks, '
+            'which can take small deposits but cannot give loans. NABARD, '
+            'set up in 1982, supports agriculture and rural development, '
+            'and SIDBI supports small industries.',
+      ),
+      LessonSection(
+        'Bank nationalisation and inclusion',
+        'On 19 July 1969, the government under Indira Gandhi '
+            'nationalised 14 major banks, and six more were nationalised in '
+            '1980, so that banks would lend to farmers, small businesses '
+            'and poor people. To bring every family into the banking '
+            'system, the Pradhan Mantri Jan Dhan Yojana was launched in '
+            '2014, opening hundreds of millions of zero-balance accounts. '
+            'The JAM trinity, Jan Dhan accounts, Aadhaar and mobile phones, '
+            'helps the government send money directly to people through '
+            'Direct Benefit Transfer.',
+      ),
+      LessonSection(
+        'Stock exchanges and SEBI',
+        'A stock exchange is a market where shares of companies are '
+            'bought and sold. The Bombay Stock Exchange, set up in 1875, is '
+            'Asia’s oldest stock exchange; its main index is the Sensex, '
+            'made of 30 companies. The National Stock Exchange, set up in '
+            '1992, has the Nifty 50 index. The Securities and Exchange '
+            'Board of India, SEBI, set up in 1988 and given legal powers in '
+            '1992, regulates the stock market and protects investors. A '
+            'rising market is called bullish and a falling one bearish.',
+      ),
+      LessonSection(
+        'UPI and digital payments',
+        'The National Payments Corporation of India (NPCI), set up in '
+            '2008, runs many of India’s payment systems. It launched the '
+            'Unified Payments Interface, UPI, in 2016, which lets people '
+            'send money instantly from their phones using a simple ID or QR '
+            'code. UPI has made India a world leader in digital payments, '
+            'and it is now used in several other countries too. NPCI also '
+            'runs RuPay cards, IMPS for instant transfers, and FASTag for '
+            'paying road tolls.',
+      ),
+      LessonSection(
+        'Insurance and safety of savings',
+        'Insurance protects people against risks like illness, '
+            'accidents or loss of property. The Life Insurance Corporation '
+            'of India (LIC) was set up in 1956. The Insurance Regulatory '
+            'and Development Authority of India (IRDAI) regulates insurance '
+            'companies. Bank deposits are insured up to 5 lakh rupees per '
+            'depositor in each bank by the Deposit Insurance and Credit '
+            'Guarantee Corporation (DICGC). Government schemes like PM '
+            'Jeevan Jyoti Bima Yojana and PM Suraksha Bima Yojana give '
+            'cheap insurance to ordinary people.',
       ),
     ],
     quiz: [
@@ -341,6 +573,63 @@ const List<Lesson> indianEconomyLessons = [
         'Demand-pull inflation happens when people want to buy more than is '
             'available. Cost-push inflation happens when costs, like oil or '
             'wages, go up and businesses pass them on to buyers.',
+      ),
+      LessonSection(
+        'Kinds of inflation',
+        'Inflation is a general rise in prices over time, which means '
+            'the same money buys less. Creeping inflation is mild, below '
+            'about 3 per cent a year. Walking inflation is moderate, and '
+            'running inflation is fast. Hyperinflation is extremely fast, '
+            'when prices rise many times over, as in Zimbabwe in 2008. '
+            'Deflation is a general fall in prices, and disinflation is a '
+            'slowing down of inflation. Stagflation means high inflation '
+            'combined with slow growth and high unemployment.',
+      ),
+      LessonSection(
+        'CPI and WPI',
+        'Inflation is measured with price indices. The Consumer Price '
+            'Index (CPI) tracks the prices that ordinary families pay for a '
+            'basket of goods and services, like food, fuel, clothing, '
+            'housing and health care. It is published by the National '
+            'Statistical Office and is used by the RBI for its inflation '
+            'target. The Wholesale Price Index (WPI) tracks prices at the '
+            'wholesale level and is published by the Office of the Economic '
+            'Adviser in the Ministry of Commerce and Industry. Core '
+            'inflation leaves out food and fuel, whose prices change a lot.',
+      ),
+      LessonSection(
+        'Demand-pull and cost-push',
+        'There are two main causes of inflation. Demand-pull inflation '
+            'happens when people want to buy more goods and services than '
+            'the economy can produce, often because they have more money to '
+            'spend. Cost-push inflation happens when the cost of making '
+            'goods rises, for example when oil prices go up, wages rise or '
+            'a poor monsoon reduces crops. Printing too much money can also '
+            'cause inflation. Sometimes, food inflation rises sharply '
+            'because of bad weather, hoarding or supply problems.',
+      ),
+      LessonSection(
+        'Who gains and who loses',
+        'Inflation hurts people with fixed incomes, like pensioners and '
+            'workers whose wages do not rise, because their money buys '
+            'less. It also hurts savers, as the value of savings falls. '
+            'Borrowers may gain, since they repay loans with money that is '
+            'worth less. Mild inflation can encourage businesses to produce '
+            'more, but high inflation creates uncertainty and harms the '
+            'poor most. That is why governments and central banks try to '
+            'keep inflation low and steady.',
+      ),
+      LessonSection(
+        'How inflation is controlled',
+        'The RBI controls inflation through monetary policy: by raising '
+            'the repo rate or the cash reserve ratio, it makes loans '
+            'costlier and reduces the money in the economy. The government '
+            'uses fiscal policy: it can cut its own spending, change taxes, '
+            'reduce import duties on essential goods, ban exports of items '
+            'like onions when prices rise, and release stocks of grain from '
+            'the Food Corporation of India. The public distribution system '
+            'gives grain at low prices to poor families, protecting them '
+            'from price rises.',
       ),
     ],
     quiz: [
@@ -413,6 +702,65 @@ const List<Lesson> indianEconomyLessons = [
             'each state. The CAG audits how public money was spent and '
             'reports to Parliament.',
       ),
+      LessonSection(
+        'The Annual Financial Statement',
+        'The Union Budget is the government’s yearly statement of how '
+            'much money it expects to earn and how it plans to spend it. '
+            'Under Article 112 of the Constitution, it is called the Annual '
+            'Financial Statement. India’s financial year runs from 1 April '
+            'to 31 March. The Finance Minister presents the Budget in the '
+            'Lok Sabha, usually on 1 February. Since 2017, the Railway '
+            'Budget, presented separately for 92 years, has been merged '
+            'with the Union Budget. The Economic Survey is presented a day '
+            'before the Budget.',
+      ),
+      LessonSection(
+        'Revenue and capital',
+        'The Budget has two main parts. The revenue budget covers '
+            'regular income, like taxes and fees, and regular spending, '
+            'like salaries, pensions, interest payments and subsidies. The '
+            'capital budget covers money that creates or reduces assets and '
+            'liabilities: borrowing, repaying loans, money from selling '
+            'government shares, and spending on long-lasting assets like '
+            'roads, railways, dams and hospitals, called capital '
+            'expenditure. Spending on capital assets helps the economy grow '
+            'in the long run.',
+      ),
+      LessonSection(
+        'Kinds of deficits',
+        'A deficit means the government spends more than it earns. The '
+            'revenue deficit is the gap between revenue spending and '
+            'revenue income. The fiscal deficit is the total borrowing the '
+            'government needs in a year; it is the most watched number and '
+            'is usually given as a share of GDP. The primary deficit is the '
+            'fiscal deficit minus interest payments on old loans. The '
+            'Fiscal Responsibility and Budget Management (FRBM) Act of 2003 '
+            'asks the government to keep its deficits under control.',
+      ),
+      LessonSection(
+        'How the Budget is passed',
+        'After the Budget speech, the Lok Sabha holds a general '
+            'discussion, and departments’ demands for grants are examined '
+            'by committees. Members vote on the demands; cutting them is '
+            'done through cut motions. Then the Appropriation Bill is '
+            'passed to allow money to be withdrawn from the Consolidated '
+            'Fund of India, and the Finance Bill is passed to approve '
+            'taxes. Since passing the full Budget takes time, a vote on '
+            'account lets the government spend money for the first few '
+            'months of the year.',
+      ),
+      LessonSection(
+        'Funds and audit',
+        'The government keeps money in three funds. The Consolidated '
+            'Fund of India (Article 266) receives all revenue and loans; no '
+            'money can be taken from it without Parliament’s approval. The '
+            'Contingency Fund (Article 267) is for emergencies, and the '
+            'Public Account holds money like provident funds that belongs '
+            'to others. The Comptroller and Auditor General (CAG), under '
+            'Article 148, audits government accounts and reports to '
+            'Parliament. Its reports are studied by the Public Accounts '
+            'Committee.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -482,6 +830,64 @@ const List<Lesson> indianEconomyLessons = [
         'Because GST is shared by the Union and states, a joint GST Council '
             '(Article 279A) decides rates and rules. The Union Finance '
             'Minister chairs it, and every state has a voice.',
+      ),
+      LessonSection(
+        'Kinds of taxes',
+        'A tax is a compulsory payment made to the government. Direct '
+            'taxes are paid directly by the person on whom they are imposed '
+            'and cannot be passed on, like income tax and corporation tax '
+            'on company profits. Indirect taxes are collected from sellers '
+            'but paid by consumers in the prices of goods and services, '
+            'like GST and customs duty. A progressive tax takes a higher '
+            'share from people with higher incomes, as income tax does. '
+            'Direct taxes are managed by the Central Board of Direct Taxes '
+            '(CBDT).',
+      ),
+      LessonSection(
+        'GST comes in',
+        'The Goods and Services Tax, GST, was introduced on 1 July 2017 '
+            'through the 101st Constitutional Amendment Act of 2016, after '
+            'many years of discussion. It replaced many separate central '
+            'and state taxes, like excise duty, service tax, VAT and entry '
+            'tax, with one tax, following the idea of One Nation, One Tax. '
+            'GST is a destination-based tax, collected where goods are '
+            'consumed, not where they are made. The idea was first '
+            'suggested by the Kelkar Task Force in 2003.',
+      ),
+      LessonSection(
+        'CGST, SGST and IGST',
+        'GST has three parts. For sales within a state, the Central GST '
+            '(CGST) goes to the Centre and the State GST (SGST) goes to the '
+            'state, in equal halves. For sales between two states and for '
+            'imports, Integrated GST (IGST) is collected by the Centre and '
+            'then shared. Union territories without legislatures have '
+            'UTGST. Items are placed in different tax slabs, with '
+            'essentials taxed low or not at all. Petroleum products and '
+            'alcohol for drinking are kept outside GST for now.',
+      ),
+      LessonSection(
+        'The GST Council and GSTN',
+        'The GST Council, set up under Article 279A, decides GST rates '
+            'and rules. It is chaired by the Union Finance Minister and '
+            'includes the finance ministers of all states. Decisions need a '
+            'three-fourths majority of weighted votes; the Centre has '
+            'one-third of the votes and the states together two-thirds. The '
+            'Goods and Services Tax Network (GSTN) runs the online system '
+            'for registration, returns and payments. The Central Board of '
+            'Indirect Taxes and Customs (CBIC) manages GST and customs for '
+            'the Centre.',
+      ),
+      LessonSection(
+        'Sharing tax money',
+        'The Constitution sets up a Finance Commission every five '
+            'years, under Article 280, to recommend how tax money should be '
+            'shared between the Centre and the states, and among the '
+            'states. K. C. Neogy chaired the first Finance Commission in '
+            '1951. The share of central taxes going to states is called '
+            'devolution. The Commission considers each state’s population, '
+            'area, forest cover and income levels. Taxes help pay for '
+            'schools, hospitals, roads, defence and welfare schemes, so '
+            'paying taxes honestly is a duty of every citizen.',
       ),
     ],
     quiz: [
@@ -558,6 +964,67 @@ const List<Lesson> indianEconomyLessons = [
             'businesses and jobs. Small businesses (MSMEs) are the backbone '
             'of many towns.',
       ),
+      LessonSection(
+        'Agriculture in the economy',
+        'Agriculture employs nearly half of India’s workers, though it '
+            'produces less than a fifth of national income. Most farms are '
+            'small, and many farmers depend on the monsoon. Land reforms '
+            'after independence abolished the zamindari system, set '
+            'ceilings on how much land one person could own, and gave '
+            'tenants more security. Today, schemes like PM-KISAN, crop '
+            'insurance, Soil Health Cards and Minimum Support Prices help '
+            'farmers, and the e-NAM online market links mandis across '
+            'states.',
+      ),
+      LessonSection(
+        'Green, White and other revolutions',
+        'The Green Revolution of the 1960s, led by M. S. Swaminathan '
+            'and supported by Norman Borlaug’s high-yielding wheat, made '
+            'India self-sufficient in food grains. The White Revolution, or '
+            'Operation Flood, led by Dr Verghese Kurien from 1970 through '
+            'the Amul cooperative model, made India the world’s largest '
+            'milk producer; National Milk Day is on 26 November, Kurien’s '
+            'birthday. Other revolutions include the Blue Revolution in '
+            'fish, the Yellow Revolution in oilseeds, the Golden Revolution '
+            'in horticulture and the Pink Revolution in meat and onions.',
+      ),
+      LessonSection(
+        'Industrial policy after independence',
+        'The Industrial Policy Resolution of 1948 and especially that '
+            'of 1956 gave the public sector the leading role in heavy and '
+            'basic industries, like steel, coal, power and machinery. Steel '
+            'plants were built at Bhilai, Durgapur and Rourkela with help '
+            'from the Soviet Union, Britain and West Germany. Companies '
+            'needed licences to set up or expand factories. Large public '
+            'sector companies with more freedom are called Maharatnas and '
+            'Navratnas. The Industrial Policy of 1991 ended licensing for '
+            'most industries.',
+      ),
+      LessonSection(
+        'Small industries and new missions',
+        'Micro, Small and Medium Enterprises (MSMEs) are very '
+            'important: they employ crores of people and make a large share '
+            'of India’s exports. Khadi and village industries are supported '
+            'by the Khadi and Village Industries Commission. In 2014, the '
+            'Make in India campaign was launched to make India a '
+            'manufacturing hub. Production Linked Incentive (PLI) schemes '
+            'reward companies that increase manufacturing in India, in '
+            'areas like mobile phones, medicines and electronics. Start-up '
+            'India supports new businesses.',
+      ),
+      LessonSection(
+        'Infrastructure for growth',
+        'Industries need good infrastructure: roads, railways, ports, '
+            'airports, electricity and internet. The Golden Quadrilateral '
+            'highway links Delhi, Mumbai, Chennai and Kolkata. Dedicated '
+            'freight corridors carry goods by rail, and the Sagarmala '
+            'project develops ports. Bharatmala builds highways, and the PM '
+            'Gati Shakti plan, launched in 2021, coordinates infrastructure '
+            'projects across ministries. Special Economic Zones offer tax '
+            'benefits to export industries. The Eight Core Industries index '
+            'tracks coal, crude oil, natural gas, refinery products, '
+            'fertilisers, steel, cement and electricity.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -624,6 +1091,66 @@ const List<Lesson> indianEconomyLessons = [
             'money straight to farmers’ bank accounts. Ayushman Bharat pays for '
             'hospital care. Direct Benefit Transfer sends help straight to '
             'bank accounts, cutting out middlemen.',
+      ),
+      LessonSection(
+        'Measuring poverty',
+        'A person is said to be poor if they cannot meet basic needs '
+            'like food, clothing, shelter, health and education. The '
+            'poverty line is a minimum level of income or spending needed '
+            'for these needs. In India, poverty estimates have been made by '
+            'committees like the Lakdawala, Tendulkar and Rangarajan '
+            'committees. NITI Aayog’s Multidimensional Poverty Index looks '
+            'at health, education and living standards, such as nutrition, '
+            'schooling, clean cooking fuel, sanitation and housing, not '
+            'just income.',
+      ),
+      LessonSection(
+        'Types of unemployment',
+        'Unemployment means people who are willing and able to work '
+            'cannot find work. Disguised unemployment is common on Indian '
+            'farms, where more people work than are needed, so removing '
+            'some would not reduce output. Seasonal unemployment happens '
+            'when work is available only in certain seasons, like sowing '
+            'and harvest. Structural unemployment is caused by a mismatch '
+            'between people’s skills and available jobs. Frictional '
+            'unemployment is the short gap when people change jobs. The '
+            'Periodic Labour Force Survey measures employment in India.',
+      ),
+      LessonSection(
+        'Rural jobs and livelihoods',
+        'The Mahatma Gandhi National Rural Employment Guarantee Act '
+            '(MGNREGA), passed in 2005, guarantees at least 100 days of '
+            'paid manual work a year to every rural household that asks for '
+            'it. If work is not given within 15 days, an unemployment '
+            'allowance must be paid. Work includes building ponds, roads '
+            'and wells. The Deendayal Antyodaya Yojana-National Rural '
+            'Livelihoods Mission helps women form self-help groups to start '
+            'small businesses. Skill India and PM Kaushal Vikas Yojana '
+            'train young people for jobs.',
+      ),
+      LessonSection(
+        'Food, housing and health',
+        'The National Food Security Act of 2013 gives subsidised grain '
+            'to about two-thirds of India’s people through the public '
+            'distribution system; under PM Garib Kalyan Anna Yojana, '
+            'eligible families get free grain. The midday meal scheme, now '
+            'called PM POSHAN, feeds children in government schools. PM '
+            'Awas Yojana helps poor families build houses, Ujjwala gives '
+            'free LPG connections, and Swachh Bharat built toilets. '
+            'Ayushman Bharat-PM Jan Arogya Yojana gives health insurance of '
+            'up to 5 lakh rupees per family a year for hospital care.',
+      ),
+      LessonSection(
+        'Pensions and social security',
+        'Social security helps people in old age, illness or when they '
+            'lose work. The Atal Pension Yojana gives a guaranteed monthly '
+            'pension to workers in the unorganised sector who join it. The '
+            'National Social Assistance Programme gives pensions to poor '
+            'elderly people, widows and disabled people. The Employees’ '
+            'Provident Fund Organisation (EPFO) manages savings for '
+            'salaried workers. The e-Shram portal registers unorganised '
+            'workers, like construction workers and street vendors, so that '
+            'they can get benefits from welfare schemes.',
       ),
     ],
     quiz: [
@@ -694,6 +1221,67 @@ const List<Lesson> indianEconomyLessons = [
             'with Brazil, Russia, India, China and South Africa, and set up '
             'its own New Development Bank. India hosted the G20 summit in New '
             'Delhi in September 2023.',
+      ),
+      LessonSection(
+        'IMF and World Bank',
+        'In 1944, at the Bretton Woods conference in the USA, countries '
+            'agreed to set up the International Monetary Fund (IMF) and the '
+            'World Bank, called the Bretton Woods twins. The IMF, '
+            'headquartered in Washington, D.C., helps keep the world’s '
+            'money system stable and lends to countries facing balance of '
+            'payments crises, as it did for India in 1991; it publishes the '
+            'World Economic Outlook. The World Bank, also in Washington, '
+            'gives loans for development projects like roads, schools and '
+            'water supply, and India is one of its largest borrowers.',
+      ),
+      LessonSection(
+        'From GATT to the WTO',
+        'The General Agreement on Tariffs and Trade (GATT), signed in '
+            '1947, aimed to reduce trade barriers. It was replaced by the '
+            'World Trade Organization (WTO) on 1 January 1995, after the '
+            'Uruguay Round of talks. The WTO, headquartered in Geneva, '
+            'Switzerland, sets rules for international trade and settles '
+            'trade disputes between countries. India is a founding member. '
+            'Its decisions are made at ministerial conferences, usually '
+            'held every two years, and all members must agree.',
+      ),
+      LessonSection(
+        'BRICS, G20 and others',
+        'BRICS began with Brazil, Russia, India and China, and South '
+            'Africa joined in 2010; more countries have since joined. Its '
+            'New Development Bank, headquartered in Shanghai, funds '
+            'projects in member countries. The G20 is a group of 19 '
+            'countries plus the European Union and the African Union, which '
+            'together make up most of the world’s economy; India held its '
+            'presidency in 2023, with the theme Vasudhaiva Kutumbakam, One '
+            'Earth, One Family, One Future. The G7 is a group of seven rich '
+            'democracies.',
+      ),
+      LessonSection(
+        'Regional groups',
+        'SAARC, the South Asian Association for Regional Cooperation, '
+            'was founded in 1985 at Dhaka and has its secretariat in '
+            'Kathmandu; its members are India, Pakistan, Bangladesh, Sri '
+            'Lanka, Nepal, Bhutan, the Maldives and Afghanistan. BIMSTEC '
+            'links countries around the Bay of Bengal. ASEAN, the '
+            'Association of Southeast Asian Nations, was formed in 1967; '
+            'India follows an Act East Policy towards it. The Asian '
+            'Development Bank (ADB), headquartered in Manila, and the Asian '
+            'Infrastructure Investment Bank (AIIB), in Beijing, fund '
+            'projects in Asia.',
+      ),
+      LessonSection(
+        'Other world bodies',
+        'The Organisation for Economic Co-operation and Development '
+            '(OECD), based in Paris, is a group of mostly rich countries. '
+            'OPEC, the Organization of the Petroleum Exporting Countries, '
+            'headquartered in Vienna, coordinates oil policies of '
+            'oil-exporting countries. The World Economic Forum, based in '
+            'Geneva, holds a yearly meeting at Davos and publishes the '
+            'Global Gender Gap Report. The United Nations Development '
+            'Programme (UNDP) publishes the Human Development Report, and '
+            'the Financial Action Task Force (FATF), in Paris, fights money '
+            'laundering and terror financing.',
       ),
     ],
     quiz: [

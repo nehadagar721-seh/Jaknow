@@ -12,6 +12,7 @@ import 'content/class10_economics.dart';
 import 'content/class10_geography.dart';
 import 'content/class10_history.dart';
 import 'content/class11_constitution.dart';
+import 'content/class11_physical_geography.dart';
 import 'content/class11_history.dart';
 import 'content/class9_social_science.dart';
 import 'content/gk_indian_economy.dart';
@@ -265,6 +266,17 @@ const List<Course> builtInCourses = [
         'Why we have a constitution, rights, elections, the three organs, '
         'federalism, local government and how the Constitution grows.',
     lessons: class11ConstitutionLessons,
+  ),
+  Course(
+    id: 'class11-physical-geography',
+    title: 'Physical Geography',
+    subject: 'Geography',
+    section: CourseSection.forClass,
+    studentClass: 'Class 11',
+    description:
+        'The Earth’s origin and interior, landforms, atmosphere and weather, '
+        'climate change, oceans and biodiversity.',
+    lessons: class11PhysicalGeographyLessons,
   ),
 
   // ---------- Explore more: General Knowledge ----------

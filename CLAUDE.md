@@ -66,7 +66,8 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   books are due in 2027-28): History, Political Science, Geography,
   Economics. Done so far: `class11-history` (World History, 7 lessons,
   `class11_history.dart`), `class11-constitution` (Constitution at Work,
-  10 lessons, ids `class11-polsci-N`). Class 12 still shows "lessons are coming".
+  10 lessons, ids `class11-polsci-N`), `class11-physical-geography`
+  (Physical Geography, 9 lessons, ids `class11-geo-N`). Class 12 still shows "lessons are coming".
   Content is written in our own words: never copy textbook text (NCERT,
   Lucent, Bharat Ko Jano are copyrighted); cover their topics instead.
 - Library screens: `library_screen.dart` ("For Class N" / "Explore more" /

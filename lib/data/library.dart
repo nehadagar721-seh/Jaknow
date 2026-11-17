@@ -11,6 +11,7 @@ import 'content/class10_civics.dart';
 import 'content/class10_economics.dart';
 import 'content/class10_geography.dart';
 import 'content/class10_history.dart';
+import 'content/class11_constitution.dart';
 import 'content/class11_history.dart';
 import 'content/class9_social_science.dart';
 import 'content/gk_indian_economy.dart';
@@ -253,6 +254,17 @@ const List<Course> builtInCourses = [
         'Mesopotamia, Rome, the Mongols, medieval Europe, the Renaissance, '
         'indigenous peoples, and modern Japan and China.',
     lessons: class11HistoryLessons,
+  ),
+  Course(
+    id: 'class11-constitution',
+    title: 'Constitution at Work',
+    subject: 'Politics',
+    section: CourseSection.forClass,
+    studentClass: 'Class 11',
+    description:
+        'Why we have a constitution, rights, elections, the three organs, '
+        'federalism, local government and how the Constitution grows.',
+    lessons: class11ConstitutionLessons,
   ),
 
   // ---------- Explore more: General Knowledge ----------

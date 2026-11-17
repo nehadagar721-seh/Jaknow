@@ -191,6 +191,21 @@ void main() {
     }
   });
 
+  test('Class 11 has World History (7 lessons), with page-long reads', () {
+    final c11 = builtInCourses.where((c) => c.studentClass == 'Class 11');
+    expect(c11.map((c) => c.id), ['class11-history']);
+    expect(c11.expand((c) => c.lessons), hasLength(7));
+    for (final lesson in c11.expand((c) => c.lessons)) {
+      expect(lesson.id, startsWith('class11-'));
+      final words = lesson.sections
+          .map((s) => s.text.split(RegExp(r'\s+')).length)
+          .fold(0, (a, b) => a + b);
+      expect(words, greaterThanOrEqualTo(450), reason: lesson.title);
+      expect(lesson.keyPoints.length, greaterThanOrEqualTo(5));
+      expect(lesson.quiz.every((q) => q.options.length == 4), isTrue);
+    }
+  });
+
   test('Class 6-8 and finished GK Full reads are a page long (450+)', () {
     final c6 = builtInCourses.where(
       (c) =>
@@ -271,17 +286,17 @@ void main() {
       expect(find.text('0 of 6 done'), findsNWidgets(3));
     });
 
-    testWidgets('a Class 11 student is told lessons are coming, can explore', (
+    testWidgets('a Class 12 student is told lessons are coming, can explore', (
       tester,
     ) async {
       tallScreen(tester);
-      await signUpIn('Class 11');
+      await signUpIn('Class 12');
       await tester.pumpWidget(
         MaterialApp(theme: AppTheme.light, home: const LibraryScreen()),
       );
       await settle(tester);
       expect(
-        find.textContaining('Class 11 lessons are on their way'),
+        find.textContaining('Class 12 lessons are on their way'),
         findsOneWidget,
       );
       await tester.tap(find.text('Explore more'));

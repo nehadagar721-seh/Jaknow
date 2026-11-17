@@ -11,6 +11,7 @@ import 'content/class10_civics.dart';
 import 'content/class10_economics.dart';
 import 'content/class10_geography.dart';
 import 'content/class10_history.dart';
+import 'content/class11_history.dart';
 import 'content/class9_social_science.dart';
 import 'content/gk_indian_economy.dart';
 import 'content/gk_indian_geography.dart';
@@ -238,6 +239,20 @@ const List<Course> builtInCourses = [
     description:
         'Development, sectors, money and credit, globalisation, consumers.',
     lessons: class10EconomicsLessons,
+  ),
+
+  // Class 11: current syllabus (still in use for 2026-27), one course per
+  // subject.
+  Course(
+    id: 'class11-history',
+    title: 'World History',
+    subject: 'History',
+    section: CourseSection.forClass,
+    studentClass: 'Class 11',
+    description:
+        'Mesopotamia, Rome, the Mongols, medieval Europe, the Renaissance, '
+        'indigenous peoples, and modern Japan and China.',
+    lessons: class11HistoryLessons,
   ),
 
   // ---------- Explore more: General Knowledge ----------

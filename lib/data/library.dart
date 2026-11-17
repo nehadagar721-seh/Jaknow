@@ -12,6 +12,7 @@ import 'content/class10_economics.dart';
 import 'content/class10_geography.dart';
 import 'content/class10_history.dart';
 import 'content/class11_constitution.dart';
+import 'content/class11_india_geography.dart';
 import 'content/class11_physical_geography.dart';
 import 'content/class11_history.dart';
 import 'content/class9_social_science.dart';
@@ -277,6 +278,17 @@ const List<Course> builtInCourses = [
         'The Earth’s origin and interior, landforms, atmosphere and weather, '
         'climate change, oceans and biodiversity.',
     lessons: class11PhysicalGeographyLessons,
+  ),
+  Course(
+    id: 'class11-india-geography',
+    title: 'India: Physical Environment',
+    subject: 'Geography',
+    section: CourseSection.forClass,
+    studentClass: 'Class 11',
+    description:
+        'India’s location, structure and landforms, rivers, monsoon climate, '
+        'natural vegetation and natural hazards.',
+    lessons: class11IndiaGeographyLessons,
   ),
 
   // ---------- Explore more: General Knowledge ----------

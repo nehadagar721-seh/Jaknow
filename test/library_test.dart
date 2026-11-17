@@ -197,8 +197,9 @@ void main() {
       'class11-history',
       'class11-constitution',
       'class11-physical-geography',
+      'class11-india-geography',
     ]);
-    expect(c11.expand((c) => c.lessons), hasLength(26));
+    expect(c11.expand((c) => c.lessons), hasLength(32));
     for (final lesson in c11.expand((c) => c.lessons)) {
       expect(lesson.id, startsWith('class11-'));
       final words = lesson.sections

@@ -15,6 +15,7 @@ import 'content/class11_constitution.dart';
 import 'content/class11_economic_development.dart';
 import 'content/class11_india_geography.dart';
 import 'content/class11_physical_geography.dart';
+import 'content/class11_political_theory.dart';
 import 'content/class11_history.dart';
 import 'content/class9_social_science.dart';
 import 'content/gk_indian_economy.dart';
@@ -268,6 +269,17 @@ const List<Course> builtInCourses = [
         'Why we have a constitution, rights, elections, the three organs, '
         'federalism, local government and how the Constitution grows.',
     lessons: class11ConstitutionLessons,
+  ),
+  Course(
+    id: 'class11-political-theory',
+    title: 'Political Theory',
+    subject: 'Politics',
+    section: CourseSection.forClass,
+    studentClass: 'Class 11',
+    description:
+        'Big ideas of politics: freedom, equality, social justice, rights, '
+        'citizenship, nationalism and secularism.',
+    lessons: class11PoliticalTheoryLessons,
   ),
   Course(
     id: 'class11-physical-geography',

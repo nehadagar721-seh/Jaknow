@@ -124,7 +124,11 @@ void main() {
     for (final lesson in evs.lessons) {
       expect(lesson.id, startsWith('class5-evs-'));
       expect(lesson.keyPoints.length, greaterThanOrEqualTo(5));
-      expect(lesson.sections, hasLength(3));
+      // Class 5 Full reads are about half a page (250+ words).
+      final words = lesson.sections
+          .map((s) => s.text.split(RegExp(r'\s+')).length)
+          .fold(0, (a, b) => a + b);
+      expect(words, greaterThanOrEqualTo(250), reason: lesson.title);
       expect(lesson.quiz.every((q) => q.options.length == 4), isTrue);
     }
   });
@@ -162,7 +166,7 @@ void main() {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)
           .fold(0, (a, b) => a + b);
-      expect(words, greaterThanOrEqualTo(400), reason: lesson.title);
+      expect(words, greaterThanOrEqualTo(450), reason: lesson.title);
       expect(lesson.keyPoints.length, greaterThanOrEqualTo(5));
       expect(lesson.quiz.every((q) => q.options.length == 4), isTrue);
     }

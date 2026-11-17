@@ -57,8 +57,9 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   e.g. `gk_polity.dart` → `polityLessons`, ids `gk-polity-1`…`10`).
   FULL READ MUST BE A LONG READ: about one page, 450+ words per lesson
   (5–6 sections of ~80–100 words), never just 2–3 short paragraphs.
-  Class 9 already follows this (a test checks 400+ words); older lessons
-  are being lengthened course by course. Class 9 follows the new 2026-27
+  All courses now follow this, and tests check it (Class 6–10 and all GK
+  courses 450+ words; Class 5 is about half a page, 250+ words, for young
+  readers). No repeated section headings within a lesson. Class 9 follows the new 2026-27
   NCERT book (Understanding Society, Part 1) but is split by subject
   (History, Geography, Civics, Economics); its lesson ids stay
   `class9-sst-N`.

@@ -225,6 +225,16 @@ const List<Lesson> class9HistoryLessons = [
             'to the story, and sometimes changes what historians believed '
             'before.',
       ),
+      LessonSection(
+        'What these early people left us',
+        'Early humans gave us some of the most important things we '
+            'still use: control of fire, farming, the wheel, pottery, '
+            'weaving and living together in villages. The Harappans showed '
+            'how to plan towns with straight streets, drains and standard '
+            'bricks and weights. When we eat bread made from wheat or wear '
+            'cotton clothes, we are using ideas that began thousands of '
+            'years ago, with people whose names we will never know.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -341,6 +351,17 @@ const List<Lesson> class9HistoryLessons = [
             'foreign visitors, like the Greek Megasthenes and the Chinese '
             'pilgrim Xuanzang, add an outsider’s view. Comparing these '
             'sources helps us build a fuller picture.',
+      ),
+      LessonSection(
+        'Why this period matters',
+        'The years up to 1000 CE shaped much of Indian life that we '
+            'still see today. Ideas about kingship, taxes, councils and '
+            'assemblies took shape in this time. Great works in Sanskrit, '
+            'Tamil and Prakrit were written, and Buddhism and Jainism '
+            'spread far beyond India. Trade linked India with Rome, China '
+            'and South-East Asia. Studying this period helps us understand '
+            'where many of our languages, beliefs, festivals and ways of '
+            'governing came from.',
       ),
     ],
     quiz: [

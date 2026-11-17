@@ -47,6 +47,29 @@ const List<Lesson> class5EnvironmentLessons = [
             'Read in good light, and keep loud music low. Our senses keep us '
             'safe, so we must keep them safe too.',
       ),
+      LessonSection(
+        'Touch and the skin',
+        'Our skin is the biggest organ of our body. It lets us feel if '
+            'something is hot or cold, rough or smooth, soft or hard. Our '
+            'fingertips are very sensitive. People who cannot see can read '
+            'using Braille, a special writing made of raised dots that they '
+            'feel with their fingers.',
+      ),
+      LessonSection(
+        'Hearing and balance',
+        'Our ears help us hear sounds, from a bird singing to a bell '
+            'ringing. The inner part of the ear also helps us keep our '
+            'balance, so we do not fall over when we walk, run or ride a '
+            'cycle. Very loud sounds can harm our ears, so we should not '
+            'play music too loudly.',
+      ),
+      LessonSection(
+        'Think about it',
+        'Close your eyes for one minute and listen carefully. How many '
+            'different sounds can you hear? Now try to guess some objects '
+            'only by touching them. Which sense did you use most? We use '
+            'all our senses together every day without even noticing.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -112,6 +135,30 @@ const List<Lesson> class5EnvironmentLessons = [
         'Food gives us energy to play, study and grow. Glucose, a kind of '
             'sugar, gives quick energy, which is why doctors sometimes give '
             'it to tired or sick people.',
+      ),
+      LessonSection(
+        'Teeth and tongue',
+        'Digestion starts in the mouth. Our front teeth cut and bite '
+            'food, and our back teeth grind and chew it. The tongue moves '
+            'the food around and mixes it with saliva, which makes it soft '
+            'and wet and begins to break down starch. That is why chewing '
+            'food well is so important.',
+      ),
+      LessonSection(
+        'A long journey',
+        'After we swallow, food goes down a pipe called the food pipe '
+            'into the stomach. There, juices break it down further. Then it '
+            'moves into the small intestine, which is a long, coiled tube. '
+            'Here the useful parts of food pass into our blood. What is '
+            'left goes to the large intestine and out of the body.',
+      ),
+      LessonSection(
+        'Good eating habits',
+        'We should wash our hands before eating, chew our food slowly, '
+            'and eat fruits, vegetables, pulses and grains so we get all '
+            'the nutrients we need. Drinking clean water helps digestion. '
+            'Too much junk food, like chips and sweet drinks, can make us '
+            'unwell. Eating at regular times keeps our stomach happy.',
       ),
     ],
     quiz: [
@@ -183,6 +230,30 @@ const List<Lesson> class5EnvironmentLessons = [
             'the bone. Milk, curd and green vegetables help keep bones '
             'strong, and playing and exercise keep muscles fit.',
       ),
+      LessonSection(
+        'Bones that protect',
+        'An adult human has 206 bones. Some bones protect soft, '
+            'important parts of the body. The skull is like a helmet for '
+            'the brain. The ribs form a cage that protects the heart and '
+            'lungs. The backbone, made of many small bones, protects the '
+            'spinal cord and helps us stand straight.',
+      ),
+      LessonSection(
+        'Different kinds of joints',
+        'Joints are places where two bones meet. The knee and elbow '
+            'work like the hinge of a door, letting us bend and straighten '
+            'our legs and arms. The shoulder and hip have ball and socket '
+            'joints, which let our arms and legs move in a circle. The neck '
+            'lets our head turn left and right.',
+      ),
+      LessonSection(
+        'Keeping bones strong',
+        'Milk, curd, green vegetables and pulses give us calcium, which '
+            'keeps bones strong. Playing outside in the morning sunlight '
+            'helps our body make vitamin D, which bones need too. Sitting '
+            'and standing straight, carrying heavy bags carefully and '
+            'exercising every day keep our bones and muscles healthy.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -249,6 +320,30 @@ const List<Lesson> class5EnvironmentLessons = [
         'Soak some moong seeds in water overnight and keep them on a wet '
             'cloth. In a day or two, tiny shoots come out. The seed has '
             'germinated. People eat these as sprouts too!',
+      ),
+      LessonSection(
+        'Seeds that fly and float',
+        'Some seeds are light and have wings or hair, so the wind can '
+            'carry them far away. Cotton and madar seeds have soft hair, '
+            'and drumstick seeds have wings. Coconuts can float on water '
+            'and travel across the sea to new beaches. This is why coconut '
+            'trees grow along many coasts.',
+      ),
+      LessonSection(
+        'Seeds that hitch a ride',
+        'Some seeds have hooks or spines that stick to the fur of '
+            'animals or to our clothes, and fall off somewhere new. Birds '
+            'and animals eat fruits and drop the seeds in their droppings, '
+            'far from the parent tree. Some pods, like those of balsam, '
+            'burst open and throw their seeds out.',
+      ),
+      LessonSection(
+        'Grow your own seed',
+        'Put a few moong or chana seeds on a wet cotton cloth in a bowl '
+            'and keep it moist. After a day or two, you will see small '
+            'white roots coming out, and later a tiny green shoot. Seeds '
+            'need water, air and the right warmth to sprout, or germinate. '
+            'Watch and draw how your seed changes each day.',
       ),
     ],
     quiz: [
@@ -321,6 +416,30 @@ const List<Lesson> class5EnvironmentLessons = [
             'also made animals like tigers rare. India protects them in '
             'national parks and sanctuaries, and it is our duty to care for '
             'them.',
+      ),
+      LessonSection(
+        'Animals that see in the dark',
+        'Many animals can see much better than us. Eagles and kites can '
+            'spot a small animal on the ground from very high up in the '
+            'sky. Owls have big eyes that help them see at night. Cats also '
+            'see well in dim light. Some animals, like bats, use sound and '
+            'echoes to find their way in the dark.',
+      ),
+      LessonSection(
+        'Ants and dogs',
+        'Ants walk in a line because each ant leaves a smell on the '
+            'ground that the others follow. Dogs have a very strong sense '
+            'of smell, so the police use them to find lost people or hidden '
+            'things. Mosquitoes find us by the smell of our skin and the '
+            'warmth of our body.',
+      ),
+      LessonSection(
+        'Protecting wild animals',
+        'Many animals, like tigers, rhinos and some birds, are in '
+            'danger because their forests are cut down or they are hunted. '
+            'National parks and wildlife sanctuaries keep them safe. We can '
+            'help by not buying things made from animal skins, horns or '
+            'tusks, and by keeping forests and rivers clean.',
       ),
     ],
     quiz: [
@@ -400,6 +519,36 @@ const List<Lesson> class5EnvironmentLessons = [
             'removes germs. Don’t let water collect in old tyres or pots, as '
             'mosquitoes lay eggs there.',
       ),
+      LessonSection(
+        'Where our water comes from',
+        'We get water from rain, rivers, lakes, wells and taps. '
+            'Rainwater fills up rivers and ponds, and some of it soaks into '
+            'the ground to fill underground water. In many villages, people '
+            'walk a long way every day to fetch water. In cities, water '
+            'comes through pipes from dams and lakes far away.',
+      ),
+      LessonSection(
+        'Saving water every day',
+        'We can save water in simple ways. Close the tap while brushing '
+            'your teeth. Use a bucket instead of a shower. Fix leaking taps '
+            'quickly. Water plants with water used for washing vegetables. '
+            'Collecting rainwater from rooftops, called rainwater '
+            'harvesting, helps fill wells and tanks for dry months.',
+      ),
+      LessonSection(
+        'Dirty water makes us sick',
+        'Germs in dirty water can cause diseases like diarrhoea, '
+            'cholera and typhoid. Mosquitoes breed in still water and '
+            'spread malaria and dengue. We should drink boiled or filtered '
+            'water, keep water pots covered and not let water collect in '
+            'old tyres or pots around our homes.',
+      ),
+      LessonSection(
+        'Did you know?',
+        'Only a tiny part of all the water on Earth is fresh water that '
+            'we can drink. Most of it is salty sea water, and much of the '
+            'fresh water is frozen as ice near the poles.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -471,6 +620,36 @@ const List<Lesson> class5EnvironmentLessons = [
             'wind. Using these, and wasting less, means there will be enough '
             'energy for the future.',
       ),
+      LessonSection(
+        'Fuels we use at home',
+        'A fuel is something we burn to get heat or energy. At home, '
+            'people cook with LPG gas, wood, cow-dung cakes or kerosene. '
+            'Cars and buses run on petrol, diesel or CNG. Coal is burnt in '
+            'power plants to make electricity. Coal, petrol and gas were '
+            'formed from plants and animals buried millions of years ago.',
+      ),
+      LessonSection(
+        'Smoke and our health',
+        'Burning wood and coal gives out smoke, which makes the air '
+            'dirty and can make people cough and fall ill. Vehicles also '
+            'release harmful gases. Clean fuels like LPG and electricity '
+            'cause less smoke. Walking, cycling and using buses or trains '
+            'instead of cars help keep our air clean.',
+      ),
+      LessonSection(
+        'Saving energy',
+        'Fuels like coal and petrol will not last forever, so we must '
+            'use them carefully. Switch off lights and fans when you leave '
+            'a room. Use the Sun to dry clothes. Solar panels use sunlight '
+            'to make electricity, and windmills use the wind. These sources '
+            'will never run out.',
+      ),
+      LessonSection(
+        'Did you know?',
+        'India has some of the biggest solar parks in the world, such '
+            'as Bhadla in Rajasthan, where rows and rows of shining panels '
+            'turn sunlight into electricity for homes and factories.',
+      ),
     ],
     quiz: [
       QuizQuestion(
@@ -534,6 +713,36 @@ const List<Lesson> class5EnvironmentLessons = [
         'A big area is drawn small on a map. The scale tells you how much '
             'real distance a small length on the map stands for, like 1 cm = '
             '10 km.',
+      ),
+      LessonSection(
+        'Using the Sun and a compass',
+        'The Sun rises in the east and sets in the west. If you stand '
+            'facing the rising Sun, north is on your left and south is on '
+            'your right. A compass has a needle that always points north. '
+            'Sailors and travellers have used compasses for hundreds of '
+            'years to find their way.',
+      ),
+      LessonSection(
+        'Symbols and colours on maps',
+        'Maps use small signs, called symbols, to show things like '
+            'roads, railway lines, schools, temples and hospitals. Colours '
+            'help too: blue shows water, green shows forests or plains, and '
+            'brown shows mountains. A key, or legend, in the corner of the '
+            'map tells us what each symbol and colour means.',
+      ),
+      LessonSection(
+        'Make a map of your school',
+        'Draw a simple map of your classroom or school from above, as a '
+            'bird would see it. Mark the door, windows, desks and the '
+            'blackboard. Show north with an arrow. Use symbols and add a '
+            'key. Can a friend find their way to the library using your '
+            'map?',
+      ),
+      LessonSection(
+        'Did you know?',
+        'A globe is a round model of the Earth. It shows the shapes of '
+            'land and sea correctly, but a map is easier to carry and can '
+            'show a small place, like your town, in great detail.',
       ),
     ],
     quiz: [
@@ -604,6 +813,31 @@ const List<Lesson> class5EnvironmentLessons = [
             'with a navy blue Ashoka Chakra, and green at the bottom. The '
             'national emblem comes from the Lion Capital of Ashoka at '
             'Sarnath. These symbols remind us that we are one country.',
+      ),
+      LessonSection(
+        'A land of many landscapes',
+        'India has high snowy mountains like the Himalayas in the '
+            'north, wide green plains along big rivers like the Ganga, a '
+            'hot sandy desert called the Thar in Rajasthan, and long coasts '
+            'with beaches in the south. It also has islands, like the '
+            'Andaman and Nicobar Islands and Lakshadweep.',
+      ),
+      LessonSection(
+        'Festivals and food',
+        'People in India celebrate many festivals, like Diwali, Eid, '
+            'Christmas, Guru Purab, Pongal, Onam, Bihu and Durga Puja. Food '
+            'changes from place to place too: idli and dosa in the south, '
+            'roti and dal in the north, fish and rice in Bengal and Kerala. '
+            'Trying each other’s food and festivals brings us closer.',
+      ),
+      LessonSection(
+        'Proud to be Indian',
+        'India became free on 15 August 1947, and we celebrate '
+            'Independence Day every year. On 26 January, Republic Day, we '
+            'remember the day our Constitution came into force. We sing our '
+            'national anthem, Jana Gana Mana, written by Rabindranath '
+            'Tagore, and respect our flag, the tricolour, with saffron, '
+            'white and green.',
       ),
     ],
     quiz: [

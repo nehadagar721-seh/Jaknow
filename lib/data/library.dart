@@ -12,6 +12,7 @@ import 'content/class10_economics.dart';
 import 'content/class10_geography.dart';
 import 'content/class10_history.dart';
 import 'content/class11_constitution.dart';
+import 'content/class11_economic_development.dart';
 import 'content/class11_india_geography.dart';
 import 'content/class11_physical_geography.dart';
 import 'content/class11_history.dart';
@@ -289,6 +290,17 @@ const List<Course> builtInCourses = [
         'India’s location, structure and landforms, rivers, monsoon climate, '
         'natural vegetation and natural hazards.',
     lessons: class11IndiaGeographyLessons,
+  ),
+  Course(
+    id: 'class11-economic-development',
+    title: 'Indian Economic Development',
+    subject: 'Economy',
+    section: CourseSection.forClass,
+    studentClass: 'Class 11',
+    description:
+        'From the colonial economy to planning and the 1991 reforms, human '
+        'capital, rural development, jobs, sustainability and neighbours.',
+    lessons: class11EconomicDevelopmentLessons,
   ),
 
   // ---------- Explore more: General Knowledge ----------

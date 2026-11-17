@@ -70,8 +70,9 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   (Physical Geography, 9 lessons, ids `class11-geo-N`),
   `class11-india-geography` (India: Physical Environment, 6 lessons, ids
   `class11-indgeo-N`), `class11-economic-development` (Indian Economic
-  Development, 8 lessons, ids `class11-eco-N`). Not done: Political Theory,
-  Statistics for Economics. Class 12 still shows "lessons are coming".
+  Development, 8 lessons, ids `class11-eco-N`). Not done: Political Theory.
+  Statistics for Economics is skipped on purpose (the user's choice: it is
+  sums and charts, which doesn't suit reading + quiz lessons). Class 12 still shows "lessons are coming".
   Content is written in our own words: never copy textbook text (NCERT,
   Lucent, Bharat Ko Jano are copyrighted); cover their topics instead.
 - Library screens: `library_screen.dart` ("For Class N" / "Explore more" /

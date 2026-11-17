@@ -62,7 +62,10 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   readers). No repeated section headings within a lesson. Class 9 follows the new 2026-27
   NCERT book (Understanding Society, Part 1) but is split by subject
   (History, Geography, Civics, Economics); its lesson ids stay
-  `class9-sst-N`.
+  `class9-sst-N`. Class 11 keeps its current books for 2026-27 (new NCERT
+  books are due in 2027-28): History, Political Science, Geography,
+  Economics. Done so far: `class11-history` (World History, 7 lessons,
+  `class11_history.dart`). Class 12 still shows "lessons are coming".
   Content is written in our own words: never copy textbook text (NCERT,
   Lucent, Bharat Ko Jano are copyrighted); cover their topics instead.
 - Library screens: `library_screen.dart` ("For Class N" / "Explore more" /

@@ -20,6 +20,7 @@ import 'content/class12_history.dart';
 import 'content/class12_world_politics.dart';
 import 'content/class12_politics_india.dart';
 import 'content/class12_human_geography.dart';
+import 'content/class12_india_people_economy.dart';
 import 'content/class11_history.dart';
 import 'content/class9_social_science.dart';
 import 'content/gk_indian_economy.dart';
@@ -363,6 +364,17 @@ const List<Course> builtInCourses = [
         'People and the Earth: population, human development, farming, '
         'industry, services, transport and world trade.',
     lessons: class12HumanGeographyLessons,
+  ),
+  Course(
+    id: 'class12-india-people-economy',
+    title: 'India: People and Economy',
+    subject: 'Geography',
+    section: CourseSection.forClass,
+    studentClass: 'Class 12',
+    description:
+        'India’s people and settlements, land, water, minerals and energy, '
+        'planning, transport, trade and environmental issues.',
+    lessons: class12IndiaPeopleEconomyLessons,
   ),
 
   // ---------- Explore more: General Knowledge ----------

@@ -16,6 +16,7 @@ import 'content/class11_economic_development.dart';
 import 'content/class11_india_geography.dart';
 import 'content/class11_physical_geography.dart';
 import 'content/class11_political_theory.dart';
+import 'content/class12_history.dart';
 import 'content/class11_history.dart';
 import 'content/class9_social_science.dart';
 import 'content/gk_indian_economy.dart';
@@ -313,6 +314,19 @@ const List<Course> builtInCourses = [
         'From the colonial economy to planning and the 1991 reforms, human '
         'capital, rural development, jobs, sustainability and neighbours.',
     lessons: class11EconomicDevelopmentLessons,
+  ),
+
+  // Class 12: current syllabus, one course per subject.
+  Course(
+    id: 'class12-history',
+    title: 'Indian History: Sources and Stories',
+    subject: 'History',
+    section: CourseSection.forClass,
+    studentClass: 'Class 12',
+    description:
+        'From the Harappans to the Constitution, through digs, inscriptions, '
+        'travellers’ accounts and records.',
+    lessons: class12HistoryLessons,
   ),
 
   // ---------- Explore more: General Knowledge ----------

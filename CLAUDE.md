@@ -81,8 +81,10 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   (Politics in India since Independence, 8 lessons, ids
   `class12-indpol-N`), `class12-human-geography` (Fundamentals of Human
   Geography, 8 lessons, ids `class12-humgeo-N`), `class12-india-people-economy`
-  (India: People and Economy, 9 lessons, ids `class12-ipe-N`). Still to do:
-  Economics. Every school class now has courses, so "lessons are coming"
+  (India: People and Economy, 9 lessons, ids `class12-ipe-N`),
+  `class12-macroeconomics` (Introductory Macroeconomics, 8 lessons, ids
+  `class12-macro-N`, ideas not long sums). Microeconomics not done yet (it is
+  graph- and sum-heavy; ask the user before adding it). Every school class now has courses, so "lessons are coming"
   only shows for College / Preparing for exams / Not a student.
   Content is written in our own words: never copy textbook text (NCERT,
   Lucent, Bharat Ko Jano are copyrighted); cover their topics instead.

@@ -21,6 +21,7 @@ import 'content/class12_world_politics.dart';
 import 'content/class12_politics_india.dart';
 import 'content/class12_human_geography.dart';
 import 'content/class12_india_people_economy.dart';
+import 'content/class12_macroeconomics.dart';
 import 'content/class11_history.dart';
 import 'content/class9_social_science.dart';
 import 'content/gk_indian_economy.dart';
@@ -375,6 +376,17 @@ const List<Course> builtInCourses = [
         'India’s people and settlements, land, water, minerals and energy, '
         'planning, transport, trade and environmental issues.',
     lessons: class12IndiaPeopleEconomyLessons,
+  ),
+  Course(
+    id: 'class12-macroeconomics',
+    title: 'Introductory Macroeconomics',
+    subject: 'Economy',
+    section: CourseSection.forClass,
+    studentClass: 'Class 12',
+    description:
+        'The whole economy: national income, money and banks, the RBI, '
+        'income and jobs, the budget and the open economy.',
+    lessons: class12MacroeconomicsLessons,
   ),
 
   // ---------- Explore more: General Knowledge ----------

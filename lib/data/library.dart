@@ -19,6 +19,7 @@ import 'content/class11_political_theory.dart';
 import 'content/class12_history.dart';
 import 'content/class12_world_politics.dart';
 import 'content/class12_politics_india.dart';
+import 'content/class12_human_geography.dart';
 import 'content/class11_history.dart';
 import 'content/class9_social_science.dart';
 import 'content/gk_indian_economy.dart';
@@ -351,6 +352,17 @@ const List<Course> builtInCourses = [
         'Nation building, the first elections, planning, foreign policy, '
         'the Emergency, regional movements and politics today.',
     lessons: class12PoliticsIndiaLessons,
+  ),
+  Course(
+    id: 'class12-human-geography',
+    title: 'Fundamentals of Human Geography',
+    subject: 'Geography',
+    section: CourseSection.forClass,
+    studentClass: 'Class 12',
+    description:
+        'People and the Earth: population, human development, farming, '
+        'industry, services, transport and world trade.',
+    lessons: class12HumanGeographyLessons,
   ),
 
   // ---------- Explore more: General Knowledge ----------

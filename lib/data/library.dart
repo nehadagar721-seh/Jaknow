@@ -17,6 +17,7 @@ import 'content/class11_india_geography.dart';
 import 'content/class11_physical_geography.dart';
 import 'content/class11_political_theory.dart';
 import 'content/class12_history.dart';
+import 'content/class12_world_politics.dart';
 import 'content/class11_history.dart';
 import 'content/class9_social_science.dart';
 import 'content/gk_indian_economy.dart';
@@ -327,6 +328,17 @@ const List<Course> builtInCourses = [
         'From the Harappans to the Constitution, through digs, inscriptions, '
         'travellers’ accounts and records.',
     lessons: class12HistoryLessons,
+  ),
+  Course(
+    id: 'class12-world-politics',
+    title: 'Contemporary World Politics',
+    subject: 'Politics',
+    section: CourseSection.forClass,
+    studentClass: 'Class 12',
+    description:
+        'The end of the Cold War, new centres of power, South Asia, the UN, '
+        'security, the environment and globalisation.',
+    lessons: class12WorldPoliticsLessons,
   ),
 
   // ---------- Explore more: General Knowledge ----------

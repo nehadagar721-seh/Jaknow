@@ -191,10 +191,10 @@ void main() {
     }
   });
 
-  test('Class 12 has History (12 lessons), with page-long reads', () {
+  test('Class 12 has History and World Politics (19 lessons), with page-long reads', () {
     final c12 = builtInCourses.where((c) => c.studentClass == 'Class 12');
-    expect(c12.map((c) => c.id), ['class12-history']);
-    expect(c12.expand((c) => c.lessons), hasLength(12));
+    expect(c12.map((c) => c.id), ['class12-history', 'class12-world-politics']);
+    expect(c12.expand((c) => c.lessons), hasLength(19));
     for (final lesson in c12.expand((c) => c.lessons)) {
       expect(lesson.id, startsWith('class12-'));
       final words = lesson.sections

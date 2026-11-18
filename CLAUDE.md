@@ -77,8 +77,9 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   (current books; new Political Science books are due in 2027): done so
   far `class12-history` (Indian History: Sources and Stories, 12 lessons,
   ids `class12-history-N`), `class12-world-politics` (Contemporary World
-  Politics, 7 lessons, ids `class12-worldpol-N`). Still to do: Politics in
-  India since Independence, Geography, Economics. Every school class now has courses, so "lessons are coming"
+  Politics, 7 lessons, ids `class12-worldpol-N`), `class12-politics-india`
+  (Politics in India since Independence, 8 lessons, ids
+  `class12-indpol-N`). Still to do: Geography, Economics. Every school class now has courses, so "lessons are coming"
   only shows for College / Preparing for exams / Not a student.
   Content is written in our own words: never copy textbook text (NCERT,
   Lucent, Bharat Ko Jano are copyrighted); cover their topics instead.

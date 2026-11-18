@@ -18,6 +18,7 @@ import 'content/class11_physical_geography.dart';
 import 'content/class11_political_theory.dart';
 import 'content/class12_history.dart';
 import 'content/class12_world_politics.dart';
+import 'content/class12_politics_india.dart';
 import 'content/class11_history.dart';
 import 'content/class9_social_science.dart';
 import 'content/gk_indian_economy.dart';
@@ -339,6 +340,17 @@ const List<Course> builtInCourses = [
         'The end of the Cold War, new centres of power, South Asia, the UN, '
         'security, the environment and globalisation.',
     lessons: class12WorldPoliticsLessons,
+  ),
+  Course(
+    id: 'class12-politics-india',
+    title: 'Politics in India since Independence',
+    subject: 'Politics',
+    section: CourseSection.forClass,
+    studentClass: 'Class 12',
+    description:
+        'Nation building, the first elections, planning, foreign policy, '
+        'the Emergency, regional movements and politics today.',
+    lessons: class12PoliticsIndiaLessons,
   ),
 
   // ---------- Explore more: General Knowledge ----------

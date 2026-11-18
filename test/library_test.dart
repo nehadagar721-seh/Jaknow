@@ -370,4 +370,23 @@ void main() {
       expect(find.text('KEY POINTS'), findsOneWidget);
     });
   });
+
+  // Lesson quizzes are being raised from 3 to 7 questions, course by
+  // course. Add each finished course here.
+  const sevenQuestionCourses = ['class5-evs'];
+
+  test('finished courses have 7 quiz questions per lesson', () {
+    for (final id in sevenQuestionCourses) {
+      final course = builtInCourses.firstWhere((c) => c.id == id);
+      for (final lesson in course.lessons) {
+        expect(lesson.quiz, hasLength(7), reason: lesson.id);
+        final questions = lesson.quiz.map((q) => q.question).toSet();
+        expect(questions, hasLength(7), reason: '${lesson.id} repeats');
+        for (final q in lesson.quiz) {
+          expect(q.options.toSet(), hasLength(4), reason: q.question);
+          expect(q.correctIndex, inInclusiveRange(0, 3));
+        }
+      }
+    }
+  });
 }

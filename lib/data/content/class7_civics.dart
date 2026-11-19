@@ -138,6 +138,43 @@ const List<Lesson> class7CivicsLessons = [
         correctIndex: 1,
         explanation: 'It gives cooked lunch to schoolchildren.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Which Article says no one can be discriminated against because '
+            'of religion, caste, race, sex or place of birth?',
+        options: ['Article 14', 'Article 15', 'Article 17', 'Article 21'],
+        correctIndex: 1,
+        explanation: 'Article 15 forbids such discrimination.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Which state was a pioneer of the Midday Meal Scheme?',
+        options: ['Kerala', 'Tamil Nadu', 'Punjab', 'Bihar'],
+        correctIndex: 1,
+        explanation: 'Tamil Nadu was a pioneer of the scheme.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Being treated with respect is called…',
+        options: ['dignity', 'franchise', 'discrimination', 'majority'],
+        correctIndex: 0,
+        explanation: 'Dignity means being treated with respect.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'In 2001, who asked all state governments to start the Midday '
+            'Meal Scheme?',
+        options: [
+          'The Supreme Court',
+          'The Election Commission',
+          'The United Nations',
+          'The Lok Sabha',
+        ],
+        correctIndex: 0,
+        explanation: 'The Supreme Court asked all states to start it in 2001.',
+      ),
     ],
   ),
   Lesson(
@@ -274,6 +311,52 @@ const List<Lesson> class7CivicsLessons = [
         correctIndex: 0,
         explanation: 'PHC stands for Primary Health Centre.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Health services run by individuals or companies are called…',
+        options: ['public services', 'private services', 'panchayats', 'PHCs'],
+        correctIndex: 1,
+        explanation:
+            'Private clinics and hospitals are run by individuals or '
+            'companies.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Clean water and sanitation help prevent diseases like…',
+        options: [
+          'diarrhoea and cholera',
+          'broken bones',
+          'short sight',
+          'sunburn',
+        ],
+        correctIndex: 0,
+        explanation: 'Dirty water spreads diarrhoea and cholera.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Why is public health care essential?',
+        options: [
+          'It is free or low-cost, so even the poor can get treatment',
+          'It is always faster',
+          'It has no doctors',
+          'It only treats the rich',
+        ],
+        correctIndex: 0,
+        explanation: 'Public hospitals give free or low-cost care to everyone.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Vaccination campaigns are an example of…',
+        options: [
+          'preventing disease',
+          'treating injuries',
+          'private business',
+          'advertising',
+        ],
+        correctIndex: 0,
+        explanation:
+            'Public health services prevent diseases through vaccination.',
+      ),
     ],
   ),
   Lesson(
@@ -407,6 +490,53 @@ const List<Lesson> class7CivicsLessons = [
         ],
         correctIndex: 1,
         explanation: 'The leader of the majority party.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'MLAs are elected every…',
+        options: ['two years', 'four years', 'five years', 'six years'],
+        correctIndex: 2,
+        explanation: 'Elections are held every five years.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'When two or more parties join to form a government, it is '
+            'called a…',
+        options: [
+          'coalition government',
+          'monarchy',
+          'panchayat',
+          'dictatorship',
+        ],
+        correctIndex: 0,
+        explanation: 'That is a coalition government.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Who appoints the Chief Minister?',
+        options: [
+          'The President',
+          'The Governor',
+          'The Prime Minister',
+          'The Speaker',
+        ],
+        correctIndex: 1,
+        explanation:
+            'The Governor appoints the leader of the ruling party as Chief '
+            'Minister.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'A party has a majority when it wins…',
+        options: [
+          'any seat',
+          'more than half the seats',
+          'exactly ten seats',
+          'all seats',
+        ],
+        correctIndex: 1,
+        explanation: 'A majority means more than half the seats.',
       ),
     ],
   ),
@@ -548,6 +678,57 @@ const List<Lesson> class7CivicsLessons = [
         correctIndex: 0,
         explanation: 'Rashsundari Devi wrote it in Bengali.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Expectations that boys and girls should behave differently '
+            'are…',
+        options: [
+          'natural',
+          'learnt from society',
+          'made by law',
+          'the same everywhere',
+        ],
+        correctIndex: 1,
+        explanation: 'These ideas are taught by society, not natural.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Why is housework often not seen as real work?',
+        options: [
+          'Because it is unpaid',
+          'Because it is easy',
+          'Because men do it',
+          'Because it takes no time',
+        ],
+        correctIndex: 0,
+        explanation: 'Because it is unpaid, it is not seen as real work.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Which reformers opened schools for girls in the 19th century?',
+        options: [
+          'Savitribai and Jyotiba Phule',
+          'Akbar and Birbal',
+          'Nehru and Gandhi',
+          'Tagore and Bose',
+        ],
+        correctIndex: 0,
+        explanation: 'Savitribai and Jyotiba Phule opened schools for girls.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Rashsundari Devi learnt to read…',
+        options: [
+          'at a big college',
+          'in secret, by herself',
+          'from the radio',
+          'abroad',
+        ],
+        correctIndex: 1,
+        explanation: 'She taught herself to read in secret.',
+      ),
     ],
   ),
   Lesson(
@@ -684,6 +865,48 @@ const List<Lesson> class7CivicsLessons = [
         correctIndex: 1,
         explanation: 'Always check facts first.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Media that reach millions of people at the same time are '
+            'called…',
+        options: ['mass media', 'local media', 'private letters', 'notices'],
+        correctIndex: 0,
+        explanation: 'They are called mass media.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'A free press is often called a…',
+        options: [
+          'pillar of democracy',
+          'type of advertisement',
+          'government office',
+          'court',
+        ],
+        correctIndex: 0,
+        explanation: 'A free press is a pillar of democracy.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'False news that spreads quickly is called…',
+        options: ['fake news', 'headline', 'editorial', 'advertisement'],
+        correctIndex: 0,
+        explanation: 'It is called fake news.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Why might media focus on celebrity gossip instead of poverty?',
+        options: [
+          'It is exciting and sells',
+          'It is more important',
+          'The law says so',
+          'Poverty has ended',
+        ],
+        correctIndex: 0,
+        explanation:
+            'Media may focus on sensational news that attracts viewers.',
+      ),
     ],
   ),
   Lesson(
@@ -809,6 +1032,50 @@ const List<Lesson> class7CivicsLessons = [
         options: ['Wholesaler', 'Retailer', 'Producer only', 'Bank'],
         correctIndex: 1,
         explanation: 'Retailers sell to consumers.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'A weekly market is also called a…',
+        options: ['haat', 'mall', 'mandi only', 'godown'],
+        correctIndex: 0,
+        explanation: 'Weekly markets are called haats.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Why do neighbourhood shops help many families?',
+        options: [
+          'They are close and may give goods on credit',
+          'They are always air-conditioned',
+          'They sell only branded goods',
+          'They open once a week',
+        ],
+        correctIndex: 0,
+        explanation: 'They are close by and often give goods on credit.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Branded goods in malls cost more because of…',
+        options: [
+          'advertising and packaging',
+          'no rent',
+          'bargaining',
+          'credit',
+        ],
+        correctIndex: 0,
+        explanation: 'Advertising and attractive packaging raise prices.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'What is the usual order in the chain of markets?',
+        options: [
+          'Producer, wholesaler, retailer, consumer',
+          'Consumer, retailer, producer, wholesaler',
+          'Retailer, producer, consumer, wholesaler',
+          'Wholesaler, consumer, producer, retailer',
+        ],
+        correctIndex: 0,
+        explanation:
+            'Goods go from producer to wholesaler to retailer to consumer.',
       ),
     ],
   ),

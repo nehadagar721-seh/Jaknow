@@ -152,6 +152,52 @@ const List<Lesson> class6CivicsLessons = [
         correctIndex: 1,
         explanation: 'We stay united while being different.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'How many languages does the Constitution recognise in its '
+            'Eighth Schedule?',
+        options: ['12', '18', '22', '28'],
+        correctIndex: 2,
+        explanation: 'The Eighth Schedule lists 22 languages.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Why does a family in Ladakh wear woollen clothes?',
+        options: [
+          'It is a festival rule',
+          'It is cold and dry there',
+          'Wool is cheaper',
+          'The law says so',
+        ],
+        correctIndex: 1,
+        explanation:
+            'Geography shapes how people live; Ladakh is cold and dry.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Which of these foods came to India from other lands long ago?',
+        options: ['Rice', 'Potatoes', 'Wheat', 'Lentils'],
+        correctIndex: 1,
+        explanation: 'Tea, potatoes and chillies came from other lands.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'At Jallianwala Bagh in 1919, people of which faiths had '
+            'gathered together?',
+        options: [
+          'Only Hindus',
+          'Hindus, Muslims and Sikhs',
+          'Only Sikhs',
+          'Only Muslims',
+        ],
+        correctIndex: 1,
+        explanation:
+            'Hindus, Muslims and Sikhs had gathered together when they were '
+            'fired upon.',
+      ),
     ],
   ),
   Lesson(
@@ -271,6 +317,49 @@ const List<Lesson> class6CivicsLessons = [
         options: ['fact', 'stereotype', 'law', 'right'],
         correctIndex: 1,
         explanation: 'It fixes one image on a whole group: a stereotype.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Treating people unfairly because of their caste or religion '
+            'is…',
+        options: ['diversity', 'discrimination', 'democracy', 'dignity'],
+        correctIndex: 1,
+        explanation: 'Acting on prejudice is discrimination.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'In which year was Dr B. R. Ambedkar born?',
+        options: ['1869', '1891', '1915', '1947'],
+        correctIndex: 1,
+        explanation: 'He was born into a Dalit family in 1891.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'As a child, Ambedkar was not allowed to…',
+        options: [
+          'play cricket',
+          'drink water from the school tap',
+          'read books',
+          'wear shoes',
+        ],
+        correctIndex: 1,
+        explanation:
+            'He was not allowed to drink from the school tap and had to sit '
+            'apart.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'What is the first step towards fairness?',
+        options: [
+          'Questioning stereotypes',
+          'Following every rumour',
+          'Avoiding others',
+          'Making fun of groups',
+        ],
+        correctIndex: 0,
+        explanation:
+            'Questioning stereotypes is the first step towards fairness.',
       ),
     ],
   ),
@@ -396,6 +485,41 @@ const List<Lesson> class6CivicsLessons = [
         options: ['One', 'Two', 'Three', 'Five'],
         correctIndex: 2,
         explanation: 'Local, state and national.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'In a monarchy, who rules?',
+        options: ['Elected leaders', 'A king or queen', 'Judges', 'Panchayats'],
+        correctIndex: 1,
+        explanation: 'A king or queen rules and is not chosen by the people.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The right of every adult to vote is called…',
+        options: [
+          'universal adult franchise',
+          'monarchy',
+          'taxation',
+          'citizenship',
+        ],
+        correctIndex: 0,
+        explanation: 'This is universal adult franchise.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Women who campaigned for the vote in Britain and the USA were '
+            'called…',
+        options: ['suffragettes', 'councillors', 'sarpanches', 'monarchs'],
+        correctIndex: 0,
+        explanation: 'They were called suffragettes.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'In India, elections are held at least every…',
+        options: ['two years', 'five years', 'ten years', 'twenty years'],
+        correctIndex: 1,
+        explanation: 'Elections are held at least every five years.',
       ),
     ],
   ),
@@ -532,6 +656,44 @@ const List<Lesson> class6CivicsLessons = [
         ],
         correctIndex: 2,
         explanation: 'The Zila Parishad works at the district level.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Panchayati Raj got a place in the Constitution through the…',
+        options: [
+          '42nd Amendment',
+          '73rd Amendment',
+          '74th Amendment',
+          '86th Amendment',
+        ],
+        correctIndex: 1,
+        explanation: 'The 73rd Amendment of 1992 did this.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'What share of panchayat seats is reserved for women?',
+        options: ['A tenth', 'A fifth', 'A third', 'Half'],
+        correctIndex: 2,
+        explanation: 'A third of the seats are reserved for women.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'A member elected by each village ward is called a…',
+        options: ['Panch', 'Mayor', 'Commissioner', 'Collector'],
+        correctIndex: 0,
+        explanation: 'Each ward elects a Panch.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Many Gram Panchayats together form a…',
+        options: [
+          'Zila Parishad',
+          'Panchayat Samiti',
+          'Municipal Council',
+          'Gram Sabha',
+        ],
+        correctIndex: 1,
+        explanation: 'They form a Panchayat Samiti at the block level.',
       ),
     ],
   ),
@@ -670,6 +832,58 @@ const List<Lesson> class6CivicsLessons = [
         correctIndex: 0,
         explanation: 'Municipalities collect property tax.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Smaller towns are run by a…',
+        options: [
+          'Municipal Council',
+          'Municipal Corporation',
+          'Zila Parishad',
+          'Gram Sabha',
+        ],
+        correctIndex: 0,
+        explanation: 'Smaller towns have a Municipal Council.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Who heads the administration of a city and is appointed by the '
+            'state government?',
+        options: [
+          'The Mayor',
+          'The Commissioner',
+          'A councillor',
+          'The Sarpanch',
+        ],
+        correctIndex: 1,
+        explanation: 'The Commissioner heads the administration.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'City local government got a place in the Constitution through '
+            'the…',
+        options: [
+          '73rd Amendment',
+          '74th Amendment',
+          '44th Amendment',
+          '61st Amendment',
+        ],
+        correctIndex: 1,
+        explanation: 'The 74th Amendment of 1992 did this.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'How can citizens help keep their city clean?',
+        options: [
+          'Separating wet and dry waste',
+          'Throwing garbage on roads',
+          'Wasting water',
+          'Ignoring broken lights',
+        ],
+        correctIndex: 0,
+        explanation: 'Separating wet and dry waste helps.',
+      ),
     ],
   ),
   Lesson(
@@ -806,6 +1020,56 @@ const List<Lesson> class6CivicsLessons = [
         options: ['farming', 'factories', 'offices', 'shipping'],
         correctIndex: 0,
         explanation: 'Farming is the main village livelihood.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Why do many small farmers fall into debt?',
+        options: [
+          'They take loans and crops can fail',
+          'They earn too much',
+          'They do not farm',
+          'They work in offices',
+        ],
+        correctIndex: 0,
+        explanation:
+            'If rains fail or prices fall, they cannot repay their loans.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Casual workers are paid…',
+        options: [
+          'a fixed monthly salary',
+          'only for the days they work',
+          'a pension',
+          'paid holidays',
+        ],
+        correctIndex: 1,
+        explanation: 'Casual workers are paid only for the days they work.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'In months with no farm work, some landless labourers…',
+        options: [
+          'go on holiday',
+          'migrate to towns for work',
+          'buy more land',
+          'stop eating',
+        ],
+        correctIndex: 1,
+        explanation:
+            'Some migrate to work at construction sites or brick kilns.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Street vendors and rickshaw pullers are…',
+        options: [
+          'government employees',
+          'self-employed',
+          'landowners',
+          'councillors',
+        ],
+        correctIndex: 1,
+        explanation: 'They are self-employed and work without fixed pay.',
       ),
     ],
   ),

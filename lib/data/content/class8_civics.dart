@@ -133,6 +133,46 @@ const List<Lesson> class8CivicsLessons = [
         correctIndex: 1,
         explanation: 'The legislature (Parliament) makes laws.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Constitution Day, when the Constitution was adopted, is…',
+        options: ['26 November', '26 January', '15 August', '2 October'],
+        correctIndex: 0,
+        explanation: 'It was adopted on 26 November 1949.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Who was the President of the Constituent Assembly?',
+        options: [
+          'Dr Rajendra Prasad',
+          'Jawaharlal Nehru',
+          'Sardar Patel',
+          'Dr B. R. Ambedkar',
+        ],
+        correctIndex: 0,
+        explanation: 'Dr Rajendra Prasad was its President.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Which neighbouring country adopted a new democratic '
+            'Constitution in 2015?',
+        options: ['Nepal', 'Bhutan', 'Sri Lanka', 'Myanmar'],
+        correctIndex: 0,
+        explanation: 'Nepal adopted its new Constitution in 2015.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Which organ of government settles disputes?',
+        options: [
+          'The legislature',
+          'The executive',
+          'The judiciary',
+          'The press',
+        ],
+        correctIndex: 2,
+        explanation: 'The judiciary, or courts, settles disputes.',
+      ),
     ],
   ),
   Lesson(
@@ -265,6 +305,53 @@ const List<Lesson> class8CivicsLessons = [
         correctIndex: 2,
         explanation: 'India has no official religion.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Secularism protects…',
+        options: [
+          'only the majority',
+          'religious minorities and everyone’s freedom of faith',
+          'only one religion',
+          'only the government',
+        ],
+        correctIndex: 1,
+        explanation:
+            'It protects minorities and everyone’s freedom to follow their '
+            'faith or none.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Government schools in India cannot…',
+        options: [
+          'teach science',
+          'hold religious prayers as official functions',
+          'teach history',
+          'have holidays',
+        ],
+        correctIndex: 1,
+        explanation: 'The state keeps a distance from all religions.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Sikhs being allowed to wear a turban instead of a helmet '
+            'shows…',
+        options: [
+          'non-interference out of respect',
+          'a ban on religion',
+          'an official religion',
+          'discrimination',
+        ],
+        correctIndex: 0,
+        explanation: 'The state respects religious customs.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'In Nazi Germany, which group was cruelly persecuted?',
+        options: ['Jews', 'Buddhists', 'Sikhs', 'Parsis'],
+        correctIndex: 0,
+        explanation: 'Millions of Jews were killed in the Holocaust.',
+      ),
     ],
   ),
   Lesson(
@@ -395,6 +482,46 @@ const List<Lesson> class8CivicsLessons = [
         correctIndex: 1,
         explanation: 'The Prime Minister leads the government.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'How many members are nominated to the Rajya Sabha by the '
+            'President?',
+        options: ['2', '12', '25', '50'],
+        correctIndex: 1,
+        explanation: 'The President nominates 12 members.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Lok Sabha elections are held every…',
+        options: ['two years', 'four years', 'five years', 'six years'],
+        correctIndex: 2,
+        explanation: 'They are held every five years.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Most Rajya Sabha members are elected by…',
+        options: [
+          'the people directly',
+          'members of state assemblies',
+          'judges',
+          'the Prime Minister',
+        ],
+        correctIndex: 1,
+        explanation: 'Most are elected by state legislators.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'A bill becomes law after both Houses pass it and…',
+        options: [
+          'the President signs it',
+          'the Chief Justice signs it',
+          'a referendum',
+          'a Governor signs it',
+        ],
+        correctIndex: 0,
+        explanation: 'The President must agree.',
+      ),
     ],
   ),
   Lesson(
@@ -524,6 +651,38 @@ const List<Lesson> class8CivicsLessons = [
         options: ['criminal case', 'civil case', 'bill', 'PIL only'],
         correctIndex: 1,
         explanation: 'Property and money disputes are civil cases.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Courts striking down a law that goes against the Constitution '
+            'is called…',
+        options: ['judicial review', 'an FIR', 'a PIL', 'an appeal'],
+        correctIndex: 0,
+        explanation: 'This is judicial review.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'The first High Courts were set up in 1862 in Calcutta, Bombay '
+            'and…',
+        options: ['Delhi', 'Madras', 'Lucknow', 'Patna'],
+        correctIndex: 1,
+        explanation: 'They were set up in Calcutta, Bombay and Madras.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'A case about theft or murder is a…',
+        options: ['civil case', 'criminal case', 'PIL', 'tax case'],
+        correctIndex: 1,
+        explanation: 'Crimes are dealt with in criminal cases.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Public Interest Litigation began in the…',
+        options: ['1950s', '1980s', '2000s', '1930s'],
+        correctIndex: 1,
+        explanation: 'PIL began in the 1980s.',
       ),
     ],
   ),
@@ -659,6 +818,52 @@ const List<Lesson> class8CivicsLessons = [
         correctIndex: 0,
         explanation: 'Article 15 forbids such discrimination.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The word Adivasi means…',
+        options: [
+          'city dwellers',
+          'original inhabitants',
+          'traders',
+          'soldiers',
+        ],
+        correctIndex: 1,
+        explanation: 'Adivasi means original inhabitants.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Which report of 2006 studied the condition of Muslims in '
+            'India?',
+        options: [
+          'Sachar Committee report',
+          'Mandal Commission report',
+          'Brundtland Report',
+          'Shah Commission report',
+        ],
+        correctIndex: 0,
+        explanation:
+            'The Sachar Committee report found many Muslims lagged behind.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Cleaning human waste by hand is called…',
+        options: ['manual scavenging', 'jhum', 'begar', 'mulching'],
+        correctIndex: 0,
+        explanation: 'Manual scavenging is banned by law.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Reservations help marginalised groups in…',
+        options: [
+          'education, jobs and legislatures',
+          'only sports',
+          'only shopping',
+          'only travel',
+        ],
+        correctIndex: 0,
+        explanation: 'Reservations cover education, jobs and legislatures.',
+      ),
     ],
   ),
   Lesson(
@@ -791,6 +996,46 @@ const List<Lesson> class8CivicsLessons = [
         options: ['companies', 'workers', 'banks', 'shops'],
         correctIndex: 1,
         explanation: 'They stop workers being paid too little.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Which gas leaked in the Bhopal disaster?',
+        options: ['Methyl isocyanate', 'Oxygen', 'Carbon dioxide', 'Helium'],
+        correctIndex: 0,
+        explanation: 'Methyl isocyanate leaked from the pesticide factory.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Public facilities are paid for mainly through…',
+        options: [
+          'taxes',
+          'donations only',
+          'private profits',
+          'foreign aid only',
+        ],
+        correctIndex: 0,
+        explanation: 'The government pays for them from taxes.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Why might private companies leave poor people out?',
+        options: [
+          'They provide goods where they can make a profit',
+          'They are banned from cities',
+          'They have no workers',
+          'They give everything free',
+        ],
+        correctIndex: 0,
+        explanation: 'Private firms aim to make profit.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Which city in Brazil showed how to provide clean water to '
+            'almost everyone?',
+        options: ['Porto Alegre', 'Rio de Janeiro', 'Sao Paulo', 'Brasilia'],
+        correctIndex: 0,
+        explanation: 'Porto Alegre is a well-known example.',
       ),
     ],
   ),

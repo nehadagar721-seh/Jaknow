@@ -133,6 +133,49 @@ const List<Lesson> class7HistoryLessons = [
         correctIndex: 0,
         explanation: 'Many grants were written on copper plates.',
       ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'Which traveller from Central Asia wrote about India’s people '
+            'and learning?',
+        options: ['Al-Biruni', 'Megasthenes', 'Faxian', 'Marco Polo'],
+        correctIndex: 0,
+        explanation: 'Al-Biruni wrote about India’s customs and learning.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'Chiefs who served bigger kings and brought them gifts and '
+            'soldiers were called…',
+        options: ['samantas', 'sultans', 'peshwas', 'mansabdars'],
+        correctIndex: 0,
+        explanation: 'They were called samantas, or subordinates.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'Three dynasties fought for many years to control which rich '
+            'city?',
+        options: ['Thanjavur', 'Kannauj', 'Delhi', 'Pune'],
+        correctIndex: 1,
+        explanation:
+            'The Gurjara-Pratiharas, Rashtrakutas and Palas fought over '
+            'Kannauj.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Which Chola kings built a strong kingdom with a navy?',
+        options: [
+          'Rajaraja I and Rajendra I',
+          'Akbar and Babur',
+          'Shivaji and Sambhaji',
+          'Iltutmish and Razia',
+        ],
+        correctIndex: 0,
+        explanation:
+            'Rajaraja I and Rajendra I built a strong Chola kingdom with a '
+            'navy.',
+      ),
     ],
   ),
   Lesson(
@@ -255,6 +298,57 @@ const List<Lesson> class7HistoryLessons = [
         correctIndex: 0,
         explanation: 'Such land was called an iqta.',
       ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Who became the first Sultan of Delhi in 1206?',
+        options: [
+          'Iltutmish',
+          'Qutb-ud-din Aibak',
+          'Alauddin Khalji',
+          'Ibrahim Lodi',
+        ],
+        correctIndex: 1,
+        explanation: 'Qutb-ud-din Aibak became the first Sultan.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'Which Sultan controlled the prices of goods in Delhi’s '
+            'markets?',
+        options: [
+          'Alauddin Khalji',
+          'Iltutmish',
+          'Ibrahim Lodi',
+          'Razia Sultan',
+        ],
+        correctIndex: 0,
+        explanation: 'Alauddin Khalji controlled market prices.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Which Sultan moved the capital to Daulatabad for a time?',
+        options: [
+          'Muhammad bin Tughlaq',
+          'Qutb-ud-din Aibak',
+          'Sikandar Lodi',
+          'Balban',
+        ],
+        correctIndex: 0,
+        explanation: 'Muhammad bin Tughlaq moved the capital to Daulatabad.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'The Delhi Sultanate ended in 1526 at the…',
+        options: [
+          'Battle of Plassey',
+          'First Battle of Panipat',
+          'Battle of Talikota',
+          'Battle of Haldighati',
+        ],
+        correctIndex: 1,
+        explanation:
+            'Babur defeated Ibrahim Lodi at the First Battle of Panipat.',
+      ),
     ],
   ),
   Lesson(
@@ -375,6 +469,37 @@ const List<Lesson> class7HistoryLessons = [
         options: ['Akbar', 'Jahangir', 'Shah Jahan', 'Aurangzeb'],
         correctIndex: 2,
         explanation: 'Shah Jahan built it for Mumtaz Mahal.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'At what age did Akbar become emperor?',
+        options: ['8', '13', '21', '30'],
+        correctIndex: 1,
+        explanation: 'Akbar became emperor at 13, in 1556.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Who took the throne from Humayun in 1540?',
+        options: ['Sher Shah Suri', 'Hemu', 'Ibrahim Lodi', 'Shivaji'],
+        correctIndex: 0,
+        explanation: 'Sher Shah Suri defeated Humayun in 1540.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Akbar’s minister who measured land and fixed taxes was…',
+        options: ['Birbal', 'Raja Todar Mal', 'Abul Fazl', 'Man Singh'],
+        correctIndex: 1,
+        explanation: 'Raja Todar Mal developed the zabt system.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'Akbar held discussions with scholars of many religions in the…',
+        options: ['Ibadat Khana', 'Red Fort', 'Taj Mahal', 'Diwan-i-Am'],
+        correctIndex: 0,
+        explanation:
+            'The discussions were held in the Ibadat Khana at Fatehpur '
+            'Sikri.',
       ),
     ],
   ),
@@ -498,6 +623,40 @@ const List<Lesson> class7HistoryLessons = [
         options: ['Cholas', 'Chandelas', 'Mughals', 'Marathas'],
         correctIndex: 1,
         explanation: 'The Chandela kings built them.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'The main shrine of a temple, where the deity is kept, is the…',
+        options: ['shikhara', 'garbhagriha', 'mandapa', 'gopuram'],
+        correctIndex: 1,
+        explanation: 'The garbhagriha houses the image of the deity.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Which early building near the Qutb Minar uses true arches?',
+        options: [
+          'Alai Darwaza',
+          'Buland Darwaza',
+          'Gateway of India',
+          'India Gate',
+        ],
+        correctIndex: 0,
+        explanation: 'The Alai Darwaza is an early example of a true arch.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Which tomb in Delhi inspired the design of the Taj Mahal?',
+        options: ['Humayun’s Tomb', 'Qutb Minar', 'Jama Masjid', 'Red Fort'],
+        correctIndex: 0,
+        explanation: 'Humayun’s Tomb inspired the Taj Mahal.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'The Thanjavur temple was built by which Chola king?',
+        options: ['Rajaraja I', 'Akbar', 'Krishnadeva Raya', 'Shah Jahan'],
+        correctIndex: 0,
+        explanation: 'Rajaraja I built the Rajarajeshvara temple.',
       ),
     ],
   ),
@@ -629,6 +788,36 @@ const List<Lesson> class7HistoryLessons = [
         correctIndex: 1,
         explanation: 'Mirabai sang bhajans for Krishna.',
       ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Kabir worked as a…',
+        options: ['weaver', 'farmer', 'soldier', 'king'],
+        correctIndex: 0,
+        explanation: 'Kabir was a weaver in Varanasi.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'The common kitchen started by Guru Nanak is called the…',
+        options: ['langar', 'khanqah', 'dargah', 'vihara'],
+        correctIndex: 0,
+        explanation: 'Guru Nanak started the langar.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'The Virashaiva or Lingayat movement in Karnataka was started '
+            'by…',
+        options: ['Basavanna', 'Tukaram', 'Chaitanya', 'Namdev'],
+        correctIndex: 0,
+        explanation: 'Basavanna started it in the 12th century.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Maharashtra’s saints worshipped Vitthala at…',
+        options: ['Pandharpur', 'Ajmer', 'Puri', 'Varanasi'],
+        correctIndex: 0,
+        explanation: 'Pilgrims walk to Pandharpur every year.',
+      ),
     ],
   ),
   Lesson(
@@ -753,6 +942,36 @@ const List<Lesson> class7HistoryLessons = [
         options: ['Delhi', 'Pune', 'Lahore', 'Hyderabad'],
         correctIndex: 1,
         explanation: 'The Peshwas ruled from Pune.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'Who attacked Delhi in 1739 and carried away the Peacock '
+            'Throne?',
+        options: ['Nadir Shah', 'Babur', 'Ahmad Shah Abdali', 'Shivaji'],
+        correctIndex: 0,
+        explanation: 'Nadir Shah of Persia carried away the Peacock Throne.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Shivaji’s council of eight ministers was called the…',
+        options: ['Ashtapradhan', 'Khalsa', 'misl', 'sulh-i kul'],
+        correctIndex: 0,
+        explanation: 'It was called the Ashtapradhan.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Guru Gobind Singh created the Khalsa in…',
+        options: ['1526', '1674', '1699', '1799'],
+        correctIndex: 2,
+        explanation: 'The Khalsa was created in 1699.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Which state was founded by Nizam-ul-Mulk Asaf Jah?',
+        options: ['Hyderabad', 'Awadh', 'Bengal', 'Mysore'],
+        correctIndex: 0,
+        explanation: 'Nizam-ul-Mulk founded Hyderabad.',
       ),
     ],
   ),

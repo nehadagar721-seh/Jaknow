@@ -378,6 +378,7 @@ void main() {
     'class6-history-ancient-india',
     'class6-geography',
     'class6-civics',
+    'class7-history',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

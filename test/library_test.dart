@@ -373,7 +373,7 @@ void main() {
 
   // Lesson quizzes are being raised from 3 to 7 questions, course by
   // course. Add each finished course here.
-  const sevenQuestionCourses = ['class5-evs'];
+  const sevenQuestionCourses = ['class5-evs', 'class6-history-ancient-india'];
 
   test('finished courses have 7 quiz questions per lesson', () {
     for (final id in sevenQuestionCourses) {

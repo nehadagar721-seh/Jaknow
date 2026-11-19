@@ -21,7 +21,7 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
   }
 
-  test('6 lessons, each with at least 5 key points and a 3-question quiz', () {
+  test('6 lessons, each with at least 5 key points and a 7-question quiz', () {
     expect(ancientIndiaLessons, hasLength(6));
     for (final lesson in ancientIndiaLessons) {
       expect(
@@ -29,7 +29,7 @@ void main() {
         greaterThanOrEqualTo(5),
         reason: lesson.title,
       );
-      expect(lesson.quiz, hasLength(3), reason: lesson.title);
+      expect(lesson.quiz, hasLength(7), reason: lesson.title);
       for (final q in lesson.quiz) {
         expect(q.options, hasLength(4), reason: q.question);
         expect(q.correctIndex, inInclusiveRange(0, 3));
@@ -49,7 +49,7 @@ void main() {
     expect(find.text('The Indus Valley Civilisation'), findsOneWidget);
     expect(find.text('KEY POINTS'), findsOneWidget);
     expect(find.text('6'), findsOneWidget); // six numbered points
-    expect(find.text('Take the 3-question quiz'), findsOneWidget);
+    expect(find.text('Take the 7-question quiz'), findsOneWidget);
   });
 
   testWidgets('the bookmark is saved to the account', (tester) async {
@@ -93,7 +93,7 @@ void main() {
       MaterialApp(theme: AppTheme.light, home: const LessonScreen()),
     );
     await tester.pump();
-    await tester.tap(find.text('Take the 3-question quiz'));
+    await tester.tap(find.text('Take the 7-question quiz'));
     await settle(tester);
 
     for (final q in ancientIndiaLessons.first.quiz) {

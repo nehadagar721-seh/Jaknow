@@ -176,6 +176,51 @@ const List<Lesson> ancientIndiaLessons = [
         explanation:
             'Mehrgarh is one of the earliest farming villages in South Asia.',
       ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Tiny, sharp stone tools of the Middle Stone Age are called…',
+        options: ['hand axes', 'microliths', 'ploughs', 'pit houses'],
+        correctIndex: 1,
+        explanation:
+            'Mesolithic people made tiny, sharp tools called microliths.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'Why did Stone Age hunter-gatherers keep moving from place to '
+            'place?',
+        options: [
+          'To follow food, water and the seasons',
+          'To build cities',
+          'To trade with Rome',
+          'To pay taxes',
+        ],
+        correctIndex: 0,
+        explanation:
+            'Plants ripened in different seasons and animals moved, so '
+            'people moved too.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Traces of ash showing early use of fire were found in the…',
+        options: [
+          'Kurnool caves',
+          'Ajanta caves',
+          'Elephanta caves',
+          'Bhimbetka paintings',
+        ],
+        correctIndex: 0,
+        explanation:
+            'Ash in the Kurnool caves of Andhra Pradesh shows people used '
+            'fire.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'At Burzahom in Kashmir, Neolithic people lived in…',
+        options: ['tree houses', 'pit houses', 'palaces', 'tents of silk'],
+        correctIndex: 1,
+        explanation: 'They lived in pit houses dug into the ground.',
+      ),
     ],
   ),
   Lesson(
@@ -305,6 +350,39 @@ const List<Lesson> ancientIndiaLessons = [
             'Harappa was the first site to be discovered, so the civilisation '
             'is named after it.',
       ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Houses in Harappan cities were built with…',
+        options: [
+          'wood only',
+          'baked bricks of a standard size',
+          'marble',
+          'mud and straw only',
+        ],
+        correctIndex: 1,
+        explanation: 'They used baked bricks of the same size.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Large buildings used to store food grains were called…',
+        options: ['granaries', 'citadels', 'stupas', 'dockyards'],
+        correctIndex: 0,
+        explanation: 'Grains were stored in granaries.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Ploughed fields from Harappan times have been found at…',
+        options: ['Kalibangan', 'Lothal', 'Harappa', 'Dholavira'],
+        correctIndex: 0,
+        explanation: 'Ploughed fields were found at Kalibangan in Rajasthan.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Harappan seals often show animals like the bull and the…',
+        options: ['tiger only', 'unicorn', 'horse', 'camel'],
+        correctIndex: 1,
+        explanation: 'Many seals show a bull or a unicorn-like animal.',
+      ),
     ],
   ),
   Lesson(
@@ -432,6 +510,41 @@ const List<Lesson> ancientIndiaLessons = [
         correctIndex: 2,
         explanation: 'The Vedas were composed in Sanskrit.',
       ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Which Veda has hymns set to music?',
+        options: ['Rigveda', 'Samaveda', 'Yajurveda', 'Atharvaveda'],
+        correctIndex: 1,
+        explanation: 'The Samaveda has hymns set to music.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'In early Vedic times, what was the main measure of wealth?',
+        options: ['Gold coins', 'Cattle', 'Land deeds', 'Silk'],
+        correctIndex: 1,
+        explanation: 'Cattle were the most important wealth.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'The assemblies that helped the raja were called the sabha and '
+            'the…',
+        options: ['samiti', 'sangha', 'vihara', 'varna'],
+        correctIndex: 0,
+        explanation: 'The raja was helped by the sabha and samiti.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Gargi and Maitreyi are remembered as…',
+        options: [
+          'queens',
+          'wise women who asked deep questions',
+          'warriors',
+          'traders',
+        ],
+        correctIndex: 1,
+        explanation: 'Later texts mention wise women like Gargi and Maitreyi.',
+      ),
     ],
   ),
   Lesson(
@@ -546,6 +659,41 @@ const List<Lesson> ancientIndiaLessons = [
         options: ['Sarnath', 'Bodh Gaya', 'Rajgir', 'Vaishali'],
         correctIndex: 1,
         explanation: 'He gained enlightenment under a Bodhi tree at Bodh Gaya.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Where was the Buddha born?',
+        options: ['Sarnath', 'Lumbini', 'Bodh Gaya', 'Kushinagar'],
+        correctIndex: 1,
+        explanation: 'He was born at Lumbini, in present-day Nepal.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'The community of Buddhist monks and nuns is called the…',
+        options: ['sangha', 'sabha', 'samiti', 'jana'],
+        correctIndex: 0,
+        explanation: 'Monks and nuns formed the sangha.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'What does ahimsa mean?',
+        options: ['Wealth', 'Non-violence', 'Prayer', 'Kingship'],
+        correctIndex: 1,
+        explanation: 'Ahimsa means not harming any living being.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Why did many Jains become traders instead of farmers?',
+        options: [
+          'Farming could harm small creatures',
+          'Farming was banned',
+          'They had no land',
+          'Kings ordered it',
+        ],
+        correctIndex: 0,
+        explanation:
+            'Farming could harm small creatures, so many Jains took up '
+            'trade.',
       ),
     ],
   ),
@@ -673,6 +821,36 @@ const List<Lesson> ancientIndiaLessons = [
         correctIndex: 1,
         explanation:
             'The Arthashastra is linked with Kautilya, also called Chanakya.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Who founded the Mauryan Empire?',
+        options: ['Ashoka', 'Chandragupta Maurya', 'Samudragupta', 'Bimbisara'],
+        correctIndex: 1,
+        explanation: 'Chandragupta Maurya founded it around 321 BCE.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Kalinga, which Ashoka attacked, is in present-day…',
+        options: ['Bihar', 'Odisha', 'Gujarat', 'Punjab'],
+        correctIndex: 1,
+        explanation: 'Kalinga is in today’s Odisha.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'The Greek ambassador who described Pataliputra was…',
+        options: ['Megasthenes', 'Faxian', 'Alexander', 'Xuanzang'],
+        correctIndex: 0,
+        explanation: 'Megasthenes described Pataliputra and its wooden wall.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'Ashoka’s edicts were mostly written in the Brahmi script and '
+            'the … language.',
+        options: ['Sanskrit', 'Prakrit', 'Persian', 'Tamil'],
+        correctIndex: 1,
+        explanation: 'They were mostly in Prakrit, in the Brahmi script.',
       ),
     ],
   ),
@@ -803,6 +981,43 @@ const List<Lesson> ancientIndiaLessons = [
         options: ['Banabhatta', 'Kalidasa', 'Tulsidas', 'Kautilya'],
         correctIndex: 1,
         explanation: 'The poet Kalidasa wrote Abhijnanashakuntalam.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Samudragupta’s coins show him playing the…',
+        options: ['flute', 'veena', 'drum', 'sitar'],
+        correctIndex: 1,
+        explanation: 'His coins show him playing the veena.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'Which famous iron pillar from the Gupta period has not rusted '
+            'for centuries?',
+        options: [
+          'Mehrauli iron pillar',
+          'Sarnath pillar',
+          'Qutub Minar',
+          'Ashoka pillar at Prayagraj',
+        ],
+        correctIndex: 0,
+        explanation: 'The iron pillar at Mehrauli in Delhi has not rusted.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'Beautiful paintings of the Buddha’s life are found in the … '
+            'caves.',
+        options: ['Ajanta', 'Kurnool', 'Bhimbetka', 'Borra'],
+        correctIndex: 0,
+        explanation: 'The Ajanta caves in Maharashtra have such paintings.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Which great centre of learning was in Bihar?',
+        options: ['Taxila', 'Nalanda', 'Ujjain', 'Kanchi'],
+        correctIndex: 1,
+        explanation: 'Nalanda in Bihar was a great centre of learning.',
       ),
     ],
   ),

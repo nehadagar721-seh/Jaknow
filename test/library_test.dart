@@ -382,6 +382,7 @@ void main() {
     'class7-geography',
     'class7-civics',
     'class8-history',
+    'class8-geography',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

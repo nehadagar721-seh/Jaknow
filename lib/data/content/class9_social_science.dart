@@ -134,6 +134,47 @@ const List<Lesson> class9HistoryLessons = [
         correctIndex: 0,
         explanation: 'Political science studies power and government.',
       ),
+      QuizQuestion(
+        topic: 'Social Science',
+        question:
+            'Which branch of social science studies the Earth, its '
+            'landforms and climate?',
+        options: ['History', 'Geography', 'Economics', 'Sociology'],
+        correctIndex: 1,
+        explanation: 'Geography studies places and the Earth.',
+      ),
+      QuizQuestion(
+        topic: 'Social Science',
+        question: 'Sociology mainly studies…',
+        options: [
+          'stars and planets',
+          'groups, customs and social change',
+          'metals and minerals',
+          'numbers',
+        ],
+        correctIndex: 1,
+        explanation: 'Sociology looks at groups, customs and social change.',
+      ),
+      QuizQuestion(
+        topic: 'Social Science',
+        question: 'Inscriptions, coins and old buildings are clues used in…',
+        options: ['history', 'physics', 'chemistry', 'astronomy'],
+        correctIndex: 0,
+        explanation: 'Historians use such clues to study the past.',
+      ),
+      QuizQuestion(
+        topic: 'Social Science',
+        question: 'Why does social science rarely give one simple answer?',
+        options: [
+          'People are not machines and see events differently',
+          'It has no evidence',
+          'It only studies numbers',
+          'It ignores the past',
+        ],
+        correctIndex: 0,
+        explanation:
+            'People make different choices, so questions have many sides.',
+      ),
     ],
   ),
   Lesson(
@@ -262,6 +303,46 @@ const List<Lesson> class9HistoryLessons = [
         ],
         correctIndex: 1,
         explanation: 'Between the Tigris and the Euphrates.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'By about 7000 BCE, people at Mehrgarh were…',
+        options: [
+          'building iron ships',
+          'farming and keeping animals',
+          'using computers',
+          'writing books',
+        ],
+        correctIndex: 1,
+        explanation: 'They grew barley and wheat and kept animals.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'The change from moving about to settled village life is called '
+            'the…',
+        options: [
+          'Industrial Revolution',
+          'Neolithic Revolution',
+          'Green Revolution',
+          'French Revolution',
+        ],
+        correctIndex: 1,
+        explanation: 'It is often called the Neolithic Revolution.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Egypt’s early civilisation grew along the…',
+        options: ['Nile', 'Indus', 'Huang He', 'Tigris'],
+        correctIndex: 0,
+        explanation: 'Egyptian civilisation grew along the Nile.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'The middle stage of the Stone Age is called the…',
+        options: ['Palaeolithic', 'Mesolithic', 'Neolithic', 'Chalcolithic'],
+        correctIndex: 1,
+        explanation: 'The Mesolithic is the middle stage.',
       ),
     ],
   ),
@@ -396,6 +477,38 @@ const List<Lesson> class9HistoryLessons = [
         correctIndex: 0,
         explanation: 'He wrote on astronomy and mathematics.',
       ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'How many mahajanapadas were there around the 6th century BCE?',
+        options: ['Six', 'Ten', 'Sixteen', 'Twenty'],
+        correctIndex: 2,
+        explanation: 'There were sixteen mahajanapadas.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'The Vajji confederacy, ruled by an assembly, had its capital '
+            'at…',
+        options: ['Vaishali', 'Pataliputra', 'Ujjain', 'Taxila'],
+        correctIndex: 0,
+        explanation: 'Its capital was Vaishali.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Who guided Chandragupta Maurya in building his empire?',
+        options: ['Chanakya', 'Ashoka', 'Aryabhata', 'Megasthenes'],
+        correctIndex: 0,
+        explanation: 'Chanakya was his adviser.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'Which famous centre of learning flourished under the Guptas?',
+        options: ['Nalanda', 'Oxford', 'Shantiniketan', 'Harappa'],
+        correctIndex: 0,
+        explanation: 'Nalanda became a famous centre of learning.',
+      ),
     ],
   ),
 ];
@@ -519,6 +632,41 @@ const List<Lesson> class9GeographyLessons = [
         correctIndex: 0,
         explanation: 'That is weathering.',
       ),
+      QuizQuestion(
+        topic: 'Geography',
+        question: 'Forces on the surface, like rivers and wind, are called…',
+        options: [
+          'endogenic forces',
+          'exogenic forces',
+          'gravity only',
+          'magnetic forces',
+        ],
+        correctIndex: 1,
+        explanation: 'Exogenic forces act on the surface.',
+      ),
+      QuizQuestion(
+        topic: 'Geography',
+        question:
+            'The point on the surface above where an earthquake starts is '
+            'the…',
+        options: ['focus', 'epicentre', 'fault', 'plate'],
+        correctIndex: 1,
+        explanation: 'It is the epicentre.',
+      ),
+      QuizQuestion(
+        topic: 'Geography',
+        question: 'India’s active volcano is on…',
+        options: ['Barren Island', 'Lakshadweep', 'Majuli', 'Sri Lanka'],
+        correctIndex: 0,
+        explanation: 'Barren Island in the Andamans is an active volcano.',
+      ),
+      QuizQuestion(
+        topic: 'Geography',
+        question: 'Glaciers carve valleys shaped like the letter…',
+        options: ['V', 'U', 'S', 'Z'],
+        correctIndex: 1,
+        explanation: 'Glaciers make U-shaped valleys.',
+      ),
     ],
   ),
   Lesson(
@@ -633,6 +781,50 @@ const List<Lesson> class9GeographyLessons = [
         options: ['Oxygen', 'Nitrogen', 'Carbon dioxide', 'Ozone'],
         correctIndex: 1,
         explanation: 'Nitrogen is about 78% of the air.',
+      ),
+      QuizQuestion(
+        topic: 'Geography',
+        question: 'The ozone layer is found in the…',
+        options: ['troposphere', 'stratosphere', 'mesosphere', 'exosphere'],
+        correctIndex: 1,
+        explanation: 'The stratosphere contains the ozone layer.',
+      ),
+      QuizQuestion(
+        topic: 'Geography',
+        question: 'Why is Shimla cool?',
+        options: [
+          'It is near the sea',
+          'Temperature falls as height increases',
+          'It is on the Equator',
+          'It has no sun',
+        ],
+        correctIndex: 1,
+        explanation: 'Hill stations are cool because they are high up.',
+      ),
+      QuizQuestion(
+        topic: 'Geography',
+        question: 'Weather is the condition of the air over…',
+        options: [
+          'a short time',
+          'thirty years',
+          'a century',
+          'a million years',
+        ],
+        correctIndex: 0,
+        explanation: 'Weather describes a short time, like today.',
+      ),
+      QuizQuestion(
+        topic: 'Geography',
+        question: 'Climate change is caused largely by…',
+        options: [
+          'greenhouse gases from burning fossil fuels',
+          'the Moon',
+          'earthquakes',
+          'ocean tides',
+        ],
+        correctIndex: 0,
+        explanation:
+            'Greenhouse gases from fossil fuels are warming the Earth.',
       ),
     ],
   ),
@@ -768,6 +960,49 @@ const List<Lesson> class9CivicsLessons = [
         correctIndex: 2,
         explanation: 'Democracy needs regular elections.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The word democracy comes from Greek words meaning…',
+        options: [
+          'rule by the people',
+          'rule by a king',
+          'rule by the army',
+          'rule by the rich',
+        ],
+        correctIndex: 0,
+        explanation: 'Demos means people and kratos means rule.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Electing representatives to make laws is called…',
+        options: [
+          'direct democracy',
+          'representative democracy',
+          'monarchy',
+          'dictatorship',
+        ],
+        correctIndex: 1,
+        explanation: 'This is representative democracy.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Which village body is similar to direct democracy?',
+        options: ['Gram Sabha', 'Lok Sabha', 'Supreme Court', 'Rajya Sabha'],
+        correctIndex: 0,
+        explanation: 'In a Gram Sabha, villagers decide together.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'In a democracy, every adult should have…',
+        options: [
+          'one vote that counts equally',
+          'votes based on wealth',
+          'no vote',
+          'two votes',
+        ],
+        correctIndex: 0,
+        explanation: 'One person, one vote, each counting equally.',
+      ),
     ],
   ),
   Lesson(
@@ -885,6 +1120,42 @@ const List<Lesson> class9CivicsLessons = [
         ],
         correctIndex: 0,
         explanation: 'Sukumar Sen ran the first general election.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Which Article of the Constitution sets up the Election '
+            'Commission?',
+        options: ['Article 21', 'Article 324', 'Article 370', 'Article 14'],
+        correctIndex: 1,
+        explanation: 'Article 324 provides for the Election Commission.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'In which years was India’s first general election held?',
+        options: ['1947–48', '1951–52', '1962–63', '1977–78'],
+        correctIndex: 1,
+        explanation: 'It was held in 1951–52.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The NOTA option was added in…',
+        options: ['1988', '2004', '2013', '2019'],
+        correctIndex: 2,
+        explanation: 'NOTA was added in 2013.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'The candidate with the most votes wins. This system is called…',
+        options: [
+          'first-past-the-post',
+          'proportional voting',
+          'lottery',
+          'nomination',
+        ],
+        correctIndex: 0,
+        explanation: 'This is the first-past-the-post system.',
       ),
     ],
   ),
@@ -1008,6 +1279,36 @@ const List<Lesson> class9EconomicsLessons = [
         correctIndex: 0,
         explanation: 'Scarcity forces us to choose.',
       ),
+      QuizQuestion(
+        topic: 'Economy',
+        question:
+            'The gap between unlimited wants and limited resources is '
+            'called…',
+        options: ['scarcity', 'profit', 'demand', 'supply'],
+        correctIndex: 0,
+        explanation: 'This is scarcity.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'The reward for capital is…',
+        options: ['rent', 'wages', 'interest', 'profit'],
+        correctIndex: 2,
+        explanation: 'Capital earns interest.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'Machines and tools used to make other goods are…',
+        options: ['consumer goods', 'capital goods', 'services', 'wants'],
+        correctIndex: 1,
+        explanation: 'They are capital goods.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'Teaching, banking and transport are examples of…',
+        options: ['goods', 'services', 'land', 'capital'],
+        correctIndex: 1,
+        explanation: 'They are services.',
+      ),
     ],
   ),
   Lesson(
@@ -1121,6 +1422,42 @@ const List<Lesson> class9EconomicsLessons = [
         options: ['shopkeepers', 'farmers', 'banks', 'importers'],
         correctIndex: 1,
         explanation: 'It protects farmers from very low crop prices.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'When the price of a good rises, sellers usually…',
+        options: ['offer more', 'offer less', 'stop selling', 'give it free'],
+        correctIndex: 0,
+        explanation: 'Higher prices encourage sellers to sell more.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question:
+            'If the price of tea rises sharply, some people may switch to…',
+        options: ['coffee', 'salt', 'petrol', 'rice'],
+        correctIndex: 0,
+        explanation: 'People may switch to a related good like coffee.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'A drought or pest attack usually makes the supply of crops…',
+        options: ['rise', 'fall', 'stay the same', 'double'],
+        correctIndex: 1,
+        explanation: 'Bad weather cuts supply and pushes prices up.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question:
+            'If the price is too high and goods stay unsold, sellers '
+            'usually…',
+        options: [
+          'lower the price',
+          'raise it more',
+          'close forever',
+          'hide goods',
+        ],
+        correctIndex: 0,
+        explanation: 'They lower the price until it reaches equilibrium.',
       ),
     ],
   ),

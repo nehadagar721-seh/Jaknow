@@ -34,3 +34,24 @@ $$;
 
 revoke all on function public.news_job_key_ok(text) from public, anon, authenticated;
 grant execute on function public.news_job_key_ok(text) to service_role;
+
+-- The daily timer: runs collect-news every morning at 6:37 am India time
+-- (01:07 UTC; pg_cron uses UTC). The key is read from Vault when it runs.
+create extension if not exists pg_cron;
+
+select cron.schedule(
+  'collect-news-daily',
+  '7 1 * * *',
+  $job$
+  select net.http_post(
+    url := 'https://khyrwtbjwkwnshrlebht.supabase.co/functions/v1/collect-news',
+    headers := jsonb_build_object(
+      'Content-Type', 'application/json',
+      'x-job-key', (select decrypted_secret from vault.decrypted_secrets
+                    where name = 'collect_news_key')
+    ),
+    body := '{}'::jsonb,
+    timeout_milliseconds := 60000
+  );
+  $job$
+);

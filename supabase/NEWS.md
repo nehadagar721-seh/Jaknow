@@ -19,6 +19,15 @@
 3. **Show.** The app's News screen shows the newest day's published stories
    (up to 5). Until there are any, it shows the labelled sample stories.
 
+## The daily timer
+
+Supabase's timer (pg_cron, job `collect-news-daily`) runs the job every
+morning at **6:37 am India time** (`7 1 * * *` in UTC), so fresh drafts are
+waiting each day. To see recent runs:
+`select * from cron.job_run_details order by start_time desc limit 5;`
+To pause it: `select cron.unschedule('collect-news-daily');` (the SQL that
+creates it again is at the end of `supabase/news_job.sql`).
+
 ## Running the job by hand
 
 In the dashboard's **SQL Editor**:

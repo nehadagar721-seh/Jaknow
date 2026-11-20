@@ -150,6 +150,49 @@ const List<Lesson> polityLessons = [
             'Dr Rajendra Prasad was elected President of the Constituent '
             'Assembly.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The Constituent Assembly first met on…',
+        options: [
+          '9 December 1946',
+          '15 August 1947',
+          '26 January 1950',
+          '26 November 1949',
+        ],
+        correctIndex: 0,
+        explanation: 'It first met on 9 December 1946.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Members of the Constituent Assembly were elected by…',
+        options: [
+          'provincial legislative assemblies',
+          'the people directly',
+          'the British king',
+          'the Congress only',
+        ],
+        correctIndex: 0,
+        explanation: 'They were elected indirectly by provincial assemblies.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The Drafting Committee was set up in…',
+        options: ['August 1947', 'January 1950', 'December 1946', 'March 1948'],
+        correctIndex: 0,
+        explanation: 'It was set up in August 1947.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'How long did it take to make the Constitution?',
+        options: [
+          'About 2 years, 11 months and 18 days',
+          'About 6 months',
+          'About 10 years',
+          'About 1 year',
+        ],
+        correctIndex: 0,
+        explanation: 'It took about 2 years, 11 months and 18 days.',
+      ),
     ],
   ),
   Lesson(
@@ -277,6 +320,39 @@ const List<Lesson> polityLessons = [
         options: ['8', '10', '12', '22'],
         correctIndex: 0,
         explanation: 'It had 8 Schedules when adopted; there are 12 today.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The parliamentary system was borrowed from…',
+        options: ['Britain', 'the USA', 'Ireland', 'Australia'],
+        correctIndex: 0,
+        explanation: 'It came from Britain.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The Concurrent List was borrowed from…',
+        options: ['Australia', 'Canada', 'Ireland', 'France'],
+        correctIndex: 0,
+        explanation: 'It came from Australia.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'How many Articles did the Constitution have when adopted?',
+        options: ['395', '448', '250', '100'],
+        correctIndex: 0,
+        explanation: 'It had 395 Articles.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'India has…',
+        options: [
+          'a single citizenship',
+          'dual citizenship',
+          'state citizenship only',
+          'no citizenship',
+        ],
+        correctIndex: 0,
+        explanation: 'India has a single citizenship.',
       ),
     ],
   ),
@@ -423,6 +499,46 @@ const List<Lesson> polityLessons = [
             'In Kesavananda Bharati (1973), the Court held the Preamble is '
             'part of the Constitution.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The Preamble begins with the words…',
+        options: [
+          'We, the people of India',
+          'In the name of God',
+          'The Union of States',
+          'Bharat is',
+        ],
+        correctIndex: 0,
+        explanation: 'It begins with “We, the people of India”.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Which of these is NOT promised in the Preamble?',
+        options: ['Monarchy', 'Justice', 'Liberty', 'Fraternity'],
+        correctIndex: 0,
+        explanation: 'It promises Justice, Liberty, Equality and Fraternity.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The Objectives Resolution was moved on…',
+        options: [
+          '13 December 1946',
+          '26 January 1950',
+          '15 August 1947',
+          '2 October 1947',
+        ],
+        correctIndex: 0,
+        explanation: 'Nehru moved it on 13 December 1946.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'The Preamble calls India a Sovereign, Socialist, Secular, '
+            'Democratic…',
+        options: ['Republic', 'Monarchy', 'Empire', 'Kingdom'],
+        correctIndex: 0,
+        explanation: 'It calls India a Republic.',
+      ),
     ],
   ),
 
@@ -554,6 +670,41 @@ const List<Lesson> polityLessons = [
         explanation:
             'There are six; there were seven before the Right to Property '
             'was removed.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Fundamental Rights are in which Part of the Constitution?',
+        options: ['Part III', 'Part IV', 'Part IX', 'Part I'],
+        correctIndex: 0,
+        explanation: 'They are in Part III.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Which amendment removed the Right to Property from Fundamental '
+            'Rights?',
+        options: ['44th', '42nd', '86th', '73rd'],
+        correctIndex: 0,
+        explanation: 'The 44th Amendment of 1978 did.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The right to education, Article 21A, was added by the…',
+        options: [
+          '86th Amendment',
+          '44th Amendment',
+          '42nd Amendment',
+          '61st Amendment',
+        ],
+        correctIndex: 0,
+        explanation: 'The 86th Amendment of 2002 added it.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Which writ means “you may have the body”?',
+        options: ['Habeas corpus', 'Mandamus', 'Certiorari', 'Quo warranto'],
+        correctIndex: 0,
+        explanation: 'Habeas corpus protects against unlawful detention.',
       ),
     ],
   ),
@@ -690,6 +841,40 @@ const List<Lesson> polityLessons = [
         explanation:
             'Article 44 is the Directive Principle about a uniform civil '
             'code.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Directive Principles are in which Part?',
+        options: ['Part IV', 'Part III', 'Part IX', 'Part XX'],
+        correctIndex: 0,
+        explanation: 'They are in Part IV, Articles 36 to 51.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Which Article asks the state to organise village panchayats?',
+        options: ['Article 40', 'Article 44', 'Article 21', 'Article 32'],
+        correctIndex: 0,
+        explanation: 'Article 40 does.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'How many Fundamental Duties were there at first?',
+        options: ['10', '11', '6', '12'],
+        correctIndex: 0,
+        explanation: 'There were 10 at first.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Fundamental Duties were added by the…',
+        options: [
+          '42nd Amendment',
+          '44th Amendment',
+          '73rd Amendment',
+          '86th Amendment',
+        ],
+        correctIndex: 0,
+        explanation: 'The 42nd Amendment of 1976 added them.',
       ),
     ],
   ),
@@ -830,6 +1015,46 @@ const List<Lesson> polityLessons = [
         explanation:
             'Dr Rajendra Prasad was the first President, elected twice.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The President’s term is…',
+        options: ['five years', 'four years', 'six years', 'life'],
+        correctIndex: 0,
+        explanation: 'The term is five years.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'The executive power of the Union is vested in the President '
+            'under Article…',
+        options: ['53', '74', '124', '356'],
+        correctIndex: 0,
+        explanation: 'Article 53 vests it in the President.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Who was the only President elected twice?',
+        options: [
+          'Dr Rajendra Prasad',
+          'Dr S. Radhakrishnan',
+          'Zakir Husain',
+          'V. V. Giri',
+        ],
+        correctIndex: 0,
+        explanation: 'Dr Rajendra Prasad was elected twice.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The President is elected by…',
+        options: [
+          'an electoral college of MPs and MLAs',
+          'the people directly',
+          'the Prime Minister',
+          'the Supreme Court',
+        ],
+        correctIndex: 0,
+        explanation: 'An electoral college elects the President.',
+      ),
     ],
   ),
   Lesson(
@@ -968,6 +1193,42 @@ const List<Lesson> polityLessons = [
         explanation:
             'They must become a Member of Parliament within six '
             'months.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'The Council of Ministers aids and advises the President under '
+            'Article…',
+        options: ['74', '75', '53', '79'],
+        correctIndex: 0,
+        explanation: 'Article 74 provides this.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The Prime Minister is appointed by the…',
+        options: ['President', 'Speaker', 'Chief Justice', 'people directly'],
+        correctIndex: 0,
+        explanation: 'The President appoints the Prime Minister.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Which amendment limited the size of the Council of Ministers?',
+        options: ['91st', '42nd', '61st', '73rd'],
+        correctIndex: 0,
+        explanation: 'The 91st Amendment of 2003 did.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Real executive power lies with the…',
+        options: [
+          'Prime Minister and Council of Ministers',
+          'President alone',
+          'Vice-President',
+          'Chief Justice',
+        ],
+        correctIndex: 0,
+        explanation: 'They hold real power.',
       ),
     ],
   ),
@@ -1110,6 +1371,39 @@ const List<Lesson> polityLessons = [
             'The Vice-President is the ex officio Chairman of the Rajya '
             'Sabha.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'How many elected seats does the Lok Sabha have?',
+        options: ['543', '250', '238', '500'],
+        correctIndex: 0,
+        explanation: 'It has 543 elected seats.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'What share of Rajya Sabha members retires every two years?',
+        options: ['One-third', 'One-half', 'All', 'One-quarter'],
+        correctIndex: 0,
+        explanation: 'One-third retire every two years.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'How many Rajya Sabha members does the President nominate?',
+        options: ['12', '2', '25', '50'],
+        correctIndex: 0,
+        explanation: 'The President nominates 12.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Who presides over the Lok Sabha?',
+        options: [
+          'The Speaker',
+          'The Vice-President',
+          'The President',
+          'The Prime Minister',
+        ],
+        correctIndex: 0,
+        explanation: 'The Speaker presides over it.',
+      ),
     ],
   ),
 
@@ -1247,6 +1541,44 @@ const List<Lesson> polityLessons = [
         ],
         correctIndex: 0,
         explanation: 'Judicial review lets courts declare such laws invalid.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The Supreme Court began work on…',
+        options: [
+          '28 January 1950',
+          '26 January 1950',
+          '15 August 1947',
+          '1 April 1935',
+        ],
+        correctIndex: 0,
+        explanation: 'It began on 28 January 1950.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'High Court judges retire at…',
+        options: ['62', '65', '60', '70'],
+        correctIndex: 0,
+        explanation: 'They retire at 62.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The Supreme Court issues writs under Article…',
+        options: ['32', '226', '21', '14'],
+        correctIndex: 0,
+        explanation: 'It issues writs under Article 32.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'A judge can be removed only by…',
+        options: [
+          'Parliament, through a special procedure',
+          'the Prime Minister',
+          'the President alone',
+          'the people',
+        ],
+        correctIndex: 0,
+        explanation: 'Only Parliament can remove a judge.',
       ),
     ],
   ),
@@ -1391,6 +1723,44 @@ const List<Lesson> polityLessons = [
         ],
         correctIndex: 1,
         explanation: 'At least one-third of the seats are reserved for women.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'National Panchayati Raj Day is on…',
+        options: ['24 April', '26 January', '2 October', '15 August'],
+        correctIndex: 0,
+        explanation: 'The 73rd Amendment came into force on 24 April 1993.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The village level of Panchayati Raj is the…',
+        options: [
+          'gram panchayat',
+          'zila parishad',
+          'panchayat samiti',
+          'municipality',
+        ],
+        correctIndex: 0,
+        explanation: 'The gram panchayat is at the village level.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Panchayat elections are held by the…',
+        options: [
+          'State Election Commission',
+          'Election Commission of India',
+          'Supreme Court',
+          'Governor',
+        ],
+        correctIndex: 0,
+        explanation: 'The State Election Commission holds them.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Which amendment covers towns and cities?',
+        options: ['74th', '73rd', '42nd', '61st'],
+        correctIndex: 0,
+        explanation: 'The 74th Amendment covers municipalities.',
       ),
     ],
   ),

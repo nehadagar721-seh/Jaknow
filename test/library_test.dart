@@ -61,7 +61,7 @@ void main() {
       for (final lesson in course.lessons) {
         expect(lesson.id, startsWith(course.id.replaceAll('-india', '')));
         expect(lesson.keyPoints.length, greaterThanOrEqualTo(5));
-        expect(lesson.quiz, hasLength(3));
+        expect(lesson.quiz.length, greaterThanOrEqualTo(3));
         for (final q in lesson.quiz) {
           expect(q.options, hasLength(4));
         }
@@ -404,6 +404,8 @@ void main() {
     'class12-human-geography',
     'class12-india-people-economy',
     'class12-macroeconomics',
+    'gk-polity',
+    'gk-medieval-india',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

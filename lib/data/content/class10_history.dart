@@ -127,6 +127,46 @@ const List<Lesson> class10HistoryLessons = [
         correctIndex: 1,
         explanation: 'It tried to bring back the old order after Napoleon.',
       ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'Which revolution of 1789 spread ideas of liberty and equality?',
+        options: [
+          'The French Revolution',
+          'The Russian Revolution',
+          'The American Revolution',
+          'The Industrial Revolution',
+        ],
+        correctIndex: 0,
+        explanation: 'The French Revolution of 1789 spread these ideas.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Napoleon’s Civil Code of 1804 ended…',
+        options: [
+          'privileges based on birth',
+          'all taxes',
+          'the army',
+          'farming',
+        ],
+        correctIndex: 0,
+        explanation: 'It ended privileges based on birth.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Who led the Congress of Vienna?',
+        options: ['Metternich', 'Bismarck', 'Mazzini', 'Garibaldi'],
+        correctIndex: 0,
+        explanation: 'The Austrian minister Metternich led it.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'Rivalries in which region helped lead to the First World War?',
+        options: ['The Balkans', 'Scandinavia', 'Iberia', 'The Alps'],
+        correctIndex: 0,
+        explanation: 'Balkan rivalries helped lead to the war.',
+      ),
     ],
   ),
   Lesson(
@@ -257,6 +297,39 @@ const List<Lesson> class10HistoryLessons = [
         correctIndex: 1,
         explanation: 'Abanindranath Tagore painted Bharat Mata.',
       ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'The Rowlatt Act of 1919 allowed…',
+        options: [
+          'detention without trial',
+          'free elections',
+          'lower taxes',
+          'Indian judges',
+        ],
+        correctIndex: 0,
+        explanation: 'It allowed activists to be jailed without trial.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Who ordered the firing at Jallianwala Bagh?',
+        options: ['General Dyer', 'Lord Curzon', 'Lord Irwin', 'Robert Clive'],
+        correctIndex: 0,
+        explanation: 'General Dyer ordered his troops to fire.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'The Civil Disobedience Movement began with the march to…',
+        options: ['Dandi', 'Champaran', 'Kheda', 'Chauri Chaura'],
+        correctIndex: 0,
+        explanation: 'It began with the Salt March to Dandi in 1930.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Gandhi’s method of non-violent resistance is called…',
+        options: ['satyagraha', 'swadeshi', 'khilafat', 'boycott'],
+        correctIndex: 0,
+        explanation: 'Satyagraha means the power of truth.',
+      ),
     ],
   ),
   Lesson(
@@ -370,6 +443,42 @@ const List<Lesson> class10HistoryLessons = [
         options: ['India', 'China', 'the Americas', 'Africa'],
         correctIndex: 2,
         explanation: 'Potatoes came from the Americas.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'The silk routes linked Asia with…',
+        options: [
+          'Europe and Africa',
+          'Australia only',
+          'Antarctica',
+          'the Americas only',
+        ],
+        correctIndex: 0,
+        explanation: 'They joined Asia, Europe and Africa.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Columbus reached the Americas in…',
+        options: ['1453', '1492', '1600', '1757'],
+        correctIndex: 1,
+        explanation: 'Columbus reached the Americas in 1492.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'Indian indentured labourers were taken to work in places like…',
+        options: ['Fiji and Mauritius', 'Iceland', 'Siberia', 'Greenland'],
+        correctIndex: 0,
+        explanation: 'They went to the Caribbean, Fiji and Mauritius.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'In the 1840s, the failure of which crop caused a great famine '
+            'in Ireland?',
+        options: ['Potato', 'Rice', 'Wheat', 'Maize'],
+        correctIndex: 0,
+        explanation: 'The potato crop failed in the 1840s.',
       ),
     ],
   ),
@@ -508,6 +617,48 @@ const List<Lesson> class10HistoryLessons = [
         correctIndex: 2,
         explanation: 'It opened in 1854.',
       ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'Which was the leading industry of Britain’s Industrial '
+            'Revolution?',
+        options: ['Cotton', 'Tea', 'Software', 'Paper'],
+        correctIndex: 0,
+        explanation: 'Cotton was the leading industry.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Who built an early cotton mill?',
+        options: [
+          'Richard Arkwright',
+          'James Watt',
+          'Jamsetji Tata',
+          'Gutenberg',
+        ],
+        correctIndex: 0,
+        explanation: 'Richard Arkwright built an early cotton mill.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'The Company’s paid agents who controlled Indian weavers were '
+            'called…',
+        options: ['gomasthas', 'zamindars', 'sepoys', 'nabobs'],
+        correctIndex: 0,
+        explanation: 'They were called gomasthas.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Which Indian businessman later built industries in India?',
+        options: [
+          'Jamsetji Tata',
+          'Robert Clive',
+          'Lord Cornwallis',
+          'Mazzini',
+        ],
+        correctIndex: 0,
+        explanation: 'Jamsetji Tata built industries in India.',
+      ),
     ],
   ),
   Lesson(
@@ -636,6 +787,45 @@ const List<Lesson> class10HistoryLessons = [
         ],
         correctIndex: 1,
         explanation: 'James Augustus Hickey started it.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'The earliest printing in China, Korea and Japan used…',
+        options: ['wooden blocks', 'metal type', 'computers', 'photocopiers'],
+        correctIndex: 0,
+        explanation: 'They used woodblock printing.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'One of Gutenberg’s first major printed works was the…',
+        options: ['Bible', 'Arthashastra', 'Quran', 'Gita'],
+        correctIndex: 0,
+        explanation: 'One of his first major works was the Bible.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question: 'Martin Luther’s printed writings helped start the…',
+        options: [
+          'Protestant Reformation',
+          'French Revolution',
+          'Renaissance',
+          'Industrial Revolution',
+        ],
+        correctIndex: 0,
+        explanation: 'They helped start the Protestant Reformation.',
+      ),
+      QuizQuestion(
+        topic: 'History',
+        question:
+            'Who brought the printing press to Goa in the mid-16th century?',
+        options: [
+          'Portuguese missionaries',
+          'The Mughals',
+          'The Dutch',
+          'The British',
+        ],
+        correctIndex: 0,
+        explanation: 'Portuguese missionaries brought it.',
       ),
     ],
   ),

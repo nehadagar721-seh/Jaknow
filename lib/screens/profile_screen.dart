@@ -9,6 +9,7 @@ import '../widgets/back_circle_button.dart';
 import '../data/lessons.dart';
 import 'leaderboard_screen.dart';
 import 'log_in_screen.dart';
+import 'news_approve_screen.dart';
 import 'sign_up_screen.dart';
 import 'welcome_screen.dart';
 
@@ -29,6 +30,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late final Future<Map<String, LessonProgress>> _lessons = _backend
       .lessonProgress()
       .catchError((_) => <String, LessonProgress>{});
+
+  /// Only the news admin sees "Approve news" (the server checks it).
+  late final Future<bool> _newsAdmin = _backend.isNewsAdmin().catchError(
+    (_) => false,
+  );
 
   static const _months = [
     'Jan',
@@ -423,6 +429,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
             context,
           ).push(MaterialPageRoute(builder: (_) => const LeaderboardScreen())),
         ),
+      ),
+      FutureBuilder<bool>(
+        future: _newsAdmin,
+        builder: (context, snap) => snap.data != true
+            ? const SizedBox.shrink()
+            : Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: _Card(
+                  padding: EdgeInsets.zero,
+                  child: _SettingRow(
+                    icon: Icons.fact_check_rounded,
+                    title: 'Approve news',
+                    value: 'Pick today’s stories',
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const NewsApproveScreen(),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
       ),
       if (!_backend.isConnected) ...[
         const SizedBox(height: 16),

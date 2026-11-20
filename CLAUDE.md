@@ -116,7 +116,12 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   via `news_job_key_ok`, `supabase/news_job.sql`) saves fresh RSS items
   (The Hindu, Indian Express; PIB blocks Supabase with 403) as drafts.
   pg_cron job `collect-news-daily` runs it at 6:37 am IST every day.
-  How to run/approve: `supabase/NEWS.md`.
+  How to run/approve: `supabase/NEWS.md`. APPROVING IN THE APP:
+  `news_approve_screen.dart` (Profile → "Approve news", shown only to
+  news admins). Admins are rows in `news_admins` (only the user's own
+  mobile account; `supabase/news_admin.sql`); the server functions
+  `is_news_admin`, `admin_news_list`, `admin_set_news` check it. First
+  story picked = top (sort 0); taking one back renumbers the rest.
 - App-wide helpers live in `lib/services/`:
   - `backend.dart`: accounts and saved profiles. Screens only use
     `Backend.instance` (never Supabase directly). `SupabaseBackend` is used

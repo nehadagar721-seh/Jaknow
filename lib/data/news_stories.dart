@@ -47,6 +47,26 @@ class NewsStory {
       simpleWords ?? (paragraphs.isEmpty ? '' : paragraphs.first);
 }
 
+/// One collected story as the news admin sees it on the Approve screen.
+class AdminNewsItem {
+  const AdminNewsItem({
+    required this.id,
+    required this.story,
+    required this.published,
+    required this.sort,
+  });
+
+  /// The row id in `news_items`.
+  final int id;
+  final NewsStory story;
+
+  /// True if it shows in the app; false while it is a draft.
+  final bool published;
+
+  /// Its place among the day's published stories (0 = top story).
+  final int sort;
+}
+
 /// SAMPLE stories. These are real events from 2023–24, written into the
 /// app so the screen can be built and tested. They are NOT today's news:
 /// real daily stories will come from a server later, in this same format.

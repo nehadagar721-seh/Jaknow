@@ -9,6 +9,13 @@
    - PIB currently blocks Supabase's servers (HTTP 403), so for now its
      stories don't come in. The job's report shows each feed's result.
 2. **Approve (you).** Nothing shows in the app until you approve it.
+   - **Easiest: in the app.** Log in with your admin account → Profile →
+     **Approve news**. Tap stories to show them (the first one you pick is
+     the top story ★), tap again to take one back. "Read it first" opens
+     the original.
+   - Only accounts in the `news_admins` table can do this (see
+     `supabase/news_admin.sql`); the server refuses everyone else.
+   - Or in the dashboard:
    - Open the Supabase dashboard → **Table Editor → news_items**.
    - Filter **status = draft** and **news_date = today**.
    - Pick about **5 stories** (a mix of categories works best). For each one,

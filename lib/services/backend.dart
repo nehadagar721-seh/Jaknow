@@ -289,6 +289,21 @@ abstract class Backend {
   /// are none or the server can't be reached (the app then shows samples).
   Future<List<NewsStory>?> fetchNews();
 
+  /// True if the signed-in user may approve news (checked by the server).
+  Future<bool> isNewsAdmin();
+
+  /// Today's and yesterday's collected stories, drafts and published.
+  /// News admins only.
+  Future<List<AdminNewsItem>> adminNews();
+
+  /// Publishes a story at place [sort] (0 = top story), or takes it back
+  /// to draft. News admins only.
+  Future<void> setNewsPublished(
+    int id, {
+    required bool published,
+    int sort = 0,
+  });
+
   /// The hidden login address made from a mobile number. Supabase's own
   /// mobile login needs paid SMS, so we use this instead; nothing is ever
   /// sent to it.
@@ -558,6 +573,48 @@ class SupabaseBackend implements Backend {
     }
   }
 
+  @override
+  Future<bool> isNewsAdmin() async {
+    if (_client.auth.currentUser == null) return false;
+    try {
+      return await _client.rpc('is_news_admin') == true;
+    } catch (error) {
+      debugPrint('JaKnow: could not check news admin ($error).');
+      return false;
+    }
+  }
+
+  @override
+  Future<List<AdminNewsItem>> adminNews() async {
+    final rows = await _guard(() async {
+      final data = await _client.rpc('admin_news_list');
+      return List<Map<String, dynamic>>.from(data as List);
+    });
+    return [
+      for (final r in rows)
+        AdminNewsItem(
+          id: (r['id'] as num).toInt(),
+          story: newsFromRow(r),
+          published: r['status'] == 'published',
+          sort: (r['sort'] as num?)?.toInt() ?? 0,
+        ),
+    ];
+  }
+
+  @override
+  Future<void> setNewsPublished(
+    int id, {
+    required bool published,
+    int sort = 0,
+  }) async {
+    await _guard(
+      () => _client.rpc(
+        'admin_set_news',
+        params: {'p_id': id, 'p_published': published, 'p_sort': sort},
+      ),
+    );
+  }
+
   /// One `news_items` row → a [NewsStory].
   static NewsStory newsFromRow(Map<String, dynamic> row) {
     final summary = (row['summary'] as String? ?? '').trim();
@@ -672,6 +729,41 @@ class MemoryBackend implements Backend {
 
   @override
   Future<List<NewsStory>?> fetchNews() async => null; // use the samples
+
+  /// Test mode: set to true (and fill [newsItems]) to try the Approve
+  /// screen without Supabase.
+  bool newsAdmin = false;
+  final List<AdminNewsItem> newsItems = [];
+
+  @override
+  Future<bool> isNewsAdmin() async => newsAdmin;
+
+  @override
+  Future<List<AdminNewsItem>> adminNews() async {
+    if (!newsAdmin) {
+      throw const BackendException('Only news admins can do this');
+    }
+    return List.of(newsItems);
+  }
+
+  @override
+  Future<void> setNewsPublished(
+    int id, {
+    required bool published,
+    int sort = 0,
+  }) async {
+    if (!newsAdmin) {
+      throw const BackendException('Only news admins can do this');
+    }
+    final i = newsItems.indexWhere((n) => n.id == id);
+    if (i < 0) return;
+    newsItems[i] = AdminNewsItem(
+      id: id,
+      story: newsItems[i].story,
+      published: published,
+      sort: sort,
+    );
+  }
 
   @override
   Future<void> startGoogleSignIn() async {

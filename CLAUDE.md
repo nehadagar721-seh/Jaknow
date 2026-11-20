@@ -87,7 +87,7 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   graph- and sum-heavy; ask the user before adding it). Every school class now has courses, so "lessons are coming"
   only shows for College / Preparing for exams / Not a student.
   LESSON QUIZZES ARE GOING FROM 3 TO 7 QUESTIONS, one course per step
-  (the user's choice: 3 felt too few). Done: Class 5, Class 6, Class 7, Class 8 (all three each), Class 9 (all four), Class 10 History + Civics. New questions are
+  (the user's choice: 3 felt too few). Done: Class 5, Class 6, Class 7, Class 8 (all three each), Class 9 (all four), Class 10 (all four). New questions are
   added with the scratchpad `addq.py` helper; finished courses go in
   `sevenQuestionCourses` in `test/library_test.dart`. In Supabase only the
   `questions` + `quiz` columns change (`quizsql.py` makes the updates).

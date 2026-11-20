@@ -133,6 +133,52 @@ const List<Lesson> class10EconomicsLessons = [
         correctIndex: 0,
         explanation: 'It counts deaths of babies under one year old.',
       ),
+      QuizQuestion(
+        topic: 'Economy',
+        question:
+            'A new dam giving power to cities but flooding villages shows '
+            'that development goals can…',
+        options: [
+          'conflict',
+          'never change',
+          'be the same for all',
+          'be ignored',
+        ],
+        correctIndex: 0,
+        explanation: 'Different people’s goals can clash.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'The HDI combines health, education and…',
+        options: ['income', 'military power', 'land area', 'population size'],
+        correctIndex: 0,
+        explanation: 'HDI combines health, education and income.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'Why can averages be misleading?',
+        options: [
+          'They can hide inequality',
+          'They are always too high',
+          'They ignore money',
+          'They count only children',
+        ],
+        correctIndex: 0,
+        explanation: 'Averages can hide big differences between rich and poor.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question:
+            'Meeting today’s needs without harming future generations is…',
+        options: [
+          'sustainable development',
+          'inflation',
+          'globalisation',
+          'barter',
+        ],
+        correctIndex: 0,
+        explanation: 'That is sustainable development.',
+      ),
     ],
   ),
   Lesson(
@@ -256,6 +302,51 @@ const List<Lesson> class10EconomicsLessons = [
         options: ['50', '100', '200', '365'],
         correctIndex: 1,
         explanation: 'It guarantees 100 days of paid work.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'Farming, fishing and mining belong to the…',
+        options: [
+          'primary sector',
+          'secondary sector',
+          'tertiary sector',
+          'quaternary sector',
+        ],
+        correctIndex: 0,
+        explanation: 'They use natural resources directly.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'Banking, transport and teaching belong to the…',
+        options: [
+          'primary sector',
+          'secondary sector',
+          'tertiary sector',
+          'informal sector',
+        ],
+        correctIndex: 2,
+        explanation: 'They are services in the tertiary sector.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'GDP counts only…',
+        options: [
+          'final goods and services',
+          'intermediate goods',
+          'imports',
+          'second-hand goods',
+        ],
+        correctIndex: 0,
+        explanation: 'Only final goods are counted to avoid double counting.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question:
+            'Which sector still employs the largest share of India’s '
+            'workers?',
+        options: ['Primary', 'Secondary', 'Tertiary', 'Quaternary'],
+        correctIndex: 0,
+        explanation: 'The primary sector employs the most workers.',
       ),
     ],
   ),
@@ -389,6 +480,45 @@ const List<Lesson> class10EconomicsLessons = [
         correctIndex: 1,
         explanation: 'Muhammad Yunus, Nobel Peace Prize 2006.',
       ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'In India, currency notes are issued by the…',
+        options: [
+          'Reserve Bank of India',
+          'State Bank of India',
+          'Finance Commission',
+          'Election Commission',
+        ],
+        correctIndex: 0,
+        explanation: 'The RBI issues notes on behalf of the government.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'Banks’ main income comes from…',
+        options: [
+          'the gap between loan and deposit interest',
+          'selling notes',
+          'fines',
+          'taxes',
+        ],
+        correctIndex: 0,
+        explanation:
+            'They charge more interest on loans than they pay on deposits.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'Loans from moneylenders and traders are…',
+        options: ['informal credit', 'formal credit', 'foreign aid', 'bonds'],
+        correctIndex: 0,
+        explanation: 'This is informal credit, often at high interest.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'A self-help group usually has about…',
+        options: ['15 to 20 members', '2 members', '500 members', 'one member'],
+        correctIndex: 0,
+        explanation: 'SHGs have about 15–20 members.',
+      ),
     ],
   ),
   Lesson(
@@ -516,6 +646,44 @@ const List<Lesson> class10EconomicsLessons = [
         correctIndex: 1,
         explanation: 'That is liberalisation.',
       ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'Money spent by MNCs on land, buildings and machines is…',
+        options: ['foreign investment', 'barter', 'tax', 'subsidy'],
+        correctIndex: 0,
+        explanation: 'This is foreign investment.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'India began liberalisation in…',
+        options: ['1947', '1969', '1991', '2005'],
+        correctIndex: 2,
+        explanation: 'India removed many barriers in 1991.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'Which has made globalisation faster?',
+        options: [
+          'Transport and information technology',
+          'Barter',
+          'Closed borders',
+          'Higher tariffs',
+        ],
+        correctIndex: 0,
+        explanation: 'Better transport and IT sped up globalisation.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'Foreign trade gives buyers…',
+        options: [
+          'more choice',
+          'less choice',
+          'no products',
+          'only local goods',
+        ],
+        correctIndex: 0,
+        explanation: 'Trade gives buyers more choice.',
+      ),
     ],
   ),
   Lesson(
@@ -631,6 +799,41 @@ const List<Lesson> class10EconomicsLessons = [
         options: ['15 March', '24 December', '5 June', '1 May'],
         correctIndex: 1,
         explanation: 'It is celebrated on 24 December.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'Which Consumer Protection Act also covers online shopping?',
+        options: [
+          'The 2019 Act',
+          'The 1986 Act',
+          'The 1950 Act',
+          'The 1972 Act',
+        ],
+        correctIndex: 0,
+        explanation: 'The new Act of 2019 covers online shopping.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'The right to get compensation when cheated is the right to…',
+        options: ['seek redress', 'choose', 'safety', 'vote'],
+        correctIndex: 0,
+        explanation: 'This is the right to seek redress.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question: 'Mixing cheap things into food is called…',
+        options: ['adulteration', 'hallmarking', 'redress', 'packaging'],
+        correctIndex: 0,
+        explanation: 'This is adulteration.',
+      ),
+      QuizQuestion(
+        topic: 'Economy',
+        question:
+            'Consumer complaints are heard by commissions at the district, '
+            'state and … levels.',
+        options: ['national', 'village', 'school', 'ward'],
+        correctIndex: 0,
+        explanation: 'There are district, state and national commissions.',
       ),
     ],
   ),

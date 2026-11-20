@@ -396,6 +396,8 @@ void main() {
     'class11-constitution',
     'class11-political-theory',
     'class11-physical-geography',
+    'class11-india-geography',
+    'class11-economic-development',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

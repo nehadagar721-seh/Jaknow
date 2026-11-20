@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../data/news_stories.dart';
 import '../data/quiz_questions.dart';
@@ -738,6 +739,10 @@ class _StorySheet extends StatelessWidget {
             ),
             const SizedBox(height: 12),
           ],
+          if (story.url case final url?) ...[
+            _FullStoryLink(source: story.source, url: url),
+            const SizedBox(height: 12),
+          ],
           const SizedBox(height: 8),
           Row(
             children: [
@@ -794,6 +799,52 @@ String _sourceLine(NewsStory story) {
     'Dec',
   ];
   return '$source · ${date.day} ${months[date.month - 1]} ${date.year}';
+}
+
+/// "Read full story on PIB ↗": opens the original article in the browser.
+class _FullStoryLink extends StatelessWidget {
+  const _FullStoryLink({required this.source, required this.url});
+
+  final String? source;
+  final String url;
+
+  Future<void> _open(BuildContext context) async {
+    final uri = Uri.tryParse(url);
+    // Only open normal web links.
+    final ok =
+        uri != null &&
+        (uri.scheme == 'https' || uri.scheme == 'http') &&
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+    if (!ok && context.mounted) {
+      ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+        const SnackBar(
+          content: Text('Couldn’t open the story. Try again later.'),
+        ),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 50,
+      child: OutlinedButton.icon(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: AppColors.indigo,
+          backgroundColor: AppColors.white,
+          side: const BorderSide(color: AppColors.indigo, width: 1.4),
+          shape: const StadiumBorder(),
+          textStyle: AppTextStyles.button.copyWith(fontSize: 15.5),
+        ),
+        onPressed: () => _open(context),
+        icon: const Icon(Icons.open_in_new_rounded, size: 19),
+        label: Text(
+          source == null ? 'Read full story' : 'Read full story on $source',
+        ),
+      ),
+    );
+  }
 }
 
 /// Says clearly that the stories shown are samples, not today's news.

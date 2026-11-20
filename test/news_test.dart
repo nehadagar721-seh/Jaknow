@@ -55,6 +55,7 @@ void main() {
     await tester.tap(find.text(sampleStories[2].headline));
     await settle(tester);
     expect(find.text(sampleStories[2].paragraphs.first), findsOneWidget);
+    expect(find.textContaining('Read full story'), findsNothing);
 
     // Close the story by tapping above it.
     await tester.tapAt(const Offset(195, 20));
@@ -94,6 +95,7 @@ void main() {
     expect(find.text('PIB · 20 Nov 2026'), findsOneWidget);
     expect(find.text('A short summary from the feed.'), findsWidgets);
     expect(find.text('Quiz me'), findsNothing);
+    expect(find.text('Read full story on PIB'), findsOneWidget);
   });
 
   testWidgets('"Quiz me on this" marks the answer', (tester) async {

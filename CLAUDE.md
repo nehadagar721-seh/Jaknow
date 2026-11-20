@@ -109,8 +109,9 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   (India), status 'draft' → 'published' (the app can only read published
   rows). `Backend.fetchNews()` gives the newest published day (up to 5);
   News falls back to `sampleStories` with a "Sample stories" note. Real
-  stories have no simpleWords/quiz, so those parts are hidden. Next steps:
-  "Read full story" link, the RSS-collecting server job, a daily timer.
+  stories have no simpleWords/quiz, so those parts are hidden. "Read full
+  story on <source>" opens `url` in the browser (`url_launcher`, https/http
+  only). Next steps: the RSS-collecting server job, a daily timer.
 - App-wide helpers live in `lib/services/`:
   - `backend.dart`: accounts and saved profiles. Screens only use
     `Backend.instance` (never Supabase directly). `SupabaseBackend` is used

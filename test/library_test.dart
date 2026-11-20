@@ -402,6 +402,8 @@ void main() {
     'class12-world-politics',
     'class12-politics-india',
     'class12-human-geography',
+    'class12-india-people-economy',
+    'class12-macroeconomics',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

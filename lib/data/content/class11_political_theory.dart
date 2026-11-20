@@ -133,6 +133,52 @@ const List<Lesson> class11PoliticalTheoryLessons = [
             'Kautilya, also called Chanakya, is linked with the '
             'Arthashastra.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Politics is about how people make…',
+        options: [
+          'collective decisions and manage power',
+          'only money',
+          'only laws of nature',
+          'films',
+        ],
+        correctIndex: 0,
+        explanation: 'Politics is about collective decisions and power.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Which of these is an idea studied in political theory?',
+        options: ['Justice', 'Photosynthesis', 'Gravity', 'Erosion'],
+        correctIndex: 0,
+        explanation:
+            'Political theory studies freedom, equality, justice and more.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Many ideas of political theory are put into practice in our…',
+        options: [
+          'Constitution',
+          'weather',
+          'sports rules only',
+          'school timetable',
+        ],
+        correctIndex: 0,
+        explanation: 'Our Constitution puts them into practice.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Studying political theory helps us act as…',
+        options: [
+          'responsible citizens',
+          'soldiers only',
+          'traders only',
+          'tourists',
+        ],
+        correctIndex: 0,
+        explanation:
+            'It helps us think clearly and act as responsible citizens.',
+      ),
     ],
   ),
   Lesson(
@@ -261,6 +307,49 @@ const List<Lesson> class11PoliticalTheoryLessons = [
         ],
         correctIndex: 1,
         explanation: 'It is Nelson Mandela’s autobiography.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Freedom to develop oneself is called…',
+        options: [
+          'positive liberty',
+          'negative liberty',
+          'equality',
+          'anarchy',
+        ],
+        correctIndex: 0,
+        explanation: 'Positive liberty is freedom to develop oneself.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Why are some limits on freedom needed?',
+        options: [
+          'So one person’s freedom does not harm others',
+          'To stop all speech',
+          'To please kings',
+          'There is no reason',
+        ],
+        correctIndex: 0,
+        explanation: 'Limits stop one person’s freedom from harming others.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'A key freedom in a democracy is freedom of…',
+        options: ['expression', 'slavery', 'censorship', 'fear'],
+        correctIndex: 0,
+        explanation: 'Freedom of expression is central to democracy.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Freedom means the absence of constraints and…',
+        options: [
+          'the ability to make one’s own choices',
+          'obeying every order',
+          'having no rights',
+          'wealth',
+        ],
+        correctIndex: 0,
+        explanation: 'Freedom includes making one’s own choices.',
       ),
     ],
   ),
@@ -399,6 +488,46 @@ const List<Lesson> class11PoliticalTheoryLessons = [
         explanation:
             'Affirmative action aims to correct historical disadvantage.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Equality means all people have…',
+        options: [
+          'equal worth and deserve equal respect',
+          'the same height',
+          'the same job',
+          'the same income always',
+        ],
+        correctIndex: 0,
+        explanation: 'Equality means equal worth and respect.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Which is NOT one of the three dimensions of equality?',
+        options: ['Political', 'Social', 'Economic', 'Military'],
+        correctIndex: 3,
+        explanation: 'The three are political, social and economic.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Everyone getting a fair chance to develop their talents is…',
+        options: [
+          'equality of opportunity',
+          'monarchy',
+          'charity',
+          'censorship',
+        ],
+        correctIndex: 0,
+        explanation: 'That is equality of opportunity.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Does equality mean treating everyone exactly the same in every '
+            'case?',
+        options: ['No', 'Yes', 'Only for adults', 'Only in courts'],
+        correctIndex: 0,
+        explanation: 'Special needs may need different treatment.',
+      ),
     ],
   ),
   Lesson(
@@ -531,6 +660,47 @@ const List<Lesson> class11PoliticalTheoryLessons = [
         correctIndex: 1,
         explanation: 'Equals should be treated equally.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Justice means giving each person…',
+        options: [
+          'their due',
+          'the same gift',
+          'nothing',
+          'everything they want',
+        ],
+        correctIndex: 0,
+        explanation: 'Justice means giving each person their due.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Recognising special needs, like for people with disabilities, '
+            'is a principle of…',
+        options: ['justice', 'monarchy', 'war', 'trade'],
+        correctIndex: 0,
+        explanation: 'Recognition of special needs is a principle of justice.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'India’s Constitution aims at social, economic and … justice.',
+        options: ['political', 'military', 'religious only', 'foreign'],
+        correctIndex: 0,
+        explanation: 'It aims at social, economic and political justice.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Social justice requires a fair distribution of…',
+        options: [
+          'goods and opportunities',
+          'only taxes',
+          'only land to kings',
+          'weapons',
+        ],
+        correctIndex: 0,
+        explanation: 'It needs fair distribution of goods and opportunities.',
+      ),
     ],
   ),
   Lesson(
@@ -655,6 +825,46 @@ const List<Lesson> class11PoliticalTheoryLessons = [
         options: ['1993', '2005', '2009', '2013'],
         correctIndex: 1,
         explanation: 'The RTI Act was passed in 2005.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'A right is a justified claim that society accepts and the…',
+        options: [
+          'state protects',
+          'market sells',
+          'army ignores',
+          'king grants daily',
+        ],
+        correctIndex: 0,
+        explanation: 'The state protects rights.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'The idea that people have rights simply because they are human '
+            'is…',
+        options: [
+          'natural rights',
+          'legal duties',
+          'taxation',
+          'citizenship tests',
+        ],
+        correctIndex: 0,
+        explanation: 'This is the idea of natural rights.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Rights place duties on the state and on…',
+        options: ['other citizens', 'no one', 'only judges', 'animals'],
+        correctIndex: 0,
+        explanation: 'Rights create duties for the state and other citizens.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'When rights conflict, they must be…',
+        options: ['balanced', 'ignored', 'sold', 'abolished'],
+        correctIndex: 0,
+        explanation: 'Conflicting rights must be balanced.',
       ),
     ],
   ),
@@ -786,6 +996,46 @@ const List<Lesson> class11PoliticalTheoryLessons = [
         options: ['tourists', 'refugees', 'diplomats', 'emigrants only'],
         correctIndex: 1,
         explanation: 'Refugees flee danger in their home country.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Citizenship means full and equal…',
+        options: [
+          'membership of a political community',
+          'ownership of land',
+          'control of the army',
+          'payment of fees',
+        ],
+        correctIndex: 0,
+        explanation: 'It means full and equal membership.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Which is a duty of citizens?',
+        options: [
+          'Obeying laws',
+          'Ignoring elections',
+          'Avoiding taxes',
+          'Breaking rules',
+        ],
+        correctIndex: 0,
+        explanation: 'Citizens have duties like obeying laws.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Indian citizenship can be acquired by birth, descent, '
+            'registration or…',
+        options: ['naturalisation', 'lottery', 'purchase', 'marriage only'],
+        correctIndex: 0,
+        explanation: 'Naturalisation is one way.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Shared action on world problems leads to the idea of…',
+        options: ['global citizenship', 'monarchy', 'isolation', 'feudalism'],
+        correctIndex: 0,
+        explanation: 'Some thinkers speak of global citizenship.',
       ),
     ],
   ),
@@ -927,6 +1177,51 @@ const List<Lesson> class11PoliticalTheoryLessons = [
         correctIndex: 0,
         explanation: 'Tagore criticised aggressive nationalism.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Nations are bound by shared beliefs, history, territory and…',
+        options: [
+          'political ideals',
+          'one food',
+          'one sport',
+          'the same height',
+        ],
+        correctIndex: 0,
+        explanation: 'Shared political ideals also bind nations.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Nationalism has helped peoples win freedom, but it can also…',
+        options: [
+          'cause conflict',
+          'stop all trade',
+          'end languages',
+          'end farming',
+        ],
+        correctIndex: 0,
+        explanation: 'It can also cause conflict.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Nationalism that welcomes all groups is called…',
+        options: ['inclusive', 'exclusive', 'colonial', 'feudal'],
+        correctIndex: 0,
+        explanation: 'Inclusive nationalism welcomes all.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Indian nationalism stressed unity in diversity and…',
+        options: [
+          'equal citizenship',
+          'one religion',
+          'one language',
+          'rule by kings',
+        ],
+        correctIndex: 0,
+        explanation: 'It stressed equal citizenship.',
+      ),
     ],
   ),
   Lesson(
@@ -1060,6 +1355,48 @@ const List<Lesson> class11PoliticalTheoryLessons = [
         options: ['laicite', 'dharma', 'apartheid', 'federalism'],
         correctIndex: 0,
         explanation: 'Laicite is the French idea of secularism.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Secularism separates religious institutions from the '
+            'institutions of the…',
+        options: ['state', 'family', 'market', 'school only'],
+        correctIndex: 0,
+        explanation: 'It separates religion from the state.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Western secularism usually means…',
+        options: [
+          'strict separation of state and religion',
+          'one official religion',
+          'state-run temples',
+          'banning prayer at home',
+        ],
+        correctIndex: 0,
+        explanation: 'It usually means strict separation.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'The Indian state can intervene to end harmful practices like…',
+        options: ['untouchability', 'festivals', 'prayer', 'pilgrimage'],
+        correctIndex: 0,
+        explanation: 'It abolished untouchability.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Secularism opposes domination of one religion over others and…',
+        options: [
+          'within a religion',
+          'over animals',
+          'over nature',
+          'over sports',
+        ],
+        correctIndex: 0,
+        explanation: 'It also opposes domination within a religion.',
       ),
     ],
   ),

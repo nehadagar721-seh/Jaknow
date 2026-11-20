@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jaknow/data/news_stories.dart';
 import 'package:jaknow/screens/home_screen.dart';
 import 'package:jaknow/screens/news_screen.dart';
+import 'package:jaknow/services/backend.dart';
 import 'package:jaknow/theme/app_theme.dart';
 
 void main() {
@@ -31,8 +32,8 @@ void main() {
   test('every story has a valid quiz question', () {
     expect(sampleStories, hasLength(5));
     for (final story in sampleStories) {
-      expect(story.quiz.options, hasLength(4), reason: story.headline);
-      expect(story.quiz.correctIndex, inInclusiveRange(0, 3));
+      expect(story.quiz!.options, hasLength(4), reason: story.headline);
+      expect(story.quiz!.correctIndex, inInclusiveRange(0, 3));
       expect(story.paragraphs, isNotEmpty);
     }
   });
@@ -61,11 +62,45 @@ void main() {
     expect(find.text('1 of 5 read'), findsOneWidget);
   });
 
+  testWidgets('samples are clearly labelled', (tester) async {
+    await openNews(tester);
+    expect(find.textContaining('Sample stories from 2023–24'), findsOneWidget);
+  });
+
+  testWidgets('a real headline-only story has no quiz button', (tester) async {
+    tallScreen(tester);
+    final story = SupabaseBackend.newsFromRow({
+      'category': 'Science',
+      'headline': 'Test headline from the feed',
+      'summary': 'A short summary from the feed.',
+      'source': 'PIB',
+      'url': 'https://example.org/story',
+      'news_date': '2026-11-20',
+    });
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: NewsScreen(stories: [story]),
+      ),
+    );
+    await tester.pump();
+    expect(find.text('Test headline from the feed'), findsOneWidget);
+    expect(find.text('Quiz me on this'), findsNothing);
+    expect(find.textContaining('Sample stories'), findsNothing);
+    expect(find.textContaining('In simple words'), findsNothing);
+
+    await tester.tap(find.text('Read story'));
+    await settle(tester);
+    expect(find.text('PIB · 20 Nov 2026'), findsOneWidget);
+    expect(find.text('A short summary from the feed.'), findsWidgets);
+    expect(find.text('Quiz me'), findsNothing);
+  });
+
   testWidgets('"Quiz me on this" marks the answer', (tester) async {
     await openNews(tester);
     await tester.tap(find.text('Quiz me on this'));
     await settle(tester);
-    final quiz = sampleStories.first.quiz;
+    final quiz = sampleStories.first.quiz!;
     expect(find.text(quiz.question), findsOneWidget);
 
     await tester.tap(find.text(quiz.correctAnswer));

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../data/news_stories.dart';
 import '../data/quiz_questions.dart';
+import '../services/backend.dart';
 import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
@@ -11,12 +12,15 @@ import '../widgets/coming_soon.dart';
 
 /// Current affairs: today's 5 stories, explained simply by Boojho.
 ///
+/// Without [stories], it loads the newest published stories from Supabase
+/// (`news_items`), and shows the labelled samples until there are some.
+///
 /// Closes with the name of a bottom-bar tab (e.g. 'Quiz') when the user
 /// taps one, so Home can open it.
 class NewsScreen extends StatefulWidget {
-  const NewsScreen({super.key, this.stories = sampleStories});
+  const NewsScreen({super.key, this.stories});
 
-  final List<NewsStory> stories;
+  final List<NewsStory>? stories;
 
   @override
   State<NewsScreen> createState() => _NewsScreenState();
@@ -37,12 +41,32 @@ class _NewsScreenState extends State<NewsScreen>
   /// Which stories have been opened (by their position in the list).
   final Set<int> _read = {};
 
+  late List<NewsStory> _stories = widget.stories ?? sampleStories;
+
+  /// True while showing the built-in samples instead of real news.
+  bool get _isSample => identical(_stories, sampleStories);
+
   @override
   void initState() {
     super.initState();
+    _load();
+  }
+
+  Future<void> _load() async {
+    if (widget.stories == null) {
+      final real = await Backend.instance.fetchNews();
+      if (!mounted) return;
+      if (real != null && real.isNotEmpty) {
+        setState(() {
+          _stories = real;
+          _read.clear();
+        });
+      }
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
       _voice.say(
-        'Here are today’s ${widget.stories.length} stories. Tap one to read '
+        'Here are today’s ${_stories.length} stories. Tap one to read '
         'it, or tap the speaker and I’ll read the headlines.',
       );
     });
@@ -63,9 +87,9 @@ class _NewsScreenState extends State<NewsScreen>
     }
     _voice.setMuted(false);
     final lines = [
-      for (var i = 0; i < widget.stories.length; i++)
-        'Story ${i + 1}, ${widget.stories[i].category}. '
-            '${widget.stories[i].headline}.',
+      for (var i = 0; i < _stories.length; i++)
+        'Story ${i + 1}, ${_stories[i].category}. '
+            '${_stories[i].headline}.',
     ];
     _voice.say(lines.join(' '));
   }
@@ -81,18 +105,22 @@ class _NewsScreenState extends State<NewsScreen>
         borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
       ),
       builder: (_) => _StorySheet(
-        story: widget.stories[index],
+        story: _stories[index],
         animation: _clock,
-        onQuiz: () {
-          Navigator.of(context).pop(); // close the story first
-          _quizMe(index);
-        },
+        onQuiz: _stories[index].quiz == null
+            ? null
+            : () {
+                Navigator.of(context).pop(); // close the story first
+                _quizMe(index);
+              },
       ),
     );
     _voice.stop();
   }
 
   Future<void> _quizMe(int index) async {
+    final question = _stories[index].quiz;
+    if (question == null) return;
     _voice.stop();
     await showModalBottomSheet<void>(
       context: context,
@@ -101,7 +129,7 @@ class _NewsScreenState extends State<NewsScreen>
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
       ),
-      builder: (_) => _StoryQuizSheet(question: widget.stories[index].quiz),
+      builder: (_) => _StoryQuizSheet(question: question),
     );
     _voice.stop();
   }
@@ -118,7 +146,7 @@ class _NewsScreenState extends State<NewsScreen>
 
   @override
   Widget build(BuildContext context) {
-    final stories = widget.stories;
+    final stories = _stories;
     return Scaffold(
       bottomNavigationBar: AppBottomBar(selected: 'News', onTap: _onTab),
       body: SafeArea(
@@ -155,6 +183,10 @@ class _NewsScreenState extends State<NewsScreen>
             else ...[
               _ReadProgress(read: _read.length, total: stories.length),
               const SizedBox(height: 16),
+              if (_isSample) ...[
+                const _SampleNote(),
+                const SizedBox(height: 12),
+              ],
               ValueListenableBuilder<bool>(
                 valueListenable: _voice.isSpeaking,
                 builder: (context, speaking, _) => _TopStoryCard(
@@ -162,7 +194,7 @@ class _NewsScreenState extends State<NewsScreen>
                   animation: _clock,
                   isSpeaking: speaking,
                   onRead: () => _openStory(0),
-                  onQuiz: () => _quizMe(0),
+                  onQuiz: stories.first.quiz == null ? null : () => _quizMe(0),
                 ),
               ),
               const SizedBox(height: 12),
@@ -348,7 +380,9 @@ class _TopStoryCard extends StatelessWidget {
   final Animation<double> animation;
   final bool isSpeaking;
   final VoidCallback onRead;
-  final VoidCallback onQuiz;
+
+  /// Null when the story has no quiz: the button is hidden.
+  final VoidCallback? onQuiz;
 
   @override
   Widget build(BuildContext context) {
@@ -367,7 +401,7 @@ class _TopStoryCard extends StatelessWidget {
               _CategoryChip(label: story.category, amber: true),
               const Spacer(),
               Text(
-                '${story.minutes} min read',
+                story.source ?? '${story.minutes} min read',
                 style: AppTextStyles.subtitle.copyWith(
                   fontSize: 13,
                   color: white.withValues(alpha: 0.7),
@@ -398,16 +432,19 @@ class _TopStoryCard extends StatelessWidget {
                 child: Text.rich(
                   TextSpan(
                     children: [
-                      TextSpan(
-                        text: 'In simple words: ',
-                        style: TextStyle(
-                          color: AppColors.amber,
-                          fontWeight: FontWeight.w700,
+                      if (story.simpleWords != null)
+                        TextSpan(
+                          text: 'In simple words: ',
+                          style: TextStyle(
+                            color: AppColors.amber,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
-                      ),
-                      TextSpan(text: story.simpleWords),
+                      TextSpan(text: story.teaser),
                     ],
                   ),
+                  maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.speech.copyWith(
                     color: white,
                     fontSize: 14.5,
@@ -428,14 +465,16 @@ class _TopStoryCard extends StatelessWidget {
                   onPressed: onRead,
                 ),
               ),
-              const SizedBox(width: 9),
-              Expanded(
-                child: _CardButton(
-                  label: 'Quiz me on this',
-                  filled: false,
-                  onPressed: onQuiz,
+              if (onQuiz case final quiz?) ...[
+                const SizedBox(width: 9),
+                Expanded(
+                  child: _CardButton(
+                    label: 'Quiz me on this',
+                    filled: false,
+                    onPressed: quiz,
+                  ),
                 ),
-              ),
+              ],
             ],
           ),
         ],
@@ -612,11 +651,14 @@ class _StorySheet extends StatelessWidget {
 
   final NewsStory story;
   final Animation<double> animation;
-  final VoidCallback onQuiz;
+
+  /// Null when the story has no quiz: the button is hidden.
+  final VoidCallback? onQuiz;
 
   @override
   Widget build(BuildContext context) {
     final voice = BoojhoVoice.instance;
+    final simpleWords = story.simpleWords;
     return DraggableScrollableSheet(
       expand: false,
       initialChildSize: 0.85,
@@ -631,9 +673,11 @@ class _StorySheet extends StatelessWidget {
             children: [
               _CategoryChip(label: story.category, amber: true),
               const SizedBox(width: 10),
-              Text(
-                '${story.minutes} min read',
-                style: AppTextStyles.subtitle.copyWith(fontSize: 13),
+              Expanded(
+                child: Text(
+                  _sourceLine(story),
+                  style: AppTextStyles.subtitle.copyWith(fontSize: 13),
+                ),
               ),
             ],
           ),
@@ -644,48 +688,49 @@ class _StorySheet extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           // Boojho's simple explanation, in a white box.
-          Container(
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Row(
-              children: [
-                ValueListenableBuilder<bool>(
-                  valueListenable: voice.isSpeaking,
-                  builder: (context, speaking, _) => BoojhoAvatar(
-                    animation: animation,
-                    isSpeaking: speaking,
-                    size: 40,
+          if (simpleWords != null)
+            Container(
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Row(
+                children: [
+                  ValueListenableBuilder<bool>(
+                    valueListenable: voice.isSpeaking,
+                    builder: (context, speaking, _) => BoojhoAvatar(
+                      animation: animation,
+                      isSpeaking: speaking,
+                      size: 40,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'In simple words: ',
-                          style: TextStyle(
-                            color: AppColors.indigo,
-                            fontWeight: FontWeight.w800,
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'In simple words: ',
+                            style: TextStyle(
+                              color: AppColors.indigo,
+                              fontWeight: FontWeight.w800,
+                            ),
                           ),
-                        ),
-                        TextSpan(text: story.simpleWords),
-                      ],
-                    ),
-                    style: AppTextStyles.speech.copyWith(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      height: 1.3,
+                          TextSpan(text: simpleWords),
+                        ],
+                      ),
+                      style: AppTextStyles.speech.copyWith(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        height: 1.3,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 16),
+          if (simpleWords != null) const SizedBox(height: 16),
           for (final paragraph in story.paragraphs) ...[
             Text(
               paragraph,
@@ -709,16 +754,74 @@ class _StorySheet extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: _SheetButton(
-                  label: 'Quiz me',
-                  icon: Icons.help_outline_rounded,
-                  dark: true,
-                  onPressed: onQuiz,
+              if (onQuiz case final quiz?) ...[
+                const SizedBox(width: 10),
+                Expanded(
+                  child: _SheetButton(
+                    label: 'Quiz me',
+                    icon: Icons.help_outline_rounded,
+                    dark: true,
+                    onPressed: quiz,
+                  ),
                 ),
-              ),
+              ],
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// "1 min read" for samples; "PIB · 20 Nov 2026" for real stories.
+String _sourceLine(NewsStory story) {
+  final source = story.source;
+  if (source == null) return '${story.minutes} min read';
+  final date = story.date;
+  if (date == null) return source;
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  return '$source · ${date.day} ${months[date.month - 1]} ${date.year}';
+}
+
+/// Says clearly that the stories shown are samples, not today's news.
+class _SampleNote extends StatelessWidget {
+  const _SampleNote();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      decoration: BoxDecoration(
+        color: AppColors.amber.withValues(alpha: 0.18),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        children: [
+          const Icon(
+            Icons.info_outline_rounded,
+            size: 18,
+            color: AppColors.ink,
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              'Sample stories from 2023–24. Real daily news will show here '
+              'once it’s approved.',
+              style: AppTextStyles.subtitle.copyWith(fontSize: 13.5),
+            ),
           ),
         ],
       ),

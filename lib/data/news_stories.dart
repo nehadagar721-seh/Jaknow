@@ -1,21 +1,28 @@
 import 'quiz_questions.dart';
 
 /// One current-affairs story.
+///
+/// Sample stories (below) have everything. Real daily stories come from
+/// Supabase (`news_items`): a headline, a short summary from the feed, the
+/// source and a link, but no "In simple words" and no quiz (no AI yet).
 class NewsStory {
   const NewsStory({
     required this.category,
     required this.headline,
-    required this.simpleWords,
+    this.simpleWords,
     required this.minutes,
     required this.paragraphs,
-    required this.quiz,
+    this.quiz,
+    this.source,
+    this.url,
+    this.date,
   });
 
   final String category;
   final String headline;
 
-  /// Boojho's one-line explanation ("In simple words: …").
-  final String simpleWords;
+  /// Boojho's one-line explanation ("In simple words: …"), if there is one.
+  final String? simpleWords;
 
   /// Reading time, e.g. 1 → "1 min read".
   final int minutes;
@@ -23,8 +30,21 @@ class NewsStory {
   /// The story itself, a few short paragraphs.
   final List<String> paragraphs;
 
-  /// The "Quiz me on this" question.
-  final QuizQuestion quiz;
+  /// The "Quiz me on this" question, if there is one.
+  final QuizQuestion? quiz;
+
+  /// Where a real story comes from, e.g. "PIB" or "The Hindu".
+  final String? source;
+
+  /// Link to the original story.
+  final String? url;
+
+  /// The India date a real story belongs to.
+  final DateTime? date;
+
+  /// A short line for the cards: the simple words, or the first paragraph.
+  String get teaser =>
+      simpleWords ?? (paragraphs.isEmpty ? '' : paragraphs.first);
 }
 
 /// SAMPLE stories. These are real events from 2023–24, written into the

@@ -102,6 +102,15 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
 - News stories live in `lib/data/news_stories.dart` (`NewsStory`,
   `sampleStories`). These are REAL past events (2023–24) used as samples,
   not today's news. Never invent news: real daily stories need a server.
+  REAL DAILY NEWS (in progress, the user's choices: PIB + newspaper RSS,
+  headlines only with NO AI, and the user approves before anything goes
+  live). Table `news_items` (`supabase/news.sql`): headline, short feed
+  summary (never the whole article: copyrighted), source, url, news_date
+  (India), status 'draft' → 'published' (the app can only read published
+  rows). `Backend.fetchNews()` gives the newest published day (up to 5);
+  News falls back to `sampleStories` with a "Sample stories" note. Real
+  stories have no simpleWords/quiz, so those parts are hidden. Next steps:
+  "Read full story" link, the RSS-collecting server job, a daily timer.
 - App-wide helpers live in `lib/services/`:
   - `backend.dart`: accounts and saved profiles. Screens only use
     `Backend.instance` (never Supabase directly). `SupabaseBackend` is used

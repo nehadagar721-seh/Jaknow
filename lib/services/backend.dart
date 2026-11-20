@@ -3,6 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../data/library.dart';
 import '../data/lessons.dart';
+import '../data/news_stories.dart';
 import '../data/quiz_questions.dart';
 import '../data/study_levels.dart';
 
@@ -284,6 +285,10 @@ abstract class Backend {
   /// (test mode) or it can't be reached: then the app uses its built-in copy.
   Future<List<Course>?> fetchLibrary();
 
+  /// The newest day's published news stories (up to 5), or null if there
+  /// are none or the server can't be reached (the app then shows samples).
+  Future<List<NewsStory>?> fetchNews();
+
   /// The hidden login address made from a mobile number. Supabase's own
   /// mobile login needs paid SMS, so we use this instead; nothing is ever
   /// sent to it.
@@ -530,6 +535,43 @@ class SupabaseBackend implements Backend {
     }
   }
 
+  @override
+  Future<List<NewsStory>?> fetchNews() async {
+    try {
+      final rows = await _client
+          .from('news_items')
+          .select()
+          .eq('status', 'published')
+          .order('news_date', ascending: false)
+          .order('sort')
+          .order('id')
+          .limit(20);
+      if (rows.isEmpty) return null;
+      final newest = rows.first['news_date'];
+      return [
+        for (final r in rows.where((r) => r['news_date'] == newest).take(5))
+          newsFromRow(r),
+      ];
+    } catch (error) {
+      debugPrint('JaKnow: could not load the news ($error).');
+      return null;
+    }
+  }
+
+  /// One `news_items` row → a [NewsStory].
+  static NewsStory newsFromRow(Map<String, dynamic> row) {
+    final summary = (row['summary'] as String? ?? '').trim();
+    return NewsStory(
+      category: row['category'] as String? ?? 'National',
+      headline: row['headline'] as String? ?? '',
+      minutes: 1,
+      paragraphs: summary.isEmpty ? const [] : [summary],
+      source: row['source'] as String?,
+      url: row['url'] as String?,
+      date: DateTime.tryParse(row['news_date'] as String? ?? ''),
+    );
+  }
+
   static Lesson _lessonFromRow(Map<String, dynamic> row) => Lesson(
     id: row['id'] as String,
     topic: row['subject'] as String? ?? '',
@@ -627,6 +669,9 @@ class MemoryBackend implements Backend {
 
   @override
   Future<List<Course>?> fetchLibrary() async => null; // use the built-in copy
+
+  @override
+  Future<List<NewsStory>?> fetchNews() async => null; // use the samples
 
   @override
   Future<void> startGoogleSignIn() async {

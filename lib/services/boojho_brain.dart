@@ -179,8 +179,8 @@ List<KnowledgeItem> buildKnowledge() => [
   for (final story in sampleStories)
     KnowledgeItem(
       keywords: _important(story.headline),
-      answer: story.simpleWords,
-      simple: story.simpleWords,
+      answer: story.teaser,
+      simple: story.teaser,
       more: story.paragraphs.join(' '),
       quiz: story.quiz,
     ),

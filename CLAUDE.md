@@ -86,8 +86,8 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   `class12-macro-N`, ideas not long sums). Microeconomics not done yet (it is
   graph- and sum-heavy; ask the user before adding it). Every school class now has courses, so "lessons are coming"
   only shows for College / Preparing for exams / Not a student.
-  LESSON QUIZZES HAVE 7 QUESTIONS (raised from 3, one course per step
-  (the user's choice: 3 felt too few). Done: Class 5, Class 6, Class 7, Class 8 (all three each), Class 9 (all four), Class 10 (all four), Class 11 (all six), Class 12 (all six). all six GK courses. ALL COURSES ARE DONE: new lessons need 7 questions too. New questions are
+  EVERY LESSON QUIZ HAS 7 QUESTIONS (raised from 3; the user's choice:
+  3 felt too few). All courses are done; new lessons need 7 too. New questions are
   added with the scratchpad `addq.py` helper; finished courses go in
   `sevenQuestionCourses` in `test/library_test.dart`. In Supabase only the
   `questions` + `quiz` columns change (`quizsql.py` makes the updates).

@@ -406,6 +406,8 @@ void main() {
     'class12-macroeconomics',
     'gk-polity',
     'gk-medieval-india',
+    'gk-modern-india',
+    'gk-indian-geography',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

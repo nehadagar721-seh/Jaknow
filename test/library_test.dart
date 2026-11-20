@@ -408,6 +408,8 @@ void main() {
     'gk-medieval-india',
     'gk-modern-india',
     'gk-indian-geography',
+    'gk-world-geography',
+    'gk-indian-economy',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

@@ -392,6 +392,8 @@ void main() {
     'class10-civics',
     'class10-geography',
     'class10-economics',
+    'class11-history',
+    'class11-constitution',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

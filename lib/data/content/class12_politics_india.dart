@@ -139,6 +139,40 @@ const List<Lesson> class12PoliticsIndiaLessons = [
         correctIndex: 2,
         explanation: 'The Act was passed in 1956.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Who helped Sardar Patel integrate the princely states?',
+        options: ['V. P. Menon', 'K. M. Munshi', 'B. N. Rau', 'Sukumar Sen'],
+        correctIndex: 0,
+        explanation: 'The official V. P. Menon helped him.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'In September 1948, the Indian army moved into…',
+        options: ['Hyderabad', 'Junagadh', 'Manipur', 'Goa'],
+        correctIndex: 0,
+        explanation: 'The army moved into Hyderabad.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Whose fast unto death led to the creation of Andhra Pradesh?',
+        options: [
+          'Potti Sriramulu',
+          'Jayaprakash Narayan',
+          'Vinoba Bhave',
+          'Periyar',
+        ],
+        correctIndex: 0,
+        explanation: 'Potti Sriramulu died after his fast in 1952.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'In 1960, Bombay state was divided into Maharashtra and…',
+        options: ['Gujarat', 'Goa', 'Karnataka', 'Madhya Pradesh'],
+        correctIndex: 0,
+        explanation: 'It was divided into Maharashtra and Gujarat.',
+      ),
     ],
   ),
   Lesson(
@@ -270,6 +304,48 @@ const List<Lesson> class12PoliticsIndiaLessons = [
         correctIndex: 1,
         explanation: 'E. M. S. Namboodiripad led the government in Kerala.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'India’s first general election was held in…',
+        options: ['1947–48', '1951–52', '1957', '1962'],
+        correctIndex: 1,
+        explanation: 'It was held from October 1951 to February 1952.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'How many Lok Sabha seats did the Congress win in the first '
+            'election?',
+        options: ['364', '244', '489', '543'],
+        correctIndex: 0,
+        explanation: 'It won 364 of the 489 seats.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The Swatantra Party was formed in 1959 by…',
+        options: [
+          'C. Rajagopalachari',
+          'Ram Manohar Lohia',
+          'Syama Prasad Mookerjee',
+          'E. M. S. Namboodiripad',
+        ],
+        correctIndex: 0,
+        explanation: 'C. Rajagopalachari formed it.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'In the first election, voters who could not read were helped '
+            'by…',
+        options: [
+          'symbols on ballot boxes',
+          'oral voting',
+          'postal votes',
+          'electronic machines',
+        ],
+        correctIndex: 0,
+        explanation: 'Each candidate had a ballot box with a symbol.',
+      ),
     ],
   ),
   Lesson(
@@ -400,6 +476,48 @@ const List<Lesson> class12PoliticsIndiaLessons = [
         correctIndex: 1,
         explanation: 'NITI Aayog replaced it on 1 January 2015.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'The Second Five Year Plan was drafted under the guidance of…',
+        options: [
+          'P. C. Mahalanobis',
+          'K. N. Raj',
+          'Verghese Kurien',
+          'J. C. Kumarappa',
+        ],
+        correctIndex: 0,
+        explanation: 'P. C. Mahalanobis guided it.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The First Five Year Plan focused mainly on…',
+        options: ['agriculture', 'heavy industry', 'software', 'tourism'],
+        correctIndex: 0,
+        explanation: 'It focused on agriculture.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Operation Flood, which created the White Revolution, was led '
+            'by…',
+        options: [
+          'Verghese Kurien',
+          'M. S. Swaminathan',
+          'P. C. Mahalanobis',
+          'Nehru',
+        ],
+        correctIndex: 0,
+        explanation: 'Verghese Kurien led it.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'India followed a … economy, with public and private sectors.',
+        options: ['mixed', 'fully capitalist', 'fully socialist', 'barter'],
+        correctIndex: 0,
+        explanation: 'India chose a mixed economy.',
+      ),
     ],
   ),
   Lesson(
@@ -529,6 +647,44 @@ const List<Lesson> class12PoliticsIndiaLessons = [
         ],
         correctIndex: 1,
         explanation: 'Bhutto signed it for Pakistan.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Non-alignment meant…',
+        options: [
+          'not joining either Cold War bloc',
+          'staying isolated from the world',
+          'joining the USSR',
+          'joining NATO',
+        ],
+        correctIndex: 0,
+        explanation: 'India joined neither bloc but stayed active.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'China attacked India in…',
+        options: ['1954', '1959', '1962', '1971'],
+        correctIndex: 2,
+        explanation: 'China attacked in October 1962.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The 1965 war ended with the…',
+        options: [
+          'Tashkent Agreement',
+          'Simla Agreement',
+          'Panchsheel',
+          'Indus Waters Treaty',
+        ],
+        correctIndex: 0,
+        explanation: 'It ended with the Tashkent Agreement.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'India’s first nuclear test at Pokhran was in…',
+        options: ['1962', '1974', '1998', '2005'],
+        correctIndex: 1,
+        explanation: 'It was in May 1974.',
       ),
     ],
   ),
@@ -671,6 +827,44 @@ const List<Lesson> class12PoliticsIndiaLessons = [
         correctIndex: 1,
         explanation: 'Garibi Hatao means remove poverty.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Nehru died in…',
+        options: ['1962', '1964', '1966', '1969'],
+        correctIndex: 1,
+        explanation: 'Nehru died in May 1964.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The 1967 election result was called a…',
+        options: [
+          'political earthquake',
+          'Green Revolution',
+          'golden age',
+          'coalition era',
+        ],
+        correctIndex: 0,
+        explanation: 'It was called a political earthquake.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'In 1969, how many major banks were nationalised?',
+        options: ['Six', 'Fourteen', 'Twenty', 'Fifty'],
+        correctIndex: 1,
+        explanation: 'Fourteen major banks were nationalised.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The phrase “Aya Ram, Gaya Ram” describes…',
+        options: [
+          'legislators who keep changing parties',
+          'farmers',
+          'soldiers',
+          'judges',
+        ],
+        correctIndex: 0,
+        explanation: 'It describes defectors.',
+      ),
     ],
   ),
   Lesson(
@@ -811,6 +1005,47 @@ const List<Lesson> class12PoliticsIndiaLessons = [
         correctIndex: 1,
         explanation: 'Morarji Desai led the Janata government in 1977.',
       ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The Emergency was declared under Article…',
+        options: ['352', '356', '370', '21'],
+        correctIndex: 0,
+        explanation: 'It was declared under Article 352.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Which court set aside Indira Gandhi’s election in June 1975?',
+        options: [
+          'Allahabad High Court',
+          'Supreme Court',
+          'Delhi High Court',
+          'Bombay High Court',
+        ],
+        correctIndex: 0,
+        explanation: 'The Allahabad High Court did.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'The commission that inquired into the Emergency’s excesses was '
+            'the…',
+        options: [
+          'Shah Commission',
+          'Mandal Commission',
+          'Sarkaria Commission',
+          'Kothari Commission',
+        ],
+        correctIndex: 0,
+        explanation: 'The Shah Commission did.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The 44th Amendment replaced “internal disturbance” with…',
+        options: ['armed rebellion', 'war only', 'famine', 'strikes'],
+        correctIndex: 0,
+        explanation: 'It replaced it with armed rebellion.',
+      ),
     ],
   ),
   Lesson(
@@ -946,6 +1181,34 @@ const List<Lesson> class12PoliticsIndiaLessons = [
         options: ['1979', '1985', '1987', '1991'],
         correctIndex: 1,
         explanation: 'It ended the Assam movement in 1985.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Operation Blue Star took place in…',
+        options: ['1984', '1966', '1973', '1999'],
+        correctIndex: 0,
+        explanation: 'It took place in June 1984.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Who led the Mizo National Front?',
+        options: ['Laldenga', 'A. Z. Phizo', 'Sheikh Abdullah', 'Longowal'],
+        correctIndex: 0,
+        explanation: 'Laldenga led it.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Article 370 gave special status to…',
+        options: ['Jammu and Kashmir', 'Punjab', 'Assam', 'Sikkim'],
+        correctIndex: 0,
+        explanation: 'It gave special status to Jammu and Kashmir.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'Sikkim joined India in…',
+        options: ['1961', '1975', '1987', '2000'],
+        correctIndex: 1,
+        explanation: 'Sikkim joined India in 1975.',
       ),
     ],
   ),
@@ -1085,6 +1348,43 @@ const List<Lesson> class12PoliticsIndiaLessons = [
         ],
         correctIndex: 1,
         explanation: 'Atal Bihari Vajpayee was Prime Minister.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'The Mandal Commission recommended reserving what share of '
+            'seats for OBCs?',
+        options: ['15 per cent', '27 per cent', '33 per cent', '50 per cent'],
+        correctIndex: 1,
+        explanation: 'It recommended 27 per cent.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question:
+            'Which government decided to implement the Mandal '
+            'recommendation in 1990?',
+        options: ['V. P. Singh’s', 'Indira Gandhi’s', 'Nehru’s', 'Vajpayee’s'],
+        correctIndex: 0,
+        explanation: 'The V. P. Singh government did.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The Babri Masjid was demolished in…',
+        options: ['1984', '1989', '1992', '2002'],
+        correctIndex: 2,
+        explanation: 'It was demolished in December 1992.',
+      ),
+      QuizQuestion(
+        topic: 'Politics',
+        question: 'The UPA governments under Manmohan Singh ruled from…',
+        options: [
+          '1998 to 2004',
+          '2004 to 2014',
+          '1991 to 1996',
+          '2014 to 2019',
+        ],
+        correctIndex: 1,
+        explanation: 'They ruled from 2004 to 2014.',
       ),
     ],
   ),

@@ -400,6 +400,8 @@ void main() {
     'class11-economic-development',
     'class12-history',
     'class12-world-politics',
+    'class12-politics-india',
+    'class12-human-geography',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

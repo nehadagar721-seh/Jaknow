@@ -111,7 +111,11 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   News falls back to `sampleStories` with a "Sample stories" note. Real
   stories have no simpleWords/quiz, so those parts are hidden. "Read full
   story on <source>" opens `url` in the browser (`url_launcher`, https/http
-  only). Next steps: the RSS-collecting server job, a daily timer.
+  only). Edge Function `collect-news` (`supabase/functions/collect-news/`,
+  verify_jwt off; it checks an `x-job-key` header against a Vault secret
+  via `news_job_key_ok`, `supabase/news_job.sql`) saves fresh RSS items
+  (The Hindu, Indian Express; PIB blocks Supabase with 403) as drafts.
+  How to run/approve: `supabase/NEWS.md`. Next step: a daily timer.
 - App-wide helpers live in `lib/services/`:
   - `backend.dart`: accounts and saved profiles. Screens only use
     `Backend.instance` (never Supabase directly). `SupabaseBackend` is used

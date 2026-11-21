@@ -9,6 +9,19 @@ import 'package:jaknow/services/library_service.dart';
 import 'package:jaknow/theme/app_theme.dart';
 
 void main() {
+  /// Scrolls the Library list until [finder] is on screen.
+  Future<void> scrollTo(WidgetTester tester, Finder finder) =>
+      tester.scrollUntilVisible(
+        finder,
+        300,
+        scrollable: find
+            .descendant(
+              of: find.byType(ListView).first,
+              matching: find.byType(Scrollable),
+            )
+            .first,
+      );
+
   setUp(() {
     GoogleFonts.config.allowRuntimeFetching = false;
     Backend.instance = MemoryBackend();
@@ -115,18 +128,25 @@ void main() {
     expect(LibraryService.search(builtInCourses, 'gst'), isNotEmpty);
   });
 
-  test('Bharat Ko Jano: Culture and Heritage has 10 lessons in 5 units', () {
-    final course = builtInCourses.firstWhere(
-      (c) => c.id == 'bkj-culture-heritage',
-    );
-    expect(course.section, CourseSection.explore);
-    expect(course.collection, bharatKoJano);
-    expect(course.lessons, hasLength(10));
-    expect(course.lessons.map((l) => l.unit).toSet(), hasLength(5));
-    for (final lesson in course.lessons) {
-      final headings = lesson.sections.map((s) => s.heading).toList();
-      expect(headings.toSet(), hasLength(headings.length), reason: lesson.id);
+  test('Bharat Ko Jano courses have 10 lessons in 5 units', () {
+    for (final course in builtInCourses.where(
+      (c) => c.collection == bharatKoJano,
+    )) {
+      expect(course.section, CourseSection.explore);
+      expect(course.collection, bharatKoJano);
+      expect(course.lessons, hasLength(10));
+      expect(course.lessons.map((l) => l.unit).toSet(), hasLength(5));
+      for (final lesson in course.lessons) {
+        final headings = lesson.sections.map((s) => s.heading).toList();
+        expect(headings.toSet(), hasLength(headings.length), reason: lesson.id);
+      }
     }
+    expect(
+      builtInCourses
+          .where((c) => c.collection == bharatKoJano)
+          .map((c) => c.id),
+      ['bkj-culture-heritage', 'bkj-great-indians'],
+    );
   });
 
   test('Class 5 has its own course: Our Environment', () {
@@ -261,9 +281,10 @@ void main() {
             'gk-world-geography',
             'gk-indian-economy',
             'bkj-culture-heritage',
+            'bkj-great-indians',
           ].contains(c.id),
     );
-    expect(c6, hasLength(16));
+    expect(c6, hasLength(17));
     for (final lesson in c6.expand((c) => c.lessons)) {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)
@@ -345,6 +366,7 @@ void main() {
       );
       await tester.tap(find.text('Explore more'));
       await settle(tester);
+      await scrollTo(tester, find.text('Ancient India'));
       expect(find.text('OTHER CLASSES'), findsOneWidget);
       expect(find.text('Ancient India'), findsOneWidget);
     });
@@ -426,6 +448,7 @@ void main() {
     'gk-world-geography',
     'gk-indian-economy',
     'bkj-culture-heritage',
+    'bkj-great-indians',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

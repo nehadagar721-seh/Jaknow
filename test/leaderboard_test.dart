@@ -8,6 +8,19 @@ import 'package:jaknow/services/backend.dart';
 import 'package:jaknow/theme/app_theme.dart';
 
 void main() {
+  /// Scrolls the Library list until [finder] is on screen.
+  Future<void> scrollTo(WidgetTester tester, Finder finder) =>
+      tester.scrollUntilVisible(
+        finder,
+        300,
+        scrollable: find
+            .descendant(
+              of: find.byType(ListView).first,
+              matching: find.byType(Scrollable),
+            )
+            .first,
+      );
+
   setUp(() {
     GoogleFonts.config.allowRuntimeFetching = false;
     Backend.instance = MemoryBackend();
@@ -163,6 +176,7 @@ void main() {
       // This test user is in Class 10, so the Class 6 course is in Explore.
       await tester.tap(find.text('Explore more'));
       await settle(tester);
+      await scrollTo(tester, find.text('Ancient India'));
       await tester.tap(find.text('Ancient India'));
       await settle(tester);
       await tester.tap(find.text('Continue: The Indus Valley Civilisation'));

@@ -98,8 +98,12 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   `bkj-culture-heritage` (Culture and Heritage, 10 lessons in 5 units,
   ids `bkj-culture-N`, `bkj_culture.dart`): dance, music, painting,
   crafts, temples, monuments, World Heritage, caves, festivals, fairs and
-  living traditions. Ideas for next courses: Great Indians, Our states &
-  symbols, India's knowledge & science.
+  living traditions; `bkj-great-indians` (Great Indians, 10 lessons, ids
+  `bkj-greats-N`, `bkj_great_indians.dart`): thinkers, Bhakti and Sufi
+  saints, reformers, women pioneers, freedom fighters, unsung heroes,
+  scientists, nation-builders, writers, sports legends. Ideas for next
+  courses: Our states & symbols, India's knowledge & science. The Explore
+  list is long now: widget tests scroll to a course with `scrollTo`.
   Content is written in our own words: never copy textbook text (NCERT,
   Lucent, Bharat Ko Jano are copyrighted); cover their topics instead.
 - Library screens: `library_screen.dart` ("For Class N" / "Explore more" /

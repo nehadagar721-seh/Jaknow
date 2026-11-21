@@ -1,4 +1,5 @@
 import 'content/bkj_culture.dart';
+import 'content/bkj_great_indians.dart';
 import 'content/class5_environment.dart';
 import 'content/class6_civics.dart';
 import 'content/class6_geography.dart';
@@ -462,5 +463,16 @@ const List<Course> builtInCourses = [
         'Dance, music, art, crafts, temples, monuments, World Heritage '
         'Sites and festivals of India.',
     lessons: bkjCultureLessons,
+  ),
+  Course(
+    id: 'bkj-great-indians',
+    title: 'Great Indians',
+    subject: 'History',
+    section: CourseSection.explore,
+    collection: bharatKoJano,
+    description:
+        'Saints, reformers, women pioneers, freedom fighters, scientists, '
+        'nation-builders, writers and sports legends.',
+    lessons: bkjGreatIndiansLessons,
   ),
 ];

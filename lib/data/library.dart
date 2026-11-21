@@ -1,3 +1,4 @@
+import 'content/bkj_culture.dart';
 import 'content/class5_environment.dart';
 import 'content/class6_civics.dart';
 import 'content/class6_geography.dart';
@@ -449,5 +450,17 @@ const List<Course> builtInCourses = [
     description:
         'Planning, banking, inflation, the Budget, GST and welfare schemes.',
     lessons: indianEconomyLessons,
+  ),
+  // ---------- Bharat Ko Jano ----------
+  Course(
+    id: 'bkj-culture-heritage',
+    title: 'Culture and Heritage',
+    subject: 'History',
+    section: CourseSection.explore,
+    collection: bharatKoJano,
+    description:
+        'Dance, music, art, crafts, temples, monuments, World Heritage '
+        'Sites and festivals of India.',
+    lessons: bkjCultureLessons,
   ),
 ];

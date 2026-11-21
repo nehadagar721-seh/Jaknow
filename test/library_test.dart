@@ -115,6 +115,20 @@ void main() {
     expect(LibraryService.search(builtInCourses, 'gst'), isNotEmpty);
   });
 
+  test('Bharat Ko Jano: Culture and Heritage has 10 lessons in 5 units', () {
+    final course = builtInCourses.firstWhere(
+      (c) => c.id == 'bkj-culture-heritage',
+    );
+    expect(course.section, CourseSection.explore);
+    expect(course.collection, bharatKoJano);
+    expect(course.lessons, hasLength(10));
+    expect(course.lessons.map((l) => l.unit).toSet(), hasLength(5));
+    for (final lesson in course.lessons) {
+      final headings = lesson.sections.map((s) => s.heading).toList();
+      expect(headings.toSet(), hasLength(headings.length), reason: lesson.id);
+    }
+  });
+
   test('Class 5 has its own course: Our Environment', () {
     final c5 = builtInCourses.where((c) => c.studentClass == 'Class 5');
     expect(c5.map((c) => c.id), ['class5-evs']);
@@ -246,9 +260,10 @@ void main() {
             'gk-indian-geography',
             'gk-world-geography',
             'gk-indian-economy',
+            'bkj-culture-heritage',
           ].contains(c.id),
     );
-    expect(c6, hasLength(15));
+    expect(c6, hasLength(16));
     for (final lesson in c6.expand((c) => c.lessons)) {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)
@@ -410,6 +425,7 @@ void main() {
     'gk-indian-geography',
     'gk-world-geography',
     'gk-indian-economy',
+    'bkj-culture-heritage',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

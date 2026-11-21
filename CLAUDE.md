@@ -91,6 +91,12 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   added with the scratchpad `addq.py` helper; finished courses go in
   `sevenQuestionCourses` in `test/library_test.dart`. In Supabase only the
   `questions` + `quiz` columns change (`quizsql.py` makes the updates).
+  BHARAT KO JANO (Explore more → Bharat Ko Jano): done so far
+  `bkj-culture-heritage` (Culture and Heritage, 10 lessons in 5 units,
+  ids `bkj-culture-N`, `bkj_culture.dart`): dance, music, painting,
+  crafts, temples, monuments, World Heritage, caves, festivals, fairs and
+  living traditions. Ideas for next courses: Great Indians, Our states &
+  symbols, India's knowledge & science.
   Content is written in our own words: never copy textbook text (NCERT,
   Lucent, Bharat Ko Jano are copyrighted); cover their topics instead.
 - Library screens: `library_screen.dart` ("For Class N" / "Explore more" /

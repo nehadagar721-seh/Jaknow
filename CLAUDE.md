@@ -51,7 +51,10 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   The SAME content is in Supabase (`courses` + `lessons` tables,
   `supabase/library.sql`); after changing content run
   `dart run tool/content_to_sql.dart` → `supabase/content.sql`, then apply
-  it (lesson ids + question counts must match for scoring).
+  it (lesson ids + question counts must match for scoring). Big batches
+  can be applied without pasting: push, then in SQL `net.http_get` the
+  raw GitHub URL of `supabase/content.sql` at that commit, check an md5 of
+  the wanted lines against the local file, and `execute` only those lines.
   `LibraryService` loads from Supabase, falling back to `builtInCourses`.
   Big content batches live in `lib/data/content/` (one file per course,
   e.g. `gk_polity.dart` → `polityLessons`, ids `gk-polity-1`…`10`).

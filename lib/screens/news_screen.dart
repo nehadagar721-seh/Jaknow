@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../data/daily_quiz.dart';
 import '../data/news_stories.dart';
 import '../data/quiz_questions.dart';
 import '../services/backend.dart';
@@ -39,13 +40,46 @@ class _NewsScreenState extends State<NewsScreen>
   static const _tabs = ['Today', 'Yesterday', 'This week', 'Saved'];
   String _tab = 'Today';
 
-  /// Which stories have been opened (by their position in the list).
-  final Set<int> _read = {};
+  /// Stories opened so far.
+  final Set<NewsStory> _read = {};
 
-  late List<NewsStory> _stories = widget.stories ?? sampleStories;
+  /// Everything there is: the last 7 days of real news, or the samples.
+  late List<NewsStory> _all = widget.stories ?? sampleStories;
 
   /// True while showing the built-in samples instead of real news.
-  bool get _isSample => identical(_stories, sampleStories);
+  bool get _isSample => identical(_all, sampleStories);
+
+  static bool _sameDay(DateTime? a, DateTime b) =>
+      a != null && a.year == b.year && a.month == b.month && a.day == b.day;
+
+  List<NewsStory> _on(DateTime day) =>
+      _all.where((s) => _sameDay(s.date, day)).toList();
+
+  /// Today's stories (up to 5). If none are approved yet today, the newest
+  /// day's instead (see [_todayIsOlder]). Samples have no date.
+  List<NewsStory> get _today {
+    if (_all.every((s) => s.date == null)) return _all.take(5).toList();
+    final todays = _on(indiaToday());
+    if (todays.isNotEmpty) return todays.take(5).toList();
+    return _on(_all.firstWhere((s) => s.date != null).date!).take(5).toList();
+  }
+
+  /// The date of the stories shown under Today, when it isn't today.
+  DateTime? get _todayIsOlder {
+    final date = _today.first.date;
+    return date == null || _sameDay(date, indiaToday()) ? null : date;
+  }
+
+  List<NewsStory> get _yesterday =>
+      _on(indiaToday().subtract(const Duration(days: 1)));
+
+  /// The stories the current tab shows.
+  List<NewsStory> get _shown => switch (_tab) {
+    'Today' => _today,
+    'Yesterday' => _isSample ? const [] : _yesterday,
+    'This week' => _isSample ? const [] : _all,
+    _ => const [],
+  };
 
   @override
   void initState() {
@@ -59,15 +93,16 @@ class _NewsScreenState extends State<NewsScreen>
       if (!mounted) return;
       if (real != null && real.isNotEmpty) {
         setState(() {
-          _stories = real;
+          _all = real;
           _read.clear();
         });
       }
     }
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
+      final which = _todayIsOlder == null ? 'today’s' : 'the latest';
       _voice.say(
-        'Here are today’s ${_stories.length} stories. Tap one to read '
+        'Here are $which ${_today.length} stories. Tap one to read '
         'it, or tap the speaker and I’ll read the headlines.',
       );
     });
@@ -80,23 +115,24 @@ class _NewsScreenState extends State<NewsScreen>
     super.dispose();
   }
 
-  /// Speaker button: read all the headlines, or stop if already talking.
+  /// Speaker button: read the tab's headlines, or stop if already talking.
   void _readHeadlines() {
     if (_voice.isSpeaking.value) {
       _voice.stop();
       return;
     }
+    final stories = _shown;
+    if (stories.isEmpty) return;
     _voice.setMuted(false);
     final lines = [
-      for (var i = 0; i < _stories.length; i++)
-        'Story ${i + 1}, ${_stories[i].category}. '
-            '${_stories[i].headline}.',
+      for (var i = 0; i < stories.length; i++)
+        'Story ${i + 1}, ${stories[i].category}. ${stories[i].headline}.',
     ];
     _voice.say(lines.join(' '));
   }
 
-  Future<void> _openStory(int index) async {
-    setState(() => _read.add(index));
+  Future<void> _openStory(NewsStory story) async {
+    setState(() => _read.add(story));
     _voice.stop();
     await showModalBottomSheet<void>(
       context: context,
@@ -106,21 +142,21 @@ class _NewsScreenState extends State<NewsScreen>
         borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
       ),
       builder: (_) => _StorySheet(
-        story: _stories[index],
+        story: story,
         animation: _clock,
-        onQuiz: _stories[index].quiz == null
+        onQuiz: story.quiz == null
             ? null
             : () {
                 Navigator.of(context).pop(); // close the story first
-                _quizMe(index);
+                _quizMe(story);
               },
       ),
     );
     _voice.stop();
   }
 
-  Future<void> _quizMe(int index) async {
-    final question = _stories[index].quiz;
+  Future<void> _quizMe(NewsStory story) async {
+    final question = story.quiz;
     if (question == null) return;
     _voice.stop();
     await showModalBottomSheet<void>(
@@ -147,7 +183,6 @@ class _NewsScreenState extends State<NewsScreen>
 
   @override
   Widget build(BuildContext context) {
-    final stories = _stories;
     return Scaffold(
       bottomNavigationBar: AppBottomBar(selected: 'News', onTap: _onTab),
       body: SafeArea(
@@ -179,42 +214,139 @@ class _NewsScreenState extends State<NewsScreen>
               onSelect: (tab) => setState(() => _tab = tab),
             ),
             const SizedBox(height: 18),
-            if (_tab != 'Today')
-              _EmptyTab(tab: _tab, animation: _clock)
-            else ...[
-              _ReadProgress(read: _read.length, total: stories.length),
-              const SizedBox(height: 16),
-              if (_isSample) ...[
-                const _SampleNote(),
-                const SizedBox(height: 12),
-              ],
-              ValueListenableBuilder<bool>(
-                valueListenable: _voice.isSpeaking,
-                builder: (context, speaking, _) => _TopStoryCard(
-                  story: stories.first,
-                  animation: _clock,
-                  isSpeaking: speaking,
-                  onRead: () => _openStory(0),
-                  onQuiz: stories.first.quiz == null ? null : () => _quizMe(0),
-                ),
-              ),
-              const SizedBox(height: 12),
-              for (var i = 1; i < stories.length; i++) ...[
-                _StoryRow(
-                  number: i + 1,
-                  story: stories[i],
-                  read: _read.contains(i),
-                  onTap: () => _openStory(i),
-                ),
-                const SizedBox(height: 10),
-              ],
-            ],
+            ...switch (_tab) {
+              'Today' => _todayTab(),
+              'Yesterday' => _yesterdayTab(),
+              'This week' => _weekTab(),
+              _ => [_EmptyTab(tab: _tab, animation: _clock)],
+            },
           ],
         ),
       ),
     );
   }
+
+  List<Widget> _todayTab() {
+    final stories = _today;
+    final older = _todayIsOlder;
+    return [
+      _ReadProgress(
+        read: stories.where(_read.contains).length,
+        total: stories.length,
+      ),
+      const SizedBox(height: 16),
+      if (_isSample) ...[
+        const _SampleNote(),
+        const SizedBox(height: 12),
+      ] else if (older != null) ...[
+        _Note(
+          'Today’s stories aren’t ready yet. Here are the latest, from '
+          '${_dayLabel(older)}.',
+        ),
+        const SizedBox(height: 12),
+      ],
+      ValueListenableBuilder<bool>(
+        valueListenable: _voice.isSpeaking,
+        builder: (context, speaking, _) => _TopStoryCard(
+          story: stories.first,
+          animation: _clock,
+          isSpeaking: speaking,
+          onRead: () => _openStory(stories.first),
+          onQuiz: stories.first.quiz == null
+              ? null
+              : () => _quizMe(stories.first),
+        ),
+      ),
+      const SizedBox(height: 12),
+      for (var i = 1; i < stories.length; i++) ...[
+        _StoryRow(
+          number: i + 1,
+          story: stories[i],
+          read: _read.contains(stories[i]),
+          onTap: () => _openStory(stories[i]),
+        ),
+        const SizedBox(height: 10),
+      ],
+    ];
+  }
+
+  /// Numbered rows, as for stories 2 to 5 on Today.
+  List<Widget> _rows(List<NewsStory> stories) => [
+    for (var i = 0; i < stories.length; i++) ...[
+      _StoryRow(
+        number: i + 1,
+        story: stories[i],
+        read: _read.contains(stories[i]),
+        onTap: () => _openStory(stories[i]),
+      ),
+      const SizedBox(height: 10),
+    ],
+  ];
+
+  List<Widget> _yesterdayTab() {
+    if (_isSample) return [_EmptyTab(tab: _tab, animation: _clock)];
+    final stories = _yesterday;
+    if (stories.isEmpty) {
+      return [
+        _EmptyTab(
+          tab: _tab,
+          animation: _clock,
+          message:
+              'No stories were picked for yesterday. Have a look at '
+              'This week.',
+        ),
+      ];
+    }
+    return _rows(stories);
+  }
+
+  /// The last 7 days, one heading per day.
+  List<Widget> _weekTab() {
+    if (_isSample) return [_EmptyTab(tab: _tab, animation: _clock)];
+    final days = <DateTime>[];
+    for (final s in _all) {
+      final d = s.date;
+      if (d != null && !days.any((day) => _sameDay(d, day))) days.add(d);
+    }
+    final today = indiaToday();
+    final yesterday = today.subtract(const Duration(days: 1));
+    return [
+      for (final day in days) ...[
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: Text(
+            _sameDay(day, today)
+                ? 'Today'
+                : _sameDay(day, yesterday)
+                ? 'Yesterday · ${_dayLabel(day)}'
+                : _dayLabel(day),
+            style: AppTextStyles.cardTitle.copyWith(fontSize: 17),
+          ),
+        ),
+        ..._rows(_on(day)),
+        const SizedBox(height: 8),
+      ],
+    ];
+  }
 }
+
+const _months = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
+
+/// e.g. "20 Nov".
+String _dayLabel(DateTime d) => '${d.day} ${_months[d.month - 1]}';
 
 // ---------- Top: speaker, tabs, progress ----------
 
@@ -605,17 +737,22 @@ class _StoryRow extends StatelessWidget {
 
 /// Shown for Yesterday / This week / Saved until there's a news server.
 class _EmptyTab extends StatelessWidget {
-  const _EmptyTab({required this.tab, required this.animation});
+  const _EmptyTab({required this.tab, required this.animation, this.message});
 
   final String tab;
   final Animation<double> animation;
 
+  /// Overrides the usual message.
+  final String? message;
+
   @override
   Widget build(BuildContext context) {
-    final message = tab == 'Saved'
-        ? 'Stories you save will show up here. Saving is coming soon!'
-        : 'Stories from ${tab.toLowerCase()} will show up here once JaKnow '
-              'gets its daily news.';
+    final message =
+        this.message ??
+        (tab == 'Saved'
+            ? 'Stories you save will show up here. Saving is coming soon!'
+            : 'Stories from ${tab.toLowerCase()} will show up here once JaKnow '
+                  'gets its daily news.');
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
@@ -784,21 +921,7 @@ String _sourceLine(NewsStory story) {
   if (source == null) return '${story.minutes} min read';
   final date = story.date;
   if (date == null) return source;
-  const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
-  return '$source · ${date.day} ${months[date.month - 1]} ${date.year}';
+  return '$source · ${_dayLabel(date)} ${date.year}';
 }
 
 /// "Read full story on PIB ↗": opens the original article in the browser.
@@ -852,6 +975,19 @@ class _SampleNote extends StatelessWidget {
   const _SampleNote();
 
   @override
+  Widget build(BuildContext context) => const _Note(
+    'Sample stories from 2023–24. Real daily news will show here once '
+    'it’s approved.',
+  );
+}
+
+/// A small amber note above the stories.
+class _Note extends StatelessWidget {
+  const _Note(this.text);
+
+  final String text;
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
@@ -869,8 +1005,7 @@ class _SampleNote extends StatelessWidget {
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              'Sample stories from 2023–24. Real daily news will show here '
-              'once it’s approved.',
+              text,
               style: AppTextStyles.subtitle.copyWith(fontSize: 13.5),
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jaknow/data/daily_quiz.dart';
 import 'package:jaknow/data/news_stories.dart';
 import 'package:jaknow/screens/home_screen.dart';
 import 'package:jaknow/screens/news_screen.dart';
@@ -138,5 +139,78 @@ void main() {
     await tester.tap(find.text('Home'));
     await settle(tester);
     expect(find.text('Ready to sharpen your mind?'), findsOneWidget);
+  });
+
+  NewsStory real(String headline, int daysAgo) => NewsStory(
+    category: 'National',
+    headline: headline,
+    minutes: 1,
+    paragraphs: const ['Summary.'],
+    source: 'The Hindu',
+    url: 'https://example.org/$headline',
+    date: indiaToday().subtract(Duration(days: daysAgo)),
+  );
+
+  testWidgets('Yesterday and This week show the right days', (tester) async {
+    tallScreen(tester);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: NewsScreen(
+          stories: [
+            real('Today one', 0),
+            real('Today two', 0),
+            real('Yesterday one', 1),
+            real('Older one', 3),
+          ],
+        ),
+      ),
+    );
+    await tester.pump();
+    expect(find.text('Today one'), findsOneWidget);
+    expect(find.text('Today two'), findsOneWidget);
+    expect(find.text('Yesterday one'), findsNothing);
+    expect(find.text('0 of 2 read'), findsOneWidget);
+
+    await tester.tap(find.text('Yesterday'));
+    await tester.pump();
+    expect(find.text('Yesterday one'), findsOneWidget);
+    expect(find.text('Today one'), findsNothing);
+
+    await tester.ensureVisible(find.text('This week')); // swipe the tabs
+    await tester.pump();
+    await tester.tap(find.text('This week'));
+    await tester.pump();
+    for (final h in ['Today one', 'Today two', 'Yesterday one', 'Older one']) {
+      expect(find.text(h), findsOneWidget);
+    }
+    expect(find.textContaining('Yesterday · '), findsOneWidget);
+  });
+
+  testWidgets('Today says so when it shows an older day', (tester) async {
+    tallScreen(tester);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: NewsScreen(stories: [real('From yesterday', 1)]),
+      ),
+    );
+    await tester.pump();
+    expect(find.text('From yesterday'), findsOneWidget);
+    expect(find.textContaining('aren’t ready yet'), findsOneWidget);
+  });
+
+  testWidgets('Yesterday says when nothing was picked', (tester) async {
+    tallScreen(tester);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: NewsScreen(stories: [real('Only today', 0)]),
+      ),
+    );
+    await tester.pump();
+    await tester.tap(find.text('Yesterday'));
+    await tester.pump();
+    expect(find.textContaining('No stories were picked'), findsOneWidget);
   });
 }

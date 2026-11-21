@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../data/daily_quiz.dart';
 import '../data/library.dart';
 import '../data/lessons.dart';
 import '../data/news_stories.dart';
@@ -285,8 +286,9 @@ abstract class Backend {
   /// (test mode) or it can't be reached: then the app uses its built-in copy.
   Future<List<Course>?> fetchLibrary();
 
-  /// The newest day's published news stories (up to 5), or null if there
-  /// are none or the server can't be reached (the app then shows samples).
+  /// Published news stories from the last 7 days (India date), newest day
+  /// first and in their order within each day. Null if there are none or
+  /// the server can't be reached (the app then shows samples).
   Future<List<NewsStory>?> fetchNews();
 
   /// True if the signed-in user may approve news (checked by the server).
@@ -557,16 +559,16 @@ class SupabaseBackend implements Backend {
           .from('news_items')
           .select()
           .eq('status', 'published')
+          .gte(
+            'news_date',
+            _isoDate(indiaToday().subtract(const Duration(days: 6))),
+          )
           .order('news_date', ascending: false)
           .order('sort')
           .order('id')
-          .limit(20);
+          .limit(100);
       if (rows.isEmpty) return null;
-      final newest = rows.first['news_date'];
-      return [
-        for (final r in rows.where((r) => r['news_date'] == newest).take(5))
-          newsFromRow(r),
-      ];
+      return [for (final r in rows) newsFromRow(r)];
     } catch (error) {
       debugPrint('JaKnow: could not load the news ($error).');
       return null;
@@ -614,6 +616,10 @@ class SupabaseBackend implements Backend {
       ),
     );
   }
+
+  static String _isoDate(DateTime d) =>
+      '${d.year}-${d.month.toString().padLeft(2, '0')}-'
+      '${d.day.toString().padLeft(2, '0')}';
 
   /// One `news_items` row → a [NewsStory].
   static NewsStory newsFromRow(Map<String, dynamic> row) {

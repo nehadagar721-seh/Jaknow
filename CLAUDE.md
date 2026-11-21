@@ -107,7 +107,10 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   live). Table `news_items` (`supabase/news.sql`): headline, short feed
   summary (never the whole article: copyrighted), source, url, news_date
   (India), status 'draft' → 'published' (the app can only read published
-  rows). `Backend.fetchNews()` gives the newest published day (up to 5);
+  rows). `Backend.fetchNews()` gives the last 7 days of published stories
+  (India dates, `indiaToday()` from `daily_quiz.dart`). News tabs: Today
+  (today's, up to 5; if none yet, the newest day's with an "aren't ready
+  yet" note), Yesterday, This week (grouped by day); Saved is still coming.
   News falls back to `sampleStories` with a "Sample stories" note. Real
   stories have no simpleWords/quiz, so those parts are hidden. "Read full
   story on <source>" opens `url` in the browser (`url_launcher`, https/http

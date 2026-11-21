@@ -291,6 +291,13 @@ abstract class Backend {
   /// the server can't be reached (the app then shows samples).
   Future<List<NewsStory>?> fetchNews();
 
+  /// The signed-in user's saved news stories, newest save first
+  /// (empty if nobody is logged in).
+  Future<List<NewsStory>> savedNews();
+
+  /// Saves (🔖) a published real story, or removes it from Saved.
+  Future<void> setNewsSaved(int newsId, bool saved);
+
   /// True if the signed-in user may approve news (checked by the server).
   Future<bool> isNewsAdmin();
 
@@ -576,6 +583,34 @@ class SupabaseBackend implements Backend {
   }
 
   @override
+  Future<List<NewsStory>> savedNews() async {
+    if (_profile == null) return const [];
+    final rows = await _guard(
+      () => _client
+          .from('news_saves')
+          .select('saved_at, news_items(*)')
+          .order('saved_at', ascending: false),
+    );
+    return [
+      for (final r in rows)
+        if (r['news_items'] case final Map<String, dynamic> story)
+          newsFromRow(story),
+    ];
+  }
+
+  @override
+  Future<void> setNewsSaved(int newsId, bool saved) async {
+    _requireProfile();
+    await _guard(
+      () => saved
+          ? _client.from('news_saves').upsert({
+              'news_id': newsId,
+            }, ignoreDuplicates: true)
+          : _client.from('news_saves').delete().eq('news_id', newsId),
+    );
+  }
+
+  @override
   Future<bool> isNewsAdmin() async {
     if (_client.auth.currentUser == null) return false;
     try {
@@ -632,6 +667,7 @@ class SupabaseBackend implements Backend {
       source: row['source'] as String?,
       url: row['url'] as String?,
       date: DateTime.tryParse(row['news_date'] as String? ?? ''),
+      id: (row['id'] as num?)?.toInt(),
     );
   }
 
@@ -740,6 +776,29 @@ class MemoryBackend implements Backend {
   /// screen without Supabase.
   bool newsAdmin = false;
   final List<AdminNewsItem> newsItems = [];
+
+  /// Test mode: published stories that can be saved, found by id.
+  final List<NewsStory> savableNews = [];
+  final Map<String, List<int>> _savedNews = {};
+
+  @override
+  Future<List<NewsStory>> savedNews() async {
+    final me = _profile;
+    if (me == null) return const [];
+    final ids = _savedNews[me.mobile] ?? const [];
+    return [
+      for (final id in ids.reversed)
+        ...savableNews.where((s) => s.id == id).take(1),
+    ];
+  }
+
+  @override
+  Future<void> setNewsSaved(int newsId, bool saved) async {
+    final me = _requireProfile();
+    final ids = _savedNews.putIfAbsent(me.mobile, () => []);
+    ids.remove(newsId);
+    if (saved) ids.add(newsId);
+  }
 
   @override
   Future<bool> isNewsAdmin() async => newsAdmin;

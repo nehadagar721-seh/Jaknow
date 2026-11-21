@@ -43,6 +43,9 @@ class _NewsScreenState extends State<NewsScreen>
   /// Stories opened so far.
   final Set<NewsStory> _read = {};
 
+  /// The user's saved stories (🔖), newest first.
+  List<NewsStory> _saved = [];
+
   /// Everything there is: the last 7 days of real news, or the samples.
   late List<NewsStory> _all = widget.stories ?? sampleStories;
 
@@ -78,6 +81,7 @@ class _NewsScreenState extends State<NewsScreen>
     'Today' => _today,
     'Yesterday' => _isSample ? const [] : _yesterday,
     'This week' => _isSample ? const [] : _all,
+    'Saved' => _saved,
     _ => const [],
   };
 
@@ -87,7 +91,42 @@ class _NewsScreenState extends State<NewsScreen>
     _load();
   }
 
+  Future<void> _loadSaved() async {
+    try {
+      final saved = await Backend.instance.savedNews();
+      if (mounted) setState(() => _saved = saved);
+    } on BackendException catch (e) {
+      debugPrint('JaKnow: could not load saved news (${e.message}).');
+    }
+  }
+
+  bool _isSaved(NewsStory story) =>
+      story.id != null && _saved.any((s) => s.id == story.id);
+
+  /// 🔖: saves or un-saves [story]. Returns whether it is saved now.
+  Future<bool> _toggleSave(NewsStory story) async {
+    final id = story.id;
+    final wasSaved = _isSaved(story);
+    if (id == null) return wasSaved;
+    final messenger = ScaffoldMessenger.of(context);
+    try {
+      await Backend.instance.setNewsSaved(id, !wasSaved);
+      if (mounted) {
+        setState(() {
+          _saved = wasSaved
+              ? _saved.where((s) => s.id != id).toList()
+              : [story, ..._saved];
+        });
+      }
+      return !wasSaved;
+    } on BackendException catch (e) {
+      messenger.showSnackBar(SnackBar(content: Text(e.message)));
+      return wasSaved;
+    }
+  }
+
   Future<void> _load() async {
+    _loadSaved();
     if (widget.stories == null) {
       final real = await Backend.instance.fetchNews();
       if (!mounted) return;
@@ -144,6 +183,11 @@ class _NewsScreenState extends State<NewsScreen>
       builder: (_) => _StorySheet(
         story: story,
         animation: _clock,
+        saved: _isSaved(story),
+        // Saving needs a real story and an account.
+        onSave: story.id == null || Backend.instance.currentProfile == null
+            ? null
+            : () => _toggleSave(story),
         onQuiz: story.quiz == null
             ? null
             : () {
@@ -218,7 +262,7 @@ class _NewsScreenState extends State<NewsScreen>
               'Today' => _todayTab(),
               'Yesterday' => _yesterdayTab(),
               'This week' => _weekTab(),
-              _ => [_EmptyTab(tab: _tab, animation: _clock)],
+              _ => _savedTab(),
             },
           ],
         ),
@@ -298,6 +342,20 @@ class _NewsScreenState extends State<NewsScreen>
       ];
     }
     return _rows(stories);
+  }
+
+  List<Widget> _savedTab() {
+    if (Backend.instance.currentProfile == null) {
+      return [
+        _EmptyTab(
+          tab: _tab,
+          animation: _clock,
+          message: 'Sign up or log in to save stories and find them here.',
+        ),
+      ];
+    }
+    if (_saved.isEmpty) return [_EmptyTab(tab: _tab, animation: _clock)];
+    return _rows(_saved);
   }
 
   /// The last 7 days, one heading per day.
@@ -750,7 +808,8 @@ class _EmptyTab extends StatelessWidget {
     final message =
         this.message ??
         (tab == 'Saved'
-            ? 'Stories you save will show up here. Saving is coming soon!'
+            ? 'Stories you save will show up here. Open a story and tap 🔖 to '
+                  'save it.'
             : 'Stories from ${tab.toLowerCase()} will show up here once JaKnow '
                   'gets its daily news.');
     return Container(
@@ -785,6 +844,8 @@ class _StorySheet extends StatelessWidget {
     required this.story,
     required this.animation,
     required this.onQuiz,
+    this.saved = false,
+    this.onSave,
   });
 
   final NewsStory story;
@@ -792,6 +853,13 @@ class _StorySheet extends StatelessWidget {
 
   /// Null when the story has no quiz: the button is hidden.
   final VoidCallback? onQuiz;
+
+  /// Whether the story is saved when the sheet opens.
+  final bool saved;
+
+  /// 🔖: saves or un-saves; gives back whether it is saved now. Null for
+  /// stories that can't be saved (the samples): the button is hidden.
+  final Future<bool> Function()? onSave;
 
   @override
   Widget build(BuildContext context) {
@@ -817,6 +885,8 @@ class _StorySheet extends StatelessWidget {
                   style: AppTextStyles.subtitle.copyWith(fontSize: 13),
                 ),
               ),
+              if (onSave case final save?)
+                _SaveButton(saved: saved, onSave: save),
             ],
           ),
           const SizedBox(height: 12),
@@ -922,6 +992,47 @@ String _sourceLine(NewsStory story) {
   final date = story.date;
   if (date == null) return source;
   return '$source · ${_dayLabel(date)} ${date.year}';
+}
+
+/// 🔖 in the story sheet. Keeps its own on/off look while the sheet is open.
+class _SaveButton extends StatefulWidget {
+  const _SaveButton({required this.saved, required this.onSave});
+
+  final bool saved;
+  final Future<bool> Function() onSave;
+
+  @override
+  State<_SaveButton> createState() => _SaveButtonState();
+}
+
+class _SaveButtonState extends State<_SaveButton> {
+  late bool _saved = widget.saved;
+  bool _busy = false;
+
+  Future<void> _tap() async {
+    if (_busy) return;
+    setState(() => _busy = true);
+    final now = await widget.onSave();
+    if (mounted) {
+      setState(() {
+        _saved = now;
+        _busy = false;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      tooltip: _saved ? 'Remove from Saved' : 'Save story',
+      color: AppColors.indigo,
+      onPressed: _tap,
+      icon: Icon(
+        _saved ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
+        size: 26,
+      ),
+    );
+  }
 }
 
 /// "Read full story on PIB ↗": opens the original article in the browser.

@@ -16,6 +16,7 @@ class NewsStory {
     this.source,
     this.url,
     this.date,
+    this.id,
   });
 
   final String category;
@@ -41,6 +42,9 @@ class NewsStory {
 
   /// The India date a real story belongs to.
   final DateTime? date;
+
+  /// The row id in `news_items` (real stories only). Needed to save it.
+  final int? id;
 
   /// A short line for the cards: the simple words, or the first paragraph.
   String get teaser =>

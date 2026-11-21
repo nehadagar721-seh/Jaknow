@@ -9,7 +9,10 @@ import 'package:jaknow/services/backend.dart';
 import 'package:jaknow/theme/app_theme.dart';
 
 void main() {
-  setUp(() => GoogleFonts.config.allowRuntimeFetching = false);
+  setUp(() {
+    GoogleFonts.config.allowRuntimeFetching = false;
+    Backend.instance = MemoryBackend();
+  });
 
   void tallScreen(WidgetTester tester) {
     tester.view.physicalSize = const Size(390, 1400);
@@ -124,7 +127,7 @@ void main() {
     await tester.pump(const Duration(milliseconds: 500));
     await tester.tap(find.text('Saved'));
     await tester.pump();
-    expect(find.textContaining('Stories you save'), findsOneWidget);
+    expect(find.textContaining('Sign up or log in to save'), findsOneWidget);
   });
 
   testWidgets('the Home tab goes back to Home', (tester) async {
@@ -212,5 +215,70 @@ void main() {
     await tester.tap(find.text('Yesterday'));
     await tester.pump();
     expect(find.textContaining('No stories were picked'), findsOneWidget);
+  });
+
+  testWidgets('🔖 saves a story to the Saved tab and takes it off again', (
+    tester,
+  ) async {
+    tallScreen(tester);
+    final backend = Backend.instance as MemoryBackend;
+    await backend.signUp(
+      name: 'Neha',
+      mobile: '9876543210',
+      password: '123456',
+    );
+    final story = NewsStory(
+      category: 'Science',
+      headline: 'A saved headline',
+      minutes: 1,
+      paragraphs: const ['Summary.'],
+      source: 'The Hindu',
+      url: 'https://example.org/saved',
+      date: indiaToday(),
+      id: 42,
+    );
+    backend.savableNews.add(story);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: NewsScreen(stories: [story]),
+      ),
+    );
+    await tester.pump();
+
+    await tester.tap(find.text('Read story'));
+    await settle(tester);
+    await tester.tap(find.byTooltip('Save story'));
+    await tester.pump();
+    expect(find.byTooltip('Remove from Saved'), findsOneWidget);
+    expect(await backend.savedNews(), [story]);
+
+    await tester.tapAt(const Offset(195, 20)); // close the story
+    await settle(tester);
+    await tester.drag(find.text('Today'), const Offset(-400, 0)); // swipe
+    await tester.pump(const Duration(milliseconds: 500));
+    await tester.tap(find.text('Saved'));
+    await tester.pump();
+    expect(find.text('A saved headline'), findsOneWidget);
+
+    // Open it from Saved and take it off.
+    await tester.tap(find.text('A saved headline'));
+    await settle(tester);
+    await tester.tap(find.byTooltip('Remove from Saved'));
+    await tester.pump();
+    await tester.tapAt(const Offset(195, 20));
+    await settle(tester);
+    expect(
+      find.textContaining('Stories you save will show up'),
+      findsOneWidget,
+    );
+    expect(await backend.savedNews(), isEmpty);
+  });
+
+  testWidgets('samples and logged-out users get no 🔖 button', (tester) async {
+    await openNews(tester);
+    await tester.tap(find.text(sampleStories[1].headline));
+    await settle(tester);
+    expect(find.byTooltip('Save story'), findsNothing);
   });
 }

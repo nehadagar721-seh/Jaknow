@@ -101,8 +101,12 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   living traditions; `bkj-great-indians` (Great Indians, 10 lessons, ids
   `bkj-greats-N`, `bkj_great_indians.dart`): thinkers, Bhakti and Sufi
   saints, reformers, women pioneers, freedom fighters, unsung heroes,
-  scientists, nation-builders, writers, sports legends. Ideas for next
-  courses: Our states & symbols, India's knowledge & science. The Explore
+  scientists, nation-builders, writers, sports legends;
+  `bkj-states-symbols` (Our States and Symbols, 10 lessons, ids
+  `bkj-states-N`, `bkj_states_symbols.dart`): national symbols, days and
+  honours, states and capitals by region, languages, city nicknames, holy
+  places, natural wonders. Idea for the next course: India's knowledge &
+  science. The Explore
   list is long now: widget tests scroll to a course with `scrollTo`.
   Content is written in our own words: never copy textbook text (NCERT,
   Lucent, Bharat Ko Jano are copyrighted); cover their topics instead.

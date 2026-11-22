@@ -1,5 +1,6 @@
 import 'content/bkj_culture.dart';
 import 'content/bkj_great_indians.dart';
+import 'content/bkj_states_symbols.dart';
 import 'content/class5_environment.dart';
 import 'content/class6_civics.dart';
 import 'content/class6_geography.dart';
@@ -474,5 +475,16 @@ const List<Course> builtInCourses = [
         'Saints, reformers, women pioneers, freedom fighters, scientists, '
         'nation-builders, writers and sports legends.',
     lessons: bkjGreatIndiansLessons,
+  ),
+  Course(
+    id: 'bkj-states-symbols',
+    title: 'Our States and Symbols',
+    subject: 'Geography',
+    section: CourseSection.explore,
+    collection: bharatKoJano,
+    description:
+        'National symbols, days and honours, the states and their '
+        'capitals, languages, city nicknames and famous places.',
+    lessons: bkjStatesLessons,
   ),
 ];

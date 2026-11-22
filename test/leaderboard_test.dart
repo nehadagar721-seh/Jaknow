@@ -8,18 +8,21 @@ import 'package:jaknow/services/backend.dart';
 import 'package:jaknow/theme/app_theme.dart';
 
 void main() {
-  /// Scrolls the Library list until [finder] is on screen.
-  Future<void> scrollTo(WidgetTester tester, Finder finder) =>
-      tester.scrollUntilVisible(
-        finder,
-        300,
-        scrollable: find
-            .descendant(
-              of: find.byType(ListView).first,
-              matching: find.byType(Scrollable),
-            )
-            .first,
-      );
+  /// Scrolls the Library list until [finder] is fully on screen.
+  Future<void> scrollTo(WidgetTester tester, Finder finder) async {
+    await tester.scrollUntilVisible(
+      finder,
+      300,
+      scrollable: find
+          .descendant(
+            of: find.byType(ListView).first,
+            matching: find.byType(Scrollable),
+          )
+          .first,
+    );
+    await tester.ensureVisible(finder);
+    await tester.pump(const Duration(milliseconds: 300));
+  }
 
   setUp(() {
     GoogleFonts.config.allowRuntimeFetching = false;

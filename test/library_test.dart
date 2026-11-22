@@ -9,18 +9,21 @@ import 'package:jaknow/services/library_service.dart';
 import 'package:jaknow/theme/app_theme.dart';
 
 void main() {
-  /// Scrolls the Library list until [finder] is on screen.
-  Future<void> scrollTo(WidgetTester tester, Finder finder) =>
-      tester.scrollUntilVisible(
-        finder,
-        300,
-        scrollable: find
-            .descendant(
-              of: find.byType(ListView).first,
-              matching: find.byType(Scrollable),
-            )
-            .first,
-      );
+  /// Scrolls the Library list until [finder] is fully on screen.
+  Future<void> scrollTo(WidgetTester tester, Finder finder) async {
+    await tester.scrollUntilVisible(
+      finder,
+      300,
+      scrollable: find
+          .descendant(
+            of: find.byType(ListView).first,
+            matching: find.byType(Scrollable),
+          )
+          .first,
+    );
+    await tester.ensureVisible(finder);
+    await tester.pump(const Duration(milliseconds: 300));
+  }
 
   setUp(() {
     GoogleFonts.config.allowRuntimeFetching = false;
@@ -145,7 +148,7 @@ void main() {
       builtInCourses
           .where((c) => c.collection == bharatKoJano)
           .map((c) => c.id),
-      ['bkj-culture-heritage', 'bkj-great-indians'],
+      ['bkj-culture-heritage', 'bkj-great-indians', 'bkj-states-symbols'],
     );
   });
 
@@ -282,9 +285,10 @@ void main() {
             'gk-indian-economy',
             'bkj-culture-heritage',
             'bkj-great-indians',
+            'bkj-states-symbols',
           ].contains(c.id),
     );
-    expect(c6, hasLength(17));
+    expect(c6, hasLength(18));
     for (final lesson in c6.expand((c) => c.lessons)) {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)
@@ -366,8 +370,9 @@ void main() {
       );
       await tester.tap(find.text('Explore more'));
       await settle(tester);
-      await scrollTo(tester, find.text('Ancient India'));
+      await scrollTo(tester, find.text('OTHER CLASSES'));
       expect(find.text('OTHER CLASSES'), findsOneWidget);
+      await scrollTo(tester, find.text('Ancient India'));
       expect(find.text('Ancient India'), findsOneWidget);
     });
 
@@ -449,6 +454,7 @@ void main() {
     'gk-indian-economy',
     'bkj-culture-heritage',
     'bkj-great-indians',
+    'bkj-states-symbols',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

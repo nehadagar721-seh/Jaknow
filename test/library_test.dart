@@ -148,7 +148,12 @@ void main() {
       builtInCourses
           .where((c) => c.collection == bharatKoJano)
           .map((c) => c.id),
-      ['bkj-culture-heritage', 'bkj-great-indians', 'bkj-states-symbols'],
+      [
+        'bkj-culture-heritage',
+        'bkj-great-indians',
+        'bkj-states-symbols',
+        'bkj-knowledge-science',
+      ],
     );
   });
 
@@ -286,9 +291,10 @@ void main() {
             'bkj-culture-heritage',
             'bkj-great-indians',
             'bkj-states-symbols',
+            'bkj-knowledge-science',
           ].contains(c.id),
     );
-    expect(c6, hasLength(18));
+    expect(c6, hasLength(19));
     for (final lesson in c6.expand((c) => c.lessons)) {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)
@@ -455,6 +461,7 @@ void main() {
     'bkj-culture-heritage',
     'bkj-great-indians',
     'bkj-states-symbols',
+    'bkj-knowledge-science',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

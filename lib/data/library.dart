@@ -1,5 +1,6 @@
 import 'content/bkj_culture.dart';
 import 'content/bkj_great_indians.dart';
+import 'content/bkj_knowledge_science.dart';
 import 'content/bkj_states_symbols.dart';
 import 'content/class5_environment.dart';
 import 'content/class6_civics.dart';
@@ -486,5 +487,16 @@ const List<Course> builtInCourses = [
         'National symbols, days and honours, the states and their '
         'capitals, languages, city nicknames and famous places.',
     lessons: bkjStatesLessons,
+  ),
+  Course(
+    id: 'bkj-knowledge-science',
+    title: 'India’s Knowledge and Science',
+    subject: 'Science',
+    section: CourseSection.explore,
+    collection: bharatKoJano,
+    description:
+        'Ancient maths and astronomy, Ayurveda, old engineering, ISRO and '
+        'space missions, defence, atomic energy and Digital India.',
+    lessons: bkjScienceLessons,
   ),
 ];

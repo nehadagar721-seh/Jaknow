@@ -105,8 +105,11 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   `bkj-states-symbols` (Our States and Symbols, 10 lessons, ids
   `bkj-states-N`, `bkj_states_symbols.dart`): national symbols, days and
   honours, states and capitals by region, languages, city nicknames, holy
-  places, natural wonders. Idea for the next course: India's knowledge &
-  science. The Explore
+  places, natural wonders; `bkj-knowledge-science` (India's Knowledge
+  and Science, 10 lessons, ids `bkj-science-N`, `bkj_knowledge_science.dart`):
+  ancient maths and astronomy, Ayurveda, old engineering, ISRO, space
+  missions, defence, atomic energy, Digital India, science institutions.
+  All four planned Bharat Ko Jano courses are done. The Explore
   list is long now: widget tests scroll to a course with `scrollTo`.
   Content is written in our own words: never copy textbook text (NCERT,
   Lucent, Bharat Ko Jano are copyrighted); cover their topics instead.

@@ -109,7 +109,11 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   and Science, 10 lessons, ids `bkj-science-N`, `bkj_knowledge_science.dart`):
   ancient maths and astronomy, Ayurveda, old engineering, ISRO, space
   missions, defence, atomic energy, Digital India, science institutions.
-  All four planned Bharat Ko Jano courses are done. The Explore
+  `bkj-india-world` (India and the World, 10 lessons, ids `bkj-world-N`,
+  `bkj_india_world.dart`): neighbours, agreements, non-alignment, foreign
+  policy today, the UN, world groups, India's gifts, the diaspora,
+  climate action, soft power. Ideas for more: Sports of India, Indian
+  economy and agriculture. The Explore
   list is long now: widget tests scroll to a course with `scrollTo`.
   Content is written in our own words: never copy textbook text (NCERT,
   Lucent, Bharat Ko Jano are copyrighted); cover their topics instead.

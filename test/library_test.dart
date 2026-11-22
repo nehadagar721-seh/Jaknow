@@ -153,6 +153,7 @@ void main() {
         'bkj-great-indians',
         'bkj-states-symbols',
         'bkj-knowledge-science',
+        'bkj-india-world',
       ],
     );
   });
@@ -292,9 +293,10 @@ void main() {
             'bkj-great-indians',
             'bkj-states-symbols',
             'bkj-knowledge-science',
+            'bkj-india-world',
           ].contains(c.id),
     );
-    expect(c6, hasLength(19));
+    expect(c6, hasLength(20));
     for (final lesson in c6.expand((c) => c.lessons)) {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)
@@ -462,6 +464,7 @@ void main() {
     'bkj-great-indians',
     'bkj-states-symbols',
     'bkj-knowledge-science',
+    'bkj-india-world',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

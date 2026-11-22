@@ -1,5 +1,6 @@
 import 'content/bkj_culture.dart';
 import 'content/bkj_great_indians.dart';
+import 'content/bkj_india_world.dart';
 import 'content/bkj_knowledge_science.dart';
 import 'content/bkj_states_symbols.dart';
 import 'content/class5_environment.dart';
@@ -498,5 +499,16 @@ const List<Course> builtInCourses = [
         'Ancient maths and astronomy, Ayurveda, old engineering, ISRO and '
         'space missions, defence, atomic energy and Digital India.',
     lessons: bkjScienceLessons,
+  ),
+  Course(
+    id: 'bkj-india-world',
+    title: 'India and the World',
+    subject: 'Politics',
+    section: CourseSection.explore,
+    collection: bharatKoJano,
+    description:
+        'Neighbours, foreign policy, the UN and world groups, India’s '
+        'gifts to the world, the diaspora, climate action and soft power.',
+    lessons: bkjWorldLessons,
   ),
 ];

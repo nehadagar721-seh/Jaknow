@@ -1,4 +1,5 @@
 import 'content/bkj_culture.dart';
+import 'content/bkj_economy_agriculture.dart';
 import 'content/bkj_great_indians.dart';
 import 'content/bkj_india_world.dart';
 import 'content/bkj_knowledge_science.dart';
@@ -522,5 +523,16 @@ const List<Course> builtInCourses = [
         'Traditional games, wrestling and chess, cricket, hockey, football, '
         'the Olympics and Paralympics, and India’s sports awards.',
     lessons: bkjSportsLessons,
+  ),
+  Course(
+    id: 'bkj-economy-agriculture',
+    title: 'Indian Economy and Agriculture',
+    subject: 'Economy',
+    section: CourseSection.explore,
+    collection: bharatKoJano,
+    description:
+        'Farming and crops, food security, industries and start-ups, '
+        'transport, trade, money and work.',
+    lessons: bkjEconomyLessons,
   ),
 ];

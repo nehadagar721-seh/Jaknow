@@ -115,8 +115,12 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   climate action, soft power; `bkj-sports-india` (Sports of India, 10
   lessons, ids `bkj-sports-N`, `bkj_sports_india.dart`): traditional
   games, wrestling and chess, cricket, hockey, football, the Olympics,
-  other Olympic sports, Paralympics, sports bodies and awards. Idea for
-  more: Indian economy and agriculture. The Explore
+  other Olympic sports, Paralympics, sports bodies and awards;
+  `bkj-economy-agriculture` (Indian Economy and Agriculture, 10 lessons,
+  ids `bkj-econ-N`, `bkj_economy_agriculture.dart`): farming, crops,
+  farming revolutions, food security, industries, MSMEs and start-ups,
+  transport, trade, money and banking, work and growth. Seven Bharat Ko
+  Jano courses so far. The Explore
   list is long now: widget tests scroll to a course with `scrollTo`.
   Content is written in our own words: never copy textbook text (NCERT,
   Lucent, Bharat Ko Jano are copyrighted); cover their topics instead.

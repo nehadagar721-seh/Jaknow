@@ -154,6 +154,7 @@ void main() {
         'bkj-states-symbols',
         'bkj-knowledge-science',
         'bkj-india-world',
+        'bkj-sports-india',
       ],
     );
   });
@@ -294,9 +295,10 @@ void main() {
             'bkj-states-symbols',
             'bkj-knowledge-science',
             'bkj-india-world',
+            'bkj-sports-india',
           ].contains(c.id),
     );
-    expect(c6, hasLength(20));
+    expect(c6, hasLength(21));
     for (final lesson in c6.expand((c) => c.lessons)) {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)
@@ -465,6 +467,7 @@ void main() {
     'bkj-states-symbols',
     'bkj-knowledge-science',
     'bkj-india-world',
+    'bkj-sports-india',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

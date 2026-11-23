@@ -2,6 +2,7 @@ import 'content/bkj_culture.dart';
 import 'content/bkj_great_indians.dart';
 import 'content/bkj_india_world.dart';
 import 'content/bkj_knowledge_science.dart';
+import 'content/bkj_sports_india.dart';
 import 'content/bkj_states_symbols.dart';
 import 'content/class5_environment.dart';
 import 'content/class6_civics.dart';
@@ -510,5 +511,16 @@ const List<Course> builtInCourses = [
         'Neighbours, foreign policy, the UN and world groups, India’s '
         'gifts to the world, the diaspora, climate action and soft power.',
     lessons: bkjWorldLessons,
+  ),
+  Course(
+    id: 'bkj-sports-india',
+    title: 'Sports of India',
+    subject: 'Sports',
+    section: CourseSection.explore,
+    collection: bharatKoJano,
+    description:
+        'Traditional games, wrestling and chess, cricket, hockey, football, '
+        'the Olympics and Paralympics, and India’s sports awards.',
+    lessons: bkjSportsLessons,
   ),
 ];

@@ -112,8 +112,11 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   `bkj-india-world` (India and the World, 10 lessons, ids `bkj-world-N`,
   `bkj_india_world.dart`): neighbours, agreements, non-alignment, foreign
   policy today, the UN, world groups, India's gifts, the diaspora,
-  climate action, soft power. Ideas for more: Sports of India, Indian
-  economy and agriculture. The Explore
+  climate action, soft power; `bkj-sports-india` (Sports of India, 10
+  lessons, ids `bkj-sports-N`, `bkj_sports_india.dart`): traditional
+  games, wrestling and chess, cricket, hockey, football, the Olympics,
+  other Olympic sports, Paralympics, sports bodies and awards. Idea for
+  more: Indian economy and agriculture. The Explore
   list is long now: widget tests scroll to a course with `scrollTo`.
   Content is written in our own words: never copy textbook text (NCERT,
   Lucent, Bharat Ko Jano are copyrighted); cover their topics instead.

@@ -23,8 +23,14 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
 - Always use these instead of hard-coding colours or fonts in screens.
 - Pieces reused on several screens live in `lib/widgets/`:
   - `jaknow_logo.dart`: the "जाKnow" logo
-  - `boojho.dart`: Boojho, drawn with CustomPainter and animated from one
-    repeating AnimationController that the screen owns and passes in
+  - `boojho.dart`: Boojho is the user's own Masko mascot picture
+    (`assets/boojho/boojho_full.png` full body, `boojho_face.png` for the
+    round `BoojhoAvatar`; made from the PNG of Masko mascot
+    `fa005984-0af5-4a2a-8160-9bfa6076b055`). `BoojhoBackdropPainter` draws
+    the amber circle, sparkles and shadow; the picture bobs, and wiggles
+    while speaking, from one repeating AnimationController that the
+    screen owns and passes in. Masko animations (with the `masko_player`
+    Flutter package) can replace the still picture later.
   - `coming_soon.dart`: "coming soon" message for buttons with no screen yet
   - `back_circle_button.dart`: round outlined back button
   - `boojho_says.dart`: Boojho's round face with a speech bubble

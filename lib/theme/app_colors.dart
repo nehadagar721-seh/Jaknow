@@ -24,12 +24,4 @@ class AppColors {
   static const Color amberLight = Color(0xFFFFF1C9); // "Remember" boxes
   static const Color silver = Color(0xFFB8BCC8); // leaderboard 2nd place
   static const Color bronze = Color(0xFFD79A63); // leaderboard 3rd place
-
-  // Boojho, the cartoon guide (only used when drawing him)
-  static const Color boojhoSkin = Color(0xFFC8895A);
-  static const Color boojhoHair = Color(0xFF1E1612);
-  static const Color boojhoTrousers = Color(0xFF262A7E);
-  static const Color boojhoCheek = Color(0xFFF2A28C);
-  static const Color boojhoMouth = Color(0xFF2A1A1A);
-  static const Color boojhoTongue = Color(0xFFF08A80);
 }

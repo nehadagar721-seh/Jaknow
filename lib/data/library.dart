@@ -1,4 +1,5 @@
 import 'content/bkj_culture.dart';
+import 'content/bkj_democracy.dart';
 import 'content/bkj_economy_agriculture.dart';
 import 'content/bkj_great_indians.dart';
 import 'content/bkj_india_world.dart';
@@ -534,5 +535,16 @@ const List<Course> builtInCourses = [
         'Farming and crops, food security, industries and start-ups, '
         'transport, trade, money and work.',
     lessons: bkjEconomyLessons,
+  ),
+  Course(
+    id: 'bkj-democracy',
+    title: 'Constitution and Democracy in Action',
+    subject: 'Politics',
+    section: CourseSection.explore,
+    collection: bharatKoJano,
+    description:
+        'Elections, Parliament at work, key Articles and amendments, '
+        'landmark cases, watchdog bodies, citizens’ laws and duties.',
+    lessons: bkjDemocracyLessons,
   ),
 ];

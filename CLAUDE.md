@@ -119,8 +119,12 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   `bkj-economy-agriculture` (Indian Economy and Agriculture, 10 lessons,
   ids `bkj-econ-N`, `bkj_economy_agriculture.dart`): farming, crops,
   farming revolutions, food security, industries, MSMEs and start-ups,
-  transport, trade, money and banking, work and growth. Seven Bharat Ko
-  Jano courses so far. The Explore
+  transport, trade, money and banking, work and growth; `bkj-democracy`
+  (Constitution and Democracy in Action, 10 lessons, ids `bkj-demo-N`,
+  `bkj_democracy.dart`): elections, Parliament at work, Articles,
+  amendments, courts, landmark cases, watchdog bodies, citizens' laws,
+  state governments, duties (the basics stay in GK Indian Polity). Eight
+  Bharat Ko Jano courses so far. The Explore
   list is long now: widget tests scroll to a course with `scrollTo`.
   Content is written in our own words: never copy textbook text (NCERT,
   Lucent, Bharat Ko Jano are copyrighted); cover their topics instead.

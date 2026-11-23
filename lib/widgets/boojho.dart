@@ -52,11 +52,27 @@ class Boojho extends StatelessWidget {
               AnimatedBuilder(
                 animation: animation,
                 // The picture itself never changes, so it is built once.
-                child: Image.asset(
-                  fullImage,
-                  fit: BoxFit.contain,
+                child: Align(
                   alignment: Alignment.bottomCenter,
-                  gaplessPlayback: true,
+                  child: AspectRatio(
+                    aspectRatio: 480 / 1006, // size of boojho_full.png
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Image.asset(fullImage, gaplessPlayback: true),
+                        CustomPaint(
+                          painter: BoojhoFacePainter(
+                            animation: animation,
+                            isSpeaking: isSpeaking,
+                            imageWidth: 480,
+                            // boojho_full.png starts 19 px left of the face
+                            // picture, so its face sits 19 px further right.
+                            shiftX: 19,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 builder: (context, picture) {
                   final t = animation.value;
@@ -112,10 +128,22 @@ class BoojhoAvatar extends StatelessWidget {
           color: AppColors.amber,
           child: AnimatedBuilder(
             animation: animation,
-            child: Image.asset(
-              Boojho.faceImage,
-              fit: BoxFit.cover,
-              gaplessPlayback: true,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                Image.asset(
+                  Boojho.faceImage,
+                  fit: BoxFit.cover,
+                  gaplessPlayback: true,
+                ),
+                CustomPaint(
+                  painter: BoojhoFacePainter(
+                    animation: animation,
+                    isSpeaking: isSpeaking,
+                    imageWidth: 420, // size of boojho_face.png
+                  ),
+                ),
+              ],
             ),
             builder: (context, face) {
               final talk = isSpeaking ? boojhoTalk(animation.value) : 0.0;
@@ -132,6 +160,116 @@ class BoojhoAvatar extends StatelessWidget {
 }
 
 const double _fullTurn = 2 * math.pi;
+
+/// True for a moment once per loop: Boojho blinks.
+bool boojhoBlinks(double t) => t > 0.70 && t < 0.735;
+
+/// Draws Boojho's blinks and his talking mouth on top of the picture.
+///
+/// The picture has his eyes open and a smile, so this paints small
+/// skin-coloured patches over them and draws closed eyes or a moving mouth
+/// instead. Positions are pixels on `boojho_face.png` (420 × 420), measured
+/// from the picture; [shiftX] moves them for pictures cropped differently.
+class BoojhoFacePainter extends CustomPainter {
+  BoojhoFacePainter({
+    required this.animation,
+    required this.isSpeaking,
+    required this.imageWidth,
+    this.shiftX = 0,
+  }) : super(repaint: animation);
+
+  final Animation<double> animation;
+  final bool isSpeaking;
+
+  /// Width in pixels of the picture this is painted over.
+  final double imageWidth;
+  final double shiftX;
+
+  static const Color _skin = Color(0xFFF9B665);
+  static const Color _line = Color(0xFF111111);
+  static const Color _mouth = Color(0xFF4A1414);
+  static const Color _tongue = Color(0xFFF2546A);
+
+  static const Offset _leftEye = Offset(170, 160);
+  static const Offset _rightEye = Offset(244, 156);
+  static const Offset _mouthCentre = Offset(213, 236);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final t = animation.value;
+    final blink = boojhoBlinks(t);
+    if (!blink && !isSpeaking) return; // the picture as it is
+
+    canvas.save();
+    canvas.scale(size.width / imageWidth);
+    canvas.translate(shiftX, 0);
+    final skin = Paint()
+      ..color = _skin
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 2);
+    final line = Paint()
+      ..color = _line
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 6
+      ..strokeCap = StrokeCap.round;
+
+    if (blink) {
+      for (final (eye, rx, ry) in [
+        (_leftEye, 29.0, 41.0),
+        (_rightEye, 30.0, 40.0),
+      ]) {
+        canvas.drawOval(
+          Rect.fromCenter(center: eye, width: rx * 2, height: ry * 2),
+          skin,
+        );
+        // A closed, happy eye: a curve like a smile.
+        final lid = Path()
+          ..moveTo(eye.dx - rx + 6, eye.dy + 4)
+          ..quadraticBezierTo(eye.dx, eye.dy + 16, eye.dx + rx - 6, eye.dy + 4);
+        canvas.drawPath(lid, line);
+      }
+    }
+
+    if (isSpeaking) {
+      final open = boojhoTalk(t); // 0 (nearly closed) to 1 (wide open)
+      canvas.drawOval(
+        Rect.fromCenter(center: _mouthCentre, width: 126, height: 76),
+        skin,
+      );
+      // A happy, D-shaped mouth: a gently curved top edge and a deep,
+      // round bottom edge that drops lower as he opens his mouth.
+      const halfWidth = 38.0;
+      final top = _mouthCentre.dy - 10;
+      final depth = 8 + 30 * open;
+      final left = _mouthCentre.dx - halfWidth;
+      final right = _mouthCentre.dx + halfWidth;
+      final mouth = Path()
+        ..moveTo(left, top)
+        ..quadraticBezierTo(_mouthCentre.dx, top + 6, right, top)
+        ..quadraticBezierTo(_mouthCentre.dx, top + depth * 2, left, top)
+        ..close();
+      canvas.drawPath(mouth, Paint()..color = _mouth);
+      if (open > 0.4) {
+        canvas.save();
+        canvas.clipPath(mouth);
+        canvas.drawOval(
+          Rect.fromCenter(
+            center: Offset(_mouthCentre.dx, top + depth * 0.95),
+            width: halfWidth * 1.1,
+            height: depth * 0.7,
+          ),
+          Paint()..color = _tongue,
+        );
+        canvas.restore();
+      }
+      canvas.drawPath(mouth, line..strokeWidth = 5);
+    }
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(BoojhoFacePainter old) =>
+      old.isSpeaking != isSpeaking || old.animation != animation;
+}
 
 /// Up/down bob in design units (about 6), twice per loop.
 double boojhoBob(double t) => math.sin(t * _fullTurn * 2) * 6;

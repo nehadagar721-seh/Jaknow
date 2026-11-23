@@ -29,7 +29,10 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
     `fa005984-0af5-4a2a-8160-9bfa6076b055`). `BoojhoBackdropPainter` draws
     the amber circle, sparkles and shadow; the picture bobs, and wiggles
     while speaking, from one repeating AnimationController that the
-    screen owns and passes in. Masko animations (with the `masko_player`
+    screen owns and passes in. `BoojhoFacePainter` paints over the picture
+    (positions measured in `boojho_face.png` pixels; skin #F9B665): a quick
+    blink once per loop (`boojhoBlinks`) and, while speaking, a smiling
+    D-shaped mouth that opens with `boojhoTalk`. Masko animations (with the `masko_player`
     Flutter package) can replace the still picture later.
   - `coming_soon.dart`: "coming soon" message for buttons with no screen yet
   - `back_circle_button.dart`: round outlined back button

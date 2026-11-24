@@ -133,8 +133,14 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   (Constitution and Democracy in Action, 10 lessons, ids `bkj-demo-N`,
   `bkj_democracy.dart`): elections, Parliament at work, Articles,
   amendments, courts, landmark cases, watchdog bodies, citizens' laws,
-  state governments, duties (the basics stay in GK Indian Polity). Eight
-  Bharat Ko Jano courses so far. The Explore
+  state governments, duties (the basics stay in GK Indian Polity);
+  `bkj-environment` (Environment and Wildlife of India, 10 lessons, ids
+  `bkj-env-N`, `bkj_environment.dart`): forests, wildlife, national parks,
+  Project Tiger and cheetahs, biosphere reserves and wetlands, green heroes,
+  laws, clean air/water/plastic, green energy, nature days and awards.
+  Nine Bharat Ko Jano courses so far. Each has 10 lessons in 5 units of 2
+  (a test checks it). In the older courses the right answer is almost
+  always option A (no shuffling); new courses spread it over A–D. The Explore
   list is long now: widget tests scroll to a course with `scrollTo`.
   Content is written in our own words: never copy textbook text (NCERT,
   Lucent, Bharat Ko Jano are copyrighted); cover their topics instead.

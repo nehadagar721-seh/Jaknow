@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
@@ -17,6 +19,56 @@ class BoojhoVoice {
   /// True while Boojho's voice is actually playing.
   final ValueNotifier<bool> isSpeaking = ValueNotifier(false);
 
+  /// How high Boojho's voice is (1.0 = the voice's normal pitch).
+  static const double pitch = 1.25;
+
+  /// When the latest word started, and its length, from the voice's
+  /// word-by-word progress (if the device reports it).
+  DateTime? _wordStart;
+  int _wordLetters = 0;
+  int _wordSyllables = 1;
+
+  void _heardWord(String word) {
+    _wordStart = DateTime.now();
+    _wordLetters = word.length;
+    _wordSyllables = syllables(word);
+  }
+
+  /// How open Boojho's mouth should be right now, 0 (closed) to 1, while he
+  /// speaks. If the device reports words, the mouth opens once for each
+  /// syllable of the word being spoken and closes between words. If not,
+  /// it follows a calm talking rhythm from the clock value [t].
+  double mouthOpenness(double t) {
+    final start = _wordStart;
+    if (start != null) {
+      final seconds = DateTime.now().difference(start).inMilliseconds / 1000;
+      if (seconds < 1.2) {
+        final length = math.max(0.18, _wordLetters * 0.065);
+        if (seconds >= length) return 0; // between words
+        final wave = math.sin(math.pi * _wordSyllables * seconds / length);
+        return 0.25 + 0.75 * wave.abs();
+      }
+    }
+    return talkingRhythm(t);
+  }
+
+  /// A natural-looking talking rhythm for a 4-second clock: about four
+  /// syllables a second, louder and softer, with short pauses.
+  static double talkingRhythm(double t) {
+    final s = t * 4; // seconds into the 4-second loop
+    final syllable = math.max(0.0, math.sin(s * 2 * math.pi * 4.5));
+    final pause = math.sin(s * 2 * math.pi * 0.5) < -0.75 ? 0.0 : 1.0;
+    final loud = 0.55 + 0.45 * math.sin(s * 2 * math.pi * 1.25).abs();
+    return syllable * pause * loud;
+  }
+
+  /// Roughly how many syllables a word has (groups of vowels).
+  @visibleForTesting
+  static int syllables(String word) {
+    final groups = RegExp(r'[aeiouy]+').allMatches(word.toLowerCase()).length;
+    return groups < 1 ? 1 : groups;
+  }
+
   /// True when the user has turned Boojho's voice off.
   final ValueNotifier<bool> isMuted = ValueNotifier(false);
 
@@ -35,15 +87,19 @@ class BoojhoVoice {
       tts.setCompletionHandler(() => isSpeaking.value = false);
       tts.setCancelHandler(() => isSpeaking.value = false);
       tts.setErrorHandler((_) => isSpeaking.value = false);
+      // Many phones and browsers say when each word starts; Boojho's mouth
+      // uses this to move with the words (see [mouthOpenness]).
+      tts.setProgressHandler((text, start, end, word) => _heardWord(word));
 
       // Each setting is tried on its own: if one isn't supported on this
       // device, Boojho still talks with the others.
       await _try('language', () => tts.setLanguage('en-IN'));
       await _pickClearestVoice(tts);
-      // Normal pitch and a calm, slightly slow pace sound the clearest.
+      // A higher, brighter pitch and a normal pace, to sound like a cheerful
+      // young boy (closer to the voice sample the user chose).
       // (Phones treat 0.5 as normal speed; web browsers treat 1.0 as normal.)
-      await _try('speed', () => tts.setSpeechRate(kIsWeb ? 0.9 : 0.45));
-      await _try('pitch', () => tts.setPitch(1.0));
+      await _try('speed', () => tts.setSpeechRate(kIsWeb ? 1.0 : 0.5));
+      await _try('pitch', () => tts.setPitch(pitch));
       // Let say() wait for each sentence to finish before the next one.
       await _try('pauses', () => tts.awaitSpeakCompletion(true));
       _tts = tts;
@@ -122,7 +178,8 @@ class BoojhoVoice {
     // Old robotic-sounding voices.
     if (name.contains('espeak') || name.contains('compact')) score -= 40;
     if (quality == 'low' || quality == 'very low') score -= 20;
-    // Small preference for a boy's voice, to suit Boojho.
+    // Small preference for a boy's voice, to suit Boojho. (With the higher
+    // [pitch] a male voice sounds like a cheerful young boy.)
     final gender = (voice['gender'] ?? '').toLowerCase();
     final soundsMale =
         gender == 'male' ||

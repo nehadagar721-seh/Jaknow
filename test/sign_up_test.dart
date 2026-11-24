@@ -45,6 +45,23 @@ void main() {
       expect(oldIndian, greaterThan(robotic));
       expect(score('Google हिन्दी', 'hi-IN'), 0); // never pick non-English
     });
+
+    test('counts syllables so the mouth moves with each word', () {
+      expect(BoojhoVoice.syllables('Namaste'), 3);
+      expect(BoojhoVoice.syllables('quiz'), 1);
+      expect(BoojhoVoice.syllables('history'), 3);
+      expect(BoojhoVoice.syllables('Boojho'), 2);
+      expect(BoojhoVoice.syllables('hmm'), 1);
+    });
+
+    test('the talking rhythm opens and closes the mouth', () {
+      final values = [
+        for (var i = 0; i < 400; i++) BoojhoVoice.talkingRhythm(i / 400),
+      ];
+      expect(values.every((v) => v >= 0 && v <= 1), isTrue);
+      expect(values.where((v) => v == 0).length, greaterThan(50)); // pauses
+      expect(values.reduce((a, b) => a > b ? a : b), greaterThan(0.8));
+    });
   });
 
   group('Sign-up form', () {

@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 
 /// Boojho, the JaKnow guide: the mascot picture made in Masko
@@ -77,7 +78,7 @@ class Boojho extends StatelessWidget {
                 builder: (context, picture) {
                   final t = animation.value;
                   final bob = boojhoBob(t) * height / 730;
-                  final talk = isSpeaking ? boojhoTalk(t) : 0.0;
+                  final talk = isSpeaking ? boojhoTalk(t) * 0.6 : 0.0;
                   return Padding(
                     // His feet stand on the shadow near the bottom.
                     padding: EdgeInsets.only(
@@ -146,7 +147,7 @@ class BoojhoAvatar extends StatelessWidget {
               ],
             ),
             builder: (context, face) {
-              final talk = isSpeaking ? boojhoTalk(animation.value) : 0.0;
+              final talk = isSpeaking ? boojhoTalk(animation.value) * 0.6 : 0.0;
               return Transform.translate(
                 offset: Offset(0, size * (0.04 - talk * 0.04)),
                 child: face,
@@ -274,10 +275,9 @@ class BoojhoFacePainter extends CustomPainter {
 /// Up/down bob in design units (about 6), twice per loop.
 double boojhoBob(double t) => math.sin(t * _fullTurn * 2) * 6;
 
-/// How "talky" this moment is, 0 to 1, for the speaking wiggle.
-double boojhoTalk(double t) =>
-    (math.sin(t * _fullTurn * 13) * 0.6 + math.sin(t * _fullTurn * 7) * 0.4)
-        .abs();
+/// How open Boojho's mouth is at this moment, 0 to 1, while he speaks:
+/// it follows the words his voice is saying, or a calm talking rhythm.
+double boojhoTalk(double t) => BoojhoVoice.instance.mouthOpenness(t);
 
 /// Draws what is behind Boojho: the amber circle, sparkles and his
 /// shadow. All numbers are positions measured on the design screenshot;

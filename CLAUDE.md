@@ -32,7 +32,8 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
     screen owns and passes in. `BoojhoFacePainter` paints over the picture
     (positions measured in `boojho_face.png` pixels; skin #F9B665): a quick
     blink once per loop (`boojhoBlinks`) and, while speaking, a smiling
-    D-shaped mouth that opens with `boojhoTalk`. Masko animations (with the `masko_player`
+    D-shaped mouth that opens with `boojhoTalk` (= the voice's
+    `mouthOpenness`). Masko animations (with the `masko_player`
     Flutter package) can replace the still picture later.
   - `coming_soon.dart`: "coming soon" message for buttons with no screen yet
   - `back_circle_button.dart`: round outlined back button
@@ -194,8 +195,14 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   - `boojho_voice.dart`: Boojho's voice (`flutter_tts` text-to-speech).
     `BoojhoVoice.instance.say(text)`; screens listen to `isSpeaking` so his
     mouth only moves while he talks. Stop the voice when leaving a screen.
-    It picks the clearest English voice on the device (`voiceScore`) and
-    says "JaKnow" as "Jaa Know" (`forSpeech`). It speaks one sentence at a
+    It picks the clearest English voice on the device (`voiceScore`,
+    small preference for a MALE voice: the user does not want a female
+    voice) and says "JaKnow" as "Jaa Know" (`forSpeech`). Pitch 1.25 and
+    normal speed, to sound like a young boy (closer to a voice sample the
+    user sent; real voice cloning would need a paid online service).
+    Lip sync: `mouthOpenness(t)` opens the mouth once per syllable of each
+    word the device reports (`setProgressHandler`), closes between words,
+    else follows `talkingRhythm` (about 4 syllables a second, with pauses). It speaks one sentence at a
     time with short pauses (`sentences`), to sound more natural.
   - `boojho_brain.dart`: how Boojho answers chat questions. For now it only
     uses the app's own content (lessons, quiz, news) plus hand-written GK

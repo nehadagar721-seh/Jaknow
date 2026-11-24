@@ -141,8 +141,12 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   `bkj-languages-literature` (Languages, Literature and Media, 10 lessons,
   ids `bkj-lit-N`, `bkj_languages_literature.dart`): languages, scripts,
   Vedas and epics, classical Sanskrit/Tamil, Bhakti-age writing, modern
-  writers, famous books, literary awards, newspapers/radio/TV, cinema.
-  Ten Bharat Ko Jano courses so far. Each has 10 lessons in 5 units of 2
+  writers, famous books, literary awards, newspapers/radio/TV, cinema;
+  `bkj-defence-security` (Defence and Security of India, 10 lessons, ids
+  `bkj-def-N`, `bkj_defence_security.dart`): Army, Navy and Coast Guard,
+  Air Force, wars since 1947, gallantry awards, women in the forces,
+  border/armed police forces, police and intelligence, disaster response,
+  joining up and defence days. Eleven Bharat Ko Jano courses so far. Each has 10 lessons in 5 units of 2
   (a test checks it). In the older courses the right answer is almost
   always option A (no shuffling); new courses spread it over A–D. The Explore
   list is long now: widget tests scroll to a course with `scrollTo`.

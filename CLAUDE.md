@@ -137,8 +137,12 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   `bkj-environment` (Environment and Wildlife of India, 10 lessons, ids
   `bkj-env-N`, `bkj_environment.dart`): forests, wildlife, national parks,
   Project Tiger and cheetahs, biosphere reserves and wetlands, green heroes,
-  laws, clean air/water/plastic, green energy, nature days and awards.
-  Nine Bharat Ko Jano courses so far. Each has 10 lessons in 5 units of 2
+  laws, clean air/water/plastic, green energy, nature days and awards;
+  `bkj-languages-literature` (Languages, Literature and Media, 10 lessons,
+  ids `bkj-lit-N`, `bkj_languages_literature.dart`): languages, scripts,
+  Vedas and epics, classical Sanskrit/Tamil, Bhakti-age writing, modern
+  writers, famous books, literary awards, newspapers/radio/TV, cinema.
+  Ten Bharat Ko Jano courses so far. Each has 10 lessons in 5 units of 2
   (a test checks it). In the older courses the right answer is almost
   always option A (no shuffling); new courses spread it over A–D. The Explore
   list is long now: widget tests scroll to a course with `scrollTo`.

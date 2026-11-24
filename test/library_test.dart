@@ -157,6 +157,7 @@ void main() {
         'bkj-sports-india',
         'bkj-economy-agriculture',
         'bkj-democracy',
+        'bkj-environment',
       ],
     );
   });
@@ -300,9 +301,10 @@ void main() {
             'bkj-sports-india',
             'bkj-economy-agriculture',
             'bkj-democracy',
+            'bkj-environment',
           ].contains(c.id),
     );
-    expect(c6, hasLength(23));
+    expect(c6, hasLength(24));
     for (final lesson in c6.expand((c) => c.lessons)) {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)
@@ -474,6 +476,7 @@ void main() {
     'bkj-sports-india',
     'bkj-economy-agriculture',
     'bkj-democracy',
+    'bkj-environment',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

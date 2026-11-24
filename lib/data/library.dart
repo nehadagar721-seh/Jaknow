@@ -1,6 +1,7 @@
 import 'content/bkj_culture.dart';
 import 'content/bkj_democracy.dart';
 import 'content/bkj_economy_agriculture.dart';
+import 'content/bkj_environment.dart';
 import 'content/bkj_great_indians.dart';
 import 'content/bkj_india_world.dart';
 import 'content/bkj_knowledge_science.dart';
@@ -546,5 +547,16 @@ const List<Course> builtInCourses = [
         'Elections, Parliament at work, key Articles and amendments, '
         'landmark cases, watchdog bodies, citizens’ laws and duties.',
     lessons: bkjDemocracyLessons,
+  ),
+  Course(
+    id: 'bkj-environment',
+    title: 'Environment and Wildlife of India',
+    subject: 'Geography',
+    section: CourseSection.explore,
+    collection: bharatKoJano,
+    description:
+        'Forests and animals, national parks, Project Tiger, wetlands, '
+        'green heroes, laws, clean air and water, and clean energy.',
+    lessons: bkjEnvironmentLessons,
   ),
 ];

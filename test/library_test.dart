@@ -158,6 +158,7 @@ void main() {
         'bkj-economy-agriculture',
         'bkj-democracy',
         'bkj-environment',
+        'bkj-languages-literature',
       ],
     );
   });
@@ -302,9 +303,10 @@ void main() {
             'bkj-economy-agriculture',
             'bkj-democracy',
             'bkj-environment',
+            'bkj-languages-literature',
           ].contains(c.id),
     );
-    expect(c6, hasLength(24));
+    expect(c6, hasLength(25));
     for (final lesson in c6.expand((c) => c.lessons)) {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)
@@ -477,6 +479,7 @@ void main() {
     'bkj-economy-agriculture',
     'bkj-democracy',
     'bkj-environment',
+    'bkj-languages-literature',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

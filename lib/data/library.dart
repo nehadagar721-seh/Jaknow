@@ -4,6 +4,7 @@ import 'content/bkj_economy_agriculture.dart';
 import 'content/bkj_environment.dart';
 import 'content/bkj_great_indians.dart';
 import 'content/bkj_india_world.dart';
+import 'content/bkj_languages_literature.dart';
 import 'content/bkj_knowledge_science.dart';
 import 'content/bkj_sports_india.dart';
 import 'content/bkj_states_symbols.dart';
@@ -558,5 +559,16 @@ const List<Course> builtInCourses = [
         'Forests and animals, national parks, Project Tiger, wetlands, '
         'green heroes, laws, clean air and water, and clean energy.',
     lessons: bkjEnvironmentLessons,
+  ),
+  Course(
+    id: 'bkj-languages-literature',
+    title: 'Languages, Literature and Media',
+    subject: 'History',
+    section: CourseSection.explore,
+    collection: bharatKoJano,
+    description:
+        'Languages and scripts, the Vedas and epics, great books and '
+        'writers, literary awards, newspapers, radio, TV and cinema.',
+    lessons: bkjLiteratureLessons,
   ),
 ];

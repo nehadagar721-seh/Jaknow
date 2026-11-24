@@ -159,6 +159,7 @@ void main() {
         'bkj-democracy',
         'bkj-environment',
         'bkj-languages-literature',
+        'bkj-defence-security',
       ],
     );
   });
@@ -304,9 +305,10 @@ void main() {
             'bkj-democracy',
             'bkj-environment',
             'bkj-languages-literature',
+            'bkj-defence-security',
           ].contains(c.id),
     );
-    expect(c6, hasLength(25));
+    expect(c6, hasLength(26));
     for (final lesson in c6.expand((c) => c.lessons)) {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)
@@ -480,6 +482,7 @@ void main() {
     'bkj-democracy',
     'bkj-environment',
     'bkj-languages-literature',
+    'bkj-defence-security',
   ];
 
   test('finished courses have 7 quiz questions per lesson', () {

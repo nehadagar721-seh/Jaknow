@@ -1,4 +1,5 @@
 import 'content/bkj_culture.dart';
+import 'content/bkj_defence_security.dart';
 import 'content/bkj_democracy.dart';
 import 'content/bkj_economy_agriculture.dart';
 import 'content/bkj_environment.dart';
@@ -570,5 +571,16 @@ const List<Course> builtInCourses = [
         'Languages and scripts, the Vedas and epics, great books and '
         'writers, literary awards, newspapers, radio, TV and cinema.',
     lessons: bkjLiteratureLessons,
+  ),
+  Course(
+    id: 'bkj-defence-security',
+    title: 'Defence and Security of India',
+    subject: 'Politics',
+    section: CourseSection.explore,
+    collection: bharatKoJano,
+    description:
+        'The Army, Navy and Air Force, wars since 1947, gallantry awards, '
+        'women in uniform, police forces, disaster response and defence days.',
+    lessons: bkjDefenceLessons,
   ),
 ];

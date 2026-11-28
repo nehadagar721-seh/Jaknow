@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../data/quiz_questions.dart';
 import '../data/study_levels.dart';
@@ -8,6 +9,7 @@ import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../widgets/boojho.dart';
+import '../widgets/confetti_burst.dart';
 
 /// The results shown after the last quiz question.
 ///
@@ -95,9 +97,23 @@ class _QuizResultsViewState extends State<QuizResultsView>
     return 'Every mistake is a lesson. $tomorrow';
   }
 
+  // Confetti showers: one for half or more right, a second for a
+  // perfect score.
+  int _showers = 0;
+  bool get _celebrate => _score * 2 >= _total;
+
   @override
   void initState() {
     super.initState();
+    if (_celebrate) {
+      _showers = 1;
+      HapticFeedback.mediumImpact();
+      if (_score == _total) {
+        Future.delayed(const Duration(milliseconds: 900), () {
+          if (mounted) setState(() => _showers = 2);
+        });
+      }
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _voice.say(
         '$_title You answered $_score of $_total correctly. $_boojhoLine',
@@ -127,6 +143,23 @@ class _QuizResultsViewState extends State<QuizResultsView>
 
   @override
   Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        _page(),
+        if (_celebrate)
+          Positioned.fill(
+            child: ConfettiBurst(
+              trigger: _showers,
+              pieces: _score == _total ? 90 : 60,
+              origin: const Alignment(0, -0.55),
+              playOnStart: true,
+            ),
+          ),
+      ],
+    );
+  }
+
+  Widget _page() {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(24, 0, 24, 8),
@@ -191,6 +224,7 @@ class _QuizResultsViewState extends State<QuizResultsView>
                     ValueListenableBuilder<bool>(
                       valueListenable: _voice.isSpeaking,
                       builder: (context, speaking, _) => _BoojhoCard(
+                        hop: _celebrate ? _showers : 0,
                         message: _boojhoLine,
                         animation: _clock,
                         isSpeaking: speaking,
@@ -480,7 +514,11 @@ class _BoojhoCard extends StatelessWidget {
     required this.message,
     required this.animation,
     required this.isSpeaking,
+    this.hop = 0,
   });
+
+  /// Changes when there is something to celebrate: Boojho hops.
+  final int hop;
 
   final String message;
   final Animation<double> animation;
@@ -496,7 +534,14 @@ class _BoojhoCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          BoojhoAvatar(animation: animation, isSpeaking: isSpeaking, size: 44),
+          HappyHop(
+            trigger: hop,
+            child: BoojhoAvatar(
+              animation: animation,
+              isSpeaking: isSpeaking,
+              size: 44,
+            ),
+          ),
           const SizedBox(width: 12),
           Expanded(
             child: Text(

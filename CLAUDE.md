@@ -41,6 +41,13 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   - `streak_pill.dart`: the white "🔥 7" streak pill
   - `app_bottom_bar.dart`: the Home / Quiz / News / Learn / Boojho bar
   - `step_indicator.dart`: "Step 1 of 2" with little bars
+  - `confetti_burst.dart`: CELEBRATIONS. `ConfettiBurst(trigger: n)` plays
+    one confetti burst each time `trigger` changes (no taps blocked, none
+    with "reduce motion"); `HappyHop` makes Boojho hop; `ShakeOnce`
+    shakes a wrong answer. Quiz: a right answer = confetti, a cheer
+    (Shabash!, Brilliant!, …), "🔥 N in a row!" from 2 in a row, Boojho
+    hops, phone buzz. Results: confetti if half or more right, a second
+    shower for a perfect score.
 - `setState(() { x = future; })`: always use braces when assigning a
   Future inside setState (an arrow `=>` returns the Future and crashes).
 - Quiz questions live in `lib/data/quiz_questions.dart` (`QuizQuestion`;

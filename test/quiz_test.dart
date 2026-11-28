@@ -44,6 +44,46 @@ void main() {
     expect(find.text('BOOJHO EXPLAINS'), findsOneWidget);
   });
 
+  testWidgets('a right answer pops a cheer; two in a row shows the chip', (
+    tester,
+  ) async {
+    tallScreen(tester);
+    await tester.pumpWidget(
+      MaterialApp(theme: AppTheme.light, home: const QuizScreen()),
+    );
+    await tester.pump();
+
+    await tester.tap(find.text(todaysQuiz[0].correctAnswer));
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('Shabash!'), findsOneWidget);
+    expect(find.textContaining('in a row'), findsNothing);
+    // The cheer fades away by itself.
+    await tester.pump(const Duration(seconds: 2));
+
+    await tester.tap(find.text('Next question'));
+    await tester.pump(const Duration(milliseconds: 300));
+    await tester.tap(find.text(todaysQuiz[1].correctAnswer));
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('Brilliant!'), findsOneWidget);
+    expect(find.text('🔥 2 in a row!'), findsOneWidget);
+    await tester.pump(const Duration(seconds: 2));
+  });
+
+  testWidgets('a wrong answer pops no cheer', (tester) async {
+    tallScreen(tester);
+    await tester.pumpWidget(
+      MaterialApp(theme: AppTheme.light, home: const QuizScreen()),
+    );
+    await tester.pump();
+    final q = todaysQuiz[0];
+    await tester.tap(
+      find.text(q.options.firstWhere((o) => o != q.correctAnswer)),
+    );
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('Shabash!'), findsNothing);
+    await tester.pump(const Duration(seconds: 2));
+  });
+
   testWidgets('a wrong answer shows the right one too', (tester) async {
     tallScreen(tester);
     await tester.pumpWidget(

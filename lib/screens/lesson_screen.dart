@@ -9,6 +9,7 @@ import '../theme/app_text_styles.dart';
 import '../widgets/back_circle_button.dart';
 import '../widgets/boojho.dart';
 import 'quiz_screen.dart';
+import '../l10n/language.dart';
 
 /// The reading mode last chosen ("Full read" or not). Kept while the app is
 /// open, so the next lesson opens the same way.
@@ -110,20 +111,24 @@ class _LessonScreenState extends State<LessonScreen>
     // Read whichever version is on screen.
     if (_fullRead) {
       final parts = [for (final s in l.sections) '${s.heading}. ${s.text}'];
-      _voice.say('${l.title}. ${parts.join(' ')} Remember: ${l.remember}');
+      _voice.say(
+        '${l.title}. ${parts.join(' ')} ${tr('Remember:')} ${l.remember}',
+      );
       return;
     }
     final points = [
       for (var i = 0; i < l.keyPoints.length; i++)
-        'Point ${i + 1}. ${l.keyPoints[i]}',
+        '${tr('Point {n}.', {'n': i + 1})} ${l.keyPoints[i]}',
     ];
-    _voice.say('${l.title}. ${points.join(' ')} Remember: ${l.remember}');
+    _voice.say(
+      '${l.title}. ${points.join(' ')} ${tr('Remember:')} ${l.remember}',
+    );
   }
 
   /// Bookmark: saved to the account, so it's still there next time.
   Future<void> _toggleSaved() async {
     if (!_loggedIn) {
-      _showMessage('Sign up to save lessons.');
+      _showMessage(tr('Sign up to save lessons.'));
       return;
     }
     final on = !_saved;
@@ -137,7 +142,7 @@ class _LessonScreenState extends State<LessonScreen>
           bookmarked: on,
         );
       });
-      _showMessage(on ? 'Lesson saved' : 'Lesson removed from saved');
+      _showMessage(on ? tr('Lesson saved') : tr('Lesson removed from saved'));
     } on BackendException catch (e) {
       _showMessage(e.message);
     }
@@ -181,13 +186,15 @@ class _LessonScreenState extends State<LessonScreen>
         bookmarked: _progress.bookmarked,
       );
     });
-    final xpText = earned > 0 ? 'You earned $earned XP. ' : '';
+    final xpText = earned > 0
+        ? '${tr('You earned {n} XP.', {'n': earned})} '
+        : '';
     _voice.say(
       _hasNext
-          ? 'Lesson done! $xpText'
-                'Next up: ${widget.lessons[widget.index + 1].title}.'
-          : 'You finished all ${widget.lessons.length} lessons. '
-                '${xpText}Amazing work!',
+          ? '${tr('Lesson done!')} $xpText'
+                '${tr('Next up: {title}.', {'title': widget.lessons[widget.index + 1].title})}'
+          : '${tr('You finished all {n} lessons.', {'n': widget.lessons.length})} '
+                '$xpText${tr('Amazing work!')}',
     );
   }
 
@@ -235,7 +242,9 @@ class _LessonScreenState extends State<LessonScreen>
                             icon: _saved
                                 ? Icons.bookmark_rounded
                                 : Icons.bookmark_border_rounded,
-                            tooltip: _saved ? 'Unsave lesson' : 'Save lesson',
+                            tooltip: _saved
+                                ? tr('Unsave lesson')
+                                : tr('Save lesson'),
                             onPressed: _toggleSaved,
                           ),
                         ],
@@ -245,13 +254,14 @@ class _LessonScreenState extends State<LessonScreen>
                         spacing: 9,
                         runSpacing: 8,
                         children: [
-                          _Chip(label: l.topic),
+                          _Chip(label: tr(l.topic)),
                           _Chip(label: l.unit),
                           if (_progress.completed)
                             _Chip(
-                              label:
-                                  '✓ Done · best ${_progress.bestScore}/'
-                                  '${l.quiz.length}',
+                              label: tr('✓ Done · best {n}/{total}', {
+                                'n': _progress.bestScore,
+                                'total': l.quiz.length,
+                              }),
                               done: true,
                             ),
                         ],
@@ -314,7 +324,7 @@ class _LessonScreenState extends State<LessonScreen>
                       speaking ? Icons.stop_rounded : Icons.volume_up_outlined,
                       size: 22,
                     ),
-                    label: Text(speaking ? 'Stop' : 'Listen to Boojho'),
+                    label: Text(speaking ? tr('Stop') : tr('Listen to Boojho')),
                   ),
                 ),
               ),
@@ -337,10 +347,10 @@ class _LessonScreenState extends State<LessonScreen>
                       : () => Navigator.of(context).pop(),
                   child: Text(
                     !_quizDone
-                        ? 'Take the ${l.quiz.length}-question quiz'
+                        ? tr('Take the {n}-question quiz', {'n': l.quiz.length})
                         : _hasNext
-                        ? 'Next lesson'
-                        : 'Finish',
+                        ? tr('Next lesson')
+                        : tr('Finish'),
                   ),
                 ),
               ),
@@ -366,7 +376,7 @@ class _LessonProgress extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Lesson $current of $total',
+          tr('Lesson {n} of {total}', {'n': current, 'total': total}),
           style: AppTextStyles.subtitle.copyWith(
             fontSize: 13.5,
             fontWeight: FontWeight.w600,
@@ -494,7 +504,7 @@ class _KeyPoints extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'KEY POINTS',
+            tr('KEY POINTS'),
             style: AppTextStyles.label.copyWith(
               color: AppColors.muted,
               fontSize: 13,
@@ -573,8 +583,8 @@ class _RememberBox extends StatelessWidget {
             child: Text.rich(
               TextSpan(
                 children: [
-                  const TextSpan(
-                    text: 'Remember: ',
+                  TextSpan(
+                    text: '${tr('Remember:')} ',
                     style: TextStyle(fontWeight: FontWeight.w800),
                   ),
                   TextSpan(text: text),
@@ -639,7 +649,9 @@ class _ModeSwitch extends StatelessWidget {
     }
 
     return Semantics(
-      label: fullRead ? 'Showing the full read' : 'Showing the crisp version',
+      label: fullRead
+          ? tr('Showing the full read')
+          : tr('Showing the crisp version'),
       // A Material (not a Container): the pills' Ink is painted on it, so
       // the dark "selected" pill shows on top of the white background.
       child: Material(
@@ -651,9 +663,9 @@ class _ModeSwitch extends StatelessWidget {
           padding: const EdgeInsets.all(4),
           child: Row(
             children: [
-              pill('Crisp', Icons.bolt_rounded, false),
+              pill(tr('Crisp'), Icons.bolt_rounded, false),
               const SizedBox(width: 4),
-              pill('Full read', Icons.menu_book_rounded, true),
+              pill(tr('Full read'), Icons.menu_book_rounded, true),
             ],
           ),
         ),

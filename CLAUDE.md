@@ -256,7 +256,8 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   Language switches any time. Boojho speaks Hindi with a hi-IN voice
   (`BoojhoVoice.useLanguage`, `voiceScore(language:)`). All text styles fall
   back to Noto Sans Devanagari for Hindi letters. Translated so far: bottom
-  bar, Welcome, Home, Profile (a test checks every tr() phrase in those files
+  bar, Welcome, Home, Profile, Quiz, Results, Speed round, Library, Course,
+  Lesson (lesson CONTENT stays English) (a test checks every tr() phrase in those files
   has Hindi with the same {blanks}). Tests that start JaKnowApp with the
   splash set `Language.chosen = true` so it doesn't ask.
 - OPENING (`splash_screen.dart`, no design): every app start first shows

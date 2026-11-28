@@ -43,6 +43,12 @@ void main() {
       'lib/screens/welcome_screen.dart',
       'lib/screens/home_screen.dart',
       'lib/screens/profile_screen.dart',
+      'lib/screens/quiz_screen.dart',
+      'lib/screens/quiz_results_screen.dart',
+      'lib/screens/speed_round_screen.dart',
+      'lib/screens/library_screen.dart',
+      'lib/screens/course_screen.dart',
+      'lib/screens/lesson_screen.dart',
     ];
     for (final file in files) {
       for (final phrase in phrasesIn(file)) {

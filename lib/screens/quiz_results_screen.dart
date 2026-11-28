@@ -12,6 +12,7 @@ import '../services/backend.dart';
 import '../widgets/boojho.dart';
 import '../widgets/confetti_burst.dart';
 import 'leaderboard_screen.dart';
+import '../l10n/language.dart';
 
 /// The results shown after the last quiz question.
 ///
@@ -85,18 +86,18 @@ class _QuizResultsViewState extends State<QuizResultsView>
       ((widget.xpBefore + _xpEarned) / xpPerLevel).clamp(0.0, 1.0);
 
   String get _title => widget.forLesson
-      ? 'Lesson complete!'
-      : '${widget.streakDays}-day streak!';
+      ? tr('Lesson complete!')
+      : tr('{n}-day streak!', {'n': widget.streakDays});
 
   /// Boojho's message, depending on how it went.
   String get _boojhoLine {
     final tomorrow = widget.forLesson
-        ? 'Ready for the next lesson?'
-        : 'Come back tomorrow to keep the flame burning.';
-    if (_score == _total) return 'Perfect score! $tomorrow';
-    if (_score >= _total - 1) return 'Well done! $tomorrow';
-    if (_score * 2 >= _total) return 'Good effort! $tomorrow';
-    return 'Every mistake is a lesson. $tomorrow';
+        ? tr('Ready for the next lesson?')
+        : tr('Come back tomorrow to keep the flame burning.');
+    if (_score == _total) return '${tr('Perfect score!')} $tomorrow';
+    if (_score >= _total - 1) return '${tr('Well done!')} $tomorrow';
+    if (_score * 2 >= _total) return '${tr('Good effort!')} $tomorrow';
+    return '${tr('Every mistake is a lesson.')} $tomorrow';
   }
 
   // This week's leaderboard, for the bottom of the page (logged-in only).
@@ -136,7 +137,7 @@ class _QuizResultsViewState extends State<QuizResultsView>
     }
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _voice.say(
-        '$_title You answered $_score of $_total correctly. $_boojhoLine',
+        '$_title ${tr('You answered {n} of {total} correctly.', {'n': _score, 'total': _total})} $_boojhoLine',
       );
     });
   }
@@ -202,7 +203,10 @@ class _QuizResultsViewState extends State<QuizResultsView>
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'You answered $_score of $_total correctly',
+                      tr('You answered {n} of {total} correctly', {
+                        'n': _score,
+                        'total': _total,
+                      }),
                       textAlign: TextAlign.center,
                       style: AppTextStyles.subtitle.copyWith(fontSize: 16),
                     ),
@@ -212,20 +216,20 @@ class _QuizResultsViewState extends State<QuizResultsView>
                         Expanded(
                           child: _StatCard(
                             value: '+$_xpEarned',
-                            label: 'XP earned',
+                            label: tr('XP earned'),
                           ),
                         ),
                         const SizedBox(width: 11),
                         Expanded(
                           child: _StatCard(
                             value: '$_accuracy%',
-                            label: 'Accuracy',
+                            label: tr('Accuracy'),
                           ),
                         ),
                         const SizedBox(width: 11),
                         Expanded(
                           child: _StatCard(
-                            value: 'Level ${widget.level}',
+                            value: tr('Level {n}', {'n': widget.level}),
                             label: widget.levelName,
                           ),
                         ),
@@ -284,14 +288,14 @@ class _QuizResultsViewState extends State<QuizResultsView>
                   textStyle: AppTextStyles.button.copyWith(fontSize: 17),
                 ),
                 onPressed: widget.onContinue,
-                child: const Text('Continue'),
+                child: Text(tr('Continue')),
               ),
             ),
             const SizedBox(height: 6),
             TextButton(
               onPressed: _review,
               child: Text(
-                'Review my answers',
+                tr('Review my answers'),
                 style: AppTextStyles.link.copyWith(fontSize: 16),
               ),
             ),
@@ -466,7 +470,7 @@ class _LevelProgress extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text('Progress to Level $nextLevel', style: style),
+            Text(tr('Progress to Level {n}', {'n': nextLevel}), style: style),
             const Spacer(),
             Text('${(progress * 100).round()}%', style: style),
           ],
@@ -498,7 +502,9 @@ class _WeekChecks extends StatelessWidget {
 
   final int streakDays;
 
-  static const _letters = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  static List<String> get _letters => Language.isHindi
+      ? const ['सो', 'मं', 'बु', 'गु', 'शु', 'श', 'र']
+      : const ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
   @override
   Widget build(BuildContext context) {
@@ -616,13 +622,15 @@ class _BoardPeek extends StatelessWidget {
     }.toList()..sort();
     final moved = board.before - board.after;
     final headline = moved > 0
-        ? 'You moved up $moved ${moved == 1 ? 'place' : 'places'}! 🎉'
-        : 'You’re #${board.after} this week. Keep going!';
+        ? (moved == 1
+              ? tr('You moved up 1 place! 🎉')
+              : tr('You moved up {n} places! 🎉', {'n': moved}))
+        : tr('You’re #{rank} this week. Keep going!', {'rank': board.after});
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'THIS WEEK’S LEADERBOARD',
+          tr('THIS WEEK’S LEADERBOARD'),
           style: AppTextStyles.label.copyWith(
             color: AppColors.muted,
             fontSize: 13,
@@ -646,7 +654,7 @@ class _BoardPeek extends StatelessWidget {
           child: TextButton(
             onPressed: onSeeAll,
             child: Text(
-              'See full leaderboard →',
+              tr('See full leaderboard →'),
               style: AppTextStyles.link.copyWith(fontSize: 15),
             ),
           ),
@@ -686,7 +694,7 @@ class _ReviewSheet extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'Your answers',
+            tr('Your answers'),
             style: AppTextStyles.display.copyWith(fontSize: 26),
           ),
           const SizedBox(height: 14),
@@ -743,7 +751,9 @@ class _ReviewItem extends StatelessWidget {
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
-                  'You said: ${question.options[picked]}',
+                  tr('You said: {answer}', {
+                    'answer': question.options[picked],
+                  }),
                   style: AppTextStyles.cardBody.copyWith(
                     color: colour,
                     fontWeight: FontWeight.w700,
@@ -755,7 +765,7 @@ class _ReviewItem extends StatelessWidget {
           if (!right) ...[
             const SizedBox(height: 4),
             Text(
-              'Right answer: ${question.correctAnswer}',
+              tr('Right answer: {answer}', {'answer': question.correctAnswer}),
               style: AppTextStyles.cardBody.copyWith(
                 color: AppColors.success,
                 fontWeight: FontWeight.w700,

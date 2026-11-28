@@ -9,6 +9,7 @@ import '../theme/app_text_styles.dart';
 import '../widgets/back_circle_button.dart';
 import 'course_screen.dart';
 import 'lesson_screen.dart';
+import '../l10n/language.dart';
 
 /// The icon for a subject, used on course cards.
 IconData subjectIcon(String subject) => switch (subject) {
@@ -117,7 +118,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                       const SizedBox(width: 14),
                       Expanded(
                         child: Text(
-                          'Library',
+                          tr('Library'),
                           style: AppTextStyles.display.copyWith(fontSize: 28),
                         ),
                       ),
@@ -130,7 +131,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                     textInputAction: TextInputAction.search,
                     onChanged: (_) => setState(() {}),
                     decoration: InputDecoration(
-                      hintText: 'Search topics, e.g. Mauryan',
+                      hintText: tr('Search topics, e.g. Mauryan'),
                       prefixIcon: const Icon(
                         Icons.search_rounded,
                         color: AppColors.muted,
@@ -138,7 +139,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                       suffixIcon: _search.text.isEmpty
                           ? null
                           : IconButton(
-                              tooltip: 'Clear search',
+                              tooltip: tr('Clear search'),
                               icon: const Icon(Icons.close_rounded),
                               color: AppColors.muted,
                               onPressed: () => setState(_search.clear),
@@ -164,8 +165,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
                         Expanded(
                           child: _Tab(
                             label: _myClass.isEmpty
-                                ? 'By class'
-                                : 'For $_myClass',
+                                ? tr('By class')
+                                : tr('For {cls}', {'cls': tr(_myClass)}),
                             selected: _forMyClass,
                             onTap: () => setState(() => _forMyClass = true),
                           ),
@@ -173,7 +174,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                         const SizedBox(width: 9),
                         Expanded(
                           child: _Tab(
-                            label: 'Explore more',
+                            label: tr('Explore more'),
                             selected: !_forMyClass,
                             onTap: () => setState(() => _forMyClass = false),
                           ),
@@ -205,9 +206,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
     if (mine.isEmpty) {
       return [
         _Note(
-          text:
-              '$_myClass lessons are on their way! Meanwhile, tap '
-              '“Explore more” to read about anything you like.',
+          text: tr(
+            '{cls} lessons are on their way! Meanwhile, tap “Explore '
+            'more” to read about anything you like.',
+            {'cls': tr(_myClass)},
+          ),
         ),
       ];
     }
@@ -228,7 +231,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
     return [
       ..._grouped(explore, (c) => c.collection),
       if (otherClasses.isNotEmpty) ...[
-        _Heading(_myClass.isEmpty ? 'BY CLASS' : 'OTHER CLASSES'),
+        _Heading(_myClass.isEmpty ? tr('BY CLASS') : tr('OTHER CLASSES')),
         for (final c in otherClasses) _card(c),
       ],
       if (explore.isEmpty && otherClasses.isEmpty)
@@ -245,7 +248,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
     }
     return [
       for (final entry in groups.entries) ...[
-        if (entry.key.isNotEmpty) _Heading(entry.key.toUpperCase()),
+        if (entry.key.isNotEmpty) _Heading(tr(entry.key).toUpperCase()),
         for (final c in entry.value) _card(c),
       ],
     ];
@@ -270,14 +273,20 @@ class _LibraryScreenState extends State<LibraryScreen> {
     if (results.isEmpty) {
       return [
         _Note(
-          text:
-              'Nothing found for “${_search.text.trim()}” yet. '
-              'Try another word, or ask Boojho!',
+          text: tr(
+            'Nothing found for “{word}” yet. Try another word, or ask '
+            'Boojho!',
+            {'word': _search.text.trim()},
+          ),
         ),
       ];
     }
     return [
-      _Heading('${results.length} LESSON${results.length == 1 ? '' : 'S'}'),
+      _Heading(
+        results.length == 1
+            ? tr('1 LESSON')
+            : tr('{n} LESSONS', {'n': results.length}),
+      ),
       for (final (course, i) in results)
         Padding(
           padding: const EdgeInsets.only(bottom: 8),
@@ -434,7 +443,9 @@ class _CourseCard extends StatelessWidget {
                     [
                       if (where.isNotEmpty) where,
                       course.subject,
-                      '$total lesson${total == 1 ? '' : 's'}',
+                      total == 1
+                          ? tr('1 lesson')
+                          : tr('{n} lessons', {'n': total}),
                     ].join(' · '),
                     style: AppTextStyles.cardBody.copyWith(fontSize: 13),
                   ),
@@ -454,7 +465,7 @@ class _CourseCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        '$done of $total done',
+                        tr('{n} of {total} done', {'n': done, 'total': total}),
                         style: AppTextStyles.cardBody.copyWith(fontSize: 12),
                       ),
                     ],

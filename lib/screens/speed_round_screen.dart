@@ -11,6 +11,7 @@ import '../theme/app_text_styles.dart';
 import '../widgets/back_circle_button.dart';
 import '../widgets/boojho.dart';
 import '../widgets/confetti_burst.dart';
+import '../l10n/language.dart';
 
 /// The best speed-round score, saved on this phone.
 class SpeedBest {
@@ -123,7 +124,7 @@ class _SpeedRoundScreenState extends State<SpeedRoundScreen>
       _newBest = false;
     });
     _time.reset();
-    _voice.say('Ready? Go!');
+    _voice.say(tr('Ready? Go!'));
     for (var n = 2; n >= 0; n--) {
       await Future<void>.delayed(const Duration(milliseconds: 700));
       if (!mounted || round != _round) return;
@@ -172,8 +173,8 @@ class _SpeedRoundScreenState extends State<SpeedRoundScreen>
     if (newBest) SpeedBest.save(_right);
     HapticFeedback.heavyImpact();
     _voice.say(
-      'Time’s up! You got $_right right. '
-      '${newBest ? 'That’s a new best!' : 'Try again to beat your best!'}',
+      '${tr('Time’s up! You got {n} right.', {'n': _right})} '
+      '${newBest ? tr('That’s a new best!') : tr('Try again to beat your best!')}',
     );
   }
 
@@ -202,14 +203,14 @@ class _SpeedRoundScreenState extends State<SpeedRoundScreen>
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
             child: BackCircleButton(
               icon: Icons.close_rounded,
-              tooltip: 'Leave speed round',
+              tooltip: tr('Leave speed round'),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ),
         ),
         const Spacer(),
         Text(
-          '⚡ SPEED ROUND',
+          tr('⚡ SPEED ROUND'),
           style: AppTextStyles.label.copyWith(
             color: AppColors.indigo,
             fontSize: 15,
@@ -218,7 +219,7 @@ class _SpeedRoundScreenState extends State<SpeedRoundScreen>
         ),
         const SizedBox(height: 8),
         Text(
-          'As many as you can in 60 seconds',
+          tr('As many as you can in 60 seconds'),
           style: AppTextStyles.subtitle.copyWith(fontSize: 15),
         ),
         const SizedBox(height: 30),
@@ -239,7 +240,7 @@ class _SpeedRoundScreenState extends State<SpeedRoundScreen>
               shape: BoxShape.circle,
             ),
             child: Text(
-              _count == 0 ? 'Go!' : '$_count',
+              _count == 0 ? tr('Go!') : '$_count',
               style: AppTextStyles.display.copyWith(fontSize: 60),
             ),
           ),
@@ -264,7 +265,7 @@ class _SpeedRoundScreenState extends State<SpeedRoundScreen>
                 children: [
                   BackCircleButton(
                     icon: Icons.close_rounded,
-                    tooltip: 'Leave speed round',
+                    tooltip: tr('Leave speed round'),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                   const SizedBox(width: 12),
@@ -278,7 +279,7 @@ class _SpeedRoundScreenState extends State<SpeedRoundScreen>
                 height: 26,
                 child: _inARow >= 2
                     ? Text(
-                        '🔥 $_inARow in a row!',
+                        tr('🔥 {n} in a row!', {'n': _inARow}),
                         style: AppTextStyles.label.copyWith(
                           color: AppColors.indigo,
                           fontSize: 14,
@@ -347,10 +348,10 @@ class _SpeedRoundScreenState extends State<SpeedRoundScreen>
   Widget _results() {
     final accuracy = _answered == 0 ? 0 : (_right * 100 / _answered).round();
     final line = _newBest
-        ? 'A new best score! You’re getting faster every day.'
+        ? tr('A new best score! You’re getting faster every day.')
         : _right == 0
-        ? 'Warm-up done! Try again: speed comes with practice.'
-        : 'Well played! Your best is $_best. Can you beat it?';
+        ? tr('Warm-up done! Try again: speed comes with practice.')
+        : tr('Well played! Your best is {n}. Can you beat it?', {'n': _best});
     return Stack(
       children: [
         Padding(
@@ -363,7 +364,7 @@ class _SpeedRoundScreenState extends State<SpeedRoundScreen>
                     children: [
                       const SizedBox(height: 28),
                       Text(
-                        _newBest ? 'New best! 🎉' : 'Time’s up!',
+                        _newBest ? tr('New best! 🎉') : tr('Time’s up!'),
                         style: AppTextStyles.display.copyWith(fontSize: 36),
                       ),
                       const SizedBox(height: 18),
@@ -385,7 +386,9 @@ class _SpeedRoundScreenState extends State<SpeedRoundScreen>
                               ),
                             ),
                             Text(
-                              _right == 1 ? 'right answer' : 'right answers',
+                              _right == 1
+                                  ? tr('right answer')
+                                  : tr('right answers'),
                               style: AppTextStyles.label.copyWith(
                                 color: AppColors.ink,
                                 fontSize: 12.5,
@@ -397,19 +400,25 @@ class _SpeedRoundScreenState extends State<SpeedRoundScreen>
                       const SizedBox(height: 20),
                       Row(
                         children: [
-                          _ResultStat(value: '$_answered', label: 'Answered'),
+                          _ResultStat(
+                            value: '$_answered',
+                            label: tr('Answered'),
+                          ),
                           const SizedBox(width: 10),
-                          _ResultStat(value: '$accuracy%', label: 'Accuracy'),
+                          _ResultStat(
+                            value: '$accuracy%',
+                            label: tr('Accuracy'),
+                          ),
                           const SizedBox(width: 10),
                           _ResultStat(
                             value: '$_bestInARow',
-                            label: 'Best in a row',
+                            label: tr('Best in a row'),
                           ),
                         ],
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        'Your best: $_best',
+                        tr('Your best: {n}', {'n': _best}),
                         style: AppTextStyles.cardTitle.copyWith(fontSize: 16),
                       ),
                       const SizedBox(height: 18),
@@ -447,7 +456,7 @@ class _SpeedRoundScreenState extends State<SpeedRoundScreen>
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        'Speed rounds are practice: no XP, just fun.',
+                        tr('Speed rounds are practice: no XP, just fun.'),
                         textAlign: TextAlign.center,
                         style: AppTextStyles.subtitle.copyWith(fontSize: 12.5),
                       ),
@@ -467,13 +476,13 @@ class _SpeedRoundScreenState extends State<SpeedRoundScreen>
                     textStyle: AppTextStyles.button.copyWith(fontSize: 17),
                   ),
                   onPressed: _start,
-                  child: const Text('Play again'),
+                  child: Text(tr('Play again')),
                 ),
               ),
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
                 child: Text(
-                  'Done',
+                  tr('Done'),
                   style: AppTextStyles.link.copyWith(fontSize: 16),
                 ),
               ),

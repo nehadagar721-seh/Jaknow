@@ -7,6 +7,7 @@ import '../theme/app_text_styles.dart';
 import '../widgets/back_circle_button.dart';
 import 'lesson_screen.dart';
 import 'library_screen.dart' show subjectIcon;
+import '../l10n/language.dart';
 
 /// One course: its lessons in order, with ticks for the finished ones and a
 /// button to carry on from the next unfinished lesson.
@@ -112,7 +113,10 @@ class _CourseScreenState extends State<CourseScreen> {
             ],
             const SizedBox(height: 6),
             Text(
-              '$doneCount of ${lessons.length} lessons done',
+              tr('{n} of {total} lessons done', {
+                'n': doneCount,
+                'total': lessons.length,
+              }),
               style: AppTextStyles.subtitle.copyWith(
                 fontSize: 13.5,
                 fontWeight: FontWeight.w700,
@@ -134,10 +138,10 @@ class _CourseScreenState extends State<CourseScreen> {
                 onPressed: () => _open(next ?? 0),
                 child: Text(
                   next == null
-                      ? 'Read again from the start'
+                      ? tr('Read again from the start')
                       : doneCount == 0
-                      ? 'Start'
-                      : 'Continue: ${lessons[next].title}',
+                      ? tr('Start')
+                      : tr('Continue: {title}', {'title': lessons[next].title}),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -245,7 +249,10 @@ class _LessonRow extends StatelessWidget {
                   ),
                   if (done)
                     Text(
-                      'Best score ${progress!.bestScore}/$questions',
+                      tr('Best score {n}/{total}', {
+                        'n': progress!.bestScore,
+                        'total': questions,
+                      }),
                       style: AppTextStyles.cardBody.copyWith(
                         fontSize: 12.5,
                         color: AppColors.success,
@@ -253,7 +260,7 @@ class _LessonRow extends StatelessWidget {
                     )
                   else if (isNext)
                     Text(
-                      'Up next',
+                      tr('Up next'),
                       style: AppTextStyles.cardBody.copyWith(
                         fontSize: 12.5,
                         color: AppColors.indigo,

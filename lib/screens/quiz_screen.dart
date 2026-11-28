@@ -10,6 +10,7 @@ import '../widgets/back_circle_button.dart';
 import '../widgets/boojho.dart';
 import '../widgets/confetti_burst.dart';
 import '../widgets/streak_pill.dart';
+import '../l10n/language.dart';
 
 /// Today's quiz: one question at a time, Boojho reads it out and explains
 /// the answer.
@@ -81,8 +82,10 @@ class _QuizScreenState extends State<QuizScreen>
   String get _spokenLine {
     if (!_answered) return _question.question;
     final verdict = _picked == _question.correctIndex
-        ? 'Correct!'
-        : 'Not quite. The answer is ${_question.correctAnswer}.';
+        ? tr('Correct!')
+        : tr('Not quite. The answer is {answer}.', {
+            'answer': _question.correctAnswer,
+          });
     return '$verdict ${_question.explanation}';
   }
 
@@ -140,22 +143,22 @@ class _QuizScreenState extends State<QuizScreen>
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.white,
         title: Text(
-          'Leave the quiz?',
+          tr('Leave the quiz?'),
           style: AppTextStyles.display.copyWith(fontSize: 22),
         ),
         content: Text(
-          'Your answers in this quiz won’t be saved.',
+          tr('Your answers in this quiz won’t be saved.'),
           style: AppTextStyles.subtitle,
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: Text('Keep going', style: AppTextStyles.link),
+            child: Text(tr('Keep going'), style: AppTextStyles.link),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
             child: Text(
-              'Leave',
+              tr('Leave'),
               style: AppTextStyles.link.copyWith(color: AppColors.error),
             ),
           ),
@@ -212,7 +215,7 @@ class _QuizScreenState extends State<QuizScreen>
                             children: [
                               BackCircleButton(
                                 icon: Icons.close_rounded,
-                                tooltip: 'Leave quiz',
+                                tooltip: tr('Leave quiz'),
                                 onPressed: _close,
                               ),
                               const SizedBox(width: 12),
@@ -229,9 +232,12 @@ class _QuizScreenState extends State<QuizScreen>
                           const SizedBox(height: 16),
                           Row(
                             children: [
-                              _Chip(label: q.topic, dark: false),
+                              _Chip(label: tr(q.topic), dark: false),
                               const SizedBox(width: 9),
-                              _Chip(label: 'Level ${widget.level}', dark: true),
+                              _Chip(
+                                label: tr('Level {n}', {'n': widget.level}),
+                                dark: true,
+                              ),
                             ],
                           ),
                           const SizedBox(height: 13),
@@ -281,12 +287,14 @@ class _QuizScreenState extends State<QuizScreen>
                             valueListenable: _voice.isSpeaking,
                             builder: (context, speaking, _) => _BoojhoExplains(
                               label: _answered
-                                  ? 'BOOJHO EXPLAINS'
-                                  : 'BOOJHO SAYS',
+                                  ? tr('BOOJHO EXPLAINS')
+                                  : tr('BOOJHO SAYS'),
                               text: _answered
                                   ? q.explanation
-                                  : 'Take your time. Tap the answer you think '
-                                        'is right.',
+                                  : tr(
+                                      'Take your time. Tap the answer you '
+                                      'think is right.',
+                                    ),
                               animation: _clock,
                               isSpeaking: speaking,
                               hop: gotItRight ? _cheers : 0,
@@ -315,7 +323,9 @@ class _QuizScreenState extends State<QuizScreen>
                         textStyle: AppTextStyles.button.copyWith(fontSize: 17),
                       ),
                       onPressed: _answered ? _next : null,
-                      child: Text(_isLast ? 'See my score' : 'Next question'),
+                      child: Text(
+                        _isLast ? tr('See my score') : tr('Next question'),
+                      ),
                     ),
                   ),
                 ],
@@ -337,7 +347,7 @@ class _QuizScreenState extends State<QuizScreen>
               right: 0,
               child: _CheerPop(
                 key: ValueKey(_cheers),
-                text: _cheerWords[(_cheers - 1) % _cheerWords.length],
+                text: tr(_cheerWords[(_cheers - 1) % _cheerWords.length]),
                 inARow: _inARow,
               ),
             ),
@@ -368,7 +378,7 @@ class _Progress extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Question $current of $total',
+          tr('Question {n} of {total}', {'n': current, 'total': total}),
           style: AppTextStyles.subtitle.copyWith(
             fontSize: 13.5,
             fontWeight: FontWeight.w600,
@@ -519,7 +529,9 @@ class _AnswerTile extends StatelessWidget {
               ),
               if (marked)
                 Text(
-                  state == _AnswerState.correct ? 'Correct' : 'Your answer',
+                  state == _AnswerState.correct
+                      ? tr('Correct')
+                      : tr('Your answer'),
                   style: AppTextStyles.cardTitle.copyWith(
                     fontSize: 13.5,
                     color: accent,
@@ -608,8 +620,8 @@ class _BoojhoExplains extends StatelessWidget {
             child: InkWell(
               customBorder: const CircleBorder(),
               onTap: onSpeaker,
-              child: const Tooltip(
-                message: 'Hear Boojho again',
+              child: Tooltip(
+                message: tr('Hear Boojho again'),
                 child: SizedBox.square(
                   dimension: 44,
                   child: Icon(
@@ -689,7 +701,7 @@ class _CheerPop extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
-                        '🔥 $inARow in a row!',
+                        tr('🔥 {n} in a row!', {'n': inARow}),
                         style: AppTextStyles.label.copyWith(
                           color: AppColors.amber,
                           fontSize: 13,

@@ -19,6 +19,7 @@ class Profile {
     this.level = 'Intermediate',
     this.dailyGoal = 5,
     this.streakDays = 0,
+    this.bestStreak = 0,
     this.lastQuizDate,
     this.xp = 0,
     this.joined,
@@ -43,6 +44,9 @@ class Profile {
   /// Days in a row with the daily quiz done, up to [lastQuizDate].
   final int streakDays;
   final DateTime? lastQuizDate;
+
+  /// The longest streak ever (for badges: it stays after a missed day).
+  final int bestStreak;
 
   /// Total XP ever earned.
   final int xp;
@@ -82,6 +86,7 @@ class Profile {
       level: level,
       dailyGoal: dailyGoal,
       streakDays: newStreak,
+      bestStreak: newStreak > bestStreak ? newStreak : bestStreak,
       lastQuizDate: _dateOnly(today),
       xp: xp + correct * xpPerCorrectAnswer,
       joined: joined,
@@ -98,6 +103,7 @@ class Profile {
     level: level,
     dailyGoal: dailyGoal,
     streakDays: streakDays,
+    bestStreak: bestStreak,
     lastQuizDate: lastQuizDate,
     xp: newXp,
     joined: joined,
@@ -113,6 +119,7 @@ class Profile {
         level: level ?? this.level,
         dailyGoal: dailyGoal ?? this.dailyGoal,
         streakDays: streakDays,
+        bestStreak: bestStreak,
         lastQuizDate: lastQuizDate,
         xp: xp,
         joined: joined,
@@ -128,6 +135,8 @@ class Profile {
         level: (row['level'] as String?) ?? 'Intermediate',
         dailyGoal: (row['daily_goal'] as int?) ?? 5,
         streakDays: (row['streak_days'] as int?) ?? 0,
+        bestStreak:
+            (row['best_streak'] as int?) ?? (row['streak_days'] as int?) ?? 0,
         lastQuizDate: row['last_quiz_date'] == null
             ? null
             : DateTime.parse(row['last_quiz_date'] as String),

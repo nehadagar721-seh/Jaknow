@@ -268,6 +268,16 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
 - Profile (`profile_screen.dart`, no design) opens from the round initial
   button next to Home's streak pill: details, streak/XP/level, study
   settings (class, level, goal — editable, saved), saved lessons, Log out.
+- BADGES (`lib/data/badges.dart`, `badgesFor(profile, progress, courses)`):
+  17 badges worked out from real progress, nothing stored: streaks 3/7/30/100
+  (uses `Profile.bestStreak` = server column `profiles.best_streak`, kept by
+  `record_daily_quiz`, `supabase/badges.sql`, so they stay after a missed
+  day), XP 100/500/2000, lessons done 1/10/50/150, perfect lesson quizzes
+  1/10/50, a finished course, a finished Bharat Ko Jano course, lessons in 5
+  subjects. Profile shows "BADGES · N OF 17" (earned in colour first, the
+  rest faded with a progress bar; tap = how to earn). Profile's lessons
+  card now counts lessons done across ALL courses. Profile is a lazy list:
+  tests use `scrollUntilVisible` to reach Log out / Approve news.
 - Scoring is done by the SERVER (`supabase/progress_and_leaderboard.sql`):
   the app can't write xp/streak columns. Daily quiz → `recordQuiz(correct,
   total)` → `record_daily_quiz` (yesterday → streak +1, missed a day → 1;

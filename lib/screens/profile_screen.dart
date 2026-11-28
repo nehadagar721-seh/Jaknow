@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../data/badges.dart';
+import '../data/library.dart';
+import '../data/lessons.dart';
 import '../data/study_levels.dart';
 import '../services/backend.dart';
 import '../services/boojho_voice.dart';
+import '../services/library_service.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 import '../widgets/back_circle_button.dart';
-import '../data/lessons.dart';
 import 'leaderboard_screen.dart';
 import 'log_in_screen.dart';
 import 'news_approve_screen.dart';
@@ -30,6 +33,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late final Future<Map<String, LessonProgress>> _lessons = _backend
       .lessonProgress()
       .catchError((_) => <String, LessonProgress>{});
+
+  /// All courses (for badges and the lessons count).
+  late final Future<List<Course>> _courses = LibraryService.instance
+      .courses()
+      .catchError((_) => builtInCourses);
 
   /// Only the news admin sees "Approve news" (the server checks it).
   late final Future<bool> _newsAdmin = _backend.isNewsAdmin().catchError(
@@ -352,6 +360,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
       const SizedBox(height: 20),
+      // Badges: worked out from streaks, XP, lessons and courses.
+      FutureBuilder<List<Object>>(
+        future: Future.wait<Object>([_lessons, _courses]),
+        builder: (context, snapshot) {
+          final data = snapshot.data;
+          if (data == null) return const SizedBox.shrink();
+          final badges = badgesFor(
+            profile: p,
+            progress: data[0] as Map<String, LessonProgress>,
+            courses: data[1] as List<Course>,
+          );
+          return _BadgeShelf(badges: badges);
+        },
+      ),
+      const SizedBox(height: 20),
       _SectionLabel('STUDY SETTINGS'),
       const SizedBox(height: 10),
       _Card(
@@ -385,15 +408,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _SectionLabel('LESSONS'),
       const SizedBox(height: 10),
       // Loaded from the account: lessons done and lessons saved.
-      FutureBuilder<Map<String, LessonProgress>>(
-        future: _lessons,
+      FutureBuilder<List<Object>>(
+        future: Future.wait<Object>([_lessons, _courses]),
         builder: (context, snapshot) {
-          final progress = snapshot.data ?? const {};
-          final done = ancientIndiaLessons
+          final data = snapshot.data;
+          final progress = data == null
+              ? const <String, LessonProgress>{}
+              : data[0] as Map<String, LessonProgress>;
+          final all = data == null
+              ? const <Lesson>[]
+              : [for (final c in data[1] as List<Course>) ...c.lessons];
+          final done = all
               .where((l) => progress[l.id]?.completed ?? false)
               .length;
           final saved = [
-            for (final l in ancientIndiaLessons)
+            for (final l in all)
               if (progress[l.id]?.bookmarked ?? false) l.title,
           ];
           return _Card(
@@ -402,9 +431,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 _InfoRow(
                   icon: Icons.task_alt_rounded,
-                  text:
-                      'Ancient India: $done of ${ancientIndiaLessons.length} '
-                      'lessons done',
+                  text: done == 1 ? '1 lesson done' : '$done lessons done',
                 ),
                 const Divider(height: 1, color: AppColors.track),
                 _InfoRow(
@@ -530,6 +557,167 @@ class _Stat extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+// ---------- Badges ----------
+
+/// "BADGES · 3 of 17" and a grid of badges; earned ones in colour first.
+class _BadgeShelf extends StatelessWidget {
+  const _BadgeShelf({required this.badges});
+
+  final List<AppBadge> badges;
+
+  @override
+  Widget build(BuildContext context) {
+    final earned = badges.where((b) => b.earned).length;
+    // Earned badges first, then the ones closest to being earned.
+    final sorted = [...badges]
+      ..sort((a, b) {
+        if (a.earned != b.earned) return a.earned ? -1 : 1;
+        return b.progress.compareTo(a.progress);
+      });
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _SectionLabel('BADGES · $earned OF ${badges.length}'),
+        const SizedBox(height: 10),
+        _Card(
+          padding: const EdgeInsets.fromLTRB(10, 14, 10, 10),
+          child: LayoutBuilder(
+            builder: (context, box) {
+              final width = (box.maxWidth - 2 * 8) / 3;
+              return Wrap(
+                spacing: 8,
+                runSpacing: 12,
+                children: [
+                  for (final b in sorted)
+                    SizedBox(
+                      width: width,
+                      child: _BadgeTile(badge: b),
+                    ),
+                ],
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _BadgeTile extends StatelessWidget {
+  const _BadgeTile({required this.badge});
+
+  final AppBadge badge;
+
+  void _explain(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: AppColors.white,
+        title: Column(
+          children: [
+            Text(badge.emoji, style: const TextStyle(fontSize: 48)),
+            const SizedBox(height: 8),
+            Text(
+              badge.title,
+              textAlign: TextAlign.center,
+              style: AppTextStyles.display.copyWith(fontSize: 24),
+            ),
+          ],
+        ),
+        content: Text(
+          badge.earned
+              ? 'Earned! ${badge.howTo}. 🎉'
+              : '${badge.howTo} to earn this badge. '
+                    'You’re at ${badge.have} of ${badge.need}.',
+          textAlign: TextAlign.center,
+          style: AppTextStyles.subtitle.copyWith(fontSize: 15),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text('OK', style: AppTextStyles.link),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final on = badge.earned;
+    return InkWell(
+      borderRadius: BorderRadius.circular(16),
+      onTap: () => _explain(context),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: Column(
+          children: [
+            Container(
+              width: 58,
+              height: 58,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: on ? AppColors.amberLight : AppColors.cream,
+                border: Border.all(
+                  color: on ? AppColors.amber : AppColors.track,
+                  width: 2.5,
+                ),
+              ),
+              // Not earned yet: a faded, grey badge.
+              child: Opacity(
+                opacity: on ? 1 : 0.35,
+                child: ColorFiltered(
+                  colorFilter: on
+                      ? const ColorFilter.mode(
+                          Colors.transparent,
+                          BlendMode.dst,
+                        )
+                      : const ColorFilter.matrix([
+                          0.33, 0.33, 0.33, 0, 0, //
+                          0.33, 0.33, 0.33, 0, 0, //
+                          0.33, 0.33, 0.33, 0, 0, //
+                          0, 0, 0, 1, 0,
+                        ]),
+                  child: Text(
+                    badge.emoji,
+                    style: const TextStyle(fontSize: 28),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              badge.title,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              style: AppTextStyles.cardTitle.copyWith(
+                fontSize: 12.5,
+                color: on ? AppColors.ink : AppColors.muted,
+              ),
+            ),
+            if (!on) ...[
+              const SizedBox(height: 4),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(3),
+                  child: LinearProgressIndicator(
+                    value: badge.progress,
+                    minHeight: 4,
+                    color: AppColors.amber,
+                    backgroundColor: AppColors.track,
+                  ),
+                ),
+              ),
+            ],
+          ],
+        ),
       ),
     );
   }

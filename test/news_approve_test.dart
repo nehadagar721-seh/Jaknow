@@ -57,6 +57,8 @@ void main() {
       MaterialApp(theme: AppTheme.light, home: const ProfileScreen()),
     );
     await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    await tester.scrollUntilVisible(find.text('Log out'), 300);
     expect(find.text('Approve news'), findsNothing);
   });
 
@@ -68,6 +70,9 @@ void main() {
       MaterialApp(theme: AppTheme.light, home: const ProfileScreen()),
     );
     await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    // Badges make the profile long: scroll down to it.
+    await tester.scrollUntilVisible(find.text('Approve news'), 300);
     expect(find.text('Approve news'), findsOneWidget);
   });
 

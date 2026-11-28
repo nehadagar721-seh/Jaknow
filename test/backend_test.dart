@@ -169,7 +169,8 @@ void main() {
       await tester.tap(find.byTooltip('My profile'));
       await settle(tester);
       expect(find.text('Neha Dagar'), findsOneWidget);
-      await tester.ensureVisible(find.text('Log out'));
+      // Badges make the profile long: scroll down to Log out.
+      await tester.scrollUntilVisible(find.text('Log out'), 300);
       await tester.pump();
       await tester.tap(find.text('Log out'));
       await settle(tester);

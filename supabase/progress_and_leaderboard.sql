@@ -96,6 +96,9 @@ begin
   update public.profiles
      set streak_days = case when p.last_quiz_date = today - 1
                             then p.streak_days + 1 else 1 end,
+         best_streak = greatest(p.best_streak,
+                                case when p.last_quiz_date = today - 1
+                                     then p.streak_days + 1 else 1 end),
          last_quiz_date = today,
          xp = p.xp + earned
    where id = uid

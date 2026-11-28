@@ -280,7 +280,11 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
 - Leaderboard (`leaderboard_screen.dart`, no design): `get_leaderboard`
   ('week' = XP since Monday from `xp_events`, or 'all'); top 50 + your own
   row; only first name + last initial, class, streak, XP. Opened from the
-  🏆 card on Home and the Profile screen. Learn opens at the next
+  🏆 card on Home and the Profile screen. The QUIZ RESULTS page ends with
+  "THIS WEEK'S LEADERBOARD" (logged-in only): top 3 + you with 2 above and
+  3 below, this quiz's XP already added (`leaderboardWithXp`, because the
+  server records it after Continue), "You moved up N places! 🎉", and
+  "See full leaderboard →". `LeaderboardRow` is the shared row widget. Learn opens at the next
   unfinished lesson; Profile lists lessons done and saved.
 - The design files are 390 px wide phone screens (screenshots at 2x).
 

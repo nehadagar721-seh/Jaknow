@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jaknow/screens/home_screen.dart';
 import 'package:jaknow/screens/leaderboard_screen.dart';
 import 'package:jaknow/screens/lesson_screen.dart';
+import 'package:jaknow/screens/quiz_results_screen.dart';
+import 'package:jaknow/data/quiz_questions.dart';
 import 'package:jaknow/services/backend.dart';
 import 'package:jaknow/theme/app_theme.dart';
 
@@ -112,6 +114,66 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(seconds: 1));
     }
+
+    test('this quiz\'s XP is added to your row and you move up', () {
+      LeaderboardEntry row(int rank, String name, int xp, {bool me = false}) =>
+          LeaderboardEntry(
+            rank: rank,
+            name: name,
+            studentClass: 'Class 8',
+            xp: xp,
+            streak: 0,
+            isMe: me,
+          );
+      final board = leaderboardWithXp([
+        row(1, 'Asha', 90),
+        row(2, 'Ravi', 60),
+        row(3, 'Meera', 40),
+        row(4, 'Neha', 30, me: true),
+      ], 40);
+      expect(board.before, 4);
+      expect(board.after, 2); // 70 XP passes Meera (40) and Ravi (60)
+      expect(board.rows.map((r) => r.name), ['Asha', 'Neha', 'Ravi', 'Meera']);
+      expect(board.rows[1].xp, 70);
+      expect(board.rows.map((r) => r.rank), [1, 2, 3, 4]);
+    });
+
+    testWidgets('the quiz results end with this week\'s leaderboard', (
+      tester,
+    ) async {
+      tallScreen(tester);
+      final b = Backend.instance;
+      await signUp('Ravi Kumar', '9123456780');
+      await b.recordQuiz(correct: 3, total: 5);
+      await b.logOut();
+      await signUp('Neha Dagar', '9876543210');
+
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.light,
+          home: Scaffold(
+            body: QuizResultsView(
+              questions: todaysQuiz,
+              picks: [for (final q in todaysQuiz) q.correctIndex],
+              streakDays: 1,
+              level: 2,
+              levelName: 'Intermediate',
+              xpBefore: 0,
+              onContinue: () {},
+            ),
+          ),
+        ),
+      );
+      await settle(tester);
+      await tester.pump(const Duration(seconds: 2)); // confetti finishes
+      await tester.ensureVisible(find.text('See full leaderboard →'));
+      await settle(tester);
+      expect(find.text('THIS WEEK’S LEADERBOARD'), findsOneWidget);
+      // 5 right = +50 XP, which passes Ravi's 30.
+      expect(find.text('You moved up 1 place! 🎉'), findsOneWidget);
+      expect(find.text('Neha D. (you)'), findsOneWidget);
+      expect(find.text('Ravi K.'), findsOneWidget);
+    });
 
     testWidgets('the leaderboard shows everyone, you highlighted', (
       tester,

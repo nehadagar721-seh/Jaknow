@@ -200,21 +200,24 @@ class _List extends StatelessWidget {
             ),
           ),
         for (final row in others) ...[
-          _Row(entry: row),
+          LeaderboardRow(entry: row),
           const SizedBox(height: 8),
         ],
         if (meFarDown.isNotEmpty) ...[
           const Center(child: Text('⋯', style: TextStyle(fontSize: 22))),
           const SizedBox(height: 8),
-          _Row(entry: meFarDown.first),
+          LeaderboardRow(entry: meFarDown.first),
         ],
       ],
     );
   }
 }
 
-class _Row extends StatelessWidget {
-  const _Row({required this.entry});
+/// One person on the leaderboard: rank (gold/silver/bronze for the top 3),
+/// name, class, streak and XP. Your own row is indigo. Also used on the
+/// quiz results page.
+class LeaderboardRow extends StatelessWidget {
+  const LeaderboardRow({super.key, required this.entry});
 
   final LeaderboardEntry entry;
 
@@ -327,4 +330,41 @@ class _Message extends StatelessWidget {
       child: Text(text, style: AppTextStyles.subtitle.copyWith(fontSize: 15)),
     );
   }
+}
+
+/// The board as it will be once this quiz's [earned] XP is added to your
+/// own row (the server adds it a moment later), re-sorted.
+/// Also returns your rank before and after.
+({List<LeaderboardEntry> rows, int before, int after}) leaderboardWithXp(
+  List<LeaderboardEntry> rows,
+  int earned,
+) {
+  final me = rows.where((r) => r.isMe).firstOrNull;
+  if (me == null) return (rows: rows, before: 0, after: 0);
+  final newXp = me.xp + earned;
+  // Everyone above you whose XP you now beat moves down one place.
+  final passed = {
+    for (final r in rows)
+      if (!r.isMe && r.rank < me.rank && r.xp < newXp) r,
+  };
+  final newRank = me.rank - passed.length;
+  LeaderboardEntry copy(LeaderboardEntry r, {int? rank, int? xp}) =>
+      LeaderboardEntry(
+        rank: rank ?? r.rank,
+        name: r.name,
+        studentClass: r.studentClass,
+        xp: xp ?? r.xp,
+        streak: r.streak,
+        isMe: r.isMe,
+      );
+  final updated = [
+    for (final r in rows)
+      if (r.isMe)
+        copy(r, rank: newRank, xp: newXp)
+      else if (passed.contains(r))
+        copy(r, rank: r.rank + 1)
+      else
+        r,
+  ]..sort((a, b) => a.rank.compareTo(b.rank));
+  return (rows: updated, before: me.rank, after: newRank);
 }

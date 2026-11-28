@@ -8,8 +8,10 @@ import '../data/study_levels.dart';
 import '../services/boojho_voice.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
+import '../services/backend.dart';
 import '../widgets/boojho.dart';
 import '../widgets/confetti_burst.dart';
+import 'leaderboard_screen.dart';
 
 /// The results shown after the last quiz question.
 ///
@@ -95,6 +97,24 @@ class _QuizResultsViewState extends State<QuizResultsView>
     if (_score >= _total - 1) return 'Well done! $tomorrow';
     if (_score * 2 >= _total) return 'Good effort! $tomorrow';
     return 'Every mistake is a lesson. $tomorrow';
+  }
+
+  // This week's leaderboard, for the bottom of the page (logged-in only).
+  late final Future<List<LeaderboardEntry>>? _board =
+      Backend.instance.currentProfile == null ? null : _loadBoard();
+
+  Future<List<LeaderboardEntry>> _loadBoard() async {
+    try {
+      return await Backend.instance.leaderboard(thisWeek: true);
+    } on BackendException {
+      return const [];
+    }
+  }
+
+  void _openLeaderboard() {
+    _voice.stop();
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => const LeaderboardScreen()));
   }
 
   // Confetti showers: one for half or more right, a second for a
@@ -230,6 +250,23 @@ class _QuizResultsViewState extends State<QuizResultsView>
                         isSpeaking: speaking,
                       ),
                     ),
+                    if (_board != null)
+                      FutureBuilder<List<LeaderboardEntry>>(
+                        future: _board,
+                        builder: (context, snapshot) {
+                          final rows = snapshot.data ?? const [];
+                          if (!rows.any((r) => r.isMe)) {
+                            return const SizedBox.shrink();
+                          }
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 22),
+                            child: _BoardPeek(
+                              board: leaderboardWithXp(rows, _xpEarned),
+                              onSeeAll: _openLeaderboard,
+                            ),
+                          );
+                        },
+                      ),
                     const SizedBox(height: 16),
                   ],
                 ),
@@ -555,6 +592,66 @@ class _BoojhoCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+// ---------- This week's leaderboard, at the bottom ----------
+
+/// The top 3, plus you with the people just above and below you.
+class _BoardPeek extends StatelessWidget {
+  const _BoardPeek({required this.board, required this.onSeeAll});
+
+  final ({List<LeaderboardEntry> rows, int before, int after}) board;
+  final VoidCallback onSeeAll;
+
+  @override
+  Widget build(BuildContext context) {
+    final rows = board.rows;
+    final me = rows.indexWhere((r) => r.isMe);
+    final keep = <int>{
+      for (var i = 0; i < 3 && i < rows.length; i++) i,
+      for (var i = me - 2; i <= me + 3; i++)
+        if (i >= 0 && i < rows.length) i,
+    }.toList()..sort();
+    final moved = board.before - board.after;
+    final headline = moved > 0
+        ? 'You moved up $moved ${moved == 1 ? 'place' : 'places'}! 🎉'
+        : 'You’re #${board.after} this week. Keep going!';
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'THIS WEEK’S LEADERBOARD',
+          style: AppTextStyles.label.copyWith(
+            color: AppColors.muted,
+            fontSize: 13,
+            letterSpacing: 1.2,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(headline, style: AppTextStyles.cardTitle.copyWith(fontSize: 16.5)),
+        const SizedBox(height: 12),
+        for (var k = 0; k < keep.length; k++) ...[
+          // "⋯" where some places are skipped.
+          if (k > 0 && rows[keep[k]].rank - rows[keep[k - 1]].rank > 1)
+            const Padding(
+              padding: EdgeInsets.only(bottom: 8),
+              child: Center(child: Text('⋯', style: TextStyle(fontSize: 20))),
+            ),
+          LeaderboardRow(entry: rows[keep[k]]),
+          const SizedBox(height: 8),
+        ],
+        Center(
+          child: TextButton(
+            onPressed: onSeeAll,
+            child: Text(
+              'See full leaderboard →',
+              style: AppTextStyles.link.copyWith(fontSize: 15),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

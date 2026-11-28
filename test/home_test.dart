@@ -19,7 +19,7 @@ void main() {
   }
 
   testWidgets('"Skip intro" opens Home', (tester) async {
-    await tester.pumpWidget(const JaKnowApp());
+    await tester.pumpWidget(const JaKnowApp(showSplash: false));
     await tester.pump();
     await tester.tap(find.text('Skip intro'));
     await tester.pump();

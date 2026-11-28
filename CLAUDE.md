@@ -222,6 +222,11 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
     uses the app's own content (lessons, quiz, news) plus hand-written GK
     facts, and says "I don't know" otherwise. Later: swap in a real AI
     service via the app's server (never put an API key in the app).
+- OPENING (`splash_screen.dart`, no design): every app start first shows
+  "जाKnow" written left to right (amber pen sparkle), an amber swoosh,
+  Boojho popping up and "Know something new every day" (3.6 s, tap to
+  skip), then fades into Welcome / Class / Home. `JaKnowApp(showSplash:
+  false)` skips it in tests.
 - Screens so far: Welcome (`design/1-welcome.png`) → Features
   (`design/2-features.png`) → Sign up (`design/3-sign-up.png`) → Home
   (`design/4-home.png`). A valid sign-up opens Level, step 1 of 2

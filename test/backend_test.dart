@@ -185,7 +185,7 @@ void main() {
         password: '123456',
       );
       await Backend.instance.saveChoices(p.copyWith(studentClass: 'Class 10'));
-      await tester.pumpWidget(const JaKnowApp());
+      await tester.pumpWidget(const JaKnowApp(showSplash: false));
       await tester.pump();
       expect(find.text('Ready to sharpen your mind?'), findsOneWidget);
     });
@@ -199,7 +199,7 @@ void main() {
         mobile: '9876543210',
         password: '123456',
       );
-      await tester.pumpWidget(const JaKnowApp());
+      await tester.pumpWidget(const JaKnowApp(showSplash: false));
       await tester.pump();
       expect(find.text('Which class are you in?'), findsOneWidget);
     });

@@ -53,7 +53,8 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
 - Quiz questions live in `lib/data/quiz_questions.dart` (`QuizQuestion`;
   `quizForLevel(level)` gives 5 sample questions per level, now only a
   fallback). The DAILY QUIZ is `dailyQuiz()` in `lib/data/daily_quiz.dart`:
-  5 questions from the Library's lesson quizzes, same all day, new each day
+  questions from the Library's lesson quizzes (as many as the daily goal:
+  5, 10 or 15; Home passes `count: _dailyGoal`), same all day, new each day
   (India date), Beginner → own class, Intermediate → class + GK, Exam
   ready → GK. Home's "Take today's quiz" uses it.
 - Classes and levels live in `lib/data/study_levels.dart`: `studentClasses`,

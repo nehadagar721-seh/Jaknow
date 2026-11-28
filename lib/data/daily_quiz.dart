@@ -17,10 +17,13 @@ DateTime indiaToday([DateTime? now]) {
 /// - Matched to the student: Beginner → their class's courses,
 ///   Intermediate → their class + General Knowledge,
 ///   Exam ready → General Knowledge first.
-/// - At most one question per lesson, so a quiz covers different topics.
+/// - [count] is the student's daily goal (5, 10 or 15 questions).
+/// - One question per lesson first, so a quiz covers different topics;
+///   only if there are fewer lessons than [count], a second (different)
+///   question from the same lessons.
 ///
 /// Falls back to the sample questions in quiz_questions.dart if the
-/// Library has too few lessons.
+/// Library has no lessons for the student.
 List<QuizQuestion> dailyQuiz({
   required List<Course> courses,
   required String level,
@@ -57,7 +60,7 @@ List<QuizQuestion> dailyQuiz({
       for (final l in c.lessons)
         if (l.quiz.isNotEmpty) l,
   ];
-  if (lessons.length < count) return quizForLevel(level);
+  if (lessons.isEmpty) return quizForLevel(level);
 
   // A seed made from the date and level: same numbers all day.
   final seed =
@@ -65,9 +68,24 @@ List<QuizQuestion> dailyQuiz({
       level.codeUnits.fold<int>(0, (a, b) => a + b);
   final random = Random(seed);
   lessons.shuffle(random);
-  return [
-    for (final l in lessons.take(count)) l.quiz[random.nextInt(l.quiz.length)],
+  // Each lesson's questions in a random order: round 1 takes the first
+  // question of every lesson, round 2 the second, and so on.
+  final decks = [
+    for (final l in lessons) [...l.quiz]..shuffle(random),
   ];
+  final picked = <QuizQuestion>[];
+  for (var round = 0; picked.length < count; round++) {
+    var added = false;
+    for (final deck in decks) {
+      if (picked.length == count) break;
+      if (round < deck.length) {
+        picked.add(deck[round]);
+        added = true;
+      }
+    }
+    if (!added) break; // every question of every lesson is used up
+  }
+  return picked;
 }
 
 /// 'Class 7' → 7. Anything else (College, exams…) → 99.

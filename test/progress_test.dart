@@ -100,6 +100,51 @@ void main() {
       expect(a.any((q) => todaysQuiz.contains(q)), isFalse);
     });
 
+    test('the quiz has as many questions as the daily goal', () {
+      for (final goal in [5, 10, 15]) {
+        for (final level in ['Beginner', 'Intermediate', 'Exam ready']) {
+          final quiz = dailyQuiz(
+            courses: builtInCourses,
+            level: level,
+            studentClass: 'Class 6',
+            day: monday,
+            count: goal,
+          );
+          expect(quiz, hasLength(goal), reason: '$level, goal $goal');
+          expect(
+            quiz.map((q) => q.question).toSet(),
+            hasLength(goal),
+            reason: 'no repeated questions',
+          );
+        }
+      }
+    });
+
+    test('a small class with few lessons still fills the goal', () {
+      final tiny = [
+        for (final c in builtInCourses)
+          if (c.studentClass == 'Class 6')
+            Course(
+              id: c.id,
+              title: c.title,
+              subject: c.subject,
+              section: c.section,
+              studentClass: c.studentClass,
+              description: c.description,
+              lessons: c.lessons.take(3).toList(),
+            ),
+      ].take(1).toList();
+      final quiz = dailyQuiz(
+        courses: tiny,
+        level: 'Beginner',
+        studentClass: 'Class 6',
+        day: monday,
+        count: 15,
+      );
+      expect(quiz, hasLength(15));
+      expect(quiz.map((q) => q.question).toSet(), hasLength(15));
+    });
+
     test('Beginners get questions from their own class', () {
       final class6 = {
         for (final c in builtInCourses)

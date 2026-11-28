@@ -210,6 +210,7 @@ class _HomeScreenState extends State<HomeScreen>
       courses: courses,
       level: _levelName,
       studentClass: _profile?.studentClass ?? '',
+      count: _dailyGoal, // 5, 10 or 15, from the student's settings
     );
     final score = await Navigator.of(context).push<int>(
       MaterialPageRoute(

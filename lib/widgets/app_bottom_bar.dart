@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
+import '../l10n/language.dart';
 
 /// The bar at the bottom: Home, Quiz, News, Learn, Boojho.
 class AppBottomBar extends StatelessWidget {
@@ -75,7 +76,7 @@ class _BarItem extends StatelessWidget {
           Icon(icon, color: color, size: 25),
           const SizedBox(height: 3),
           Text(
-            label,
+            tr(label), // the tab's name in the chosen language
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: AppTextStyles.cardBody.copyWith(

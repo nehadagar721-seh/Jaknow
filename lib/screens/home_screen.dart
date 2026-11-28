@@ -25,6 +25,7 @@ import 'news_screen.dart';
 import 'profile_screen.dart';
 import 'quiz_screen.dart';
 import 'speed_round_screen.dart';
+import '../l10n/language.dart';
 
 /// Opens Home and removes the intro/sign-up screens behind it, so the
 /// back button doesn't lead back into them.
@@ -93,38 +94,44 @@ class _HomeScreenState extends State<HomeScreen>
   int get _dailyGoal => _profile?.dailyGoal ?? widget.dailyGoal;
 
   /// "1 day" or "7 days".
-  String get _daysText => _streakDays == 1 ? '1 day' : '$_streakDays days';
+  String get _daysText =>
+      _streakDays == 1 ? tr('1 day') : tr('{n} days', {'n': _streakDays});
 
   /// "5 Foundation questions", "5 easy questions", "5 exam-style questions".
   String get _questionsText => switch (_levelName) {
-    'Beginner' => '$_dailyGoal easy questions',
-    'Exam ready' => '$_dailyGoal exam-style questions',
-    _ => '$_dailyGoal Foundation questions',
+    'Beginner' => tr('{n} easy questions', {'n': _dailyGoal}),
+    'Exam ready' => tr('{n} exam-style questions', {'n': _dailyGoal}),
+    _ => tr('{n} Foundation questions', {'n': _dailyGoal}),
   };
 
   /// What Boojho is saying right now (shown in his card).
   late String _boojhoLine = _welcomeLine();
   int _nextTip = 0;
 
-  static const List<String> _tips = [
-    'Here’s a tip: ten minutes every day beats one long hour once a week.',
-    'Did you know? Reading the news out loud helps you remember it.',
-    'When a question is hard, take a guess. Mistakes help you learn!',
-    'Try a different topic today. Variety keeps your mind sharp.',
+  static List<String> get _tips => [
+    tr('Here’s a tip: ten minutes every day beats one long hour once a week.'),
+    tr('Did you know? Reading the news out loud helps you remember it.'),
+    tr('When a question is hard, take a guess. Mistakes help you learn!'),
+    tr('Try a different topic today. Variety keeps your mind sharp.'),
   ];
 
   /// "Good morning", "Good afternoon" or "Good evening", by the clock.
   String get _greeting {
     final hour = DateTime.now().hour;
-    if (hour < 12) return 'Good morning';
-    if (hour < 17) return 'Good afternoon';
-    return 'Good evening';
+    if (hour < 12) return tr('Good morning');
+    if (hour < 17) return tr('Good afternoon');
+    return tr('Good evening');
   }
 
   String _welcomeLine() {
     final name = widget.name;
-    final hello = name == null ? 'Namaste!' : 'Namaste, $name!';
-    return '$hello $_questionsText are ready. Warm up first?';
+    final hello = name == null
+        ? tr('Namaste!')
+        : tr('Namaste, {name}!', {'name': name});
+    return tr('{hello} {questions} are ready. Warm up first?', {
+      'hello': hello,
+      'questions': _questionsText,
+    });
   }
 
   @override
@@ -135,8 +142,8 @@ class _HomeScreenState extends State<HomeScreen>
       final name = widget.name == null ? '' : ', ${widget.name}';
       _voice.say(
         '$_greeting$name! '
-        '${_streakDays > 0 ? 'You’re on a $_streakDays day streak. ' : 'Let’s start your streak today! '}'
-        '$_questionsText are ready. Shall we warm up first?',
+        '${_streakDays > 0 ? tr('You’re on a {n} day streak.', {'n': _streakDays}) : tr('Let’s start your streak today!')} '
+        '${tr('{questions} are ready. Shall we warm up first?', {'questions': _questionsText})}',
       );
     });
   }
@@ -163,16 +170,27 @@ class _HomeScreenState extends State<HomeScreen>
 
   void _onStreakTapped() {
     if (_streakDays == 0) {
-      _boojhoSays('Finish today’s $_dailyGoal questions to start your streak!');
+      _boojhoSays(
+        tr('Finish today’s {n} questions to start your streak!', {
+          'n': _dailyGoal,
+        }),
+      );
       return;
     }
     if (_doneToday) {
-      _boojhoSays('$_daysText in a row! Today is done. See you tomorrow!');
+      _boojhoSays(
+        tr('{days} in a row! Today is done. See you tomorrow!', {
+          'days': _daysText,
+        }),
+      );
       return;
     }
     _boojhoSays(
-      '$_daysText in a row! Finish today’s $_dailyGoal questions '
-      'to make it ${_streakDays + 1}.',
+      tr('{days} in a row! Finish today’s {n} questions to make it {next}.', {
+        'days': _daysText,
+        'n': _dailyGoal,
+        'next': _streakDays + 1,
+      }),
     );
   }
 
@@ -180,7 +198,7 @@ class _HomeScreenState extends State<HomeScreen>
     final question = _askController.text.trim();
     FocusScope.of(context).unfocus();
     if (question.isEmpty) {
-      _boojhoSays('Type a question in the box and I’ll do my best!');
+      _boojhoSays(tr('Type a question in the box and I’ll do my best!'));
       return;
     }
     _askController.clear();
@@ -233,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen>
     );
     if (!mounted) return;
     if (score == null) {
-      _boojhoSays('No problem. The quiz will be here when you’re ready.');
+      _boojhoSays(tr('No problem. The quiz will be here when you’re ready.'));
       return;
     }
     // Save the result: XP, streak and today's date.
@@ -265,14 +283,19 @@ class _HomeScreenState extends State<HomeScreen>
     // The results screen already told them the score.
     if (wasDoneToday) {
       _boojhoSays(
-        'Nice practice! XP counts for the first quiz each day. '
-        'Your streak is still $_daysText.',
+        tr(
+          'Nice practice! XP counts for the first quiz each day. '
+          'Your streak is still {days}.',
+          {'days': _daysText},
+        ),
       );
       return;
     }
     _boojhoSays(
-      'Your streak is now $_daysText! '
-      'I’ll have new questions for you tomorrow.',
+      tr(
+        'Your streak is now {days}! I’ll have new questions for you tomorrow.',
+        {'days': _daysText},
+      ),
     );
   }
 
@@ -297,7 +320,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   /// A topic chip: Boojho says a line, and the Library opens on that topic.
   void _onTopicTapped(_Topic topic) {
-    _boojhoSays('${topic.name}! ${topic.boojhoLine}');
+    _boojhoSays('${tr(topic.name)}! ${tr(topic.boojhoLine)}');
     _openLessons(topic.name);
   }
 
@@ -434,7 +457,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  'Ready to sharpen your mind?',
+                  tr('Ready to sharpen your mind?'),
                   style: AppTextStyles.display.copyWith(fontSize: 24.5),
                 ),
                 const SizedBox(height: 14),
@@ -482,7 +505,7 @@ class _HomeScreenState extends State<HomeScreen>
                         fact: fact,
                         onListen: () {
                           _voice.setMuted(false);
-                          _boojhoSays('Did you know? ${fact.text}');
+                          _boojhoSays('${tr('Did you know?')} ${fact.text}');
                         },
                         onRead: () => _openFactLesson(fact),
                       ),
@@ -495,8 +518,8 @@ class _HomeScreenState extends State<HomeScreen>
                     Expanded(
                       child: _SmallCard(
                         icon: Icons.feed_outlined,
-                        title: 'Current affairs',
-                        subtitle: '5 updates today',
+                        title: tr('Current affairs'),
+                        subtitle: tr('5 updates today'),
                         onTap: _openNews,
                       ),
                     ),
@@ -504,8 +527,8 @@ class _HomeScreenState extends State<HomeScreen>
                     Expanded(
                       child: _SmallCard(
                         icon: Icons.school_outlined,
-                        title: 'Learn topics',
-                        subtitle: 'Guided by Boojho',
+                        title: tr('Learn topics'),
+                        subtitle: tr('Guided by Boojho'),
                         onTap: _openLessons,
                       ),
                     ),
@@ -522,7 +545,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
                 const SizedBox(height: 22),
                 Text(
-                  'BROWSE TOPICS',
+                  tr('BROWSE TOPICS'),
                   style: AppTextStyles.label.copyWith(
                     color: AppColors.muted,
                     fontSize: 13,
@@ -564,7 +587,9 @@ class _StreakCard extends StatelessWidget {
   final VoidCallback onTap;
 
   // Monday = 1 … Sunday = 7, like DateTime.weekday.
-  static const _letters = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  static List<String> get _letters => Language.isHindi
+      ? const ['सो', 'मं', 'बु', 'गु', 'शु', 'श', 'र']
+      : const ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
   @override
   Widget build(BuildContext context) {
@@ -596,14 +621,19 @@ class _StreakCard extends StatelessWidget {
                     children: [
                       const SizedBox(height: 4),
                       Text(
-                        days == 0 ? 'Start your streak' : '$days-day streak',
+                        days == 0
+                            ? tr('Start your streak')
+                            : tr('{n}-day streak', {'n': days}),
                         style: AppTextStyles.display.copyWith(fontSize: 22),
                       ),
                       const SizedBox(height: 6),
                       Text(
                         doneToday
-                            ? 'Done for today. See you tomorrow!'
-                            : 'Finish $goal questions today to keep it alive',
+                            ? tr('Done for today. See you tomorrow!')
+                            : tr(
+                                'Finish {n} questions today to keep it alive',
+                                {'n': goal},
+                              ),
                         style: AppTextStyles.subtitle.copyWith(fontSize: 13),
                       ),
                     ],
@@ -674,7 +704,7 @@ class _DayDot extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          label,
+          tr(label),
           // "Today" is always indigo, the other days grey.
           style: label == 'Today'
               ? AppTextStyles.link.copyWith(fontSize: 13)
@@ -736,7 +766,7 @@ class _BoojhoCard extends StatelessWidget {
           GestureDetector(
             onTap: onBoojhoTap,
             child: Tooltip(
-              message: 'Tap Boojho for a tip',
+              message: tr('Tap Boojho for a tip'),
               child: SizedBox(
                 width: 84,
                 height: 125,
@@ -754,7 +784,7 @@ class _BoojhoCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'BOOJHO · YOUR AI GUIDE',
+                  tr('BOOJHO · YOUR AI GUIDE'),
                   style: AppTextStyles.label.copyWith(letterSpacing: 0.8),
                 ),
                 const SizedBox(height: 6),
@@ -797,7 +827,7 @@ class _AskField extends StatelessWidget {
       textInputAction: TextInputAction.send,
       onSubmitted: (_) => onAsk(),
       decoration: InputDecoration(
-        hintText: 'Ask Boojho anything',
+        hintText: tr('Ask Boojho anything'),
         fillColor: AppColors.creamLight,
         contentPadding: const EdgeInsets.fromLTRB(18, 14, 4, 14),
         enabledBorder: OutlineInputBorder(
@@ -862,12 +892,16 @@ class _QuizCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Take today’s quiz',
+                      tr('Take today’s quiz'),
                       style: AppTextStyles.display.copyWith(fontSize: 21),
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      'Level $level · $label · $goal questions',
+                      tr('Level {level} · {label} · {n} questions', {
+                        'level': level,
+                        'label': tr(label),
+                        'n': goal,
+                      }),
                       style: AppTextStyles.cardBody.copyWith(
                         color: AppColors.ink,
                         fontSize: 13,
@@ -926,7 +960,7 @@ class _SpeedRoundCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Speed round',
+                      tr('Speed round'),
                       style: AppTextStyles.cardTitle.copyWith(
                         color: AppColors.white,
                         fontSize: 17,
@@ -935,8 +969,8 @@ class _SpeedRoundCard extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       best > 0
-                          ? '60 seconds · your best: $best'
-                          : '60 seconds · as many as you can',
+                          ? tr('60 seconds · your best: {n}', {'n': best})
+                          : tr('60 seconds · as many as you can'),
                       style: AppTextStyles.cardBody.copyWith(
                         color: AppColors.white.withValues(alpha: 0.75),
                         fontSize: 13,
@@ -993,7 +1027,7 @@ class _FunFactCard extends StatelessWidget {
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
-                  'DID YOU KNOW?',
+                  tr('DID YOU KNOW?'),
                   style: AppTextStyles.label.copyWith(
                     color: AppColors.ink,
                     fontSize: 12.5,
@@ -1007,8 +1041,8 @@ class _FunFactCard extends StatelessWidget {
                 child: InkWell(
                   customBorder: const CircleBorder(),
                   onTap: onListen,
-                  child: const Tooltip(
-                    message: 'Hear Boojho say it',
+                  child: Tooltip(
+                    message: tr('Hear Boojho say it'),
                     child: SizedBox.square(
                       dimension: 36,
                       child: Icon(
@@ -1036,7 +1070,7 @@ class _FunFactCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'From ${fact.course.title}',
+                  tr('From {course}', {'course': fact.course.title}),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.cardBody.copyWith(fontSize: 12.5),
@@ -1045,7 +1079,7 @@ class _FunFactCard extends StatelessWidget {
               TextButton(
                 onPressed: onRead,
                 child: Text(
-                  'Read the lesson →',
+                  tr('Read the lesson →'),
                   style: AppTextStyles.link.copyWith(fontSize: 13.5),
                 ),
               ),
@@ -1164,7 +1198,7 @@ class _TopicChips extends StatelessWidget {
                   Icon(topic.icon, color: AppColors.indigo, size: 21),
                   const SizedBox(width: 10),
                   Text(
-                    topic.name,
+                    tr(topic.name),
                     style: AppTextStyles.cardTitle.copyWith(fontSize: 15.5),
                   ),
                 ],
@@ -1237,10 +1271,13 @@ class _LeaderboardCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final mine = me;
     final subtitle = !signedIn
-        ? 'Sign up to compete with other learners'
+        ? tr('Sign up to compete with other learners')
         : mine == null || mine.xp == 0
-        ? 'Finish today’s quiz to get on the board'
-        : 'You’re #${mine.rank} this week · ${mine.xp} XP';
+        ? tr('Finish today’s quiz to get on the board')
+        : tr('You’re #{rank} this week · {xp} XP', {
+            'rank': mine.rank,
+            'xp': mine.xp,
+          });
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(22),
@@ -1268,7 +1305,7 @@ class _LeaderboardCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Leaderboard',
+                    tr('Leaderboard'),
                     style: AppTextStyles.cardTitle.copyWith(fontSize: 15.5),
                   ),
                   const SizedBox(height: 2),

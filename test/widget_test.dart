@@ -1,11 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jaknow/l10n/language.dart';
 import 'package:jaknow/main.dart';
 import 'package:jaknow/screens/splash_screen.dart';
 
 void main() {
   // Tests run without internet, so don't let google_fonts try to download.
-  setUp(() => GoogleFonts.config.allowRuntimeFetching = false);
+  setUp(() {
+    GoogleFonts.config.allowRuntimeFetching = false;
+    // A language was chosen before, so the app doesn't ask again.
+    Language.chosen = true;
+    Language.current.value = 'en';
+  });
 
   testWidgets('Welcome screen shows Boojho\'s message and buttons', (
     WidgetTester tester,

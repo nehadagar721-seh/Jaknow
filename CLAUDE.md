@@ -243,6 +243,22 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
     uses the app's own content (lessons, quiz, news) plus hand-written GK
     facts, and says "I don't know" otherwise. Later: swap in a real AI
     service via the app's server (never put an API key in the app).
+- LANGUAGES (the user's choice: English + Hindi first; Marathi, Bengali,
+  Tamil later; buttons/menus/Boojho first, lessons stay English for now).
+  `lib/l10n/language.dart`: `tr('English text', {'blank': value})` gives the
+  chosen language (Hindi from `lib/l10n/hindi.dart` `hindiWords`, keyed by
+  the exact English; missing = English). `Language.current` ('en'/'hi'),
+  `Language.choose(code)` saves it (shared_preferences) and bumps
+  `Language.changes`, which rebuilds the whole MaterialApp (main.dart keys it
+  by that number; the opening plays only once per start). First start:
+  splash → `language_screen.dart` ("Choose your language / अपनी भाषा चुनें",
+  other languages "Coming soon") → Welcome. Profile → STUDY SETTINGS →
+  Language switches any time. Boojho speaks Hindi with a hi-IN voice
+  (`BoojhoVoice.useLanguage`, `voiceScore(language:)`). All text styles fall
+  back to Noto Sans Devanagari for Hindi letters. Translated so far: bottom
+  bar, Welcome, Home, Profile (a test checks every tr() phrase in those files
+  has Hindi with the same {blanks}). Tests that start JaKnowApp with the
+  splash set `Language.chosen = true` so it doesn't ask.
 - OPENING (`splash_screen.dart`, no design): every app start first shows
   "जाKnow" written left to right (amber pen sparkle), an amber swoosh,
   Boojho popping up and the TAGLINE "जानो आज, जीतो कल" / "Know today.

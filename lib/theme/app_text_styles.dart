@@ -10,26 +10,26 @@ class AppTextStyles {
   AppTextStyles._();
 
   // Headings (Fraunces)
-  static TextStyle get headingLarge => GoogleFonts.fraunces(
+  static TextStyle get headingLarge => _fraunces(
     fontSize: 32,
     fontWeight: FontWeight.w700,
     color: AppColors.ink,
   );
 
-  static TextStyle get headingMedium => GoogleFonts.fraunces(
+  static TextStyle get headingMedium => _fraunces(
     fontSize: 24,
     fontWeight: FontWeight.w700,
     color: AppColors.ink,
   );
 
-  static TextStyle get headingSmall => GoogleFonts.fraunces(
+  static TextStyle get headingSmall => _fraunces(
     fontSize: 20,
     fontWeight: FontWeight.w600,
     color: AppColors.ink,
   );
 
   // Big page title, e.g. "Everything you need to know, every day"
-  static TextStyle get display => GoogleFonts.fraunces(
+  static TextStyle get display => _fraunces(
     fontSize: 32,
     fontWeight: FontWeight.w800,
     height: 1.08,
@@ -38,14 +38,14 @@ class AppTextStyles {
   );
 
   // Title and description inside a white card
-  static TextStyle get cardTitle => GoogleFonts.plusJakartaSans(
+  static TextStyle get cardTitle => _jakarta(
     fontSize: 16.5,
     fontWeight: FontWeight.w700,
     letterSpacing: -0.2,
     color: AppColors.ink,
   );
 
-  static TextStyle get cardBody => GoogleFonts.plusJakartaSans(
+  static TextStyle get cardBody => _jakarta(
     fontSize: 13.5,
     fontWeight: FontWeight.w500,
     height: 1.22,
@@ -53,7 +53,7 @@ class AppTextStyles {
   );
 
   // Grey line under a page title
-  static TextStyle get subtitle => GoogleFonts.plusJakartaSans(
+  static TextStyle get subtitle => _jakarta(
     fontSize: 14,
     fontWeight: FontWeight.w500,
     height: 1.3,
@@ -61,42 +61,33 @@ class AppTextStyles {
   );
 
   // Forms: label above a box, text typed into it, and the grey hint
-  static TextStyle get fieldLabel => GoogleFonts.plusJakartaSans(
-    fontSize: 14,
-    fontWeight: FontWeight.w700,
-    color: AppColors.ink,
-  );
+  static TextStyle get fieldLabel =>
+      _jakarta(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.ink);
 
-  static TextStyle get fieldText => GoogleFonts.plusJakartaSans(
-    fontSize: 15,
-    fontWeight: FontWeight.w600,
-    color: AppColors.ink,
-  );
+  static TextStyle get fieldText =>
+      _jakarta(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.ink);
 
-  static TextStyle get fieldHint => GoogleFonts.plusJakartaSans(
+  static TextStyle get fieldHint => _jakarta(
     fontSize: 15,
     fontWeight: FontWeight.w400,
     color: AppColors.muted,
   );
 
   // Body text (Plus Jakarta Sans)
-  static TextStyle get body => GoogleFonts.plusJakartaSans(
-    fontSize: 16,
-    fontWeight: FontWeight.w400,
-    color: AppColors.ink,
-  );
+  static TextStyle get body =>
+      _jakarta(fontSize: 16, fontWeight: FontWeight.w400, color: AppColors.ink);
 
-  static TextStyle get bodyMuted => GoogleFonts.plusJakartaSans(
+  static TextStyle get bodyMuted => _jakarta(
     fontSize: 14,
     fontWeight: FontWeight.w400,
     color: AppColors.muted,
   );
 
   static TextStyle get button =>
-      GoogleFonts.plusJakartaSans(fontSize: 16, fontWeight: FontWeight.w700);
+      _jakarta(fontSize: 16, fontWeight: FontWeight.w700);
 
   // Small capital label, e.g. "BOOJHO IS SPEAKING"
-  static TextStyle get label => GoogleFonts.plusJakartaSans(
+  static TextStyle get label => _jakarta(
     fontSize: 12.5,
     fontWeight: FontWeight.w700,
     letterSpacing: 0.3,
@@ -104,7 +95,7 @@ class AppTextStyles {
   );
 
   // What Boojho says in his speech bubble
-  static TextStyle get speech => GoogleFonts.plusJakartaSans(
+  static TextStyle get speech => _jakarta(
     fontSize: 16,
     fontWeight: FontWeight.w600,
     height: 1.42,
@@ -112,7 +103,7 @@ class AppTextStyles {
   );
 
   // Text-only links, e.g. "Skip intro"
-  static TextStyle get link => GoogleFonts.plusJakartaSans(
+  static TextStyle get link => _jakarta(
     fontSize: 15,
     fontWeight: FontWeight.w700,
     color: AppColors.indigo,
@@ -125,10 +116,44 @@ class AppTextStyles {
     color: AppColors.indigo,
   );
 
-  static TextStyle get logoLatin => GoogleFonts.fraunces(
+  static TextStyle get logoLatin => _fraunces(
     fontSize: 32,
     fontWeight: FontWeight.w800,
     letterSpacing: -0.5,
     color: AppColors.ink,
   );
 }
+
+/// Hindi letters aren't in the English fonts, so every style falls back to
+/// Noto Sans Devanagari for them (used when the app is in Hindi).
+List<String> get _hindiFallback => [
+  GoogleFonts.notoSansDevanagari().fontFamily!,
+];
+
+TextStyle _jakarta({
+  double? fontSize,
+  FontWeight? fontWeight,
+  double? height,
+  double? letterSpacing,
+  Color? color,
+}) => GoogleFonts.plusJakartaSans(
+  fontSize: fontSize,
+  fontWeight: fontWeight,
+  height: height,
+  letterSpacing: letterSpacing,
+  color: color,
+).copyWith(fontFamilyFallback: _hindiFallback);
+
+TextStyle _fraunces({
+  double? fontSize,
+  FontWeight? fontWeight,
+  double? height,
+  double? letterSpacing,
+  Color? color,
+}) => GoogleFonts.fraunces(
+  fontSize: fontSize,
+  fontWeight: fontWeight,
+  height: height,
+  letterSpacing: letterSpacing,
+  color: color,
+).copyWith(fontFamilyFallback: _hindiFallback);

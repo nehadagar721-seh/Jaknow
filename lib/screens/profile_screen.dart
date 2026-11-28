@@ -15,6 +15,7 @@ import 'log_in_screen.dart';
 import 'news_approve_screen.dart';
 import 'sign_up_screen.dart';
 import 'welcome_screen.dart';
+import '../l10n/language.dart';
 
 /// The user's own profile: details, progress, and study settings.
 /// (No design yet: it follows the app's card style.)
@@ -150,10 +151,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _changeClass(Profile p) async {
     final picked = await _choose<String>(
-      title: 'Your class',
+      title: tr('Your class'),
       options: studentClasses,
       current: p.studentClass,
-      label: (c) => c,
+      label: (c) => tr(c),
     );
     if (picked == null || picked == p.studentClass) return;
     // A new class also moves to the level that suits it.
@@ -161,16 +162,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
       p.copyWith(studentClass: picked, level: suggestedLevel(picked)),
     );
     BoojhoVoice.instance.say(
-      'Got it, $picked. I’ve set your level to ${suggestedLevel(picked)}.',
+      tr('Got it, {cls}. I’ve set your level to {level}.', {
+        'cls': tr(picked),
+        'level': tr(suggestedLevel(picked)),
+      }),
     );
   }
 
   Future<void> _changeLevel(Profile p) async {
     final picked = await _choose<String>(
-      title: 'Your level',
+      title: tr('Your level'),
       options: levelNames,
       current: p.level,
-      label: (l) => 'Level ${levelNumber(l)} · $l',
+      label: (l) =>
+          tr('Level {n} · {name}', {'n': levelNumber(l), 'name': tr(l)}),
     );
     if (picked != null && picked != p.level) {
       await _save(p.copyWith(level: picked));
@@ -179,13 +184,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _changeGoal(Profile p) async {
     final picked = await _choose<int>(
-      title: 'Daily goal',
+      title: tr('Daily goal'),
       options: const [5, 10, 15],
       current: p.dailyGoal,
-      label: (g) => '$g questions a day',
+      label: (g) => tr('{n} questions a day', {'n': g}),
     );
     if (picked != null && picked != p.dailyGoal) {
       await _save(p.copyWith(dailyGoal: picked));
+    }
+  }
+
+  /// English or हिन्दी: the whole app switches straight away.
+  Future<void> _changeLanguage() async {
+    final picked = await _choose<String>(
+      title: tr('Language'),
+      options: [
+        for (final l in AppLanguage.all)
+          if (l.ready) l.code,
+      ],
+      current: Language.current.value,
+      label: (code) => AppLanguage.all.firstWhere((l) => l.code == code).name,
+    );
+    if (picked != null && picked != Language.current.value) {
+      BoojhoVoice.instance.stop();
+      await Language.choose(picked); // the app rebuilds in the new language
     }
   }
 
@@ -277,7 +299,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   if (joined != null)
                     Text(
-                      'Joined ${_months[joined.month - 1]} ${joined.year}',
+                      tr('Joined {month} {year}', {
+                        'month': tr(_months[joined.month - 1]),
+                        'year': joined.year,
+                      }),
                       style: AppTextStyles.subtitle.copyWith(fontSize: 13),
                     ),
                 ],
@@ -294,7 +319,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: _Stat(
               icon: Icons.local_fire_department_rounded,
               value: '${p.currentStreak(today)}',
-              label: 'Day streak',
+              label: tr('Day streak'),
             ),
           ),
           const SizedBox(width: 10),
@@ -302,15 +327,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: _Stat(
               icon: Icons.bolt_rounded,
               value: '${p.xp}',
-              label: 'Total XP',
+              label: tr('Total XP'),
             ),
           ),
           const SizedBox(width: 10),
           Expanded(
             child: _Stat(
               icon: Icons.school_outlined,
-              value: 'Level $level',
-              label: p.level,
+              value: tr('Level {n}', {'n': level}),
+              label: tr(p.level),
             ),
           ),
         ],
@@ -325,7 +350,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 // Expanded: this text gives way if the line is too long.
                 Expanded(
                   child: Text(
-                    'Progress to Level ${level + 1}',
+                    tr('Progress to Level {n}', {'n': level + 1}),
                     style: AppTextStyles.cardTitle.copyWith(fontSize: 14.5),
                   ),
                 ),
@@ -352,8 +377,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(height: 8),
             Text(
               p.doneOn(today)
-                  ? 'Today’s quiz: done ✓'
-                  : 'Today’s quiz: not done yet',
+                  ? tr('Today’s quiz: done ✓')
+                  : tr('Today’s quiz: not done yet'),
               style: AppTextStyles.subtitle.copyWith(fontSize: 13.5),
             ),
           ],
@@ -375,7 +400,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         },
       ),
       const SizedBox(height: 20),
-      _SectionLabel('STUDY SETTINGS'),
+      _SectionLabel(tr('STUDY SETTINGS')),
       const SizedBox(height: 10),
       _Card(
         padding: EdgeInsets.zero,
@@ -383,29 +408,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             _SettingRow(
               icon: Icons.class_outlined,
-              title: 'Class',
-              value: p.studentClass.isEmpty ? 'Not set' : p.studentClass,
+              title: tr('Class'),
+              value: p.studentClass.isEmpty
+                  ? tr('Not set')
+                  : tr(p.studentClass),
               onTap: () => _changeClass(p),
             ),
             const Divider(height: 1, color: AppColors.track),
             _SettingRow(
               icon: Icons.stairs_outlined,
-              title: 'Level',
-              value: 'Level $level · ${p.level}',
+              title: tr('Level'),
+              value: tr('Level {n} · {name}', {
+                'n': level,
+                'name': tr(p.level),
+              }),
               onTap: () => _changeLevel(p),
             ),
             const Divider(height: 1, color: AppColors.track),
             _SettingRow(
               icon: Icons.flag_outlined,
-              title: 'Daily goal',
-              value: '${p.dailyGoal} questions',
+              title: tr('Daily goal'),
+              value: tr('{n} questions', {'n': p.dailyGoal}),
               onTap: () => _changeGoal(p),
+            ),
+            const Divider(height: 1, color: AppColors.track),
+            _SettingRow(
+              icon: Icons.translate_rounded,
+              title: tr('Language'),
+              value: AppLanguage.all
+                  .firstWhere((l) => l.code == Language.current.value)
+                  .name,
+              onTap: _changeLanguage,
             ),
           ],
         ),
       ),
       const SizedBox(height: 20),
-      _SectionLabel('LESSONS'),
+      _SectionLabel(tr('LESSONS')),
       const SizedBox(height: 10),
       // Loaded from the account: lessons done and lessons saved.
       FutureBuilder<List<Object>>(
@@ -431,13 +470,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 _InfoRow(
                   icon: Icons.task_alt_rounded,
-                  text: done == 1 ? '1 lesson done' : '$done lessons done',
+                  text: done == 1
+                      ? tr('1 lesson done')
+                      : tr('{n} lessons done', {'n': done}),
                 ),
                 const Divider(height: 1, color: AppColors.track),
                 _InfoRow(
                   icon: Icons.bookmark_rounded,
                   text: saved.isEmpty
-                      ? 'No saved lessons yet. Tap 🔖 on a lesson to save it.'
+                      ? tr(
+                          'No saved lessons yet. Tap 🔖 on a lesson to save it.',
+                        )
                       : 'Saved: ${saved.join(', ')}',
                 ),
               ],
@@ -450,8 +493,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: EdgeInsets.zero,
         child: _SettingRow(
           icon: Icons.emoji_events_rounded,
-          title: 'Leaderboard',
-          value: 'See your rank',
+          title: tr('Leaderboard'),
+          value: tr('See your rank'),
           onTap: () => Navigator.of(
             context,
           ).push(MaterialPageRoute(builder: (_) => const LeaderboardScreen())),
@@ -467,8 +510,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding: EdgeInsets.zero,
                   child: _SettingRow(
                     icon: Icons.fact_check_rounded,
-                    title: 'Approve news',
-                    value: 'Pick today’s stories',
+                    title: tr('Approve news'),
+                    value: tr('Pick today’s stories'),
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (_) => const NewsApproveScreen(),
@@ -498,7 +541,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           onPressed: _logOut,
           icon: const Icon(Icons.logout_rounded, size: 20),
-          label: const Text('Log out'),
+          label: Text(tr('Log out')),
         ),
       ),
     ];
@@ -582,7 +625,9 @@ class _BadgeShelf extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _SectionLabel('BADGES · $earned OF ${badges.length}'),
+        _SectionLabel(
+          tr('BADGES · {n} OF {total}', {'n': earned, 'total': badges.length}),
+        ),
         const SizedBox(height: 10),
         _Card(
           padding: const EdgeInsets.fromLTRB(10, 14, 10, 10),
@@ -640,7 +685,7 @@ class _BadgeTile extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text('OK', style: AppTextStyles.link),
+            child: Text(tr('OK'), style: AppTextStyles.link),
           ),
         ],
       ),

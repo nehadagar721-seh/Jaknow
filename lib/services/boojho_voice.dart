@@ -74,6 +74,22 @@ class BoojhoVoice {
 
   FlutterTts? _tts;
 
+  /// 'en' or 'hi': the language Boojho speaks (follows the app's language).
+  String _language = 'en';
+
+  /// Switches Boojho to English or Hindi (a Hindi voice from the phone).
+  Future<void> useLanguage(String code) async {
+    if (code == _language) return;
+    _language = code;
+    final tts = _tts;
+    if (tts == null) return; // set up with this language when first needed
+    await stop();
+    await _try('language', () => tts.setLanguage(_locale));
+    await _pickClearestVoice(tts);
+  }
+
+  String get _locale => _language == 'hi' ? 'hi-IN' : 'en-IN';
+
   /// Goes up by one every time Boojho starts something new or is stopped,
   /// so an older, half-finished speech knows it should stop.
   int _turn = 0;
@@ -93,7 +109,7 @@ class BoojhoVoice {
 
       // Each setting is tried on its own: if one isn't supported on this
       // device, Boojho still talks with the others.
-      await _try('language', () => tts.setLanguage('en-IN'));
+      await _try('language', () => tts.setLanguage(_locale));
       await _pickClearestVoice(tts);
       // A higher, brighter pitch and a normal pace, to sound like a cheerful
       // young boy (closer to the voice sample the user chose).
@@ -136,7 +152,7 @@ class BoojhoVoice {
         final voice = Map<String, String>.from(
           (raw as Map).map((k, v) => MapEntry('$k', '$v')),
         );
-        final score = voiceScore(voice);
+        final score = voiceScore(voice, language: _language);
         if (score > bestScore) {
           best = voice;
           bestScore = score;
@@ -156,13 +172,14 @@ class BoojhoVoice {
   /// Gives a voice points for sounding clear. Higher is better;
   /// 0 means "don't use it" (for example, not English).
   @visibleForTesting
-  static int voiceScore(Map<String, String> voice) {
+  static int voiceScore(Map<String, String> voice, {String language = 'en'}) {
     final name = (voice['name'] ?? '').toLowerCase();
     final locale = (voice['locale'] ?? '').toLowerCase().replaceAll('_', '-');
     final quality = (voice['quality'] ?? '').toLowerCase();
-    if (!locale.startsWith('en') || name.isEmpty) return 0;
+    if (!locale.startsWith(language) || name.isEmpty) return 0;
 
     var score = 10;
+    if (locale == 'hi-in') score += 30;
     // Accent: Indian English first, then British, then American.
     if (locale == 'en-in') score += 30;
     if (locale == 'en-gb') score += 10;
@@ -184,7 +201,7 @@ class BoojhoVoice {
     final soundsMale =
         gender == 'male' ||
         RegExp(r'\bmale\b').hasMatch(name) ||
-        ['ravi', 'prabhat', 'rishi'].any(name.contains);
+        ['ravi', 'prabhat', 'rishi', 'madhur', 'hemant'].any(name.contains);
     if (soundsMale) score += 5;
     return score < 1 ? 1 : score;
   }
@@ -192,13 +209,17 @@ class BoojhoVoice {
   /// Changes words that text-to-speech says wrongly into spellings it says
   /// right. "JaKnow" should sound like जा + Know ("Jaa Know").
   @visibleForTesting
-  static String forSpeech(String text) =>
+  static String forSpeech(String text) => BoojhoVoice.instance._language == 'hi'
+      ? text.replaceAll(RegExp('jaknow', caseSensitive: false), 'जा नो')
+      : _forEnglishSpeech(text);
+
+  static String _forEnglishSpeech(String text) =>
       text.replaceAll(RegExp('jaknow', caseSensitive: false), 'Jaa Know');
 
   /// Splits text into sentences: "Hi! How are you?" → ["Hi!", "How are you?"]
   @visibleForTesting
   static List<String> sentences(String text) => text
-      .split(RegExp(r'(?<=[.!?])\s+'))
+      .split(RegExp(r'(?<=[.!?।])\s+'))
       .map((s) => s.trim())
       .where((s) => s.isNotEmpty)
       .toList();

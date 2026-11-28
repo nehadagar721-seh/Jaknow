@@ -9,6 +9,7 @@ import '../widgets/boojho.dart';
 import '../widgets/jaknow_logo.dart';
 import 'features_screen.dart';
 import 'home_screen.dart';
+import '../l10n/language.dart';
 
 /// The first screen: Boojho says hello and explains the app.
 ///
@@ -32,9 +33,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
   final BoojhoVoice _voice = BoojhoVoice.instance;
 
-  static const String _message =
-      'Namaste! I’m Boojho, your guide at JaKnow. Every day I’ll quiz you, '
-      'share the news and teach you something new.';
+  static String get _message => tr(
+    'Namaste! I’m Boojho, your guide at JaKnow. Every day I’ll quiz you, '
+    'share the news and teach you something new.',
+  );
 
   @override
   void initState() {
@@ -139,13 +141,13 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     textStyle: AppTextStyles.button.copyWith(fontSize: 17),
                   ),
                   onPressed: _begin,
-                  child: const Text('Let’s begin'),
+                  child: Text(tr('Let’s begin')),
                 ),
               ),
               const SizedBox(height: 8),
               TextButton(
                 onPressed: () => openHome(context),
-                child: Text('Skip intro', style: AppTextStyles.link),
+                child: Text(tr('Skip intro'), style: AppTextStyles.link),
               ),
             ],
           ),
@@ -175,7 +177,7 @@ class _SoundButton extends StatelessWidget {
         padding: EdgeInsets.zero,
         iconSize: 22,
         color: AppColors.indigo,
-        tooltip: soundOn ? 'Mute Boojho' : 'Unmute Boojho',
+        tooltip: soundOn ? tr('Mute Boojho') : tr('Unmute Boojho'),
         icon: Icon(
           soundOn ? Icons.volume_up_outlined : Icons.volume_off_outlined,
         ),
@@ -216,7 +218,7 @@ class _SpeechBubble extends StatelessWidget {
                 children: [
                   _SoundBars(animation: animation, isSpeaking: isSpeaking),
                   const SizedBox(width: 10),
-                  Text('BOOJHO IS SPEAKING', style: AppTextStyles.label),
+                  Text(tr('BOOJHO IS SPEAKING'), style: AppTextStyles.label),
                 ],
               ),
               const SizedBox(height: 10),

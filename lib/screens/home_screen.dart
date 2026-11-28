@@ -24,6 +24,7 @@ import 'library_screen.dart';
 import 'news_screen.dart';
 import 'profile_screen.dart';
 import 'quiz_screen.dart';
+import 'speed_round_screen.dart';
 
 /// Opens Home and removes the intro/sign-up screens behind it, so the
 /// back button doesn't lead back into them.
@@ -310,6 +311,33 @@ class _HomeScreenState extends State<HomeScreen>
     _refreshRank(); // lesson XP may have changed the leaderboard
   }
 
+  /// Your best speed-round score (saved on this phone).
+  late Future<int> _speedBest = SpeedBest.load();
+
+  /// ⚡ 60-second speed round, with questions from the student's lessons.
+  Future<void> _openSpeedRound() async {
+    _voice.stop();
+    List<Course> courses;
+    try {
+      courses = await LibraryService.instance.courses();
+    } catch (_) {
+      courses = builtInCourses;
+    }
+    if (!mounted) return;
+    final questions = speedRoundQuestions(
+      courses: courses,
+      level: _levelName,
+      studentClass: _profile?.studentClass ?? '',
+    );
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => SpeedRoundScreen(questions: questions)),
+    );
+    if (!mounted) return;
+    setState(() {
+      _speedBest = SpeedBest.load();
+    });
+  }
+
   /// Today's "Did you know?" fact (from the Library's lessons).
   late final Future<FunFact?> _funFact = _loadFunFact();
 
@@ -434,6 +462,14 @@ class _HomeScreenState extends State<HomeScreen>
                   label: quizLabel(_levelName),
                   goal: _dailyGoal,
                   onTap: _openQuiz,
+                ),
+                const SizedBox(height: 12),
+                FutureBuilder<int>(
+                  future: _speedBest,
+                  builder: (context, snapshot) => _SpeedRoundCard(
+                    best: snapshot.data ?? 0,
+                    onTap: _openSpeedRound,
+                  ),
                 ),
                 FutureBuilder<FunFact?>(
                   future: _funFact,
@@ -845,6 +881,74 @@ class _QuizCard extends StatelessWidget {
                 Icons.chevron_right_rounded,
                 color: AppColors.ink,
                 size: 30,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ---------- ⚡ Speed round ----------
+
+class _SpeedRoundCard extends StatelessWidget {
+  const _SpeedRoundCard({required this.best, required this.onTap});
+
+  final int best;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: AppColors.ink,
+      borderRadius: BorderRadius.circular(22),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(22),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 14, 14, 14),
+          child: Row(
+            children: [
+              Container(
+                width: 42,
+                height: 42,
+                alignment: Alignment.center,
+                decoration: const BoxDecoration(
+                  color: AppColors.amber,
+                  shape: BoxShape.circle,
+                ),
+                child: const Text('⚡', style: TextStyle(fontSize: 22)),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Speed round',
+                      style: AppTextStyles.cardTitle.copyWith(
+                        color: AppColors.white,
+                        fontSize: 17,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      best > 0
+                          ? '60 seconds · your best: $best'
+                          : '60 seconds · as many as you can',
+                      style: AppTextStyles.cardBody.copyWith(
+                        color: AppColors.white.withValues(alpha: 0.75),
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(
+                Icons.chevron_right_rounded,
+                color: AppColors.amber,
+                size: 28,
               ),
             ],
           ),

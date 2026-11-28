@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'lessons.dart';
 import 'library.dart';
 import 'quiz_questions.dart';
 
@@ -32,34 +33,7 @@ List<QuizQuestion> dailyQuiz({
   int count = 5,
 }) {
   final date = day ?? indiaToday();
-  final mine = [
-    for (final c in courses)
-      if (studentClass.isNotEmpty && c.studentClass == studentClass) c,
-  ];
-  final classCourses = [
-    for (final c in courses)
-      if (c.section == CourseSection.forClass) c,
-  ];
-  final gk = [
-    for (final c in courses)
-      if (c.section == CourseSection.explore) c,
-  ];
-  final pool = switch (level) {
-    'Beginner' =>
-      mine.isNotEmpty
-          ? mine
-          : [
-              for (final c in classCourses)
-                if (_classNumber(c.studentClass) <= 8) c,
-            ],
-    'Exam ready' => [...gk, ...mine],
-    _ => mine.isNotEmpty ? [...mine, ...gk] : [...classCourses, ...gk],
-  };
-  final lessons = [
-    for (final c in pool)
-      for (final l in c.lessons)
-        if (l.quiz.isNotEmpty) l,
-  ];
+  final lessons = _lessonsFor(courses, level, studentClass);
   if (lessons.isEmpty) return quizForLevel(level);
 
   // A seed made from the date and level: same numbers all day.
@@ -86,6 +60,74 @@ List<QuizQuestion> dailyQuiz({
     if (!added) break; // every question of every lesson is used up
   }
   return picked;
+}
+
+/// The lessons a student's questions come from: Beginner → their class's
+/// courses, Intermediate → their class + General Knowledge, Exam ready →
+/// General Knowledge first. Only lessons that have a quiz.
+List<Lesson> _lessonsFor(
+  List<Course> courses,
+  String level,
+  String studentClass,
+) {
+  final mine = [
+    for (final c in courses)
+      if (studentClass.isNotEmpty && c.studentClass == studentClass) c,
+  ];
+  final classCourses = [
+    for (final c in courses)
+      if (c.section == CourseSection.forClass) c,
+  ];
+  final gk = [
+    for (final c in courses)
+      if (c.section == CourseSection.explore) c,
+  ];
+  final pool = switch (level) {
+    'Beginner' =>
+      mine.isNotEmpty
+          ? mine
+          : [
+              for (final c in classCourses)
+                if (_classNumber(c.studentClass) <= 8) c,
+            ],
+    'Exam ready' => [...gk, ...mine],
+    _ => mine.isNotEmpty ? [...mine, ...gk] : [...classCourses, ...gk],
+  };
+  return [
+    for (final c in pool)
+      for (final l in c.lessons)
+        if (l.quiz.isNotEmpty) l,
+  ];
+}
+
+/// Questions for a 60-second speed round: every quiz question from the
+/// student's lessons, in a new random order each round, with the answers
+/// A–D shuffled too.
+List<QuizQuestion> speedRoundQuestions({
+  required List<Course> courses,
+  required String level,
+  String studentClass = '',
+  Random? random,
+}) {
+  final r = random ?? Random();
+  final lessons = _lessonsFor(courses, level, studentClass);
+  final all = lessons.isEmpty
+      ? [...quizForLevel(level)]
+      : [for (final l in lessons) ...l.quiz];
+  all.shuffle(r);
+  return [for (final q in all) shuffleAnswers(q, r)];
+}
+
+/// The same question with its four answers in a random order.
+QuizQuestion shuffleAnswers(QuizQuestion q, Random r) {
+  final order = [for (var i = 0; i < q.options.length; i++) i]..shuffle(r);
+  return QuizQuestion(
+    topic: q.topic,
+    question: q.question,
+    options: [for (final i in order) q.options[i]],
+    correctIndex: order.indexOf(q.correctIndex),
+    explanation: q.explanation,
+  );
 }
 
 /// 'Class 7' → 7. Anything else (College, exams…) → 99.

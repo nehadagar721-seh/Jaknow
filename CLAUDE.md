@@ -253,6 +253,15 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   (`boojho_chat_screen.dart`, `design/10-boojho-chat.png`).
   "Skip" buttons and Level's Continue open Home via
   `openHome(context, name: ..., dailyGoal: ...)`, which clears the intro screens behind it.
+- SPEED ROUND (`speed_round_screen.dart`, Home's dark "⚡ Speed round" card
+  under the quiz card): 3-2-1-Go, 60 s, every question from the student's
+  lessons (`speedRoundQuestions` in `daily_quiz.dart`, new order each round,
+  answers A–D shuffled by `shuffleAnswers`), tap = quick green/red then the
+  next question, mini confetti, "🔥 N in a row", red timer in the last 10 s.
+  Results: score, answered, accuracy, best in a row, "New best! 🎉".
+  Practice only: NO XP or streak. Best score saved on the phone with
+  `shared_preferences` (`SpeedBest`; tests call
+  `SharedPreferences.setMockInitialValues({})`).
 - DAILY FUN FACT: `lib/data/fun_fact.dart` `funFactFor(courses)` picks one
   lesson's "Remember" fact per India day (fixed shuffled order, no repeats
   until all are shown). Home's amber "💡 DID YOU KNOW?" card (under the

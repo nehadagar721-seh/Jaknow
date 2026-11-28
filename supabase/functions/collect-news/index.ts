@@ -1,6 +1,9 @@
-// collect-news: reads real headlines from PIB and newspaper RSS feeds and
-// saves them in `news_items` as DRAFTS. Nothing shows in the app until it
-// is approved (status set to 'published').
+// collect-news: reads real headlines from PIB and newspaper RSS feeds,
+// saves them in `news_items` as drafts, then PUBLISHES the day's 5 stories
+// automatically with auto_publish_news() (supabase/news_auto.sql: no
+// unsuitable stories, one per area: National, World, Economy, Science,
+// Sports, exam-useful ones first). The news admin can still take a story
+// back in the app's "Approve news".
 //
 // Only a short summary from the feed is kept (never the whole article,
 // which is copyrighted), plus a link to the original story.
@@ -192,7 +195,11 @@ Deno.serve(async (req) => {
     error: r.error,
   }));
 
-  if (dry) return json({ today, dry: true, report, sample: rows.slice(0, 10) });
+  if (dry) {
+    // What would be published today (from drafts already saved).
+    const { data: picks } = await db.rpc("news_picks", { p_date: today });
+    return json({ today, dry: true, report, picks, sample: rows.slice(0, 10) });
+  }
 
   let saved = 0;
   if (rows.length > 0) {
@@ -204,9 +211,21 @@ Deno.serve(async (req) => {
     saved = data?.length ?? 0;
   }
 
-  // Old drafts that were never approved are removed after a week.
+  // Publish today's 5 stories (does nothing if 5 are already published).
+  const { data: published, error: publishError } = await db.rpc(
+    "auto_publish_news",
+    { p_date: today },
+  );
+
+  // Old drafts that were never published are removed after a week.
   const weekAgo = new Date(Date.now() - 7 * 86400_000).toISOString().slice(0, 10);
   await db.from("news_items").delete().eq("status", "draft").lt("news_date", weekAgo);
 
-  return json({ today, saved, report });
+  return json({
+    today,
+    saved,
+    published: published ?? 0,
+    publishError: publishError?.message ?? null,
+    report,
+  });
 });

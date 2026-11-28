@@ -54,7 +54,8 @@ void main() {
   ) async {
     await tester.pumpWidget(const JaKnowApp());
     await tester.pump(const Duration(milliseconds: 300));
-    expect(find.text('Know something new every day'), findsOneWidget);
+    expect(find.text('जानो आज, जीतो कल'), findsOneWidget);
+    expect(find.text('Know today. Win tomorrow.'), findsOneWidget);
     expect(find.text('Let’s begin'), findsNothing);
 
     // After the opening, it fades into the Welcome screen.

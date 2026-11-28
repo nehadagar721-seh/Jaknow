@@ -14,7 +14,7 @@ import '../widgets/jaknow_logo.dart';
 ///    "pen" sparkle at the tip;
 /// 2. an amber swoosh is drawn under it;
 /// 3. Boojho pops up with a bounce;
-/// 4. the line "Know something new every day" fades in;
+/// 4. the tagline "जानो आज, जीतो कल" (Know today. Win tomorrow.) fades in;
 /// then it fades into [next] (Welcome, Class or Home).
 /// Tapping anywhere skips straight to [next].
 class SplashScreen extends StatefulWidget {
@@ -22,6 +22,10 @@ class SplashScreen extends StatefulWidget {
 
   /// The screen to open after the animation.
   final Widget next;
+
+  /// JaKnow's tagline: study today, succeed in tomorrow's exams.
+  static const String tagline = 'जानो आज, जीतो कल';
+  static const String taglineEnglish = 'Know today. Win tomorrow.';
 
   /// How long the whole opening takes.
   static const Duration length = Duration(milliseconds: 3600);
@@ -154,12 +158,27 @@ class _SplashScreenState extends State<SplashScreen>
                         opacity: tagline,
                         child: Transform.translate(
                           offset: Offset(0, (1 - tagline) * 12),
-                          child: Text(
-                            'Know something new every day',
-                            style: AppTextStyles.subtitle.copyWith(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
+                          // The tagline: Hindi first (it plays on the
+                          // "जा" of the logo), English under it.
+                          child: Column(
+                            children: [
+                              Text(
+                                SplashScreen.tagline,
+                                style: AppTextStyles.logoHindi.copyWith(
+                                  fontSize: 26,
+                                  height: 1.3,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                SplashScreen.taglineEnglish,
+                                style: AppTextStyles.subtitle.copyWith(
+                                  fontSize: 15.5,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 0.3,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

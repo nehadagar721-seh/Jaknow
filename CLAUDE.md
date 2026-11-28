@@ -189,6 +189,14 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   via `news_job_key_ok`, `supabase/news_job.sql`) saves fresh RSS items
   (The Hindu, Indian Express; PIB blocks Supabase with 403) as drafts.
   pg_cron job `collect-news-daily` runs it at 6:37 am IST every day.
+  NEWS IS NOW AUTOMATIC (the user's choice: approving by hand every day
+  isn't possible): after saving drafts, collect-news calls
+  `auto_publish_news(day)` (`supabase/news_auto.sql`, service role only),
+  which publishes 5 stories via `news_picks(day)`: skips crime/violence/
+  gossip/live/photo/video/opinion headlines, takes the best of National,
+  World, Economy, Science, Sports (scored by exam-useful words), tops up to
+  5; does nothing if 5 are already published. `?dry=1` shows the picks.
+  "Approve news" still lets the admin take a story back.
   How to run/approve: `supabase/NEWS.md`. APPROVING IN THE APP:
   `news_approve_screen.dart` (Profile → "Approve news", shown only to
   news admins). Admins are rows in `news_admins` (only the user's own
@@ -232,7 +240,9 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
     service via the app's server (never put an API key in the app).
 - OPENING (`splash_screen.dart`, no design): every app start first shows
   "जाKnow" written left to right (amber pen sparkle), an amber swoosh,
-  Boojho popping up and "Know something new every day" (3.6 s, tap to
+  Boojho popping up and the TAGLINE "जानो आज, जीतो कल" / "Know today.
+  Win tomorrow." (`SplashScreen.tagline`; the user wants students to focus
+  on studies and exams) (3.6 s, tap to
   skip), then fades into Welcome / Class / Home. `JaKnowApp(showSplash:
   false)` skips it in tests.
 - Screens so far: Welcome (`design/1-welcome.png`) → Features

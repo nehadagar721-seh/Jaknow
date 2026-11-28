@@ -131,6 +131,21 @@ void main() {
     expect(LibraryService.search(builtInCourses, 'gst'), isNotEmpty);
   });
 
+  test('the World Sports course has 10 lessons in 5 units', () {
+    final sports = builtInCourses.firstWhere((c) => c.id == 'gk-world-sports');
+    expect(sports.subject, 'Sports');
+    expect(sports.collection, generalKnowledge);
+    expect(sports.lessons, hasLength(10));
+    expect(sports.lessons.map((l) => l.unit).toSet(), hasLength(5));
+    for (final lesson in sports.lessons) {
+      expect(lesson.id, startsWith('gk-wsports-'));
+      expect(lesson.keyPoints.length, greaterThanOrEqualTo(5));
+      expect(lesson.sections.length, greaterThanOrEqualTo(5));
+      expect(lesson.quiz, hasLength(7));
+    }
+    expect(LibraryService.search(builtInCourses, 'wimbledon'), isNotEmpty);
+  });
+
   test('Bharat Ko Jano courses have 10 lessons in 5 units', () {
     for (final course in builtInCourses.where(
       (c) => c.collection == bharatKoJano,
@@ -295,6 +310,7 @@ void main() {
             'gk-indian-geography',
             'gk-world-geography',
             'gk-indian-economy',
+            'gk-world-sports',
             'bkj-culture-heritage',
             'bkj-great-indians',
             'bkj-states-symbols',
@@ -308,7 +324,7 @@ void main() {
             'bkj-defence-security',
           ].contains(c.id),
     );
-    expect(c6, hasLength(26));
+    expect(c6, hasLength(27));
     for (final lesson in c6.expand((c) => c.lessons)) {
       final words = lesson.sections
           .map((s) => s.text.split(RegExp(r'\s+')).length)
@@ -472,6 +488,7 @@ void main() {
     'gk-indian-geography',
     'gk-world-geography',
     'gk-indian-economy',
+    'gk-world-sports',
     'bkj-culture-heritage',
     'bkj-great-indians',
     'bkj-states-symbols',

@@ -41,6 +41,7 @@ import 'content/gk_medieval_india.dart';
 import 'content/gk_modern_india.dart';
 import 'content/gk_polity.dart';
 import 'content/gk_world_geography.dart';
+import 'content/gk_world_sports.dart';
 import 'lessons.dart';
 
 /// Where a course appears in the Library.
@@ -460,6 +461,17 @@ const List<Course> builtInCourses = [
     description:
         'Planning, banking, inflation, the Budget, GST and welfare schemes.',
     lessons: indianEconomyLessons,
+  ),
+  Course(
+    id: 'gk-world-sports',
+    title: 'World Sports',
+    subject: 'Sports',
+    section: CourseSection.explore,
+    collection: generalKnowledge,
+    description:
+        'The Olympics, the football and cricket World Cups, tennis, chess '
+        'and more: trophies, terms, grounds and world sports bodies.',
+    lessons: worldSportsLessons,
   ),
   // ---------- Bharat Ko Jano ----------
   Course(

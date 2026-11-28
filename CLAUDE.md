@@ -74,6 +74,11 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   raw GitHub URL of `supabase/content.sql` at that commit, check an md5 of
   the wanted lines against the local file, and `execute` only those lines.
   `LibraryService` loads from Supabase, falling back to `builtInCourses`.
+  GK WORLD SPORTS: `gk-world-sports` (World Sports, Explore → General
+  Knowledge, 10 lessons in 5 units, ids `gk-wsports-N`, `gk_world_sports.dart`,
+  subject Sports): Olympics, hosts and legends, FIFA World Cup, world
+  cricket, tennis and racquet sports, athletics/chess/F1/golf, trophies,
+  sports words and team sizes, famous grounds, world bodies/awards/days.
   Big content batches live in `lib/data/content/` (one file per course,
   e.g. `gk_polity.dart` → `polityLessons`, ids `gk-polity-1`…`10`).
   FULL READ MUST BE A LONG READ: about one page, 450+ words per lesson

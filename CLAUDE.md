@@ -253,6 +253,10 @@ JaKnow is a daily general knowledge and current affairs app for Android and iOS,
   (`boojho_chat_screen.dart`, `design/10-boojho-chat.png`).
   "Skip" buttons and Level's Continue open Home via
   `openHome(context, name: ..., dailyGoal: ...)`, which clears the intro screens behind it.
+- DAILY FUN FACT: `lib/data/fun_fact.dart` `funFactFor(courses)` picks one
+  lesson's "Remember" fact per India day (fixed shuffled order, no repeats
+  until all are shown). Home's amber "💡 DID YOU KNOW?" card (under the
+  quiz card): speaker = Boojho says it, "Read the lesson →" opens it.
 - Home uses a lighter background (`AppColors.creamLight`, #FFFBF2) and soft
   card borders (`AppColors.cardBorder`), as in its design.
 - Sign-up password is exactly 6 digits (the user's choice, not the design's

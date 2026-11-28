@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../data/daily_quiz.dart';
+import '../data/fun_fact.dart';
 import '../data/library.dart';
 import '../data/study_levels.dart';
 import '../services/backend.dart';
@@ -18,6 +19,7 @@ import '../widgets/streak_pill.dart';
 import 'boojho_chat_screen.dart';
 import 'class_screen.dart';
 import 'leaderboard_screen.dart';
+import 'lesson_screen.dart';
 import 'library_screen.dart';
 import 'news_screen.dart';
 import 'profile_screen.dart';
@@ -308,6 +310,31 @@ class _HomeScreenState extends State<HomeScreen>
     _refreshRank(); // lesson XP may have changed the leaderboard
   }
 
+  /// Today's "Did you know?" fact (from the Library's lessons).
+  late final Future<FunFact?> _funFact = _loadFunFact();
+
+  Future<FunFact?> _loadFunFact() async {
+    List<Course> courses;
+    try {
+      courses = await LibraryService.instance.courses();
+    } catch (_) {
+      courses = builtInCourses;
+    }
+    return funFactFor(courses: courses);
+  }
+
+  /// Opens the lesson that today's fun fact comes from.
+  Future<void> _openFactLesson(FunFact fact) async {
+    _voice.stop();
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) =>
+            LessonScreen(lessons: fact.course.lessons, index: fact.lessonIndex),
+      ),
+    );
+    _refreshRank();
+  }
+
   /// Your place on this week's leaderboard (for the 🏆 card).
   late Future<LeaderboardEntry?> _myRank = _loadRank();
 
@@ -407,6 +434,24 @@ class _HomeScreenState extends State<HomeScreen>
                   label: quizLabel(_levelName),
                   goal: _dailyGoal,
                   onTap: _openQuiz,
+                ),
+                FutureBuilder<FunFact?>(
+                  future: _funFact,
+                  builder: (context, snapshot) {
+                    final fact = snapshot.data;
+                    if (fact == null) return const SizedBox.shrink();
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 12),
+                      child: _FunFactCard(
+                        fact: fact,
+                        onListen: () {
+                          _voice.setMuted(false);
+                          _boojhoSays('Did you know? ${fact.text}');
+                        },
+                        onRead: () => _openFactLesson(fact),
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(height: 12),
                 Row(
@@ -804,6 +849,105 @@ class _QuizCard extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+// ---------- Boojho's "Did you know?" fact ----------
+
+class _FunFactCard extends StatelessWidget {
+  const _FunFactCard({
+    required this.fact,
+    required this.onListen,
+    required this.onRead,
+  });
+
+  final FunFact fact;
+  final VoidCallback onListen;
+  final VoidCallback onRead;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(16, 14, 12, 8),
+      decoration: BoxDecoration(
+        color: AppColors.amberLight,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(
+          color: AppColors.amber.withValues(alpha: 0.55),
+          width: 1.2,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Text('💡', style: TextStyle(fontSize: 18)),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  'DID YOU KNOW?',
+                  style: AppTextStyles.label.copyWith(
+                    color: AppColors.ink,
+                    fontSize: 12.5,
+                    letterSpacing: 1.1,
+                  ),
+                ),
+              ),
+              Material(
+                color: AppColors.amber,
+                shape: const CircleBorder(),
+                child: InkWell(
+                  customBorder: const CircleBorder(),
+                  onTap: onListen,
+                  child: const Tooltip(
+                    message: 'Hear Boojho say it',
+                    child: SizedBox.square(
+                      dimension: 36,
+                      child: Icon(
+                        Icons.volume_up_outlined,
+                        color: AppColors.ink,
+                        size: 19,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            fact.text,
+            style: AppTextStyles.cardTitle.copyWith(
+              fontSize: 15.5,
+              fontWeight: FontWeight.w600,
+              height: 1.35,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'From ${fact.course.title}',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.cardBody.copyWith(fontSize: 12.5),
+                ),
+              ),
+              TextButton(
+                onPressed: onRead,
+                child: Text(
+                  'Read the lesson →',
+                  style: AppTextStyles.link.copyWith(fontSize: 13.5),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
